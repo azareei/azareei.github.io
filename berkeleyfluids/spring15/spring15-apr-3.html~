@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="../site3.css">
+<title>Berkeley Fluids Seminar</title>
+<META NAME="Author" CONTENT="Ahmad Zareei">
+<META NAME="keywords" CONTENT="fluids, berkeley">
+</head>
+
+<body>
+
+<div id="main">
+
+<div id="top">
+<h1>Berkeley Fluids Seminar</h1>
+<h2>University of California, Berkeley</h2>
+</div>
+
+<div id="location">
+<h3>Bring your lunch and enjoy learning about fluids!</h3>
+</div>
+
+<div id="sidebar">
+
+<div id="menu">
+<h4>Information</h4>
+<p>What: Fluids</p>
+<p>When: Tue 12 noon</p>
+<p>Where: HP Adudit., Soda Hall</p>
+<p><a href="../spring15.html" title="Spring 2015 schedule">Spring 2015 schedule</a></p>
+<p><a href="../fall14.html" title="Fall 2014 schedule">Fall 2014 schedule</a></p>
+<p><a href="../spring14.html" title="Spring 2014 schedule">Spring 2014 schedule</a></p>
+<p><a href="../fall13.html" title="Fall 2013 schedule">Fall 2013 schedule</a></p>
+</div>
+
+<div id="links">
+<h4>Contact</h4>
+<!-- <p align="center"><a href="http://www.cbeaume.com" title="C&eacute;dric Beaume">C&eacute;dric Beaume</a></p>
+<p align="center">ced.beaume AT gmail.com</p>
+<p align="center">+1-510-423-1487</p><br>
+-->
+<p align="center"><a href="http://physics.berkeley.edu/people/graduate-student/daniel-lecoanet" title="Daniel Lecoanet">Daniel Lecoanet</a></p>
+<p align="center">dlecoanet AT berkeley.edu</p><br>
+<p align="center"><a href="http://me.berkeley.edu/~mahdinia/" title="Mani Mahdinia">Mani Mahdinia</a></p>
+<p align="center">mahdinia AT berkeley.edu</p><br>
+<p align="center"><a href="http://math.berkeley.edu/people/grad/anna-lieb" title="Anna Lieb">Anna Lieb</a></p>
+<p align="center">lieb AT math.berkeley.edu</p><br>
+<p align="center"><a href="http://www.me.berkeley.edu/~azareei" title="Ahmad Zareei">Ahmad Zareei</a></p>
+<p align="center">ahmad.zareei AT gmail.com</p>
+<p align="center">+1-510-693-9359</p><br>
+</div>
+
+</div>
+
+<div id="mainright">
+
+<p align="center">March 11, 2015</p>
+<p align="center"><a href="http://stripe.colorado.edu/~hertzber/">Prof. Jean Hertzberg </a> (University of Colorado, Boulder)</p>
+<p align="center"><b> From Flow Visualization to Beauty, Power, Destruction and Oddness</b></p>
+</br>
+<table border=0><tr>
+
+<td>
+<img src="Jean.jpg" alt="my picture" height=140>
+<td width=00>
+
+<td>
+<p align="justify"> <b> Abstract: </b> Since 2003, the University of Colorado Boulder has offered a Flow Visualization (Flow Vis) course. It is cross-listed as a mechanical engineering elective and a fine arts studio course, and brings together mixed teams of engineering and fine arts photography or film students. It focuses on the production of aesthetically pleasing and scientifically useful images of fluid flows. Flow Vis students have responded enthusiastically, with exit survey comments such as “I’ll never ignore the sky again” or “I see examples of flow vis all the time now.” After attempts to replicate the Flow Vis pedagogy in the engineering design domain with limited success, an engineering education research (EER) program was undertaken, based on two prongs. 1) A neuropsychology approach studying whether students can acquire visual expertise in   fluid mechanics, akin to the rapid visual processing</p>
+</td>
+</tr>
+</table>
+<p align="justify">of radiologists or dog show judges. 2) A mixed-methods sociocultural approach, including quantitative surveys of affect, qualitative interviews and analyses of student work. Both of these are works in progress, and preliminary results will be presented.Depending on the audience, the talk may shift into a discussion of aesthetics in fluid mechanics, specifically the aesthetics of beauty (laminar flow), power (aerospace applications), destruction (wildfires) and oddness (nonNewtonian fluid behavior). These aesthetics are proposed as a model for other aesthetics in STEM, with importance in the context of science communication. </p>
+<br>
+
+<table border=0><tr>
+<td>
+<p align="justify"> <b>Bio:</b> Dr. Hertzberg is an Associate Professor of Mechanical Engineering at CU-Boulder. She teaches graduate and undergraduate courses in measurement techniques, thermodynamics, fluid mechanics, heat transfer, design and computer tools. She has pioneered a spectacular course on the art and physics of flow visualization, and is conducting research on the impact of the course with respect to visual perception and educational outcomes. Her disciplinary research centers around pulsatile, vortex dominated flows with applications in both combustion and bio-fluid dynamics. She is also interested in a variety of flow field measurement techniques. Current projects include electrospray atomization of jet fuel and velocity and vorticity in human cardiac ventricles and large vessels. </p>
+</td>
+<td>
+<img src="Jean2.jpg" alt="my picture" height=130>
+<td width=10>
+</tr>
+</table>
+
+<br>
+<br>
+
+<p align="right"><a href="../index.html" title="Berkeley Fluids Seminar">Back to main page</a></p><br>
+
+</div>
+
+<div id="bottom">
+<h5>&copy; <a href="http://www.cbeaume.com"><font color="white"> C&eacute;dric Beaume </font></a></h5>
+</div>
+
+
+</div>
+
+</body>
+
+</html>
+

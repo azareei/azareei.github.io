@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="../site3.css">
+<title>Berkeley Fluids Seminar</title>
+<META NAME="Author" CONTENT="Ahmad Zareei">
+<META NAME="keywords" CONTENT="fluids, berkeley">
+</head>
+
+<body>
+
+<div id="main">
+
+<div id="top">
+<h1>Berkeley Fluids Seminar</h1>
+<h2>University of California, Berkeley</h2>
+</div>
+
+<div id="location">
+<h3>Bring your lunch and enjoy learning about fluids!</h3>
+</div>
+
+<div id="sidebar">
+
+<div id="menu">
+<h4>Information</h4>
+<p>What: Fluids</p>
+<p>When: Wed 13 noon</p>
+<p>Where: 240, Bechtel Hall </p>
+<p><a href="../spring16.html" title="Spring 2016 schedule">Spring 2016 schedule</a></p>
+<p><a href="../fall15.html" title="Fall 2015 schedule">Fall 2015 schedule</a></p>
+<p><a href="../spring15.html" title="Spring 2015 schedule">Spring 2015 schedule</a></p>
+<p><a href="../fall14.html" title="Fall 2014 schedule">Fall 2014 schedule</a></p>
+<p><a href="../spring14.html" title="Spring 2014 schedule">Spring 2014 schedule</a></p>
+<p><a href="../fall13.html" title="Fall 2013 schedule">Fall 2013 schedule</a></p>
+</div>
+
+<div id="links">
+<h4>Contact</h4>
+<!-- <p align="center"><a href="http://www.cbeaume.com" title="C&eacute;dric Beaume">C&eacute;dric Beaume</a></p>
+<p align="center">ced.beaume AT gmail.com</p>
+<p align="center">+1-510-423-1487</p><br>
+-->
+<p align="center"><a href="http://physics.berkeley.edu/people/graduate-student/daniel-lecoanet" title="Daniel Lecoanet">Daniel Lecoanet</a></p>
+<p align="center">dlecoanet AT berkeley.edu</p><br>
+<p align="center"><a href="http://me.berkeley.edu/~mahdinia/" title="Mani Mahdinia">Mani Mahdinia</a></p>
+<p align="center">mahdinia AT berkeley.edu</p><br>
+<p align="center"><a href="http://math.berkeley.edu/people/grad/anna-lieb" title="Anna Lieb">Anna Lieb</a></p>
+<p align="center">lieb AT math.berkeley.edu</p><br>
+<p align="center"><a href="http://www.me.berkeley.edu/~azareei" title="Ahmad Zareei">Ahmad Zareei</a></p>
+<p align="center">ahmad.zareei AT gmail.com</p>
+<p align="center">+1-510-693-9359</p><br>
+</div>
+
+</div>
+
+<div id="mainright">
+
+<p align="center">Wednesday, April 13, 2016</p>
+<p align="center">240, Bechtel Hall, 13:00-14:00</p>
+<p align="center"><a href="https://sites.google.com/site/ruoqianwangscoast/home"><b> Dr. Ruo-Qian(Roger) Wang </b></a> (Civil Engineering, Stanford University) </p><br>
+<p align="center"><b> How to use fluid mechanics to hack the food crisis: <br> A respiratory airway-inspired low-pressure, self-regulating valve for drip irrigation</b></p><br>
+<p align="justify"> 
+<b> Abstract: </b> One of the most significant barriers to achieving large-scale dissemination of drip irrigation is the cost of the pump and power system. An effective means of reducing power consumption is by reducing pumping pressure. The principle source of pressure drop in a drip system is the high flow resistance of the self-regulating flow resistors installed at the outlets of the pipes, which evenly distribute water over a field. Traditional architectures require a minimum pressure of ~1 bar to maintain a constant flow rate; our aim is to reduce this pressure by 90% and correspondingly lower pumping power to facilitate the creation of low-cost, off-grid drip irrigation systems.
+<br>
+This study presents a new Starling resistor architecture that enables the adjustment of flow rate with a fixed minimum pressure demand of ~0.1 bars. A Starling resistor is a flexible tube subjected to a transmural pressure, which collapses the tube to restrict flow. Our design uses a single pressure source to drive flow through the flexible tube and apply a transmural pressure. Flow into the flexible tube is restricted with a needle valve, to increase the transmural pressure. Using this device, a series of experiments were conducted with different flexible tube diameters, lengths and wall thickness. We found that the resistance of the needle valve changes flow rate but not the minimum transmural pressure required to collapse the tube. A lumped-parameter model was developed to capture the relationships between valve openings, pressure, and flow rates. 
+</br><br>
+<b>Bio:</b>Ruo-Qian (Roger) Wang is a Postdoctoral Scholar at Civil and Environmental Engineering at UC Berkeley. He has conducted a Postdoctoral research at Mechanical Engineering and Tata Center for Research and Technology at MIT. He has obtained Ph.D. in Environmental Fluid Mechanics at MIT, a Master degree from Singapore-Stanford Partnership (Nanyang Technological University /Stanford University), and a Bachelor degree from Beihang University, China. He was also a research engineer in Singapore-MIT Alliance for Research and Technology Center before coming to MIT. 
+</p>
+<br>
+
+<p align="right"><a href="../index.html" title="Berkeley Fluids Seminar">Back to main page</a></p><br>
+
+</div>
+
+<div id="bottom">
+<h5>&copy; <a href="http://www.cbeaume.com"><font color="white"> C&eacute;dric Beaume </font></a></h5>
+</div>
+
+
+</div>
+
+</body>
+
+</html>
+

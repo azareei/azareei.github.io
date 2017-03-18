@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="../site3.css">
+<title>Berkeley Fluids Seminar</title>
+<META NAME="Author" CONTENT="Ahmad Zareei">
+<META NAME="keywords" CONTENT="fluids, berkeley">
+</head>
+
+<body>
+
+<div id="main">
+
+<div id="top">
+<h1>Berkeley Fluids Seminar</h1>
+<h2>University of California, Berkeley</h2>
+</div>
+
+<div id="location">
+<h3>Bring your lunch and enjoy learning about fluids!</h3>
+</div>
+
+<div id="sidebar">
+
+<div id="menu">
+<h4>Information</h4>
+<p>What: Fluids</p>
+<p>When: Wed 12 noon</p>
+<p>Where: 3110 Etcheverry Hall </p>
+<p><a href="../fall16.html" title="Fall 2016 schedule">Fall 2016 schedule</a></p>
+<p><a href="../spring16.html" title="Spring 2016 schedule">Spring 2016 schedule</a></p>
+<p><a href="../fall15.html" title="Fall 2015 schedule">Fall 2015 schedule</a></p>
+<p><a href="../spring15.html" title="Spring 2015 schedule">Spring 2015 schedule</a></p>
+<p><a href="../fall14.html" title="Fall 2014 schedule">Fall 2014 schedule</a></p>
+<p><a href="../spring14.html" title="Spring 2014 schedule">Spring 2014 schedule</a></p>
+<p><a href="../fall13.html" title="Fall 2013 schedule">Fall 2013 schedule</a></p>
+</div>
+
+<div id="links">
+<h4>Contact</h4>
+<!-- <p align="center"><a href="http://www.cbeaume.com" title="C&eacute;dric Beaume">C&eacute;dric Beaume</a></p>
+<p align="center">ced.beaume AT gmail.com</p>
+<p align="center">+1-510-423-1487</p><br>
+-->
+<!--
+<p align="center"><a href="http://physics.berkeley.edu/people/graduate-student/daniel-lecoanet" title="Daniel Lecoanet">Daniel Lecoanet</a></p>
+<p align="center">dlecoanet AT berkeley.edu</p><br>
+<p align="center"><a href="http://me.berkeley.edu/~mahdinia/" title="Mani Mahdinia">Mani Mahdinia</a></p>
+<p align="center">mahdinia AT berkeley.edu</p><br>
+<p align="center"><a href="http://math.berkeley.edu/people/grad/anna-lieb" title="Anna Lieb">Anna Lieb</a></p>
+<p align="center">lieb AT math.berkeley.edu</p><br>
+-->
+<p align="center"><a href="http://www.me.berkeley.edu/~azareei" title="Ahmad Zareei">Ahmad Zareei</a></p>
+<p align="center">ahmad.zareei AT gmail.com</p>
+<p align="center">zareei AT berkeley.edu</p><br>
+<p align="center"><a href="http://www.me.berkeley.edu/~arzani" title="Amirhossein Arzani">Amirhossein Arzani</a></p>
+<p align="center">arzani AT berkeley.edu</p>
+</div>
+</div>
+
+<div id="mainright">
+
+<p align="center">Wednesday, October 26, 2016</p>
+<p align="center">3110 Etcheverry Hall, 12:00-13:00</p>
+<p align="center"><a href="https://profiles.stanford.edu/mahdi-esmaily-moghada"> Dr. Mahdi Esmaily Moghadam</a> (Livermore)</p>
+<p align="center"><b> Inertial particles segregation in turbulent flows  </b></p><br>
+<p align="justify"> <b> Abstract: </b> Finite-size inertial particles in turbulent flows preferentially concentrate and form clusters in certain regions of the flow. Over the past few decades, several experimental studies have shown that clustering mainly occurs when the particle relaxation-time is comparable to the Kolmogorov time scale, i.e. the Stokes number is of order one. Although direct numerical simulations (DNS) can predict this behavior, they are far too expensive to be applied to real-world problems, ranging from droplet coalescence in clouds and combustion chambers to formation of planets in our early solar system. Therefore, building reduced-order numerical models seems inevitable, which itself relies on extending our fundamental understanding of these systems through analytical studies. On this front, however, minimal progress has been made due to the chaotic and complex behavior of these systems, with the most prominent analytical studies dating back to several decades ago. 
+
+With this motivation in mind, in this talk, I will present my recent findings that advance this frontier by providing insight into different modes of particle clustering in strain- and rotation-dominated flows. I will present an asymptotic solution for the finite-time Lyapunov exponents of particle clouds that is applicable to the full regime of Stokes numbers and explains the non-monotonic behavior of particle clustering versus Stokes number. Contrary to extant beliefs, I will show that particle clouds that are placed in strong oscillatory straining flows may experience expansion. I will also show that any N-dimensional homogeneous particle-laden flow can be characterized by an equivalent 1-dimensional scalar problem, allowing for this analysis to be applied to 3D turbulent flows. To conclude, I will compare and show the remarkable agreement that exists between the prediction of this analysis and the DNS results of particle-laden homogeneous turbulence. </p>
+<br>
+
+<p align="right"><a href="../index.html" title="Berkeley Fluids Seminar">Back to main page</a></p><br>
+
+</div>
+
+<div id="bottom">
+<h5>&copy; <a href="http://www.cbeaume.com"><font color="white"> C&eacute;dric Beaume </font></a></h5>
+</div>
+
+
+</div>
+
+</body>
+
+</html>
+

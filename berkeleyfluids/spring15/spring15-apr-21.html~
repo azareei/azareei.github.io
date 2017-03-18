@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="../site3.css">
+<title>Berkeley Fluids Seminar</title>
+<META NAME="Author" CONTENT="Ahmad Zareei">
+<META NAME="keywords" CONTENT="fluids, berkeley">
+</head>
+
+<body>
+
+<div id="main">
+
+<div id="top">
+<h1>Berkeley Fluids Seminar</h1>
+<h2>University of California, Berkeley</h2>
+</div>
+
+<div id="location">
+<h3>Bring your lunch and enjoy learning about fluids!</h3>
+</div>
+
+<div id="sidebar">
+
+<div id="menu">
+<h4>Information</h4>
+<p>What: Fluids</p>
+<p>When: Wednesday, 12 noon</p>
+<p>Where: 3110 Etcheverry Hall</p>
+<p><a href="../spring15.html" title="Spring 2015 schedule">Spring 2015 schedule</a></p>
+<p><a href="../fall14.html" title="Fall 2014 schedule">Fall 2014 schedule</a></p>
+<p><a href="../spring14.html" title="Spring 2014 schedule">Spring 2014 schedule</a></p>
+<p><a href="../fall13.html" title="Fall 2013 schedule">Fall 2013 schedule</a></p>
+</div>
+
+<div id="links">
+<h4>Contact</h4>
+<!-- <p align="center"><a href="http://www.cbeaume.com" title="C&eacute;dric Beaume">C&eacute;dric Beaume</a></p>
+<p align="center">ced.beaume AT gmail.com</p>
+<p align="center">+1-510-423-1487</p><br>
+-->
+<p align="center"><a href="http://physics.berkeley.edu/people/graduate-student/daniel-lecoanet" title="Daniel Lecoanet">Daniel Lecoanet</a></p>
+<p align="center">dlecoanet AT berkeley.edu</p><br>
+<p align="center"><a href="http://me.berkeley.edu/~mahdinia/" title="Mani Mahdinia">Mani Mahdinia</a></p>
+<p align="center">mahdinia AT berkeley.edu</p><br>
+<p align="center"><a href="http://math.berkeley.edu/people/grad/anna-lieb" title="Anna Lieb">Anna Lieb</a></p>
+<p align="center">lieb AT math.berkeley.edu</p><br>
+<p align="center"><a href="http://www.me.berkeley.edu/~azareei" title="Ahmad Zareei">Ahmad Zareei</a></p>
+<p align="center">ahmad.zareei AT gmail.com</p>
+<p align="center">+1-510-693-9359</p><br>
+</div>
+
+</div>
+
+<div id="mainright">
+
+<p align="center">Tuesday, April 21, 2015</p>
+<p align="center">3110 Etcheverry Hall, 12:00-13:00</p>
+<p align="center"><a href="Dr. Livescu"> Dr. Daniel Livescu</a> (CCS Division, Los Alamos National Laboratory, NM)</p><br>
+<p align="center"><b> An overview of recent results on Rayleigh-Taylor instability</b></p><br>
+<p align="justify"> <b> Abstract: </b> Molecular mixing in response to stirring by turbulence is an important process in many practical applications. When the microscopic densities of the fluids are not the same, mixing itself becomes qualitatively different; these flows have been referred to as variable density (VD) flows. Many VD flows are driven by acceleration which, because the density is not uniform, leads to large differential forces. In the unstable configuration, small perturbations of the initial interface between the two fluids grow, interact nonlinearly, and lead to turbulence. This instability is known as the Rayleigh-Taylor instability (RTI) and is of fundamental importance in a multitude of applications, from fluidized beds, oceans and atmosphere, to inertial, magnetic, or gravitational confinement fusion, and to astrophysics. <br>
+Although RTI has been subjected to intense research over the last 50 years, until recently, numerical studies have been restricted to coarse mesh calculations of the Euler equations. On the other hand, it is notoriously difficult, in laboratory experiments, to accurately characterize the initial conditions and provide the detailed measurements needed for turbulence model development and validation. Thus, a large number of open questions remain unanswered about this instability and even first order global quantities, such as the layer growth, are not completely understood and still give rise to intense debate. Nevertheless, today’s petascale computers allow fully resolved simulations of RTI at parameter ranges comparable to those attained in laboratory experiments, but providing, in carefully controlled initial and boundary conditions studies, much more information than physical experiments. <br>
+In this talk, I will give an overview of recent results on Rayleigh-Taylor instability, including self-similarity, turbulence and mixing asymmetries, spectral behavior, and structure of the layer. In particular, I will show results from an extensive set of Direct Numerical Simulations on up to 40962 x 4032 meshes, the largest fully resolved instability simulations to date. <br> <br>
+1. Livescu, D. 2013. Phil. Trans. R. Soc. A 371, 20120185. <br>
+2. Wei, T. and D. Livescu. 2012. Phys. Rev. E 86, 046405.<br>
+3. Livescu, D. and J. R. Ristorcelli. 2008. J. Fluid Mech. 605, 145-180. </p>
+<br><br>
+<p><b> Bio: </b> Dr. Daniel Livescu is a scientist at Los Alamos National Laboratory and, currently, is leading the fluid dynamics team within the CCS Division and is the PI for DOE/NNSA Defense Science Programs on DNS and QMD. Dr. Livescu received his Ph.D. from the University of Buffalo, SUNY (2001) and his M.S. from the “Politehnica” University Bucharest (1991). His research interests are in the general areas of theoretical and computational fluid mechanics, with emphasis on turbulence and turbulent mixing simulation, theory, and modeling. </p>
+<br>
+
+
+<p align="right"><a href="../index.html" title="Berkeley Fluids Seminar">Back to main page</a></p><br>
+
+</div>
+
+<div id="bottom">
+<h5>&copy; <a href="http://www.cbeaume.com"><font color="white"> C&eacute;dric Beaume </font></a></h5>
+</div>
+
+
+</div>
+
+</body>
+
+</html>
+

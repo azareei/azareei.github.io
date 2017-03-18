@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="../site3.css">
+<title>Berkeley Fluids Seminar</title>
+<META NAME="Author" CONTENT="Ahmad Zareei">
+<META NAME="keywords" CONTENT="fluids, berkeley">
+</head>
+
+<body>
+
+<div id="main">
+
+<div id="top">
+<h1>Berkeley Fluids Seminar</h1>
+<h2>University of California, Berkeley</h2>
+</div>
+
+<div id="location">
+<h3>Bring your lunch and enjoy learning about fluids!</h3>
+</div>
+
+<div id="sidebar">
+
+<div id="menu">
+<h4>Information</h4>
+<p>What: Fluids</p>
+<p>When: Wed 12 noon</p>
+<p>Where: 240, Bechtel Hall </p>
+<p><a href="../spring16.html" title="Spring 2016 schedule">Spring 2016 schedule</a></p>
+<p><a href="../fall15.html" title="Fall 2015 schedule">Fall 2015 schedule</a></p>
+<p><a href="../spring15.html" title="Spring 2015 schedule">Spring 2015 schedule</a></p>
+<p><a href="../fall14.html" title="Fall 2014 schedule">Fall 2014 schedule</a></p>
+<p><a href="../spring14.html" title="Spring 2014 schedule">Spring 2014 schedule</a></p>
+<p><a href="../fall13.html" title="Fall 2013 schedule">Fall 2013 schedule</a></p>
+</div>
+
+<div id="links">
+<h4>Contact</h4>
+<!-- <p align="center"><a href="http://www.cbeaume.com" title="C&eacute;dric Beaume">C&eacute;dric Beaume</a></p>
+<p align="center">ced.beaume AT gmail.com</p>
+<p align="center">+1-510-423-1487</p><br>
+-->
+<p align="center"><a href="http://physics.berkeley.edu/people/graduate-student/daniel-lecoanet" title="Daniel Lecoanet">Daniel Lecoanet</a></p>
+<p align="center">dlecoanet AT berkeley.edu</p><br>
+<p align="center"><a href="http://me.berkeley.edu/~mahdinia/" title="Mani Mahdinia">Mani Mahdinia</a></p>
+<p align="center">mahdinia AT berkeley.edu</p><br>
+<p align="center"><a href="http://math.berkeley.edu/people/grad/anna-lieb" title="Anna Lieb">Anna Lieb</a></p>
+<p align="center">lieb AT math.berkeley.edu</p><br>
+<p align="center"><a href="http://www.me.berkeley.edu/~azareei" title="Ahmad Zareei">Ahmad Zareei</a></p>
+<p align="center">ahmad.zareei AT gmail.com</p>
+<p align="center">+1-510-693-9359</p><br>
+</div>
+
+</div>
+
+<div id="mainright">
+
+<p align="center">Friday, February 5, 2016</p>
+<p align="center">240, Bechtel Hall, 12:00-13:00</p>
+<p align="center"><a href="http://www.damtp.cam.ac.uk/people/m.s.davies-wykes/"><b> Dr. Megan S. Davies Wykes </b></a> (Courant Institute, NYU) </p><br>
+<p align="center"><b> Measuring mixing efficiency in stratified flows  </b></p><br>
+<p align="justify"> 
+Quantifying the efficiency of mixing in stratified flows has been studied for the last twenty years and mixing efficiency is an important quantity in many ocean and climate models. In the past it has been common practice to assume a value for the mixing efficiency of 20%. However, recent laboratory experiments of Rayleigh-Taylor instability between two otherwise stably-stratified layers have shown that mixing efficiencies as high as 75% are possible. This experimental research and accompanying computational simulations have revealed important aspects about the way that energy removed by mixing is measured, leading to new questions about how best to measure and describe turbulent mixing in stratified flows. 
+</p>
+<br>
+
+<p align="right"><a href="../index.html" title="Berkeley Fluids Seminar">Back to main page</a></p><br>
+
+</div>
+
+<div id="bottom">
+<h5>&copy; <a href="http://www.cbeaume.com"><font color="white"> C&eacute;dric Beaume </font></a></h5>
+</div>
+
+
+</div>
+
+</body>
+
+</html>
+

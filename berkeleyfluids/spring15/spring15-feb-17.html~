@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="../site3.css">
+<title>Berkeley Fluids Seminar</title>
+<META NAME="Author" CONTENT="Ahmad Zareei">
+<META NAME="keywords" CONTENT="fluids, berkeley">
+</head>
+
+<body>
+
+<div id="main">
+
+<div id="top">
+<h1>Berkeley Fluids Seminar</h1>
+<h2>University of California, Berkeley</h2>
+</div>
+
+<div id="location">
+<h3>Bring your lunch and enjoy learning about fluids!</h3>
+</div>
+
+<div id="sidebar">
+
+<div id="menu">
+<h4>Information</h4>
+<p>What: Fluids</p>
+<p>When: Tue 12 noon</p>
+<p>Where: 544 Davis Hall</p>
+<p><a href="../spring15.html" title="Spring 2015 schedule">Spring 2015 schedule</a></p>
+<p><a href="../fall14.html" title="Fall 2014 schedule">Fall 2014 schedule</a></p>
+<p><a href="../spring14.html" title="Spring 2014 schedule">Spring 2014 schedule</a></p>
+<p><a href="../fall13.html" title="Fall 2013 schedule">Fall 2013 schedule</a></p>
+</div>
+
+<div id="links">
+<h4>Contact</h4>
+<!-- <p align="center"><a href="http://www.cbeaume.com" title="C&eacute;dric Beaume">C&eacute;dric Beaume</a></p>
+<p align="center">ced.beaume AT gmail.com</p>
+<p align="center">+1-510-423-1487</p><br>
+-->
+<p align="center"><a href="http://physics.berkeley.edu/people/graduate-student/daniel-lecoanet" title="Daniel Lecoanet">Daniel Lecoanet</a></p>
+<p align="center">dlecoanet AT berkeley.edu</p><br>
+<p align="center"><a href="http://me.berkeley.edu/~mahdinia/" title="Mani Mahdinia">Mani Mahdinia</a></p>
+<p align="center">mahdinia AT berkeley.edu</p><br>
+<p align="center"><a href="http://math.berkeley.edu/people/grad/anna-lieb" title="Anna Lieb">Anna Lieb</a></p>
+<p align="center">lieb AT math.berkeley.edu</p><br>
+<p align="center"><a href="http://www.me.berkeley.edu/~azareei" title="Ahmad Zareei">Ahmad Zareei</a></p>
+<p align="center">ahmad.zareei AT gmail.com</p>
+<p align="center">+1-510-693-9359</p><br>
+</div>
+
+</div>
+
+<div id="mainright">
+
+<p align="center">February 11, 2015</p>
+<p align="center"><a href="http://www.ntnu.edu/employees/helge.i.andersson"><b>Prof Helge Andersson</b></a> (Department of Energy, NTNU)</p><br>
+<p align="center"><b>Coriolis force effects on turbulent shear flows  </b></p><br>
+<p align="justify"> <b>Abstract:</b> Flow in rotating systems are encountered in astrophysical, geophysical and industrial fluid mechanics. The presence of the Coriolis force are known to affect the mean fluid motion in geophysical applications. The shorter length and time scales in engineering devices make the Coriolis force also affect the turbulence. The talk will address Coriolis-force effects on both the mean flow and the turbulence. A variety of different shear flows of engineering relevance will be presented to illustrate the most striking flow phenomena caused by the Coriolis force.  We will see that both the turbulence level and the turbulence anisotropy are changed due to system rotation and the extent of zones of separated flow varies with the rate of system rotation.
+<br><br>
+<b>Biography:</b>
+Helge Andersson is the author or co-author of more than 200 scientific papers.  His research includes: Particles in turbulent flows; Bluff-body wake flows; and Flows in rotating systems.  He is currently a professor in the Department of Energy and Process Engineering (Division of Fluids Engineering) at the Norwegian University of Science and Technology (NTNU).  He has served as the head of the Division of Applied Mechanics at the Norwegian Institute of Technology, and did his postdoctoral study at the Theodore von Karman Institute for Fluid Dynamics in Brussels.
+<br><br>
+For personal meetings with Dr. Andersson, please contact his host: variano@ce.berkeley.edu
+ </p>
+<br>
+
+<p align="right"><a href="../index.html" title="Berkeley Fluids Seminar">Back to main page</a></p><br>
+
+</div>
+
+<div id="bottom">
+<h5>&copy; <a href="http://www.cbeaume.com"><font color="white"> C&eacute;dric Beaume </font></a></h5>
+</div>
+
+
+</div>
+
+</body>
+
+</html>
+
