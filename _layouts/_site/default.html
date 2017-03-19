@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <link rel="shortcut icon" href="{{site.baseurl}}/img/phd.ico" type="image/x-icon" />
+  <head>
+    <meta charset="utf-8">
+    <title> Ahmad Zareei Personal Webpage</title>
+    <link href="{{site.baseurl}}/css/common.css" rel="stylesheet">
+  </head>
+  <body>
+    
+    <table border=0><tr>
+
+        <td>
+          <img src="{{site.baseurl}}/img/ahmad_zareei.jpg" alt="my picture" height=200>
+        <td width=40>
+          
+        <td>
+          <h1>Ahmad Zareei</h1>
+          PhD Candidate<br>
+          Taflab, <br>
+          Mechanical Engineering<br>
+          University of California, Berkeley<br>
+        </td>
+      </tr>
+    </table>
+    <hr>
+
+    <header>
+      {% include nav.html navclass='nav-top'%}
+    </header>
+
+    {{content}}
+
+  <hr>
+  <footer>
+  <p> {% include nav.html navclass='nav-bottom'%}</p>
+  </footer>
+
+    <hr>
+    <address>
+      Ahmad M. Zareei, 135 Hesse Hall, University of California Berkeley, CA 94720,  
+      <a href="mailto:ahmad.zareei@gmail.com">ahmad.zareei@gmail.com</a> (prefered),
+      <a href="mailto:ahmad@berkeley.edu">ahmad@berkeley.edu</a>
+    </address>    
+  </body>
+</html>
