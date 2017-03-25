@@ -8,6 +8,8 @@ layout: posts
 
 
 <footer>
-  <p><a href="{{page.source}}">{{page.source}}</a></p>
+  {% if page.source %}
+  <p>Source:<a href="{{page.source}}">{{page.source}}</a></p>
+  {% endif %}
 </footer>
 
