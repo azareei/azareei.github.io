@@ -1,0 +1,27 @@
+* Suggestion for a building a workstation ~1000?                       :blog:
+:PROPERTIES:  
+:on: 
+:category: blog
+:layout: posts-article
+<2017-03-25 Sat>  
+:END:
+
+I did some research and this is a workstation that I suggest for number crunching purposes which costs ~1000$: (2015-29-05)
+
+
+
+| Component       | Mark                  | number |       price |   Total |
+|-----------------+-----------------------+--------+-------------+---------|
+| CPU             | [[%20http://www.newegg.com/Product/Product.aspx?Item%3DN82E16819117402][Intel 5820k]]           |      1 |      389.99 |  389.99 |
+| Mobo            | [[http://www.newegg.com/Product/Product.aspx?Item%3DN82E16813157543&nm_mc%3DAFC-C8Junction&cm_mmc%3DAFC-C8Junction-_-na-_-na-_-na&cm_sp%3D&AID%3D10446076&PID%3D3938566&SID%3D][Asrock X99-Extreme4]]   |      1 |      190.99 |  190.99 |
+| PSU and Case    | [[http://www.amazon.com/Cooler-Master-Elite-350-CMP/dp/B003O2KEPC/ref%3Dsr_1_3?ie%3DUTF8&qid%3D1382887651&sr%3D8-3&keywords%3Dcase%2Band%2Bpsu%2Bcooler%2Bmaster][cooler master]]         |      2 |       58.25 |   58.57 |
+| mouse and board | [[http://www.amazon.com/Logitech-Desktop-MK120-Mouse-keyboard/dp/B003NREDC8/ref%3Dsr_1_3?ie%3DUTF8&qid%3D1382887730&sr%3D8-3&keywords%3Dlogitech%2Bmouse%2Band%2Bkeyboard%2Bcombo][logitech]]              |      1 |       14.99 |   14.99 |
+| Harddrive       | [[http://www.amazon.com/Black-Performance-Desktop-Hard-Drive/dp/B00FJRS6FU/ref%3Ddp_ob_title_ce][caviar black]]          |      1 |       70.31 |   70.31 |
+| Wireless Card   | [[http://www.amazon.com/TP-LINK-TL-WN881ND-Wireless-Express-Low-profile/dp/B0079XWMEI/ref%3Dsr_1_4?s%3Delectronics&ie%3DUTF8&qid%3D1382888142&sr%3D1-4&keywords%3Dwireless%2Bcard][Tp Link]]               |      1 |       15.89 |   15.89 |
+| RAM             | [[http://www.newegg.com/Product/Product.aspx?Item%3DN82E16820148863][Crossair, DDR4- 2x8Gb]] |      2 |       76.99 |  153.98 |
+| monitor         | [[http://www.amazon.com/dp/B0058UUR6E/ref%3Dtwister_B00HV850KE?_encoding%3DUTF8&psc%3D1][Asus 24"]]              |      1 |      174.99 |  174.99 |
+| Graphic Card    | [[http://www.newegg.com/Product/Product.aspx?Item%3DN82E16814487052][Geforce GT 730 2Gb]]    |      1 |       74.99 |   74.99 |
+|-----------------+-----------------------+--------+-------------+---------|
+|                 |                       |        |         Sum |  1144.7 |
+|                 |                       |        | Tax(CA-10%) |  114.47 |
+|                 |                       |        |       Total | 1259.17 |
