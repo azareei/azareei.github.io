@@ -1,9 +1,8 @@
 * Suggestion for a building a workstation ~1000?                       :blog:
 :PROPERTIES:  
-:on: 
+:on: <2017-03-25 Sat>  
 :category: blog
 :layout: posts-article
-<2017-03-25 Sat>  
 :END:
 
 I did some research and this is a workstation that I suggest for number crunching purposes which costs ~1000$: (2015-29-05)
