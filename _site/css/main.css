@@ -6,28 +6,6 @@ html {
 }
 
 
-.current {
-    background-color: #000531;
-    color: #fff;
-}
-
-
-
-.nav-top {
-    font-size: 1.1rem;
-}
-
-.nav-under-top {
-    font-size: 1.2rem;
-}
-
-
-
-.nav > li {
-    display: inline-block;
-    padding-right: 20px;
-}
-
 
 .current {
     background-color: #000531;
