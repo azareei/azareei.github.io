@@ -1,5 +1,5 @@
 ---
-layout: posts
+layout: posts-article
 title: How to read emails with emacs? 
 category: linux
 ---

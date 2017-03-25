@@ -1,5 +1,5 @@
 ---
-layout: posts
+layout: posts-article
 title: How to install Lapack & Blas on linux? 
 category: linux
 ---

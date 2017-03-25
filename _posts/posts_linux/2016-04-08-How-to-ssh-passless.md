@@ -1,14 +1,9 @@
 ---
-layout: posts
+layout: posts-article
 title: How to do SSH loging without password? 
 category: linux
 ---
 
-<body bgcolor="white">
-<h1>How to do SSH login without passowrd?</h1>
-<br>
-
-<br>
 <h2> Goal </h2>
 Assume we are using linux and openssh and we want to do an automatic login form "host A/user a" to "Host B/ user b" without entering your password every time. 
 

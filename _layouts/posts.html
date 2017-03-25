@@ -1,15 +1,16 @@
 ---
 layout: default
 ---                                
-
-                                                                           
+                                                                         
 <h2> Posts: </h2>
-
-<nav>
-  <ul>
-    <li><a href="{{site.baseurl}}/posts_news.html"> News:</a></li>    
-    <li><a href="{{site.baseurl}}/posts_linux.html"> Linux:</a></li>
+<nav class='nav-under-top'>
+  <ul class="nav {{include.navclass}}">
+    <li><a href="{{site.baseurl}}/posts/linux.html" class="{% if page.url contains 'linux' %}current{% endif %}"> Linux</a></li>
+    <li><a href="{{site.baseurl}}/posts/news.html" class="{% if page.url contains 'news'%}current{% endif %}"> News</a></li>
+    <li><a href="{{site.baseurl}}/posts/useful-links.html" class="{% if page.url contains 'useful' %}current{% endif %}"> Useful Links</a></li>
   </ul>
 </nav>
+
+<hr>
 
 {{content}}
