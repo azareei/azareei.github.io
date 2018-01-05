@@ -1,13 +1,13 @@
 ---
 layout: posts-article
-title: Neural Network for a Nonlinear Function 
+title: Solving ODE using neural net 
 category: machine-learning
 ---
 
 <br>
 
 
-<h2> Learning a nonlinear function using neural network! </h2>
+<h2> How to solve an ODE using neural net? </h2>
 
 
 <p>
