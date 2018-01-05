@@ -7,7 +7,7 @@ category: machine-learning
 <br>
 
 
-<h2> Learning a nonlinear function using neural network? </h2>
+<h2> Learning a nonlinear function using neural network! </h2>
 
 
 <p>

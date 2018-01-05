@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <link rel="shortcut icon" href="{{site.baseurl}}/img/phd.ico" type="image/x-icon" />
+  <head>
+    <meta charset="utf-8">
+    <title> {% if page.title %}{{page.title}} . {% endif %}Ahmad Zareei Webpage</title>
+    <link href="{{site.baseurl}}/css/main.css" rel="stylesheet">
+  </head>
+  <body>
+    
+    <table border=0><tr>
+        
+        <td>
+          <img src="{{site.baseurl}}/img/ahmad_zareei3.jpg" alt="my picture" height=200>
+        <td width=50>
+
+        <td>
+          <b><font size="8">Ahmad Zareei</font></b><br>
+          <font size="4"> PhD Candidate, <br>
+          Theoritical and Applied Fluids Lab., <br>
+          Mechanical Engineering, University of California, Berkeley<br></font>
+        </td>
+
+          
+      </tr>
+    </table>
+    <hr>
+
+    <header>
+      {% include nav.html navclass='nav-top'%}
+    </header>
+    <hr>
+
+    <!--  some content added here -->
+
+    <!--  some content added here -->    
+    
+    {{content}}
+
+  <hr>
+  <footer>
+  <p> {% include nav.html navclass='nav-bottom'%}</p>
+  </footer>
+
+    <hr>
+    <address>
+      135 Hesse Hall, University of California Berkeley, CA 94720,  
+      <!--
+      <a href="mailto:ahmad.zareei@gmail.com">ahmad.zareei@gmail.com</a> (prefered),
+      -->
+      <a href="mailto:zareei@berkeley.edu">zareei@berkeley.edu</a><br>
+      <!-- Complex Fluids Lab, 1984 Mathematics Road, University of British Columbia, Vancouver, Canada     -->
+    </address>    
+  </body>
+</html>
+
+
+
+
+{% include google-analytics.html %}
