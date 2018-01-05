@@ -10,13 +10,15 @@ category: machine-learning
 <h2> How to solve an ODE using neural net? </h2>
 
 
+
+
 <p>
 Here, I want to solve an ode using a neural network. I consider the
 most basic ordinary differential equation as 
 </p>
 
 <p>
-\[ \frac{d y}{d x} = -\alpha y, \quad y(x=x_0) = y_0\]
+\[ \frac{d y}{d x} = \alpha y, \quad y(x=x_0) = y_0\]
 </p>
 
 
@@ -28,73 +30,73 @@ The code is as follows
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python">import autograd.numpy as np
-from autograd import grad, elementwise_grad
-from autograd.misc.optimizers import adam
-import autograd.numpy.random as npr
+<pre class="src src-python"><span style="color: #b4fa70; font-weight: bold;">import</span> autograd.numpy <span style="color: #b4fa70; font-weight: bold;">as</span> np
+<span style="color: #b4fa70; font-weight: bold;">from</span> autograd <span style="color: #b4fa70; font-weight: bold;">import</span> grad, elementwise_grad
+<span style="color: #b4fa70; font-weight: bold;">from</span> autograd.misc.optimizers <span style="color: #b4fa70; font-weight: bold;">import</span> adam
+<span style="color: #b4fa70; font-weight: bold;">import</span> autograd.numpy.random <span style="color: #b4fa70; font-weight: bold;">as</span> npr
 
 
-def init_random_parameters(scale, layer_sizes, rs = npr.RandomState(0)):
-    """ Building a list of tuples (weights, biases)
-        For each layer, defined in layer_sizes
-        and saceling with scale parameteR"""
-    return [ (scale*rs.randn(m,n),  #weighths in matrix of m input and n output
-              scale*rs.randn(n))    #biases
-             for m,n in zip(layer_sizes[:-1], # m: number of input layers
-                            layer_sizes[1:])] # n: number of output layers
+<span style="color: #b4fa70; font-weight: bold;">def</span> <span style="color: #fce94f;">init_random_parameters</span>(scale, layer_sizes, rs = npr.RandomState(0)):
+    <span style="color: #9FC59F;">""" Building a list of tuples (weights, biases)</span>
+<span style="color: #9FC59F;">        For each layer, defined in layer_sizes</span>
+<span style="color: #9FC59F;">        and saceling with scale parameteR"""</span>
+    <span style="color: #b4fa70; font-weight: bold;">return</span> [ (scale*rs.randn(m,n),  <span style="color: #5F7F5F;">#</span><span style="color: #73d216;">weighths in matrix of m input and n output</span>
+              scale*rs.randn(n))    <span style="color: #5F7F5F;">#</span><span style="color: #73d216;">biases</span>
+             <span style="color: #b4fa70; font-weight: bold;">for</span> m,n <span style="color: #b4fa70; font-weight: bold;">in</span> <span style="color: #e090d7; font-weight: bold;">zip</span>(layer_sizes[:-1], <span style="color: #5F7F5F;"># </span><span style="color: #73d216;">m: number of input layers</span>
+                            layer_sizes[1:])] <span style="color: #5F7F5F;"># </span><span style="color: #73d216;">n: number of output layers</span>
 
 
-def logistic(x):
-    """ defining a logistic term"""
-    return 1.0 / (1.0 + np.exp(-x));
+<span style="color: #b4fa70; font-weight: bold;">def</span> <span style="color: #fce94f;">logistic</span>(x):
+    <span style="color: #9FC59F;">""" defining a logistic term"""</span>
+    <span style="color: #b4fa70; font-weight: bold;">return</span> 1.0 / (1.0 + np.exp(-x));
 
-def f(params, inputs):
-    """This function calculates the output of the neural net
-        with a list of (weights, bias) tuples as params.
-        returns normalized class log-probabilities."""
-    for W, b in params:
-        outputs = np.dot(inputs, W) + b
-        inputs = logistic(outputs)
-    return outputs
+<span style="color: #b4fa70; font-weight: bold;">def</span> <span style="color: #fce94f;">f</span>(params, inputs):
+    <span style="color: #9FC59F;">"""This function calculates the output of the neural net</span>
+<span style="color: #9FC59F;">        with a list of (weights, bias) tuples as params.</span>
+<span style="color: #9FC59F;">        returns normalized class log-probabilities."""</span>
+    <span style="color: #b4fa70; font-weight: bold;">for</span> W, b <span style="color: #b4fa70; font-weight: bold;">in</span> params:
+        <span style="color: #fcaf3e;">outputs</span> = np.dot(inputs, W) + b
+        <span style="color: #fcaf3e;">inputs</span> = logistic(outputs)
+    <span style="color: #b4fa70; font-weight: bold;">return</span> outputs
 
-# initializing the neural net with random numbers
-params = init_random_parameters(0.5, layer_sizes = [1,5,5,1]);
+<span style="color: #5F7F5F;"># </span><span style="color: #73d216;">initializing the neural net with random numbers</span>
+<span style="color: #fcaf3e;">params</span> = init_random_parameters(0.5, layer_sizes = [1,5,5,1]);
 
-# defining the domain
-t = np.linspace(0,4,100).reshape((-1,1));
+<span style="color: #5F7F5F;"># </span><span style="color: #73d216;">defining the domain</span>
+<span style="color: #fcaf3e;">t</span> = np.linspace(0,4,100).reshape((-1,1));
 
-# defining the derivative of the function
+<span style="color: #5F7F5F;"># </span><span style="color: #73d216;">defining the derivative of the function</span>
 
-dfdt = elementwise_grad(f,1); 
-alpha = 1.0;
-f0 = 10.0;
+<span style="color: #fcaf3e;">dfdt</span> = elementwise_grad(f,1); 
+<span style="color: #fcaf3e;">alpha</span> = 1.0;
+<span style="color: #fcaf3e;">f0</span> = 10.0;
 
-def f_exact(t):
-    return f0*np.exp(-alpha*t);
+<span style="color: #b4fa70; font-weight: bold;">def</span> <span style="color: #fce94f;">f_exact</span>(t):
+    <span style="color: #b4fa70; font-weight: bold;">return</span> f0*np.exp(-alpha*t);
 
-def objective_function(params, step):
-    """ the output of the function should be the same
-        as the nonlinear function defined in y"""
-    ode = dfdt(params,t) - (-alpha*f(params,t))
-    initial_condition = f(params,0);
-    return np.mean(ode**2) + (initial_condition - f0)**2
-
-
-def callback(params, step, g):
-    if step%1000 ==0:
-        print("At itteration {0:4d} objective value is: {1}".format(step, objective_function(params,step)));
+<span style="color: #b4fa70; font-weight: bold;">def</span> <span style="color: #fce94f;">objective_function</span>(params, step):
+    <span style="color: #9FC59F;">""" the output of the function should be the same</span>
+<span style="color: #9FC59F;">        as the nonlinear function defined in y"""</span>
+    <span style="color: #fcaf3e;">ode</span> = dfdt(params,t) - (-alpha*f(params,t))
+    <span style="color: #fcaf3e;">initial_condition</span> = f(params,0);
+    <span style="color: #b4fa70; font-weight: bold;">return</span> np.mean(ode**2) + (initial_condition - f0)**2
 
 
-params = adam(grad(objective_function), params, step_size=0.01, num_iters=10000, callback=callback);
+<span style="color: #b4fa70; font-weight: bold;">def</span> <span style="color: #fce94f;">callback</span>(params, step, g):
+    <span style="color: #b4fa70; font-weight: bold;">if</span> step%1000 ==0:
+        <span style="color: #b4fa70; font-weight: bold;">print</span>(<span style="color: #e9b96e;">"At itteration {0:4d} objective value is: {1}"</span>.<span style="color: #e090d7; font-weight: bold;">format</span>(step, objective_function(params,step)));
 
 
-# plotting the final result
-import matplotlib.pyplot as plt
-plt.plot(t, f(params, t),'r')
-plt.plot(t, f_exact(t),'b')
-plt.xlabel('$t$')
-plt.ylabel('$f(t)$')
-plt.savefig('ode-neural-net.png')
+<span style="color: #fcaf3e;">params</span> = adam(grad(objective_function), params, step_size=0.01, num_iters=10000, callback=callback);
+
+
+<span style="color: #5F7F5F;"># </span><span style="color: #73d216;">plotting the final result</span>
+<span style="color: #b4fa70; font-weight: bold;">import</span> matplotlib.pyplot <span style="color: #b4fa70; font-weight: bold;">as</span> plt
+plt.plot(t, f(params, t),<span style="color: #e9b96e;">'r'</span>)
+plt.plot(t, f_exact(t),<span style="color: #e9b96e;">'b'</span>)
+plt.xlabel(<span style="color: #e9b96e;">'$t$'</span>)
+plt.ylabel(<span style="color: #e9b96e;">'$f(t)$'</span>)
+plt.savefig(<span style="color: #e9b96e;">'ode-neural-net.png'</span>)
 
 </pre>
 </div>
@@ -120,42 +122,42 @@ A usual way to sove such ordinary differential equations is to use ode45 built i
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python"># integrating using ode45
-from scipy.integrate import ode
-import numpy as numpy
+<pre class="src src-python"><span style="color: #5F7F5F;"># </span><span style="color: #73d216;">integrating using ode45</span>
+<span style="color: #b4fa70; font-weight: bold;">from</span> scipy.integrate <span style="color: #b4fa70; font-weight: bold;">import</span> ode
+<span style="color: #b4fa70; font-weight: bold;">import</span> numpy <span style="color: #b4fa70; font-weight: bold;">as</span> numpy
 
-def f(t,y,arg1):
-    return -arg1*y
-y0, t0 = 10.0, 0.0;
-alpha = 1.0; # parameter in dy/dt = alpha y
+<span style="color: #b4fa70; font-weight: bold;">def</span> <span style="color: #fce94f;">f</span>(t,y,arg1):
+    <span style="color: #b4fa70; font-weight: bold;">return</span> -arg1*y
+<span style="color: #fcaf3e;">y0</span>, <span style="color: #fcaf3e;">t0</span> = 10.0, 0.0;
+<span style="color: #fcaf3e;">alpha</span> = 1.0; <span style="color: #5F7F5F;"># </span><span style="color: #73d216;">parameter in dy/dt = alpha y</span>
 
-r = ode(f).set_integrator('dopri5', verbosity = 1);
+<span style="color: #fcaf3e;">r</span> = ode(f).set_integrator(<span style="color: #e9b96e;">'dopri5'</span>, verbosity = 1);
 r.set_initial_value([y0],t0).set_f_params(alpha);
 
-tf = 4;
-dt= 0.05;
-num_steps = numpy.int((tf-t0)/dt) + 1;
+<span style="color: #fcaf3e;">tf</span> = 4;
+<span style="color: #fcaf3e;">dt</span>= 0.05;
+<span style="color: #fcaf3e;">num_steps</span> = numpy.<span style="color: #e090d7; font-weight: bold;">int</span>((tf-t0)/dt) + 1;
 
 
-t = numpy.zeros((num_steps,1))
-y = numpy.zeros((num_steps,1));
+<span style="color: #fcaf3e;">t</span> = numpy.zeros((num_steps,1))
+<span style="color: #fcaf3e;">y</span> = numpy.zeros((num_steps,1));
 
 
-k = 0;
-while r.successful() and r.t &lt; tf:
+<span style="color: #fcaf3e;">k</span> = 0;
+<span style="color: #b4fa70; font-weight: bold;">while</span> r.successful() <span style="color: #b4fa70; font-weight: bold;">and</span> r.t &lt; tf:
     r.integrate(r.t + dt)
-    print("{0}{1}".format(r.t, r.y))
-    t[k] = r.t;
-    y[k] = r.y;
-    k = k+ 1;
+    <span style="color: #b4fa70; font-weight: bold;">print</span>(<span style="color: #e9b96e;">"{0}{1}"</span>.<span style="color: #e090d7; font-weight: bold;">format</span>(r.t, r.y))
+    <span style="color: #fcaf3e;">t</span>[k] = r.t;
+    <span style="color: #fcaf3e;">y</span>[k] = r.y;
+    <span style="color: #fcaf3e;">k</span> = k+ 1;
 
-import matplotlib.pyplot as plt
+<span style="color: #b4fa70; font-weight: bold;">import</span> matplotlib.pyplot <span style="color: #b4fa70; font-weight: bold;">as</span> plt
 
-plt.plot(t, y,'r');
-plt.plot(t,y0*numpy.exp(-alpha*t),'b')
-plt.xlabel('$x$')
-plt.ylabel('$f(x)$')
-plt.savefig('ode-45.png')
+plt.plot(t, y,<span style="color: #e9b96e;">'r'</span>);
+plt.plot(t,y0*numpy.exp(-alpha*t),<span style="color: #e9b96e;">'b'</span>)
+plt.xlabel(<span style="color: #e9b96e;">'$x$'</span>)
+plt.ylabel(<span style="color: #e9b96e;">'$f(x)$'</span>)
+plt.savefig(<span style="color: #e9b96e;">'ode-45.png'</span>)
 </pre>
 </div>
 
