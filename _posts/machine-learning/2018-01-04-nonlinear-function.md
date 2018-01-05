@@ -1,7 +1,7 @@
 ---
 layout: posts-article
 title: Neural Network for a Nonlinear Function 
-category: machine_learning
+category: machine-learning
 ---
 
 <br>
