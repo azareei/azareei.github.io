@@ -16,7 +16,7 @@ most basic ordinary differential equation as
 </p>
 
 <p>
-\[ \frac{d y}{d x} = \alpha y, \quad y(x=x_0) = y_0\]
+\[ \frac{d y}{d x} = -\alpha y, \quad y(x=x_0) = y_0\]
 </p>
 
 
