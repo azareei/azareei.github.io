@@ -1,4 +1,0 @@
-#+OPTIONS: toc:nil num:nil
-
-
-** Milk-Crown (Drop Splash)
