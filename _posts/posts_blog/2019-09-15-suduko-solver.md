@@ -7,11 +7,9 @@ category: blog
 <br>
 
 
-<h2> Sudoku solver with Python </h2>
-
 
 <p>
-The following code finds a solution to the Sudoku puzzle.
+The following code finds a solution to the Sudoku puzzle. It finds only one solution. If there exists multiple solution, it finds the one that needs less computation! You can tweak the code to find all of the solutions.
 </p>
 
 
