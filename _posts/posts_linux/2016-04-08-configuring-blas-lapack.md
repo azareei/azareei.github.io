@@ -45,4 +45,4 @@ LAPack and BLAS are powerfull linear algebra libraries written in fortran. Here 
 
 
 -------------------------------------------
-<li> If you get the error "recipe for target 'znep.out' failed" during installation of LAPack, run the command "$ ulimit -s unlimited". Thanks to <a href="https://www.imprs-astro.mpg.de/content/prof-dr-werner-becker"> Prof. Becker</a> for bringing this up to my attention. </li>
+<li> If you get the error "recipe for target 'znep.out' failed" during installation of LAPack, run the command "$ ulimit -s unlimited". See <a href="https://unix.stackexchange.com/questions/428394/lapack-make-fails-recipe-for-target-znep-out-failed-error">this</a> for more information. Thanks to <a href="https://www.imprs-astro.mpg.de/content/prof-dr-werner-becker"> Prof. Becker</a> for bringing this up to my attention. </li>
