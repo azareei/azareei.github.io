@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<title>Ahmad  Zareei | Ahmad Zareei</title>
+<title>Ahmad  Zareei | How to ssh passless?</title>
 <meta name="description" content="A simple, whitespace theme for academics. Based on [*folio](https://github.com/bogoli/-folio) design.
 ">
 
@@ -29,7 +29,7 @@
 <link rel="shortcut icon" href="/azareei/assets/img/favicon.ico">
 <link rel="stylesheet" href="/azareei/assets/css/main.css">
 
-<link rel="canonical" href="/azareei/blog/">
+<link rel="canonical" href="/azareei/blog/2016/How-to-ssh-passless/">
 
 <!-- Theming-->
 
@@ -149,60 +149,51 @@
     <!-- Content -->
 
     <div class="container mt-5">
-      <div class="post">
+      
 
-  <div class="header-bar">
-    <h1>Ahmad Zareei</h1>
-    <h2>Math, coding, puzzles, philosophy, etc.</h2>
-  </div>
+<div class="post">
 
+  <header class="post-header">
+    <h1 class="post-title">How to ssh passless?</h1>
+    <p class="post-meta">April 8, 2016</p>
+  </header>
 
-  <ul class="post-list">
-    
-      <li>
-        <h3><a class="post-title" href="/azareei/blog/2020/Buffons-Needle/">Buffon's Needle</a></h3>
-        <p class="post-meta">October 27, 2020</p>
-        <p>Buffon's Needle</p>
-      </li>
-    
-      <li>
-        <h3><a class="post-title" href="/azareei/blog/2020/Investment-plan/">Investing plan</a></h3>
-        <p class="post-meta">September 18, 2020</p>
-        <p>How to invest</p>
-      </li>
-    
-      <li>
-        <h3><a class="post-title" href="/azareei/blog/2020/Balance-puzzle/">Weighing balance puzzle</a></h3>
-        <p class="post-meta">March 14, 2020</p>
-        <p>Puzzle</p>
-      </li>
-    
-  </ul>
+  <article class="post-content">
+    <h2> Goal </h2>
+<p>Assume we are using linux and openssh and we want to do an automatic login form “host A/user a” to “Host B/ user b” without entering your password every time.</p>
+
+<h2> How to do it? </h2>
+
+<ul>
+<li> Open a terminal. </li>
+<li> log in to host A</li>
+<li> Generating a pair of authentication keys: a@A:~$ ssh-keygen -t rsa</li>
+<ul>
+<li> Enter file in which to save the key (/home/a/.ssh/id_rsa):</li>
+<li> Created directory '/home/a/.ssh'. </li>
+<li> Enter passphrase (empty for no passphrase): </li>
+<li> Enter same passphrase again:  </li>
+</ul>
+<li> Now, your identification is saved in "/home/a/.ssh/id_rsa" and your public ey has been saved in "/home/a/.ssh/id_rsa.pub" </li>
+<li> Now create a directory "~/.ssh" as user b on B. This directory may already exists. </li>
+<ul>
+<li> a@A:~$ ssh b@B  </li>
+<li> mkdir -p .ssh </li> 
+</ul>
+<li> Finally you need to append a's new public key to the authorized keys for b@B as</li>
+<ul>
+<li> a@A:~&gt; cat .ssh/id_rsa.pub | ssh b@B 'cat &gt;&gt; .ssh/authorized_keys'</li>
+</ul>
+<li> At this step, we are done! I usually add an alias to my ~/.bashrc file, for doing the whole ssh thing with just typing someWord! You can append this line to your ~/.bashrc file: </li>
+<ul>
+<li> alias someWord="ssh b@B"</li>
+</ul>
+<li>Voila!! </li>
+</ul>
+
+  </article>
 
   
-<nav aria-label="Blog page naviation">
-  <ul class="pagination pagination-lg justify-content-center">
-    <li class="page-item disabled">
-      <a class="page-link" href="" tabindex="-1" aria-disabled="">Newer</a>
-    </li>
-    
-      
-        <li class="page-item active"><a class="page-link" href="/azareei/blog/index.html" title="Ahmad Zareei">1</a></li>
-      
-        <li class="page-item "><a class="page-link" href="/azareei/blog/page/2/index.html" title="Ahmad Zareei - page 2">2</a></li>
-      
-        <li class="page-item "><a class="page-link" href="/azareei/blog/page/3/index.html" title="Ahmad Zareei - page 3">3</a></li>
-      
-        <li class="page-item "><a class="page-link" href="/azareei/blog/page/4/index.html" title="Ahmad Zareei - page 4">4</a></li>
-      
-    
-    <li class="page-item ">
-      <a class="page-link" href="/azareei/blog/page/2/">Older</a>
-    </li>
-  </ul>
-</nav>
-
-
 
 </div>
 

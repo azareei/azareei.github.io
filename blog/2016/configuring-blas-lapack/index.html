@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<title>Ahmad  Zareei | Ahmad Zareei</title>
+<title>Ahmad  Zareei | How to install Lapack & Blas on linux?</title>
 <meta name="description" content="A simple, whitespace theme for academics. Based on [*folio](https://github.com/bogoli/-folio) design.
 ">
 
@@ -29,7 +29,7 @@
 <link rel="shortcut icon" href="/azareei/assets/img/favicon.ico">
 <link rel="stylesheet" href="/azareei/assets/css/main.css">
 
-<link rel="canonical" href="/azareei/blog/">
+<link rel="canonical" href="/azareei/blog/2016/configuring-blas-lapack/">
 
 <!-- Theming-->
 
@@ -149,60 +149,63 @@
     <!-- Content -->
 
     <div class="container mt-5">
-      <div class="post">
+      
 
-  <div class="header-bar">
-    <h1>Ahmad Zareei</h1>
-    <h2>Math, coding, puzzles, philosophy, etc.</h2>
-  </div>
+<div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">How to install Lapack & Blas on linux?</h1>
+    <p class="post-meta">April 8, 2016</p>
+  </header>
+
+  <article class="post-content">
+    <p><br /></p>
+<h2> Goal </h2>
+<p>LAPack and BLAS are powerfull linear algebra libraries written in fortran. Here I go over installing and using them in linux. First we need to install BLAS, and then we can install LAPack.</p>
+
+<h2> How to do it? </h2>
+
+<ul>
+<li> Download the latest version of <a href="http://www.netlib.org/blas/"> BLAS </a></li>
+<li> Open a terminal and go to the directory where you have saved it. </li>
+<ul> 
+<li> $ tar -xvf blas-3.6.0.tgz # create BLAS subdirectory</li> 
+<li> $ cd BLAS-3.6.0 </li>
+<li> $ gfortran -O3 -c *.f # compiling </li>
+<li> $ ar cr libblas.a *.o  # creates libblas.a </li>
+<li> $ sudo cp ./libblas.a /usr/local/lib/ </li>
+</ul>
+<li> So far we have installed BLAS. Now download the latest version of <a href="http://www.netlib.org/lapack/">LAPack</a>.</li>
+<li> Open a terminal and go to the directory where you have saved it. </li>
+<ul> 
+<li> $ tar -xvf ./lapack-3.6.0.tgz # create LAPack subdirectory</li> 
+<li> $ cd lapack-3.6.0 </li>
+</ul>
+<li> Now you need to change the directory of BLAS in the file "make.inc.example". Open this file and find the line that reads</li>
+<ul>
+<li> BLASLIB      = ../../librefblas.a </li>
+</ul>
+<li> and change it to :</li>
+<ul>
+<li> BLASLIB      = /usr/local/libblas.a </li>
+</ul>
+<li> Save this file as "make.inc" and then run make:  
+<ul>
+<li> $ make </li>
+</ul>
+<li> $ sudo cp ./liblapack.a /usr/local/lib/ </li>
+<li> compile your code using "-lblas -llapack" flags. </li>
+<li>Voila!! </li>
 
 
-  <ul class="post-list">
-    
-      <li>
-        <h3><a class="post-title" href="/azareei/blog/2020/Buffons-Needle/">Buffon's Needle</a></h3>
-        <p class="post-meta">October 27, 2020</p>
-        <p>Buffon's Needle</p>
-      </li>
-    
-      <li>
-        <h3><a class="post-title" href="/azareei/blog/2020/Investment-plan/">Investing plan</a></h3>
-        <p class="post-meta">September 18, 2020</p>
-        <p>How to invest</p>
-      </li>
-    
-      <li>
-        <h3><a class="post-title" href="/azareei/blog/2020/Balance-puzzle/">Weighing balance puzzle</a></h3>
-        <p class="post-meta">March 14, 2020</p>
-        <p>Puzzle</p>
-      </li>
-    
-  </ul>
+
+-------------------------------------------
+<li> If you get the error "recipe for target 'znep.out' failed" during installation of LAPack, run the command "$ ulimit -s unlimited". See <a href="https://unix.stackexchange.com/questions/428394/lapack-make-fails-recipe-for-target-znep-out-failed-error">this</a> for more information. Thanks to <a href="https://www.imprs-astro.mpg.de/content/prof-dr-werner-becker"> Prof. Becker</a> for bringing this up to my attention. </li>
+</li></ul>
+
+  </article>
 
   
-<nav aria-label="Blog page naviation">
-  <ul class="pagination pagination-lg justify-content-center">
-    <li class="page-item disabled">
-      <a class="page-link" href="" tabindex="-1" aria-disabled="">Newer</a>
-    </li>
-    
-      
-        <li class="page-item active"><a class="page-link" href="/azareei/blog/index.html" title="Ahmad Zareei">1</a></li>
-      
-        <li class="page-item "><a class="page-link" href="/azareei/blog/page/2/index.html" title="Ahmad Zareei - page 2">2</a></li>
-      
-        <li class="page-item "><a class="page-link" href="/azareei/blog/page/3/index.html" title="Ahmad Zareei - page 3">3</a></li>
-      
-        <li class="page-item "><a class="page-link" href="/azareei/blog/page/4/index.html" title="Ahmad Zareei - page 4">4</a></li>
-      
-    
-    <li class="page-item ">
-      <a class="page-link" href="/azareei/blog/page/2/">Older</a>
-    </li>
-  </ul>
-</nav>
-
-
 
 </div>
 

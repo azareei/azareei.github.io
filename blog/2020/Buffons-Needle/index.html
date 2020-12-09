@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<title>Ahmad  Zareei | Ahmad Zareei</title>
+<title>Ahmad  Zareei | Buffon's Needle</title>
 <meta name="description" content="A simple, whitespace theme for academics. Based on [*folio](https://github.com/bogoli/-folio) design.
 ">
 
@@ -29,7 +29,7 @@
 <link rel="shortcut icon" href="/azareei/assets/img/favicon.ico">
 <link rel="stylesheet" href="/azareei/assets/css/main.css">
 
-<link rel="canonical" href="/azareei/blog/">
+<link rel="canonical" href="/azareei/blog/2020/Buffons-Needle/">
 
 <!-- Theming-->
 
@@ -149,60 +149,98 @@
     <!-- Content -->
 
     <div class="container mt-5">
-      <div class="post">
+      
 
-  <div class="header-bar">
-    <h1>Ahmad Zareei</h1>
-    <h2>Math, coding, puzzles, philosophy, etc.</h2>
-  </div>
+<div class="post">
 
+  <header class="post-header">
+    <h1 class="post-title">Buffon's Needle</h1>
+    <p class="post-meta">October 27, 2020</p>
+  </header>
 
-  <ul class="post-list">
-    
-      <li>
-        <h3><a class="post-title" href="/azareei/blog/2020/Buffons-Needle/">Buffon's Needle</a></h3>
-        <p class="post-meta">October 27, 2020</p>
-        <p>Buffon's Needle</p>
-      </li>
-    
-      <li>
-        <h3><a class="post-title" href="/azareei/blog/2020/Investment-plan/">Investing plan</a></h3>
-        <p class="post-meta">September 18, 2020</p>
-        <p>How to invest</p>
-      </li>
-    
-      <li>
-        <h3><a class="post-title" href="/azareei/blog/2020/Balance-puzzle/">Weighing balance puzzle</a></h3>
-        <p class="post-meta">March 14, 2020</p>
-        <p>Puzzle</p>
-      </li>
-    
-  </ul>
+  <article class="post-content">
+    <p>Suppose we have a floor made of parallel strips of wood, each the same width, and we drop a needle onto the floor. What is the probability that the needle lie in one of the  the two strips?</p>
+
+<p><br /></p>
+<div class="row mt-3" style="text-align:center;">
+    <div class="col-sm mt-3 mt-md-0">
+        <img class="img-fluid rounded z-depth-1" width="300" src="/azareei/assets/posts/needle.png" />
+    </div>
+</div>
+<p><br /></p>
+
+<p>e.g. here in (A) the needle lies on the border line between the stripes and in (B) the needle lies in the white strip. The equation asks what is the probability of observing case (B)?</p>
+
+<p>In order to find the probability, we need to look at the space of possible configuration for the needle and see how much of this configuration space is the part that we are interested in.</p>
+
+<p>The center of needle has a distance $x$ from the beginning of the strip and we assume an angle of the needle is</p>
+
+<p><br /></p>
+<div class="row mt-3" style="text-align:center;">
+    <div class="col-sm mt-3 mt-md-0">
+        <img class="img-fluid rounded z-depth-1" width="300" src="/azareei/assets/posts/N1.png" />
+    </div>
+</div>
+<p><br /></p>
+
+<p>Looking at the area in the configuration space of $(x,\theta)$ we find that there will be two cases depending on if $x\leq \ell$  or $x\geq \ell$. You can see the different cases in the following figure. The full configuration space is the whoe ractangle with the area of $\pi\cdot t$; and what we are interested in is the green area.</p>
+
+<p><br /></p>
+<div class="row mt-3" style="text-align:center;">
+    <div class="col-sm mt-3 mt-md-0">
+        <img class="img-fluid rounded z-depth-1" width="600" src="/azareei/assets/posts/N2.png" />
+    </div>
+</div>
+<p><br /></p>
+
+<p>So the total are is $A = \pi t$</p>
+
+<p>The relevant area for which the needle lies in between the stripes is</p>
+
+\[A_g = \iint d\theta dx\]
+
+<p>and the probability is simply $p = A_g/A$</p>
+
+<p>No in order to calculate the $A_g$ we have</p>
+
+<p>(a)  $t\geq \ell$:</p>
+
+<p>In this case, we have</p>
+
+\[A_g = 4 \int_{0}^{\pi/2} d\theta~ \int_{\frac{\ell}{2}\sin\theta}^{t/2} dx = 2 \int_{0}^{\pi/2} {t} - {\ell} \sin\theta d\theta =  {\pi t} - 2{\ell}\]
+
+<p>As a result</p>
+
+\[p = \frac{\pi t -  2 \ell}{\pi t} = 1 - \frac{2\ell}{\pi t}\]
+
+<p>(b)  $t\leq \ell$:</p>
+
+<p>We can take the integral as follows</p>
+
+\[A_g = 4\int_0^{\sin^{-1}(t/\ell)} d\theta  \int_{\ell \sin\theta/2}^{t/2} dx =  2\int_0^{\sin^{-1}(t/\ell)} (t - \ell \sin\theta )d\theta \\\]
+
+\[A_g = 2t\sin^{-1} \frac{t}{\ell} - 2 \ell \left[ \cos(\sin^{-1}\frac{t}{\ell}) - 1\right]\]
+
+<p>So the probability becomes</p>
+
+\[p = \frac{2}{\pi} \sin^{-1}\frac{t}{\ell} - \frac{2\ell}{\pi t} \left[ \cos(\sin^{-1}\frac{t}{\ell}) - 1 \right]\]
+
+<p>So the probability of the needle lie in between the strips and not cross them is</p>
+
+\[p = \begin{cases} \frac{2}{\pi} \sin^{-1}\frac{t}{\ell} - \frac{2\ell}{\pi t} \left[ \cos(\sin^{-1}\frac{t}{\ell}) - 1 \right] &amp; t\leq \ell \\ 1 - \frac{2\ell}{\pi t} &amp; t\geq \ell \end{cases}\]
+
+<p>and finally this is what the probability looks like!</p>
+
+<p><br /></p>
+<div class="row mt-3" style="text-align:center;">
+    <div class="col-sm mt-3 mt-md-0">
+        <img class="img-fluid rounded z-depth-1" width="500" src="/azareei/assets/posts/probability.png" />
+    </div>
+</div>
+
+  </article>
 
   
-<nav aria-label="Blog page naviation">
-  <ul class="pagination pagination-lg justify-content-center">
-    <li class="page-item disabled">
-      <a class="page-link" href="" tabindex="-1" aria-disabled="">Newer</a>
-    </li>
-    
-      
-        <li class="page-item active"><a class="page-link" href="/azareei/blog/index.html" title="Ahmad Zareei">1</a></li>
-      
-        <li class="page-item "><a class="page-link" href="/azareei/blog/page/2/index.html" title="Ahmad Zareei - page 2">2</a></li>
-      
-        <li class="page-item "><a class="page-link" href="/azareei/blog/page/3/index.html" title="Ahmad Zareei - page 3">3</a></li>
-      
-        <li class="page-item "><a class="page-link" href="/azareei/blog/page/4/index.html" title="Ahmad Zareei - page 4">4</a></li>
-      
-    
-    <li class="page-item ">
-      <a class="page-link" href="/azareei/blog/page/2/">Older</a>
-    </li>
-  </ul>
-</nav>
-
-
 
 </div>
 

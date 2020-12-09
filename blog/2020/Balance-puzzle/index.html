@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<title>Ahmad  Zareei | Ahmad Zareei</title>
+<title>Ahmad  Zareei | Weighing balance puzzle</title>
 <meta name="description" content="A simple, whitespace theme for academics. Based on [*folio](https://github.com/bogoli/-folio) design.
 ">
 
@@ -29,7 +29,7 @@
 <link rel="shortcut icon" href="/azareei/assets/img/favicon.ico">
 <link rel="stylesheet" href="/azareei/assets/css/main.css">
 
-<link rel="canonical" href="/azareei/blog/">
+<link rel="canonical" href="/azareei/blog/2020/Balance-puzzle/">
 
 <!-- Theming-->
 
@@ -149,60 +149,42 @@
     <!-- Content -->
 
     <div class="container mt-5">
-      <div class="post">
+      
 
-  <div class="header-bar">
-    <h1>Ahmad Zareei</h1>
-    <h2>Math, coding, puzzles, philosophy, etc.</h2>
-  </div>
+<div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Weighing balance puzzle</h1>
+    <p class="post-meta">March 14, 2020</p>
+  </header>
+
+  <article class="post-content">
+    <p><br /></p>
+
+<p>
+You have a balance and 12 marbles: 11 identical, one secretly
+lighter/heavier. Balance lets you see whether LHS is &gt;, =, or &lt;
+RHS. Determine which marble is weird and whether it is lighter or
+heavier in 3 weighings.
+</p>
+
+<p>
+We first see if such solution is feasible. There are 3 outcomes per each balance test (LHS&gt;RHS, LHS=RHS, or LHS&lt;RHS). So if we run 3 weighings, then we will have 3x3x3 different distinct outcomes. Considering the fact that each marble can be lighter or heavier or all equal, then we have 2x12+1=25 different cases. Since 25&lt;27, then we can definitely design the weighings so that each outcome corresponds to one case. An example of such case is shown below: 
+</p>
+
+<div class="figure">
+<p><img src="/azareei/assets/posts/marbles.png" alt="marbles.png" width="800px" />
+</p>
+</div>
+
+<p>
+To generalize this question, if we have \( n \) marbles with one being lighter/heavier or maybe equal, we will have \( 2n+1\) cases, for which we need at least \(m \) where \( 3^m \geq 2n+2\). 
+</p>
 
 
-  <ul class="post-list">
-    
-      <li>
-        <h3><a class="post-title" href="/azareei/blog/2020/Buffons-Needle/">Buffon's Needle</a></h3>
-        <p class="post-meta">October 27, 2020</p>
-        <p>Buffon's Needle</p>
-      </li>
-    
-      <li>
-        <h3><a class="post-title" href="/azareei/blog/2020/Investment-plan/">Investing plan</a></h3>
-        <p class="post-meta">September 18, 2020</p>
-        <p>How to invest</p>
-      </li>
-    
-      <li>
-        <h3><a class="post-title" href="/azareei/blog/2020/Balance-puzzle/">Weighing balance puzzle</a></h3>
-        <p class="post-meta">March 14, 2020</p>
-        <p>Puzzle</p>
-      </li>
-    
-  </ul>
+  </article>
 
   
-<nav aria-label="Blog page naviation">
-  <ul class="pagination pagination-lg justify-content-center">
-    <li class="page-item disabled">
-      <a class="page-link" href="" tabindex="-1" aria-disabled="">Newer</a>
-    </li>
-    
-      
-        <li class="page-item active"><a class="page-link" href="/azareei/blog/index.html" title="Ahmad Zareei">1</a></li>
-      
-        <li class="page-item "><a class="page-link" href="/azareei/blog/page/2/index.html" title="Ahmad Zareei - page 2">2</a></li>
-      
-        <li class="page-item "><a class="page-link" href="/azareei/blog/page/3/index.html" title="Ahmad Zareei - page 3">3</a></li>
-      
-        <li class="page-item "><a class="page-link" href="/azareei/blog/page/4/index.html" title="Ahmad Zareei - page 4">4</a></li>
-      
-    
-    <li class="page-item ">
-      <a class="page-link" href="/azareei/blog/page/2/">Older</a>
-    </li>
-  </ul>
-</nav>
-
-
 
 </div>
 
