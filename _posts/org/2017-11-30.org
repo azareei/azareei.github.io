@@ -1,8 +1,0 @@
-#+OPTIONS: toc:nil num:nil 
-
-* Cunningham's Law?
-
-Cunningham's Law says that the best way to find the right answer on the internet is not to ask the question directly, but to post the wrong answer. People normally won't answer question on the internet; however they have a tendency to correct someone if he/she is wrong! This law is named after Ward Cunningham, the founder of wiki, where wik is a good example of this law! 
-
-
-

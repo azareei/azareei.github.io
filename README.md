@@ -1,4 +1,8 @@
+# My Homepage
 
-        * This is my personal Webpage
+bundle exec jekyll serve
 
-        * How to execute on local server: $  jekyll serve --watch --baseurl ""
+
+## License
+
+The theme is based on **al-folio** theme and is available under the [MIT License](https://opensource.org/licenses/MIT).
