@@ -82,7 +82,7 @@ footer.sticky-bottom { border-top: 1px solid #e8e8e8; padding-top: 40px; padding
 .header-bar h1 { color: var(--global-theme-color); font-size: 5rem; }
 
 .post-list { margin: 0; margin-bottom: 40px; padding: 0; }
-.post-list li { border-bottom: 1px solid #e8e8e8; list-style: none; padding-top: 2rem; padding-bottom: 2rem; }
+.post-list li { border-bottom: 1px solid #e8e8e8; list-style: none; padding-top: 1rem; padding-bottom: -1rem; }
 .post-list li .post-meta { color: #828282; font-size: 0.875rem; margin-bottom: 0; }
 .post-list li a { color: var(--global-text-color); text-decoration: none; }
 .post-list li a:hover { color: var(--global-theme-color); }
