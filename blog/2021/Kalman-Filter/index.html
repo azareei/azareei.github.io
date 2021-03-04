@@ -313,21 +313,17 @@ that we have at time \(t-1\) based on all the observations we had as  \(\hat{\ma
 
 \[\boxed{\Sigma_{t|t} = \left( \mathbf{I} - \mathbf{K}_t\right)\Sigma_{t|t-1}}\]
 
-<p>Now let’s imagine what happens if we only do a partial observation of the state or $\mathbf{H}_k\neq \mathbf{I}$. In this case, we do the prediction as before, but in the step that we want to combine the results to correct the prediction, we need to make some changes since we only have partial parts of $\mathbf{x}_t$. In such a case, we used the best linear estimator that we introduced earlier to construct the full $\mathbf{x}_t$ and then use that to update the prediction.</p>
+<p>Now let’s imagine what happens if we only do a partial observation of the state or \(\mathbf{H}_k\neq \mathbf{I}\). In this case, we do the prediction as before, but in the step that we want to combine the results to correct the prediction, we need to make some changes since we only have partial parts of \(\mathbf{x}_t\). In such a case, we used the best linear estimator that we introduced earlier to construct the full \(\mathbf{x}_t\) and then use that to update the prediction.</p>
 
 <p>The estimation with partial observation becomes</p>
 
 \[\mathbf{H}_t\hat{\mathbf{x}}_{t|t} = \mathbf{H}_t\hat{\mathbf{x}}_{t|t-1} + \mathbf{H}_t  \Sigma_{t|t-1} \left( \Sigma_{t|t-1} + \mathbf{R}_t \right)^{-1} \mathbf{H}_t^\top\left( \mathbf{z}_t - \mathbf{H}_t\hat{\mathbf{x}}_{t|t-1}\right)\]
 
-<table>
-  <tbody>
-    <tr>
-      <td>We can define $$\boxed{\mathbf{K}<em>t = \Sigma</em>{t</td>
-      <td>t-1} \left( \Sigma_{t</td>
-      <td>t-1} + \mathbf{R}_t \right)^{-1} \mathbf{H}_t^\top}$$, and the observable simplifies to</td>
-    </tr>
-  </tbody>
-</table>
+<p>We can define</p>
+
+\[\boxed{\mathbf{K}_t = \Sigma_{t|t-1} \left( \Sigma_{t|t-1} + \mathbf{R}_t \right)^{-1} \mathbf{H}_t^\top}\]
+
+<p>and the observable simplifies to</p>
 
 \[\mathbf{H}_t\hat{\mathbf{x}}_{t|t} = \mathbf{H}_t\hat{\mathbf{x}}_{t|t-1} + \mathbf{H}_t \mathbf{K}_t\left( \mathbf{z}_t - \mathbf{H}_t\hat{\mathbf{x}}_{t|t-1}\right)\]
 
