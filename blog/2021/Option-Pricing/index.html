@@ -84,24 +84,7 @@
               
             </a>
           </li>
-          
-          <!-- Blog -->
-          <li class="nav-item active">
-            <a class="nav-link" href="/azareei/blog/">
-              blog
-              
-            </a>
-          </li>
-          
-          <!-- Other pages -->
-          
-          
-          
-          
-          
-          
-          
-          
+          <!-- Other pages  | sort: "title" -->
           
           
           
@@ -124,6 +107,15 @@
           
           
           <li class="nav-item ">
+              <a class="nav-link" href="/azareei/mentorship/">
+                mentorship
+                
+              </a>
+          </li>
+          
+          
+          
+          <li class="nav-item ">
               <a class="nav-link" href="/azareei/teaching/">
                 teaching
                 
@@ -132,6 +124,23 @@
           
           
           
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          <!-- Blog -->
+          <li class="nav-item active">
+            <a class="nav-link" href="/azareei/blog/">
+              blog
+              
+            </a>
+          </li>
+                      
         </ul>
       </div>
     </div>
@@ -153,7 +162,7 @@
   </header>
 
   <article class="post-content">
-    <p>I have recently got interested in options and how they are priced. In this post, I plan to briefly summarize what I have learned so far about options and how they are priced. First I start with what options are, then I cover the bounds of an option price. Next, I briefly discuss what a Weiner, or Ito process is, and at the end I derive the famous Black-Sholes equation. I don’t have any background in finance, and these are my understandings based on what I have understood.</p>
+    <p>I have recently got interested in options and how they are priced. In this post, I plan to briefly summarize what I have learned so far about options and how they are priced. First I start with what options are, then I cover the bounds for an option price. Next, I briefly discuss what a Weiner process or an Ito process is, and at the end I derive the famous Black-Sholes equation. Disclaimer: I don’t have any background in finance, and these are my understandings.</p>
 
 <h1 id="options">Options</h1>
 
@@ -319,7 +328,7 @@
 
 \[\ln S_T - \ln S_0 \sim \mathcal{N}\left( (\mu - \frac{\sigma^2}{2})T, \sigma^2 T\right)\]
 
-<p>Example. Imagine a stock price of \(10\\), with annual return of \(16\%\), and volatility of \(20\%\). After \(6\) months, what is the probability distribution of stock price?</p>
+<p>Example. Imagine a stock price of \(10\$\), with annual return of \(16\%\), and volatility of \(20\%\). After \(6\) months, what is the probability distribution of stock price?</p>
 
 \[\ln S_T - \ln10 \sim \mathcal{N}\left( (0.16-\frac{0.2^2}{2})\frac{1}{2}, 0.2^2 \frac{1}{2} \right)\\\]
 
@@ -465,7 +474,7 @@
     &copy; Copyright 2021 Ahmad  Zareei.
     <!--  -->     
     
-    Last updated: March 03, 2021.
+    Last updated: March 25, 2021.
     
   </div>
 </footer>

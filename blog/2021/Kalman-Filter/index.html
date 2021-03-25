@@ -84,24 +84,7 @@
               
             </a>
           </li>
-          
-          <!-- Blog -->
-          <li class="nav-item active">
-            <a class="nav-link" href="/azareei/blog/">
-              blog
-              
-            </a>
-          </li>
-          
-          <!-- Other pages -->
-          
-          
-          
-          
-          
-          
-          
-          
+          <!-- Other pages  | sort: "title" -->
           
           
           
@@ -124,6 +107,15 @@
           
           
           <li class="nav-item ">
+              <a class="nav-link" href="/azareei/mentorship/">
+                mentorship
+                
+              </a>
+          </li>
+          
+          
+          
+          <li class="nav-item ">
               <a class="nav-link" href="/azareei/teaching/">
                 teaching
                 
@@ -132,6 +124,23 @@
           
           
           
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          <!-- Blog -->
+          <li class="nav-item active">
+            <a class="nav-link" href="/azareei/blog/">
+              blog
+              
+            </a>
+          </li>
+                      
         </ul>
       </div>
     </div>
@@ -153,12 +162,12 @@
   </header>
 
   <article class="post-content">
-    <p>Kalman filter is a classic state estimation technique that has applications in many areas. In this simple tutorial, I will try to explain Kalman filters in an intuitive way. This is the most basic introduction to the Kalman filter and basically how I learned it. Before starting to talk about the Kalman filter, I first review some basic materials that we need.</p>
+    <p>Kalman filter is a classic state estimation technique that has found application in many places. In this simple tutorial, I will try to explain Kalman filter in an intuitive way. This is the most basic introduction to the Kalman filter and basically how I learned it. Before getting to the Kalman filter, I will first review some basic materials that we need.</p>
 
 <p><br /></p>
 <h1 id="prerequisite">Prerequisite</h1>
 
-<p>Let \(x_i\) be a random variable that has a <strong>probability density function</strong> \(p_i(x)\) whose mean and variance are \(\mu_i\) and \(\sigma_i^2\) and we write \(x_i \sim p_i(\mu_i,\sigma_i^2)\).</p>
+<p>Let \(x_i\) be a random variable that has a <strong>probability density function</strong> \(p_i(x)\) whose mean and variance are \(\mu_i\) and \(\sigma_i^2\). We write \(x_i \sim p_i(\mu_i,\sigma_i^2)\).</p>
 
 <p>Assuming a set of pairwise uncorrelated random variables \(x_1 \sim p_1(\mu_1,\sigma_1^2), \cdots x_n \sim p_n(\mu_n,\sigma_n^2)\), if \(y\) is a random variable where \(y = \sum_{i=1}^n \alpha_i x_i\), then the mean and variance of \(y\) are</p>
 
@@ -169,7 +178,7 @@
 <p><br /></p>
 <h2 id="fusing-two-variables">Fusing two variables</h2>
 
-<p>Now, imagine that we want to measure a variable \(y\), we have two totally different devices that use different methods, one is based on an old method for example and its results are reported with \(x_1 \sim p_1(\mu_1,\sigma_1^2)\), and one that uses a new method and its the results are reported with \(x_2 \sim p_2(\mu_2,\sigma_2^2)\). Now the question is how to combine these two different measurements to create an optimal estimator for \(x\).  The simplest way is to combine these results linearly as \(y = \alpha x_1 + \beta x_2\).  A reasonable requirement is that if the two estimates \(x_1\) and \(x_2\) are giving the same result, then this linear combination should give out that same result. This implies that \(\alpha + \beta =1\). So our linear estimator so far becomes</p>
+<p>Now, imagine that we want to measure a variable \(y\), we have two totally different devices where they use different methods, one is based on an old method for example and its results are reported with \(x_1 \sim p_1(\mu_1,\sigma_1^2)\), and one that uses a new method and its the results are reported with \(x_2 \sim p_2(\mu_2,\sigma_2^2)\). Now the question is how to combine these two different measurements to create an optimal estimator for \(y\).  The simplest way is to combine these results linearly as \(y = \alpha x_1 + \beta x_2\).  A reasonable requirement is that if the two estimates \(x_1\) and \(x_2\) are giving the same result, then this linear combination should give out that same result. This implies that \(\alpha + \beta =1\). So our linear estimator so far becomes</p>
 
 \[y_\alpha(x_1,x_2) = \alpha x_1 + (1-\alpha)x_2\]
 
@@ -373,7 +382,7 @@ is an invertible matrix, it can be removed from both sides, and we obtain</p>
     &copy; Copyright 2021 Ahmad  Zareei.
     <!--  -->     
     
-    Last updated: March 03, 2021.
+    Last updated: March 25, 2021.
     
   </div>
 </footer>
