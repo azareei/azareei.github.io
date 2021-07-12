@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<title>Ahmad  Zareei | Kalman Filter</title>
+<meta name="description" content="Personal homepage of Ahmad Zareei.
+">
+
+<!-- Open Graph -->
+
+
+<!-- Bootstrap & MDB -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" integrity="sha512-MoRNloxbStBcD8z3M/2BmnT+rg4IsMxPkXaGh2zD6LGNNFE80W3onsAhRcMAMrSoyWL9xD7Ert0men7vR8LUZg==" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" integrity="sha512-RO38pBRxYH3SoOprtPTD86JFOclM51/XTIdEPh5j8sj4tp8jmQIx26twG52UaLi//hQldfrh7e51WzP9wuP32Q==" crossorigin="anonymous" />
+
+<!-- Fonts & Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"  integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.0/css/academicons.min.css" integrity="sha512-W4yqoT1+8NLkinBLBZko+dFB2ZbHsYLDdr50VElllRcNt2Q4/GSs6u71UHKxB7S6JEMCp5Ve4xjh3eGQl/HRvg==" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons">
+
+<!-- Code Syntax Highlighting -->
+<link rel="stylesheet" href="https://gitcdn.link/repo/jwarby/jekyll-pygments-themes/master/github.css" />
+
+<!-- Styles -->
+<link rel="shortcut icon" href="/azareei/assets/img/favicon.ico">
+<link rel="stylesheet" href="/azareei/assets/css/main.css">
+
+<link rel="canonical" href="/azareei/blog/2021/Kalman-Filter/">
+
+<!-- Theming-->
+
+
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-77789841"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-77789841');
+  </script>
+
+
+    
+<!-- MathJax -->
+<script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js"></script>
+<script defer src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+
+
+  </head>
+
+  <body class="fixed-top-nav ">
+
+    <!-- Header -->
+
+    <header>
+
+    <!-- Nav Bar -->
+    <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top">
+    <div class="container">
+      
+      <a class="navbar-brand title font-weight-lighter" href="https://ahmadzareei.github.io/azareei/">
+       <span class="font-weight-bold">Ahmad</span>   Zareei
+      </a>
+      
+      <!-- Navbar Toogle -->
+      <button class="navbar-toggler collapsed ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar top-bar"></span>
+        <span class="icon-bar middle-bar"></span>
+        <span class="icon-bar bottom-bar"></span>
+      </button>
+      <div class="collapse navbar-collapse text-right" id="navbarNav">
+        <ul class="navbar-nav ml-auto flex-nowrap">
+          <!-- About -->
+          <li class="nav-item ">
+            <a class="nav-link" href="/azareei/">
+              about
+              
+            </a>
+          </li>
+          <!-- Other pages  | sort: "title" -->
+          
+          
+          
+          <li class="nav-item ">
+              <a class="nav-link" href="/azareei/publications/">
+                publications
+                
+              </a>
+          </li>
+          
+          
+          
+          <li class="nav-item ">
+              <a class="nav-link" href="/azareei/projects/">
+                research
+                
+              </a>
+          </li>
+          
+          
+          
+          <li class="nav-item ">
+              <a class="nav-link" href="/azareei/mentorship/">
+                mentorship
+                
+              </a>
+          </li>
+          
+          
+          
+          <li class="nav-item ">
+              <a class="nav-link" href="/azareei/teaching/">
+                teaching
+                
+              </a>
+          </li>
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          <!-- Blog -->
+          <li class="nav-item active">
+            <a class="nav-link" href="/azareei/blog/">
+              blog
+              
+            </a>
+          </li>
+                      
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+</header>
+
+
+    <!-- Content -->
+
+    <div class="container mt-5">
+      
+
+<div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Kalman Filter</h1>
+    <p class="post-meta">March 1, 2021</p>
+  </header>
+
+  <article class="post-content">
+    <p>Kalman filter is a classic state estimation technique that has found application in many places. In this simple tutorial, I will try to explain Kalman filter in an intuitive way. This is the most basic introduction to the Kalman filter and basically how I learned it. Before getting to the Kalman filter, I will first review some basic materials that we need.</p>
+
+<p><br /></p>
+<h1 id="prerequisite">Prerequisite</h1>
+
+<p>Let \(x_i\) be a random variable that has a <strong>probability density function</strong> \(p_i(x)\) whose mean and variance are \(\mu_i\) and \(\sigma_i^2\). We write \(x_i \sim p_i(\mu_i,\sigma_i^2)\).</p>
+
+<p>Assuming a set of pairwise uncorrelated random variables \(x_1 \sim p_1(\mu_1,\sigma_1^2), \cdots x_n \sim p_n(\mu_n,\sigma_n^2)\), if \(y\) is a random variable where \(y = \sum_{i=1}^n \alpha_i x_i\), then the mean and variance of \(y\) are</p>
+
+\[\mu_y = \sum_{i=1}^n \alpha_i \mu_i\]
+
+\[\sigma_y^2 = \sum_{i=1}^n \alpha_i \sigma_i^2\]
+
+<p><br /></p>
+<h2 id="fusing-two-variables">Fusing two variables</h2>
+
+<p>Now, imagine that we want to measure a variable \(y\), we have two totally different devices where they use different methods, one is based on an old method for example and its results are reported with \(x_1 \sim p_1(\mu_1,\sigma_1^2)\), and one that uses a new method and its the results are reported with \(x_2 \sim p_2(\mu_2,\sigma_2^2)\). Now the question is how to combine these two different measurements to create an optimal estimator for \(y\).  The simplest way is to combine these results linearly as \(y = \alpha x_1 + \beta x_2\).  A reasonable requirement is that if the two estimates \(x_1\) and \(x_2\) are giving the same result, then this linear combination should give out that same result. This implies that \(\alpha + \beta =1\). So our linear estimator so far becomes</p>
+
+\[y_\alpha(x_1,x_2) = \alpha x_1 + (1-\alpha)x_2\]
+
+<p>But what value should we pick for \(\alpha\)? One reasonable way is to say that the optimal value of \(\alpha\) minimizes the variance of \(y_\alpha\). The variance of \(y_\alpha\)  is</p>
+
+\[\sigma_y^2 = \alpha^2 \sigma_1^2 + (1-\alpha)^2 \sigma_2^2\]
+
+\[\frac{d}{d \alpha} \sigma_y^2 = 2\alpha \sigma_1^2 -2 (1-\alpha)\sigma_2^2 = 0 \to \alpha = \frac{\sigma_2^2}{\sigma_1^2 + \sigma_2^2}\]
+
+<p>Since the second derivative is positive then this value of \(\alpha\) minimizes the variance. The estimator then becomes</p>
+
+\[y(x_1,x_2) = \frac{\sigma_2^2}{\sigma_1^2 + \sigma_2^2} x_1 + \frac{\sigma_1^2}{\sigma_1^2 + \sigma_2^2} x_2\]
+
+\[y(x_1,x_2) = \frac{1/\sigma_1^2}{1/\sigma_1^2 + 1/\sigma_2^2} x_1 + \frac{1/\sigma_2^2}{1/\sigma_1^2 + 1/\sigma_2^2} x_2, \quad \sigma_y^2 = \frac{1}{1/\sigma_2^1 + 1/\sigma_2^2}\]
+
+<p><br /></p>
+<h2 id="fusing-multiple-variables">Fusing multiple variables</h2>
+
+<p>The above argument can be extended for multiple scalar estimates. Let \(x_i \sim p_i(\mu_i,\sigma_i^2)\) be a set of pairwise uncorrelated random variables. Consider unbiased linear estimator \(y = \sum_{i=1}^n \alpha_i x_i\).  Using Lagrange multipliers, we have</p>
+
+\[f(\alpha_1, \cdots, \alpha_n) = \sum_{i=1}^n \alpha_i^2 \sigma_i^2 + \lambda \left( \sum_{i=1}^n \alpha_i -1 \right)\]
+
+<p>where \(\lambda\)  is the Lagrange multiplier. Taking the derivative with respect to \(\alpha_j\) we find that \(\alpha_1 \sigma_1^2 = \alpha_2\sigma_2^2 = \cdots = -\lambda/2\). Since \(\sum \alpha_i = 1\), then we can find that</p>
+
+\[\alpha_i = \frac{\frac{1}{\sigma_i^2}}{\sum_{i=1}^n \frac{1}{\sigma_i^2}}\]
+
+<p>where the variance \(\sigma_y\)  is</p>
+
+\[\sigma_y = \frac{1}{\sum_{i=1}^n \frac{1}{\sigma_i^2}}\]
+
+<p><br /></p>
+<h2 id="vector-estimates">Vector estimates</h2>
+
+<p>Now let’s expand the same result to the vectors of random variables. Let \(\mathbf{x}_1 \sim p_1( \mathbf{\mu}_1,\Sigma_1), \cdots, \mathbf{x}_n \sim p_n( \mathbf{\mu}_n,\Sigma_n)\) be a set of pairwise uncorrelated random variables of length \(m\). If random variable \(\mathbf{y}\) is a linear combination of these random variables as \(\mathbf{y}  = \sum_{i=1}^n \mathbf{A}_i \mathbf{x}_i\), then the mean and covariance of \(\mathbf{y}\) is obtianed as</p>
+
+\[\mathbf{\mu}_\mathbf{y} = \sum_{i=1}^n \mathbf{A}_i \mathbf{\mu}_i\]
+
+\[\Sigma_\mathbf{yy} = \sum_{i=1}^n \mathbf{A}_i \Sigma_i\mathbf{A}^\top_i\]
+
+<p><br /></p>
+<h2 id="fusing-multiple-vector-estimates">Fusing multiple vector estimates</h2>
+
+<p>Imagine the linear estimator as</p>
+
+\[\mathbf{y}(\mathbf{x}_1,\cdots,\mathbf{x}_n) = \sum_{i=1}^n \mathbf{A}_i \mathbf{x}_i, \quad \sum \mathbf{A}_i = \mathbb{I}\]
+
+<p>Similarly, we intend to minimize \(\mathbb{E}[ (\mathbf{y}-\mu)^\top (\mathbf{y}-\mu)]\) . We define the following optimization problem using Lagrangian multipliers</p>
+
+\[f(\mathbf{A}_1, \cdots, \mathbf{A}_n) = \mathbb{E} \left[\sum_{i=1}^n (\mathbf{x}_i-\mu_i)^\top \mathbf{A}^\top_i \mathbf{A}_i (\mathbf{x}_i - \mu_i) \right] + \langle \Lambda, \mathbf{A}_i-\mathbb{I}\rangle\]
+
+<p>where the second term is the Lagrangian multipliers and \(\langle \Lambda, \mathbf{A}_i-\mathbb{I}\rangle = \text{tr}\left[\Lambda^\top\left(  \mathbf{A}_i-\mathbb{I}\right)\right]\). Taking derivative of \(f\) with respect to \(\mathbf{A}_i\) and setting each derivative to zero to find the optimal values of \(\mathbf{A}_i\) gives us</p>
+
+\[\mathbb{E} \left[2\mathbf{A}_i (\mathbf{x}_i-\mu_i) (\mathbf{x}_i - \mu_i)^\top  +  \Lambda \right]=0\]
+
+\[2\mathbf{A}_i \Sigma_i + \Lambda = 0\to \mathbf{A}_1 \Sigma_1 = \mathbf{A}_2 \Sigma_2  = \cdots = \mathbf{A}_n \Sigma_n  = \frac{-\Lambda}{2}\]
+
+<p>Using the fact that \(\sum \mathbf{A}_i = \mathbb{I}\),</p>
+
+\[\mathbf{A}_i = \left( \sum_{i=1}^n \Sigma_j^{-1}\right)^{-1} \Sigma_i^{-1}\]
+
+<p>Therefore the optimal estimator becomes</p>
+
+\[\mathbf{y} =  \left( \sum_{i=1}^n \Sigma_j^{-1}\right)^{-1}\sum_{i=1}^n  \Sigma_i^{-1} \mathbf{x}_i, \qquad \Sigma_{\mathbf{y}\mathbf{y}} = \left( \sum_{i=1}^n \Sigma_j^{-1}\right)^{-1}\]
+
+<p><br /></p>
+<h2 id="special-case-of-n2">Special case of \(n=2\)</h2>
+
+<p>Let \(\mathbf{x}_1 \sim p_1(\mu_1, \Sigma_1)\), and \(\mathbf{x}_2 \sim p_2 (\mu_2,\Sigma_2)\), then we have</p>
+
+\[\mathbf{K} = \Sigma_1 \left(\Sigma_1 + \Sigma_2 \right)^{-1}\]
+
+\[\mathbf{y} = \mathbf{x}_1 + \mathbf{K} (\mathbf{x}_2-\mathbf{x}_1), \quad \Sigma_{\mathbf{y}\mathbf{y}} = (\mathbf{I}-\mathbf{K})\Sigma_1\]
+
+<p>In order to prove the above relation, we start from the relation we obtained above, i.e.</p>
+
+\[\mathbf{y} = \left( \Sigma_1^{-1} + \Sigma_2^{-1} \right)^{-1} \left( \Sigma_1^{-1} \mathbf{x}_1+ \Sigma_2^{-1}\mathbf{x}_2 \right)\]
+
+<p>Note that the following matrix identity holds true \((\mathbf{A} ^{-1} + \mathbf{B}^{-1})^{-1} = \mathbf{A} (\mathbf{A} + \mathbf{B})^{-1} \mathbf{B} = \mathbf{B} (\mathbf{A} + \mathbf{B})^{-1} \mathbf{A}\)</p>
+
+\[\mathbf{y} = \Sigma_2  \left( \Sigma_1 + \Sigma_2 \right)^{-1} \Sigma_1 \Sigma_1^{-1} \mathbf{x}_1  + \Sigma_1 \left( \Sigma_1 + \Sigma_2 \right)^{-1} \Sigma_2  \Sigma_2^{-1}\mathbf{x}_2\]
+
+\[\mathbf{y} = \Sigma_2  \left( \Sigma_1 + \Sigma_2 \right)^{-1}  \mathbf{x}_1  + \Sigma_1 \left( \Sigma_1 + \Sigma_2 \right)^{-1} \mathbf{x}_2\]
+
+<p>We add and subtract \(\Sigma_1  \left( \Sigma_1 + \Sigma_2 \right)^{-1}  \mathbf{x}_1\)  to the above equation to obtain</p>
+
+\[\mathbf{y} = \Sigma_2  \left( \Sigma_1 + \Sigma_2 \right)^{-1}  \mathbf{x}_1  + \Sigma_1 \left( \Sigma_1 + \Sigma_2 \right)^{-1} \mathbf{x}_2 + \Sigma_1  \left( \Sigma_1 + \Sigma_2 \right)^{-1}  \mathbf{x}_1  - \Sigma_1  \left( \Sigma_1 + \Sigma_2 \right)^{-1}  \mathbf{x}_1\]
+
+\[\boxed{\mathbf{y} =  \mathbf{x}_1  + \Sigma_1 \left( \Sigma_1 + \Sigma_2 \right)^{-1} \left( \mathbf{x}_2 - \mathbf{x}_1\right) }\]
+
+<p>Similarly for the covariance matrix we have</p>
+
+\[\Sigma_{\mathbf{y}\mathbf{y}} = \left( \Sigma_1^{-1} + \Sigma_2^{-1} \right)^{-1} = \Sigma_1 \left( \Sigma_1^{-1} + \Sigma_2^{-1} \right)^{-1}  \Sigma_2\]
+
+<p>We add and subtract the term \(\left( \Sigma_1^{-1} + \Sigma_2^{-1} \right)^{-1}  \Sigma_1\) to the above equatio to obtain</p>
+
+\[\Sigma_{\mathbf{y}\mathbf{y}} = \Sigma_1 \left( \Sigma_1^{-1} + \Sigma_2^{-1} \right)^{-1}  \Sigma_2 + \Sigma_1\left( \Sigma_1^{-1} + \Sigma_2^{-1} \right)^{-1}  \Sigma_1 - \Sigma_1\left( \Sigma_1^{-1} + \Sigma_2^{-1} \right)^{-1}  \Sigma_1\]
+
+\[\Sigma_{\mathbf{y}\mathbf{y}} = \Sigma_1  - \Sigma_1\left( \Sigma_1^{-1} + \Sigma_2^{-1} \right)^{-1}  \Sigma_1\]
+
+\[\Sigma_{\mathbf{y}\mathbf{y}} = \left( \mathbf{I}  - \Sigma_1\left( \Sigma_1^{-1} + \Sigma_2^{-1} \right)^{-1}\right)  \Sigma_1 = \left( \mathbf{I}  - \mathbf{K} \right)  \Sigma_1\]
+
+<p><br /></p>
+<h2 id="best-linear-unbiased-estimator">Best Linear Unbiased Estimator</h2>
+
+<p>Let \(\left( \begin{matrix} \mathbf{x} \\ \mathbf{y}\end{matrix}\right) \sim p\left(\left( \begin{matrix} \mu_\mathbf{x} \\ \mu_\mathbf{y} \end{matrix}\right), \left( \begin{matrix} \Sigma_\mathbf{xx}&amp; \Sigma_\mathbf{xy} \\ \Sigma_\mathbf{yx} &amp; \Sigma_\mathbf{yy}\end{matrix}\right) \right)\) . The estimator \(\hat{\mathbf{y}} = \mathbf{A}\mathbf{x} + \mathbf{b}\) for estimating values of \(\mathbf{y}\) for a given \(\mathbf{x}\) is</p>
+
+\[\mathbf{A} = \Sigma_\mathbf{yx} \Sigma_\mathbf{xx}^{-1}\]
+
+\[\mathbf{b} = \mu_\mathbf{y} - \mathbf{A}\mu_\mathbf{x}\]
+
+<h1 id="kalman-filter-for-a-linear-system">Kalman Filter for a linear system</h1>
+
+<p>Now that we know all the ingredients we can discuss the Kalman filter. Assume a linear dynamical system where</p>
+
+\[\mathbf{x}_k = \mathbf{F}_k\mathbf{x}_{k-1} + \mathbf{B}_k \mathbf{u}_k  + \mathbf{w}_k\]
+
+<p>where \(\mathbf{F}_k\) is the state transition model applied to the previous state \(\mathbf{x}_{k-1},\)  and \(\mathbf{B}_k\) is the control input model applied to the control vector \(\mathbf{u}_k\), and \(\mathbf{w}_k\) is the process noise assumed to be drawn from a multivariate normal distribution with \(\mathcal{N}(0,\mathbf{Q})\) where \(\mathbf{Q}\) is the covariance matrix. At time \(k\), we do an observation (or measurement) \(\mathbf{z}_k\) of the true state \(\mathbf{x}_k\) according to the</p>
+
+\[\mathbf{x}_k = \mathbf{H}_k \mathbf{x}_k + \mathbf{v}_k\]
+
+<p>where \(\mathbf{H}_k\) is the observation model, and \(\mathbf{v}_k\) is the observation noise drawn from Gaussian noise \(\mathcal{N}(0,\mathbf{R}_k)\) where \(\mathbf{R}_k\) is the covariance matrix.</p>
+
+<p>First let’s assume that \(\mathbf{H}_k= \mathbf{I}\) where we fully observe the state. Given an estimate
+that we have at time \(t-1\) based on all the observations we had as  \(\hat{\mathbf{x}}_{t-1|t-1}\), we make a prediction for \(\hat{\mathbf{x}}_{t|t-1}\) based on the dynamical system equation as</p>
+
+\[\hat{\mathbf{x}}_{t|t-1} = \mathbf{F}_t\hat{\mathbf{x}}_{t-1|t-1} + \mathbf{B}_t \mathbf{u}_t\]
+
+<p>Next the variance can also be estimated as</p>
+
+\[\Sigma_{t|t-1} = \mathbf{F}_t \Sigma_{t-1|t-1}\mathbf{F}_t^\top + \mathbf{Q}_t\]
+
+<p>Given these predictions for that state at time \(t\), we also make an observation as \(\mathbf{z}_t = \mathbf{x}_t\) where the covariance matrix is \(\mathbf{R}_t\).</p>
+
+<p>Now our goal is to combine these results to correct our estimate of
+\(\mathbf{x}_{t|t}\)
+. We use the derivation that we did above to combine these results based on their covariance matrix such that the covariance is minimized, we have</p>
+
+\[\boxed{\mathbf{K}_t= \Sigma_{t|t-1} \left( \Sigma_{t|t-1} + \mathbf{R}_t \right)^{-1}}\]
+
+\[\boxed{\hat{\mathbf{x}}_{t|t} = \hat{\mathbf{x}}_{t|t-1} + \mathbf{K}_t \left( \mathbf{z}_t - \hat{\mathbf{x}}_{t|t-1}\right)}\]
+
+\[\boxed{\Sigma_{t|t} = \left( \mathbf{I} - \mathbf{K}_t\right)\Sigma_{t|t-1}}\]
+
+<p>Now let’s imagine what happens if we only do a partial observation of the state or \(\mathbf{H}_k\neq \mathbf{I}\). In this case, we do the prediction as before, but in the step that we want to combine the results to correct the prediction, we need to make some changes since we only have partial parts of \(\mathbf{x}_t\). In such a case, we used the best linear estimator that we introduced earlier to construct the full \(\mathbf{x}_t\) and then use that to update the prediction.</p>
+
+<p>The estimation with partial observation becomes</p>
+
+\[\mathbf{H}_t\hat{\mathbf{x}}_{t|t} = \mathbf{H}_t\hat{\mathbf{x}}_{t|t-1} + \mathbf{H}_t  \Sigma_{t|t-1} \left( \Sigma_{t|t-1} + \mathbf{R}_t \right)^{-1} \mathbf{H}_t^\top\left( \mathbf{z}_t - \mathbf{H}_t\hat{\mathbf{x}}_{t|t-1}\right)\]
+
+<p>We can define</p>
+
+\[\boxed{\mathbf{K}_t = \Sigma_{t|t-1} \left( \Sigma_{t|t-1} + \mathbf{R}_t \right)^{-1} \mathbf{H}_t^\top}\]
+
+<p>and the observable simplifies to</p>
+
+\[\mathbf{H}_t\hat{\mathbf{x}}_{t|t} = \mathbf{H}_t\hat{\mathbf{x}}_{t|t-1} + \mathbf{H}_t \mathbf{K}_t\left( \mathbf{z}_t - \mathbf{H}_t\hat{\mathbf{x}}_{t|t-1}\right)\]
+
+<p>The rest of the variables (hidden states) can be obtained using
+\(\mathbf{C}_t\hat{\mathbf{x}}_{t|t-1}\)
+where
+\(\left(\begin{matrix} \mathbf{H}_t \\ \mathbf{C}_t\end{matrix} \right)\)
+becomes an invertible matrix. The simplest example is to have it be equal to the identity matrix. The covariance between
+\(\mathbf{C}_t\hat{\mathbf{x}}_{t|t-1}\)
+and the observable
+\(\mathbf{H}_t\hat{\mathbf{x}}_{t|t-1}\)
+is
+\(\mathbf{C}_t \Sigma_{t|t-1} \mathbf{H}_t^\top\)
+. Using the best linear estimate estimator, we can find the hidden portion estimation as</p>
+
+\[\mathbf{C}_t\hat{\mathbf{x}}_{t|t} = \mathbf{C}_t\hat{\mathbf{x}}_{t|t-1} + \left(\mathbf{C}_t \Sigma_{t|t-1} \mathbf{H}_t^\top \right) \left( \mathbf{H}_t \Sigma_{t|t-1} \mathbf{H}_t^\top  \right)^{-1} \mathbf{H}_t \mathbf{K}_t\left( \mathbf{z}_t - \mathbf{H}_t\hat{\mathbf{x}}_{t|t-1}\right)\]
+
+\[\mathbf{C}_t\hat{\mathbf{x}}_{t|t} = \mathbf{C}_t\hat{\mathbf{x}}_{t|t-1} + \mathbf{C}_t \mathbf{K}_t\left( \mathbf{z}_t - \mathbf{H}_t\hat{\mathbf{x}}_{t|t-1}\right)\]
+
+<p>Combining the above two results we find that</p>
+
+\[\left(\begin{matrix} \mathbf{H}_t \\ \mathbf{C}_t\end{matrix} \right) \hat{\mathbf{x}}_{t|t} = \left(\begin{matrix} \mathbf{H}_t \\ \mathbf{C}_t\end{matrix} \right) \hat{\mathbf{x}}_{t|t-1} + \left(\begin{matrix} \mathbf{H}_t \\ \mathbf{C}_t\end{matrix} \right)  \mathbf{K}_t\left( \mathbf{z}_t - \mathbf{H}_t\hat{\mathbf{x}}_{t|t-1}\right)\]
+
+<p>Since
+\(\left(\begin{matrix} \mathbf{H}_t \\ \mathbf{C}_t\end{matrix} \right)\)
+is an invertible matrix, it can be removed from both sides, and we obtain</p>
+
+\[\boxed{ \hat{\mathbf{x}}_{t|t} = \hat{\mathbf{x}}_{t|t-1} + \mathbf{K}_t\left( \mathbf{z}_t - \mathbf{H}_t\hat{\mathbf{x}}_{t|t-1}\right)}\]
+
+<p>Note that the covariance matrix can be obtained using the above equation as</p>
+
+\[\boxed{\Sigma_{t|t} = \left( \mathbf{I} - \mathbf{K}_t \mathbf{H}_t\right)\Sigma_{t|t-1} \left( \mathbf{I} - \mathbf{K}_t \mathbf{H}_t\right)^\top + \mathbf{K}_t \mathbf{R}_t \mathbf{K}_t^\top}\]
+
+  </article>
+
+  
+
+</div>
+
+    </div>
+
+    <!-- Footer -->
+
+   
+<footer class="fixed-bottom">
+  <div class="container mt-0" style="text-align:center;">
+    &copy; Copyright 2021 Ahmad  Zareei.
+    <!--  -->     
+    
+    Last updated: March 25, 2021.
+    
+  </div>
+</footer>
+
+ 
+
+  </body>
+
+  <!-- jQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+
+  <!-- Bootsrap & MDB scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.4.4/umd/popper.min.js" integrity="sha512-eUQ9hGdLjBjY3F41CScH3UX+4JDSI9zXeroz7hJ+RteoCaY+GP/LDoM8AO+Pt+DRFw3nXqsjh9Zsts8hnYv8/A==" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha512-M5KW3ztuIICmVIhjSqXe01oV2bpe248gOxqmlcYrEzAvws7Pw3z6BK0iGbrwvdrUQUhi3eXgtxp5I8PDo9YfjQ==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js" integrity="sha512-Mug9KHKmroQFMLm93zGrjhibM2z2Obg9l6qFG2qKjXEXkMp/VDkI4uju9m4QKPjWSwQ6O2qzZEnJDEeCw0Blcw==" crossorigin="anonymous"></script>
+
+  
+<!-- Mansory & imagesLoaded -->
+<script defer src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+<script defer src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+<script defer src="/azareei/assets/js/mansory.js" type="text/javascript"></script>
+
+
+  
+
+
+<!-- Load Common JS -->
+<script src="/azareei/assets/js/common.js"></script>
+
+<!-- Load DarkMode JS -->
+<script src="/azareei/assets/js/dark_mode.js"></script>
+
+
+</html>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-77789841-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
