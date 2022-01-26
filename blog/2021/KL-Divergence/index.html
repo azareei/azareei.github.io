@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<title>Ady  Zareei | Reinforcement Learning and Optimization</title>
+<title>Ady  Zareei | KL Divergence between two normal distributions</title>
 <meta name="description" content="Personal homepage of Ady Zareei.
 ">
 
@@ -29,7 +29,7 @@
 <link rel="shortcut icon" href="/azareei/assets/img/favicon.ico">
 <link rel="stylesheet" href="/azareei/assets/css/main.css">
 
-<link rel="canonical" href="/azareei/projects/4_project/">
+<link rel="canonical" href="/azareei/blog/2021/KL-Divergence/">
 
 <!-- Theming-->
 
@@ -134,7 +134,7 @@
           
           
           <!-- Blog -->
-          <li class="nav-item ">
+          <li class="nav-item active">
             <a class="nav-link" href="/azareei/blog/">
               blog
               
@@ -152,24 +152,60 @@
     <!-- Content -->
 
     <div class="container mt-5">
-      <div class="post">
+      
+
+<div class="post">
 
   <header class="post-header">
-    <h1 class="post-title">Reinforcement Learning and Optimization</h1>
-    <p class="post-description">Reinforcement Learning and Topology Optimization in Mechanics</p>
+    <h1 class="post-title">KL Divergence between two normal distributions</h1>
+    <p class="post-meta">March 10, 2021</p>
   </header>
 
-  <article>
-    <p><br /></p>
-<div class="row mt-3" style="text-align:center;">
-    <div class="col-sm mt-3 mt-md-0">
-        <img class="img-fluid rounded z-depth-1" width="300" src="/azareei/assets/research/rl.png" />
-    </div>
-</div>
-<p><br /></p>
+  <article class="post-content">
+    <p>Here I would like to drive the KL divergence between two normal distribution, which is used in  variational auto-encoders.</p>
+
+<h3 id="kl-divergence">KL divergence</h3>
+
+<p>The KL divergence between two distributions \(p\) and \(q\) is defined as</p>
+
+\[D_{KL}(p||q) := \int_x p(x) \log \frac{p(x)}{q(x)} = \mathbf{E}_p[\log p(x) - \log q(x)]\]
+
+<h3 id="kl-divergence-between-two-gaussian">KL divergence between two Gaussian</h3>
+
+<p>Now consider \(p(\mathbf{x}) \sim \mathcal{N}(\mu_p,\Sigma_p)\) and \(q(x) \sim \mathcal{N}(\mu_q,\Sigma_q)\) are probability density function of multivariate normal distributions where e.g.,</p>
+
+\[p(\mathbf{x}) = \frac{1}{(2\pi)^{k/2}|\Sigma_p|^{1/2}} \exp\left( -\frac{1}{2} (\mathbf{x}-\mu_p)^\top \Sigma_p^{-1} (\mathbf{x}-\mu_p) \right)\]
+
+<p>The KL divergence becomes</p>
+
+\[D_{KL}(p||q) = \mathbf{E}_p[\log p(x) - \log q(x)]\]
+
+\[D_{KL}(p||q) = \mathbf{E}_p\left[\frac{1}{2}\log \frac{|\Sigma_q|}{|\Sigma_p|} -\frac{1}{2} (\mathbf{x}-\mu_p)^\top \Sigma_p^{-1} (\mathbf{x}-\mu_p) + \frac{1}{2} (\mathbf{x}-\mu_q)^\top \Sigma_q^{-1} (\mathbf{x}-\mu_q) \right]\]
+
+\[D_{KL}(p||q) = \mathbf{E}_p\left[\frac{1}{2}\log \frac{|\Sigma_q|}{|\Sigma_p|}\right] - \frac{1}{2} \mathbf{E}_p\left[ (\mathbf{x}-\mu_p)^\top \Sigma_p^{-1} (\mathbf{x}-\mu_p)\right] + \frac{1}{2} \mathbf{E}_p\left[ (\mathbf{x}-\mu_q)^\top \Sigma_q^{-1} (\mathbf{x}-\mu_q) \right]\]
+
+\[D_{KL}(p||q) = \frac{1}{2}\log \frac{|\Sigma_q|}{|\Sigma_p|} - \frac{1}{2} \mathbf{E}_p\left[ (\mathbf{x}-\mu_p)^\top \Sigma_p^{-1} (\mathbf{x}-\mu_p)\right] + \frac{1}{2} \mathbf{E}_p\left[ (\mathbf{x}-\mu_q)^\top \Sigma_q^{-1} (\mathbf{x}-\mu_q) \right]\]
+
+<p>Focusing on the second term we obtain</p>
+
+\[\mathbf{E}_p\left[ (\mathbf{x}-\mu_p)^\top \Sigma_p^{-1} (\mathbf{x}-\mu_p)\right] = \mathbf{E}_p\left[ \text{tr} \left\{ (\mathbf{x}-\mu_p)^\top \Sigma_p^{-1} (\mathbf{x}-\mu_p)\right\}\right] =  \mathbf{E}_p\left[ \text{tr} \left\{ (\mathbf{x}-\mu_p)^\top (\mathbf{x}-\mu_p)\Sigma_p^{-1} \right\}\right] = \text{tr}\left\{ \mathbf{E}_p\left[ (\mathbf{x}-\mu_p)^\top (\mathbf{x}-\mu_p)\Sigma_p^{-1} \right]  \right\} = \text{tr}\left\{ \mathbf{E}_p\left[ (\mathbf{x}-\mu_p)^\top (\mathbf{x}-\mu_p)\right] \Sigma_p^{-1}  \right\} = \text{tr}\left\{ \Sigma_p \Sigma_p^{-1} \right\} = \text{tr} (I_k) = k\]
+
+<p>The third term also becomes</p>
+
+\[\mathbf{E}_p\left[ (\mathbf{x}-\mu_q)^\top \Sigma_q^{-1} (\mathbf{x}-\mu_q)\right] = \mathbf{E}_p\left[ \text{tr} \left\{ (\mathbf{x}-\mu_q)^\top \Sigma_q^{-1} (\mathbf{x}-\mu_q)\right\}\right] =  \mathbf{E}_p\left[ \text{tr} \left\{ (\mathbf{x}-\mu_q)^\top (\mathbf{x}-\mu_q)\Sigma_q^{-1} \right\}\right] = \text{tr}\left\{ \mathbf{E}_p\left[ (\mathbf{x}-\mu_q)^\top (\mathbf{x}-\mu_q)\Sigma_q^{-1} \right]  \right\} = \text{tr}\left\{ \mathbf{E}_p\left[ (\mathbf{x}-\mu_q)^\top (\mathbf{x}-\mu_q)\right] \Sigma_q^{-1}  \right\} = \text{tr}\left\{ \mathbf{E}_p\left[ (\mathbf{x}-\mu_p + \mu_p -\mu_q)^\top (\mathbf{x}-\mu_p + \mu_p - \mu_q)\right] \Sigma_q^{-1}  \right\} = \text{tr}\left\{ \mathbf{E}_p\left[ (\mathbf{x}-\mu_p )^\top (\mathbf{x}-\mu_p )\right] \Sigma_q^{-1} + (\mu_p - \mu_q)^\top (\mu_p - \mu_q) \Sigma_q^{-1} \right\} = \text{tr}\left( \Sigma_p \Sigma_q^{-1}\right) + (\mu_p - \mu_q)^\top \Sigma_q^{-1}(\mu_p - \mu_q)\]
+
+<p>Replacing back into the first equation, we find that</p>
+
+\[D_{KL}(p||q) = \frac{1}{2} \left( \log \frac{|\Sigma_q|}{|\Sigma_p|}- k +  \text{tr}\left( \Sigma_p^{-1} \Sigma_q^{-1}\right) + (\mu_p - \mu_q)^\top \Sigma_q^{-1}(\mu_p - \mu_q) \right)\]
+
+<p>Now, if $q\sim\mathcal{N}(0,I)$, we find that</p>
+
+\[D_{KL}(p||q) = \frac{1}{2} \left( -\log {|\Sigma_p|}- k + \text{tr}\left( \Sigma_p \right) + \mu_p^\top\mu_p \right)\]
 
 
   </article>
+
+  
 
 </div>
 
