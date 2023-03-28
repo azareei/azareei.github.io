@@ -323,11 +323,17 @@
 
 \[\max_\theta p(X\mid \theta) = \max_\theta \log p(X\mid \theta)= \max_\theta \log \Pi_{i=1}^N p(x_i\mid \theta)=  \max_\theta \sum_{i=1}^N \log p(x_i\mid \theta)\]
 
-\[\max_\theta p(X\mid \theta) = \max_\theta \sum_{i=1}^N \log \sum_{c=1}^2 p(x_i,z_i=c\mid \theta) = \max_\theta \sum_{i=1}^N \log \sum_{c=1}^2 \frac{q(z_i=c)}{q(z_i=c)}p(x_i,z_i=c\mid \theta) = \max_\theta \sum_{i=1}^N \log \sum_{c=1}^2q(z_i=c) \frac{p(x_i,z_i=c\mid \theta)}{q(z_i=c)}  \geq \max_\theta \sum_{i=1}^N \sum_{c=1}^2 q(z_i=c) \log \frac{p(x_i,z_i=c\mid \theta)}{q(z_i=c)}\]
+\[\begin{align*}
+\max_\theta p(X\mid \theta) &amp;= \max_\theta \sum_{i=1}^N \log \sum_{c=1}^2 p(x_i,z_i=c\mid \theta) \\
+&amp;= \max_\theta \sum_{i=1}^N \log \sum_{c=1}^2 \frac{q(z_i=c)}{q(z_i=c)}p(x_i,z_i=c\mid \theta) \\
+&amp;= \max_\theta \sum_{i=1}^N \log \sum_{c=1}^2q(z_i=c) \frac{p(x_i,z_i=c\mid \theta)}{q(z_i=c)}  \geq \max_\theta \sum_{i=1}^N \sum_{c=1}^2 q(z_i=c) \log \frac{p(x_i,z_i=c\mid \theta)}{q(z_i=c)}
+\end{align*}\]
 
 <p>So, in summary we have found the following</p>
 
-\[\boxed{\log p(X\mid \theta) \geq \mathcal{L}(\theta,q) \text{ for any } q }\\ \boxed{\mathcal{L}(\theta,q) = \sum_{i=1}^N \sum_{c=1}^2 q(z_i=c) \log   \frac{p(x_i,z_i=c\mid \theta)}{q(z_i=c)}) }\]
+\[\boxed{\log p(X\mid \theta) \geq \mathcal{L}(\theta,q) \text{ for any } q }\]
+
+\[\boxed{\mathcal{L}(\theta,q) = \sum_{i=1}^N \sum_{c=1}^2 q(z_i=c) \log   \frac{p(x_i,z_i=c\mid \theta)}{q(z_i=c)}) }\]
 
 <p>So, we do the above part in two steps as follows (Expectation step)</p>
 
@@ -341,7 +347,9 @@
 
 <p>Let’s look at the E-Step. In order to do so, let’s look at the difference between the log-likelihood and the lowerbound that we defined</p>
 
-\[\log p(X,\theta)-\mathcal{L}(\theta,q) = \sum_{i=1}^N \log p(x_i\mid \theta)  - \sum_{i=1}^N \sum_{c=1}^2 q(z_i=c) \log   \frac{p(x_i,z_i=c\mid \theta)}{q(z_i=c)}) \\ = \sum_{i=1}^N \log p(x_i\mid \theta) \sum_{c=1}^2 q(z_i=c)  - \sum_{i=1}^N \sum_{c=1}^2 q(z_i=c) \log   \frac{p(x_i,z_i=c\mid \theta)}{q(z_i=c)}) \\ = \sum_{i=1}^N \sum_{c=1}^2 q(z_i=c)  \left( \log p(x_i\mid \theta)  -\log   \frac{p(x_i,z_i=c\mid \theta)}{q(z_i=c)}) \right)\\ = \sum_{i=1}^N \sum_{c=1}^2 q(z_i=c)  \left( \log   \frac{q(z_i=c) p(x_i\mid \theta) }{p(x_i,z_i=c\mid \theta)}) \right) \\ = \sum_{i=1}^N \sum_{c=1}^2 q(z_i=c)  \left( \log   \frac{q(z_i=c) }{p(z_i=c\mid x_i,\theta)}) \right) \\ = D_{KL}\left({q(z_i=c) }\mid \mid {p(z_i=c\mid x_i,\theta)} \right)\]
+\[\begin{align*}
+\log p(X,\theta)-\mathcal{L}(\theta,q) &amp;= \sum_{i=1}^N \log p(x_i\mid \theta)  - \sum_{i=1}^N \sum_{c=1}^2 q(z_i=c) \log   \frac{p(x_i,z_i=c\mid \theta)}{q(z_i=c)}) \\ &amp;= \sum_{i=1}^N \log p(x_i\mid \theta) \sum_{c=1}^2 q(z_i=c)  - \sum_{i=1}^N \sum_{c=1}^2 q(z_i=c) \log   \frac{p(x_i,z_i=c\mid \theta)}{q(z_i=c)}) \\ &amp;= \sum_{i=1}^N \sum_{c=1}^2 q(z_i=c)  \left( \log p(x_i\mid \theta)  -\log   \frac{p(x_i,z_i=c\mid \theta)}{q(z_i=c)}) \right)\\ &amp; = \sum_{i=1}^N \sum_{c=1}^2 q(z_i=c)  \left( \log   \frac{q(z_i=c) p(x_i\mid \theta) }{p(x_i,z_i=c\mid \theta)}) \right) \\ &amp;= \sum_{i=1}^N \sum_{c=1}^2 q(z_i=c)  \left( \log   \frac{q(z_i=c) }{p(z_i=c\mid x_i,\theta)}) \right) \\ &amp;= D_{KL}\left({q(z_i=c) }\mid \mid {p(z_i=c\mid x_i,\theta)} \right)
+\end{align*}\]
 
 <p>So we found that</p>
 
@@ -355,7 +363,9 @@
 
 <p>Now we are interested to maximize the following with respect to \(\theta\) as</p>
 
-\[\mathcal{L}(\theta,q) = \sum_{i=1}^N \sum_{c=1}^2 q(z_i=c) \log   \frac{p(x_i,z_i=c\mid \theta)}{q(z_i=c)})  \\= \sum_{i=1}^N \sum_{c=1}^2 q(z_i=c) \log   {p(x_i,z_i=c\mid \theta)}) - \sum_{i=1}^N \sum_{c=1}^2 q(z_i=c) \log   {q(z_i=c)})\\ = \mathbf{E}_q \log p(X,Z\mid \theta)\]
+\[\begin{align*}
+\mathcal{L}(\theta,q) &amp;= \sum_{i=1}^N \sum_{c=1}^2 q(z_i=c) \log   \frac{p(x_i,z_i=c\mid \theta)}{q(z_i=c)})  \\ &amp;= \sum_{i=1}^N \sum_{c=1}^2 q(z_i=c) \log   {p(x_i,z_i=c\mid \theta)}) - \sum_{i=1}^N \sum_{c=1}^2 q(z_i=c) \log   {q(z_i=c)})\\ &amp;= \mathbf{E}_q \log p(X,Z\mid \theta) 
+\end{align*}\]
 
 <h3 id="summary-of-expectation-maximization">Summary of Expectation-Maximization:</h3>
 
@@ -383,7 +393,9 @@
 
 <p>where \(\sum_k \pi_k = 1\). Note that \(\theta = \{ \mu_1,\Sigma_1, \cdots, \mu_K,\Sigma_K\}.\) Now, let’s assume the latent variable is called \(z_i\). Using Expectation-Maximization that we discussed here, we find that</p>
 
-\[q(z_i = k) = p(z_i=k\mid x_i,\theta) = \frac{p(z_i=k) p(x_i \mid  z_i=k,\theta) }{p(x_i\mid \theta)} = \frac{p(z_i=k)p(x_i \mid  z_i=k,\theta) }{\sum_{k} p(z_i=k) p(x_i \mid  z_i=k,\theta) } \\ \boxed{q(z_i=k) = \frac{\pi_k \mathcal{N}(x_i\mid \mu_k,\Sigma_k)}{\sum_k\pi_k \mathcal{N}(x_i\mid \mu_k,\Sigma_k)}}\]
+\[q(z_i = k) = p(z_i=k\mid x_i,\theta) = \frac{p(z_i=k) p(x_i \mid  z_i=k,\theta) }{p(x_i\mid \theta)} = \frac{p(z_i=k)p(x_i \mid  z_i=k,\theta) }{\sum_{k} p(z_i=k) p(x_i \mid  z_i=k,\theta) }\]
+
+\[\boxed{q(z_i=k) = \frac{\pi_k \mathcal{N}(x_i\mid \mu_k,\Sigma_k)}{\sum_k\pi_k \mathcal{N}(x_i\mid \mu_k,\Sigma_k)}}\]
 
 <p>Next, in the Maximization step, we have</p>
 
@@ -391,7 +403,11 @@
 
 <p>Taking the derivative with respect to the \(\mu_k\), we find that</p>
 
-\[\frac{\partial \cdots}{\partial \mu_k} = 0 = \sum_i \frac{\pi_k \mathcal{N}(x_i\mid \mu_k,\sigma_k)}{\sum_k \pi_k \mathcal{N}(x_i\mid \mu_k,\sigma_k) } \\  \sum_i q(z_i=k)   \Sigma_k^{-1}(x_i - \mu_k) =0 =  \sum_i q(z_i=k)   (x_i - \mu_k) \\ \boxed{\mu_k =\frac{\sum_i q(z_i=k) x_i}{\sum_i q(z_i=k)}}\]
+\[\frac{\partial \cdots}{\partial \mu_k} = 0 = \sum_i \frac{\pi_k \mathcal{N}(x_i\mid \mu_k,\sigma_k)}{\sum_k \pi_k \mathcal{N}(x_i\mid \mu_k,\sigma_k) }\]
+
+\[\sum_i q(z_i=k)   \Sigma_k^{-1}(x_i - \mu_k) =0 =  \sum_i q(z_i=k)   (x_i - \mu_k)\]
+
+\[\boxed{\mu_k =\frac{\sum_i q(z_i=k) x_i}{\sum_i q(z_i=k)}}\]
 
 <p>Similarly, we can find that</p>
 
@@ -597,25 +613,35 @@
 
 \[\log q(\theta) = \mathbf{E}_{q(z)} \log p(\theta,Z,W)  =  \mathbf{E}_{q(z)} \log p(\theta,Z\mid  W) + C.\]
 
-\[\log q(\theta) = \mathbf{E}_{q(z)} \sum_{d=1}^D \left[ \sum_{t=1}^T (\alpha_t-1) \log \theta_{dt} +  \sum_{n=1}^{N_d} \sum_{t=1}^T\mathbf{1}(z_{dn}=t) \left(\log \theta_{dt} + \log \phi_{tw_{dn}} \right) \right]\\ = \mathbf{E}_{q(z)} \sum_{d=1}^D \left[ \sum_{t=1}^T (\alpha_t-1) \log \theta_{dt} +  \sum_{n=1}^{N_d}\sum_{t=1}^T \mathbf{1}(z_{dn}=t) \left(\log \theta_{dt} \right) \right] \\ =  \sum_{d=1}^D \left[ \sum_{t=1}^T (\alpha_t-1) \log \theta_{dt} +  \sum_{n=1}^{N_d} \sum_{t=1}^T \mathbf{E}_{q(z)}\left[\mathbf{1}(z_{dn}=t)\right] \left(\log \theta_{dt}  \right) \right] \\  =  \sum_{d=1}^D \sum_{t=1}^T \log \theta_{dt} \left[ (\alpha_t-1)  +  \sum_{n=1}^{N_d} \mathbf{E}_{q(z)}\left[\mathbf{1}(z_{dn}=t)\right] \right]\]
+\[\begin{align*}
+\log q(\theta) &amp;= \mathbf{E}_{q(z)} \sum_{d=1}^D \left[ \sum_{t=1}^T (\alpha_t-1) \log \theta_{dt} +  \sum_{n=1}^{N_d} \sum_{t=1}^T\mathbf{1}(z_{dn}=t) \left(\log \theta_{dt} + \log \phi_{tw_{dn}} \right) \right]\\ &amp;= \mathbf{E}_{q(z)} \sum_{d=1}^D \left[ \sum_{t=1}^T (\alpha_t-1) \log \theta_{dt} +  \sum_{n=1}^{N_d}\sum_{t=1}^T \mathbf{1}(z_{dn}=t) \left(\log \theta_{dt} \right) \right] \\ &amp;=  \sum_{d=1}^D \left[ \sum_{t=1}^T (\alpha_t-1) \log \theta_{dt} +  \sum_{n=1}^{N_d} \sum_{t=1}^T \mathbf{E}_{q(z)}\left[\mathbf{1}(z_{dn}=t)\right] \left(\log \theta_{dt}  \right) \right] \\  &amp;=  \sum_{d=1}^D \sum_{t=1}^T \log \theta_{dt} \left[ (\alpha_t-1)  +  \sum_{n=1}^{N_d} \mathbf{E}_{q(z)}\left[\mathbf{1}(z_{dn}=t)\right] \right]
+\end{align*}\]
 
 <p>So in summary, we have</p>
 
-\[\boxed{\log q(\theta) =  \sum_{d=1}^D \sum_{t=1}^T \log \theta_{dt} \left[ (\alpha_t-1)  +  \sum_{n=1}^{N_d} \gamma_{dn}^t \right]} \\ \boxed{\gamma_{dn}^t = \mathbf{E}_{q(z)}\left[\mathbf{1}(z_{dn}=t)\right]}\]
+\[\boxed{\log q(\theta) =  \sum_{d=1}^D \sum_{t=1}^T \log \theta_{dt} \left[ (\alpha_t-1)  +  \sum_{n=1}^{N_d} \gamma_{dn}^t \right]}\]
+
+\[\boxed{\gamma_{dn}^t = \mathbf{E}_{q(z)}\left[\mathbf{1}(z_{dn}=t)\right]}\]
 
 \[\to q(\theta) \propto \Pi_d \Pi_t \theta_{dt}^{\left[\alpha_t + \sum_n \gamma^t_{dn} - 1\right]}\]
 
 <p>Now, let’s take the E-step for \(q(Z)\), we have</p>
 
-\[\log q(Z) = \\  \mathbf{E}_{q(\theta)} \sum_{d=1}^D \left[ \sum_{t=1}^T (\alpha_t-1) \log \theta_{dt} +  \sum_{n=1}^{N_d} \sum_{t=1}^T\mathbf{1}(z_{dn}=t) \left(\log \theta_{dt} + \log \phi_{tw_{dn}} \right) \right] \\ = \mathbf{E}_{q(\theta)} \sum_{d=1}^D  \sum_{n=1}^{N_d} \mathbf{1}(z_{dn}=t) \left(\log \theta_{dt} + \log \phi_{tw_{dn}} \right)  \\ =  \sum_{d=1}^D  \sum_{n=1}^{N_d} \mathbf{1}(z_{dn}=t) \left(\mathbf{E}_{q(\theta)} \log \theta_{dt} + \log \phi_{tw_{dn}} \right)\]
+\[\begin{align*}
+\log q(Z) &amp;=   \mathbf{E}_{q(\theta)} \sum_{d=1}^D \left[ \sum_{t=1}^T (\alpha_t-1) \log \theta_{dt} +  \sum_{n=1}^{N_d} \sum_{t=1}^T\mathbf{1}(z_{dn}=t) \left(\log \theta_{dt} + \log \phi_{tw_{dn}} \right) \right] \\ &amp;= \mathbf{E}_{q(\theta)} \sum_{d=1}^D  \sum_{n=1}^{N_d} \mathbf{1}(z_{dn}=t) \left(\log \theta_{dt} + \log \phi_{tw_{dn}} \right)  \\ &amp;=  \sum_{d=1}^D  \sum_{n=1}^{N_d} \mathbf{1}(z_{dn}=t) \left(\mathbf{E}_{q(\theta)} \log \theta_{dt} + \log \phi_{tw_{dn}} \right) 
+\end{align*}\]
 
 <p>so in summary</p>
 
-\[\boxed{\log q(Z) = \sum_{d=1}^D  \sum_{n=1}^{N_d} \mathbf{1}(z_{dn}=t) \left(\mathbf{E}_{q(\theta)} \log \theta_{dt} + \log \phi_{tw_{dn}} \right) } \\ \to q(Z) = \Pi_d \Pi_t q(z_{dn})\\ q\left( z_{dn}=t\right) =   \frac{\phi_{t w_{dn}} \exp \left( \mathbf{E}_{q(\theta)} \log \theta_{dt} \right)}{\sum_{t'} {\phi_{t' w_{dn}} \exp \left( \mathbf{E}_{q(\theta)} \log \theta_{dt'} \right)}}\]
+\[\boxed{\log q(Z) = \sum_{d=1}^D  \sum_{n=1}^{N_d} \mathbf{1}(z_{dn}=t) \left(\mathbf{E}_{q(\theta)} \log \theta_{dt} + \log \phi_{tw_{dn}} \right) } \\ \to q(Z) = \Pi_d \Pi_t q(z_{dn})\]
+
+\[q\left( z_{dn}=t\right) =   \frac{\phi_{t w_{dn}} \exp \left( \mathbf{E}_{q(\theta)} \log \theta_{dt} \right)}{\sum_{t'} {\phi_{t' w_{dn}} \exp \left( \mathbf{E}_{q(\theta)} \log \theta_{dt'} \right)}}\]
 
 <p>and in the M-step we would like to maximize the following</p>
 
-\[\mathbf{E}_{q(\theta)q(Z)} \log p(\theta,Z,W)  = \mathbf{E}_{q(\theta)q(Z)}  \left[ \sum_{d=1}^D \left[ \sum_{t=1}^T (\alpha_t-1) \log \theta_{dt} +  \sum_{n=1}^{N_d} \sum_{t=1}^T \mathbf{1}(z_{dn}=t) \left(\log \theta_{dt} + \log \phi_{tw_{dn}} \right) \right] \right] \\ = \mathbf{E}_{q(\theta)q(Z)}  \left[ \sum_{d=1}^D \sum_{t=1}^T \sum_{n=1}^{N_d} \mathbf{1}(z_{dn}=t)  \log \phi_{tw_{dn}} \right] \\  =   \sum_{d=1}^D \sum_{t=1}^T \sum_{n=1}^{N_d} \mathbf{E}_{q(\theta)q(Z)} \left[\mathbf{1}(z_{dn}=t)\right]  \log \phi_{tw_{dn}} \\ =   \sum_{d=1}^D \sum_{t=1}^T \sum_{n=1}^{N_d} \gamma_{dn}^t  \log \phi_{tw_{dn}}\]
+\[\begin{align*}
+\mathbf{E}_{q(\theta)q(Z)} \log p(\theta,Z,W)  &amp;= \mathbf{E}_{q(\theta)q(Z)}  \left[ \sum_{d=1}^D \left[ \sum_{t=1}^T (\alpha_t-1) \log \theta_{dt} +  \sum_{n=1}^{N_d} \sum_{t=1}^T \mathbf{1}(z_{dn}=t) \left(\log \theta_{dt} + \log \phi_{tw_{dn}} \right) \right] \right] \\ &amp;= \mathbf{E}_{q(\theta)q(Z)}  \left[ \sum_{d=1}^D \sum_{t=1}^T \sum_{n=1}^{N_d} \mathbf{1}(z_{dn}=t)  \log \phi_{tw_{dn}} \right] \\  &amp;=   \sum_{d=1}^D \sum_{t=1}^T \sum_{n=1}^{N_d} \mathbf{E}_{q(\theta)q(Z)} \left[\mathbf{1}(z_{dn}=t)\right]  \log \phi_{tw_{dn}} \\ &amp;=   \sum_{d=1}^D \sum_{t=1}^T \sum_{n=1}^{N_d} \gamma_{dn}^t  \log \phi_{tw_{dn}}
+\end{align*}\]
 
 <p>given that \(\sum_w \phi_{tw} = 1\) and also \(\phi_{tw}\geq 0\). We use lagrangian to maximize the above equation, we have</p>
 
@@ -627,7 +653,9 @@
 
 <p>Knowing that \(\sum_w \phi_{tw} = 1\), we can find that</p>
 
-\[\phi_{tw} = \frac{\sum_{d=1}^D \sum_{n=1}^{N_d} \gamma_{dn}^t \mathbf{1}\left[w_{dn}= w\right]}{ \sum_w \sum_{d=1}^D \sum_{n=1}^{N_d} \gamma_{dn}^t \mathbf{1}\left[w_{dn}= w\right]} \\ \to \boxed{\phi_{tw} = \frac{\sum_{d,n} \gamma_{dn}^t \mathbf{1}\left[w_{dn}= w\right]}{ \sum_{d,n,w'} \gamma_{dn}^t \mathbf{1}\left[w_{dn}= w'\right]}}\]
+\[\phi_{tw} = \frac{\sum_{d=1}^D \sum_{n=1}^{N_d} \gamma_{dn}^t \mathbf{1}\left[w_{dn}= w\right]}{ \sum_w \sum_{d=1}^D \sum_{n=1}^{N_d} \gamma_{dn}^t \mathbf{1}\left[w_{dn}= w\right]}\]
+
+\[\to \boxed{\phi_{tw} = \frac{\sum_{d,n} \gamma_{dn}^t \mathbf{1}\left[w_{dn}= w\right]}{ \sum_{d,n,w'} \gamma_{dn}^t \mathbf{1}\left[w_{dn}= w'\right]}}\]
 
 <h2 id="monte-carlo-method">Monte-Carlo Method</h2>
 
@@ -681,7 +709,7 @@
 
 <p>Using the transition kernel, if we are at state \(s_i\) we can define a row vector for the state space probabilities, i.e., \(\pi_i(t) = p(X_t = s_i)\). The evolution of this state space probabilities can be obtained using the kernel as</p>
 
-\[\pi_j(t+1) = p(X_{t+1}=s_j) \\= \sum_k p(X_{t+1}=s_j\mid   X_t = s_k) p(X_t = s_k) = \sum_k p(k,j) \pi_k(t) \\ \mathbf{\pi}(t+1) = \mathbf{\pi}(t) \mathbf{P}\]
+\[\pi_j(t+1) = p(X_{t+1}=s_j)  = \sum_k p(X_{t+1}=s_j\mid   X_t = s_k) p(X_t = s_k) = \sum_k p(k,j) \pi_k(t) \\ \mathbf{\pi}(t+1) = \mathbf{\pi}(t) \mathbf{P}\]
 
 <p>As a result, we can find that \(\pi(t) = \pi(0) \mathbf{P}^k\). A distribution of states $\mathbf{\pi}^*$ is called stationary if \(\mathbf{\pi}^* = \mathbf{\pi}^*\mathbf{P}\). A sufficient condition for a unique stationary distribution is that the <strong>detailed balance</strong> condition holds</p>
 
