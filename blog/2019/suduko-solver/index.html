@@ -346,8 +346,8 @@ The following code finds a solution to the Sudoku puzzle using recursive methods
 179
 180
 </pre></td>
-<td class="code"><pre><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
-<span class="kn">import</span> <span class="nn">copy</span>
+<td class="code"><pre><span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="n">copy</span>
 
 
 <span class="k">def</span> <span class="nf">checkRules</span><span class="p">(</span><span class="n">puzzle</span><span class="p">):</span>
@@ -361,36 +361,36 @@ The following code finds a solution to the Sudoku puzzle using recursive methods
     <span class="c1"># Checking condition (i)
 </span>    <span class="c1"># Checking numbers to be unique in rows    
 </span>    <span class="n">rowCheck</span> <span class="o">=</span> <span class="bp">True</span><span class="p">;</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">puzzle</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
-               <span class="k">if</span> <span class="n">puzzle</span><span class="p">[</span><span class="n">i</span><span class="p">][:].</span><span class="n">count</span><span class="p">(</span><span class="n">puzzle</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">])</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+               <span class="k">if</span> <span class="n">puzzle</span><span class="p">[</span><span class="n">i</span><span class="p">][:].</span><span class="nf">count</span><span class="p">(</span><span class="n">puzzle</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">])</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
                    <span class="n">rowCheck</span> <span class="o">=</span> <span class="bp">False</span><span class="p">;</span>
 
     <span class="c1"># Checking condition (ii)
 </span>    <span class="c1"># checking to be unique in columns
 </span>    <span class="n">colCheck</span> <span class="o">=</span> <span class="bp">True</span><span class="p">;</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
         <span class="n">col</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">puzzle</span><span class="p">]</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">col</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
-               <span class="k">if</span> <span class="n">col</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">col</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+               <span class="k">if</span> <span class="n">col</span><span class="p">.</span><span class="nf">count</span><span class="p">(</span><span class="n">col</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
                    <span class="n">colCheck</span> <span class="o">=</span> <span class="bp">False</span><span class="p">;</span>
 
 
     <span class="c1"># Checking condition (iii)
 </span>    <span class="c1"># Checking numbers to be unique in each cell
 </span>    <span class="n">cellCheck</span> <span class="o">=</span> <span class="bp">True</span><span class="p">;</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
             <span class="n">cell</span> <span class="o">=</span> <span class="p">[];</span>
             <span class="n">cell</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="mi">3</span><span class="o">*</span><span class="n">i</span><span class="p">:</span><span class="mi">3</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">puzzle</span><span class="p">[</span><span class="mi">3</span><span class="o">*</span><span class="n">i</span><span class="p">:</span><span class="mi">3</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)]];</span>
             <span class="n">cell_flat</span> <span class="o">=</span> <span class="p">[];</span>
             <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">cell</span><span class="p">:</span>
                 <span class="n">cell_flat</span> <span class="o">=</span> <span class="n">cell_flat</span> <span class="o">+</span> <span class="n">row</span><span class="p">;</span>
-            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
                 <span class="k">if</span> <span class="ow">not</span> <span class="n">cell_flat</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
-                    <span class="k">if</span> <span class="n">cell_flat</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">cell_flat</span><span class="p">[</span><span class="n">k</span><span class="p">])</span><span class="o">!=</span><span class="mi">1</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">cell_flat</span><span class="p">.</span><span class="nf">count</span><span class="p">(</span><span class="n">cell_flat</span><span class="p">[</span><span class="n">k</span><span class="p">])</span><span class="o">!=</span><span class="mi">1</span><span class="p">:</span>
                         <span class="n">cellCheck</span><span class="o">=</span><span class="bp">False</span><span class="p">;</span>
                         
     <span class="k">return</span> <span class="n">rowCheck</span> <span class="ow">and</span> <span class="n">colCheck</span> <span class="ow">and</span> <span class="n">cellCheck</span>
@@ -415,10 +415,10 @@ The following code finds a solution to the Sudoku puzzle using recursive methods
     <span class="c1"># finding numbers that are not in row, col, or cell
 </span>
     <span class="n">out</span> <span class="o">=</span> <span class="p">[];</span> <span class="c1"># will contain all the possibilites
-</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
         <span class="n">integer</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
         <span class="k">if</span> <span class="ow">not</span><span class="p">((</span><span class="n">integer</span>  <span class="ow">in</span> <span class="n">row</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">integer</span> <span class="ow">in</span> <span class="n">col</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">integer</span> <span class="ow">in</span> <span class="n">cell_flat</span><span class="p">)):</span>
-            <span class="n">out</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">integer</span><span class="p">)</span> <span class="c1"># appending the number to out if its not in row, col, and cell
+            <span class="n">out</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">integer</span><span class="p">)</span> <span class="c1"># appending the number to out if its not in row, col, and cell
 </span>    <span class="k">return</span> <span class="n">out</span>
 
 <span class="k">def</span> <span class="nf">solve_sodoku</span><span class="p">(</span><span class="n">puzzle</span><span class="p">):</span>
@@ -429,8 +429,8 @@ The following code finds a solution to the Sudoku puzzle using recursive methods
     """</span>
     <span class="c1"># Checking if the puzzle satisfy the rules of the puzzle
 </span>    <span class="c1"># and is already a solved puzzle
-</span>    <span class="k">if</span> <span class="p">(</span><span class="n">checkRules</span><span class="p">(</span><span class="n">puzzle</span><span class="p">)):</span>
-        <span class="k">if</span> <span class="n">np</span><span class="p">.</span><span class="nb">sum</span><span class="p">(</span><span class="n">puzzle</span><span class="p">)</span> <span class="o">==</span> <span class="mi">405</span><span class="p">:</span>
+</span>    <span class="nf">if </span><span class="p">(</span><span class="nf">checkRules</span><span class="p">(</span><span class="n">puzzle</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">np</span><span class="p">.</span><span class="nf">sum</span><span class="p">(</span><span class="n">puzzle</span><span class="p">)</span> <span class="o">==</span> <span class="mi">405</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">puzzle</span><span class="p">,</span> <span class="bp">True</span><span class="p">;</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="p">[],</span> <span class="bp">False</span> <span class="c1"># if the puzzle doesn't satisfy the conditions of the puzzle
@@ -441,42 +441,42 @@ The following code finds a solution to the Sudoku puzzle using recursive methods
 </span>    <span class="c1"># that only one number can fill them
 </span>    <span class="c1"># it also stores the tile with the smallest number of possibilities
 </span>    <span class="k">while</span> <span class="n">cond</span><span class="p">:</span>
-        <span class="n">sol</span><span class="o">=</span><span class="n">copy</span><span class="p">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">puzzle</span><span class="p">);</span> <span class="c1"># making a copy of the puzzle
+        <span class="n">sol</span><span class="o">=</span><span class="n">copy</span><span class="p">.</span><span class="nf">deepcopy</span><span class="p">(</span><span class="n">puzzle</span><span class="p">);</span> <span class="c1"># making a copy of the puzzle
 </span>        <span class="n">num</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1"># number of possible changes
 </span>        <span class="n">iBest</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
         <span class="n">jBest</span><span class="o">=</span> <span class="mi">0</span> <span class="p">;</span>
         <span class="n">numPos</span><span class="o">=</span> <span class="mi">9</span><span class="p">;</span> <span class="c1"># the maximum number of possiblities 
-</span>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
-            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+</span>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
                 <span class="k">if</span> <span class="n">puzzle</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-                    <span class="n">sol</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">possibilities</span><span class="p">(</span><span class="n">puzzle</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
-                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sol</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">])</span> <span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+                    <span class="n">sol</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="nf">possibilities</span><span class="p">(</span><span class="n">puzzle</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">sol</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">])</span> <span class="o">==</span><span class="mi">1</span><span class="p">:</span>
                         <span class="n">num</span> <span class="o">=</span> <span class="n">num</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
                     <span class="k">else</span> <span class="p">:</span> <span class="c1"># the length is greater than 1; we try to find the minimum
-</span>                        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sol</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">])</span><span class="o">&lt;</span><span class="n">numPos</span><span class="p">:</span>
-                            <span class="n">numPos</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">sol</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]);</span>
+</span>                        <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">sol</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">])</span><span class="o">&lt;</span><span class="n">numPos</span><span class="p">:</span>
+                            <span class="n">numPos</span> <span class="o">=</span> <span class="nf">len</span><span class="p">(</span><span class="n">sol</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]);</span>
                             <span class="n">iBest</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
                             <span class="n">jBest</span> <span class="o">=</span> <span class="n">j</span><span class="p">;</span>
         <span class="k">if</span> <span class="n">num</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="c1"># there is no element with 1 possiblity to change
 </span>            <span class="n">cond</span><span class="o">=</span><span class="bp">False</span><span class="p">;</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
-                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
                     <span class="k">if</span> <span class="n">puzzle</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-                        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sol</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">])</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">sol</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">])</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
                             <span class="n">puzzle</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">sol</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">];</span>
                                 
 
-    <span class="k">if</span> <span class="n">np</span><span class="p">.</span><span class="nb">sum</span><span class="p">(</span><span class="n">puzzle</span><span class="p">)</span> <span class="o">==</span> <span class="mi">405</span><span class="p">:</span> <span class="c1"># if the puzzle is solved, we return
+    <span class="k">if</span> <span class="n">np</span><span class="p">.</span><span class="nf">sum</span><span class="p">(</span><span class="n">puzzle</span><span class="p">)</span> <span class="o">==</span> <span class="mi">405</span><span class="p">:</span> <span class="c1"># if the puzzle is solved, we return
 </span>        <span class="k">return</span> <span class="n">puzzle</span><span class="p">,</span> <span class="bp">True</span>
 
     <span class="c1"># If the puzzle is not solved yet, we need to search for all
 </span>    <span class="c1"># possibilities in a tile with smallest number of possibilites
 </span>    <span class="c1"># to save some time!
-</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sol</span><span class="p">[</span><span class="n">iBest</span><span class="p">][</span><span class="n">jBest</span><span class="p">])):</span>
-            <span class="n">puz_help</span> <span class="o">=</span> <span class="n">copy</span><span class="p">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">puzzle</span><span class="p">)</span>
+</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">sol</span><span class="p">[</span><span class="n">iBest</span><span class="p">][</span><span class="n">jBest</span><span class="p">])):</span>
+            <span class="n">puz_help</span> <span class="o">=</span> <span class="n">copy</span><span class="p">.</span><span class="nf">deepcopy</span><span class="p">(</span><span class="n">puzzle</span><span class="p">)</span>
             <span class="n">puz_help</span><span class="p">[</span><span class="n">iBest</span><span class="p">][</span><span class="n">jBest</span><span class="p">]</span> <span class="o">=</span> <span class="n">sol</span><span class="p">[</span><span class="n">iBest</span><span class="p">][</span><span class="n">jBest</span><span class="p">][</span><span class="n">i</span><span class="p">];</span>
-            <span class="n">puz</span><span class="p">,</span> <span class="n">con</span> <span class="o">=</span> <span class="n">solve_sodoku</span><span class="p">(</span><span class="n">puz_help</span><span class="p">);</span>
+            <span class="n">puz</span><span class="p">,</span> <span class="n">con</span> <span class="o">=</span> <span class="nf">solve_sodoku</span><span class="p">(</span><span class="n">puz_help</span><span class="p">);</span>
             <span class="k">if</span> <span class="n">con</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">puz</span><span class="p">,</span> <span class="n">con</span><span class="p">;</span>
             <span class="k">else</span><span class="p">:</span>
@@ -510,22 +510,22 @@ The following code finds a solution to the Sudoku puzzle using recursive methods
                <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">9</span><span class="p">]];</span>
 
 
-    <span class="k">print</span><span class="p">(</span><span class="s">'---------------Solving an easy puzzle ------------'</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">"The puzzle:"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">'---------------Solving an easy puzzle ------------'</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"The puzzle:"</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">puzzle1</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">);</span>
-    <span class="n">sol</span><span class="p">,</span><span class="n">con</span> <span class="o">=</span> <span class="n">solve_sodoku</span><span class="p">(</span><span class="n">puzzle1</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">"The solution is:"</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="n">r</span><span class="p">);</span>
+    <span class="n">sol</span><span class="p">,</span><span class="n">con</span> <span class="o">=</span> <span class="nf">solve_sodoku</span><span class="p">(</span><span class="n">puzzle1</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"The solution is:"</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">sol</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">'---------------Solving a hard puzzle ------------'</span><span class="p">)</span>        
-    <span class="k">print</span><span class="p">(</span><span class="s">"The puzzle:"</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">'---------------Solving a hard puzzle ------------'</span><span class="p">)</span>        
+    <span class="nf">print</span><span class="p">(</span><span class="s">"The puzzle:"</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">puzzle2</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">);</span>
-    <span class="n">sol</span><span class="p">,</span><span class="n">con</span> <span class="o">=</span> <span class="n">solve_sodoku</span><span class="p">(</span><span class="n">puzzle2</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">"The solution is:"</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="n">r</span><span class="p">);</span>
+    <span class="n">sol</span><span class="p">,</span><span class="n">con</span> <span class="o">=</span> <span class="nf">solve_sodoku</span><span class="p">(</span><span class="n">puzzle2</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"The solution is:"</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">sol</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>    
+        <span class="nf">print</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>    
 </pre></td>
 </tr></tbody></table></code></pre></figure>
 
