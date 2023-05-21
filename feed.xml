@@ -1,5 +1,113 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://azareei.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://azareei.github.io/" rel="alternate" type="text/html" /><updated>2023-04-01T22:06:23+10:00</updated><id>https://azareei.github.io/feed.xml</id><title type="html">Ahmad (Ady) Zareei</title><subtitle>Personal homepage of Ahmad Zareei.
-</subtitle><entry><title type="html">Qabus-name (in Farsi)</title><link href="https://azareei.github.io/blog/2023/qabus-name/" rel="alternate" type="text/html" title="Qabus-name (in Farsi)" /><published>2023-03-26T08:30:00+10:00</published><updated>2023-03-26T08:30:00+10:00</updated><id>https://azareei.github.io/blog/2023/qabus-name</id><content type="html" xml:base="https://azareei.github.io/blog/2023/qabus-name/"><![CDATA[<p>This is Qabus name</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://azareei.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://azareei.github.io/" rel="alternate" type="text/html" /><updated>2023-05-21T11:14:42-07:00</updated><id>https://azareei.github.io/feed.xml</id><title type="html">Ahmad (Ady) Zareei</title><subtitle>Personal homepage of Ahmad Zareei.
+</subtitle><entry><title type="html">Goals and The Drift That Directs Your Life’s Random Walk</title><link href="https://azareei.github.io/blog/2023/Goals-drift/" rel="alternate" type="text/html" title="Goals and The Drift That Directs Your Life’s Random Walk" /><published>2023-05-21T03:30:00-07:00</published><updated>2023-05-21T03:30:00-07:00</updated><id>https://azareei.github.io/blog/2023/Goals-drift</id><content type="html" xml:base="https://azareei.github.io/blog/2023/Goals-drift/"><![CDATA[<p>Life can often feel like a random walk, a journey where every step is influenced by countless variables, many beyond our control. In this context, imagine each step as a day, and each direction as a decision that either takes us in positive (+1) or negative direction.</p>
+
+<p>When we don’t have a clear goal or purpose, our life is like a random walk with equal probabilities. Some days we make progress (+1), while on others we face setbacks (-1). Each day our steps will be</p>
+
+\[\text{step} = \begin{cases} +1, &amp;  p=0.5 \\ -1, &amp;  p=-0.5 \end{cases}\]
+
+<p>Over time, after  $n$ days, the average progress is zero - meaning we stay roughly where we started - and the range of places where we might end up (the standard deviation) is quite large (proportional to $\sqrt{n}$). It’s unpredictable and can feel like we’re drifting aimlessly.</p>
+
+\[\mathbb{E}[\text{distance}] = \mathbb{E}[\text{step}_1 + \text{step}_2 + … + \text{step}_n] = n \mathbb{E}[step] = n  (-1 \times 0.5 + 1 \times 0.5) = 0\]
+
+\[Var[\text{distance}] = Var[\text{step}_1 + \text{step}_2 + … + \text{step}_n] = n Var[step] = n \cdot 1 =n\]
+
+<p>where we used the fact that</p>
+
+\[Var[step] =  \mathbb{E}[step^2] - (\mathbb{E}[step])^2 = 1\]
+
+<p>However, when we do have a goal, it introduces a drift, a subtle push for our walk in one direction. This goal doesn’t remove the randomness or unpredictability of life; there will still be steps forward and backward. But the drift gently nudges us towards making progress $+1$ more often than experiencing setbacks $-1$. It’s like a compass guiding us through the randomness. We call this a drift $d$, that pushes us more toward one direction. So the steps each day are</p>
+
+\[\text{step} = \begin{cases} +1, &amp;  p=0.5+d/2 \\ -1, &amp;  p=-0.5 - d/2 \end{cases}\]
+
+<p>Now let’s see what happens, after  $n$ days. This time the progress is not zero, in fact after $n$ days,</p>
+
+\[\mathbb{E}[\text{distance}] = \mathbb{E}[\text{step}_1 + \text{step}_2 + … + \text{step}_n] = n \mathbb{E}[step] = n  (-1 \times (0.5-d/2) + 1 \times (0.5+d/2)) = n\cdot d\]
+
+<p>which means we are not at zero anymore, and in fact with that slight drift, now we are and $n\cdot d$. It’s interesting to see that the randomness, or the standard deviation of where we are also decreases,</p>
+
+\[Var[\text{distance}] = Var[\text{step}_1 + \text{step}_2 + … + \text{step}_n] = n Var[step] = n \cdot (1-d^2)\]
+
+\[Var[step] =  \mathbb{E}[step^2] - (\mathbb{E}[step])^2 = 1 - d^2\]
+
+<p>Let’s simulate this to see it in action. We create a simulation of both a random walk example, and a drifted random walk, with setting the drift value only to ! meaning that you take a positive direction action with probability of only $p=0.55$ (a bit more than average)!</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="n">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+<span class="c1"># Number of steps
+</span><span class="n">n</span> <span class="o">=</span> <span class="mi">10000</span>
+
+<span class="c1"># Number of random walks
+</span><span class="n">num_walks</span> <span class="o">=</span> <span class="mi">500</span>
+
+<span class="c1"># The drift term, which makes positive steps more likely
+</span><span class="n">drift</span> <span class="o">=</span> <span class="mf">0.05</span>
+
+<span class="n">distances_random</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">zeros</span><span class="p">((</span><span class="n">num_walks</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+<span class="n">distances_drifted</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">zeros</span><span class="p">((</span><span class="n">num_walks</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+
+<span class="c1"># Perform the random walks
+</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">num_walks</span><span class="p">):</span>
+    <span class="n">steps_random</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">choice</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">steps_drifted</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">choice</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="p">[</span><span class="mf">0.5</span><span class="o">-</span><span class="n">drift</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mf">0.5</span><span class="o">+</span><span class="n">drift</span><span class="o">/</span><span class="mi">2</span><span class="p">])</span>
+    
+    <span class="n">distances_random</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">cumsum</span><span class="p">(</span><span class="n">steps_random</span><span class="p">)</span>
+    <span class="n">distances_drifted</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">cumsum</span><span class="p">(</span><span class="n">steps_drifted</span><span class="p">)</span>
+
+<span class="c1"># Calculate the mean and standard deviations of the distances at each step
+</span><span class="n">mean_distances_random</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">mean</span><span class="p">(</span><span class="n">distances_random</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">mean_distances_drifted</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">mean</span><span class="p">(</span><span class="n">distances_drifted</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">mean_distances_random_theory</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="n">mean_distances_drifted_theory</span> <span class="o">=</span> <span class="n">drift</span><span class="o">*</span><span class="n">np</span><span class="p">.</span><span class="nf">arange</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+<span class="n">std_distances_random</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">std</span><span class="p">(</span><span class="n">distances_random</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">std_distances_drifted</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">std</span><span class="p">(</span><span class="n">distances_drifted</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Create an array representing sqrt(n) for comparison
+</span><span class="n">sqrt_n</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">sqrt</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">arange</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+<span class="n">sqrt_n_drift</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">sqrt</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">arange</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">drift</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+
+<span class="c1"># Plot the mean and standard deviation of the distances and sqrt(n) for comparison
+</span><span class="n">plt</span><span class="p">.</span><span class="nf">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">mean_distances_random</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">'Mean of random walk distances'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">'blue'</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">mean_distances_drifted</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">'Mean of drifted walk distances'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">'red'</span><span class="p">,</span><span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">mean_distances_random_theory</span><span class="p">,</span> <span class="s">'--'</span><span class="p">,</span>  <span class="n">color</span><span class="o">=</span><span class="s">'green'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">mean_distances_drifted_theory</span><span class="p">,</span> <span class="s">'--'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">'green'</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="p">.</span><span class="nf">fill_between</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">mean_distances_random</span> <span class="o">-</span> <span class="n">std_distances_random</span><span class="p">,</span> <span class="n">mean_distances_random</span> <span class="o">+</span> <span class="n">std_distances_random</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">'blue'</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="p">.</span><span class="nf">fill_between</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">mean_distances_drifted</span> <span class="o">-</span> <span class="n">std_distances_drifted</span><span class="p">,</span> <span class="n">mean_distances_drifted</span> <span class="o">+</span> <span class="n">std_distances_drifted</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">'red'</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">mean_distances_random_theory</span> <span class="o">+</span> <span class="n">sqrt_n</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s">':'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">'green'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">mean_distances_random_theory</span> <span class="o">-</span> <span class="n">sqrt_n</span><span class="p">,</span>  <span class="n">linestyle</span><span class="o">=</span><span class="s">':'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">'green'</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">mean_distances_drifted_theory</span> <span class="o">+</span> <span class="n">sqrt_n_drift</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s">':'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">'green'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">mean_distances_drifted_theory</span> <span class="o">-</span> <span class="n">sqrt_n_drift</span><span class="p">,</span>  <span class="n">linestyle</span><span class="o">=</span><span class="s">':'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">'green'</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="p">.</span><span class="nf">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">xlabel</span><span class="p">(</span><span class="s">'Number of steps'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">ylabel</span><span class="p">(</span><span class="s">'Distance'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">title</span><span class="p">(</span><span class="s">'Comparison of Random Walk and Drifted Walk Distance with sqrt(n)'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>The blue curve shows a person doing random walk, always around 0 with a standard deviation of $\sqrt{n}$. The more they have lived, the more probability of being somewhere further out from 0 on the positive or negative side! however, when taking small actions (drift) toward a goal daily, after $n$ days, linearly proportional to the number of days, $n$, they are distanced from $0$, and further more the standard deviation of their place has been reduced by $\sqrt{n(1-d^2)}$. So take small actions daily toward a goal, as they matter a lot over a long run.</p>
+
+<figure>
+    <picture>
+        
+
+        <!-- Fallback to the original file -->
+        <img src="/assets/img/posts/goals_random_walk/random_walk.png" class="img-fluid rounded z-depth-1" width="auto" height="auto" data-zoomable="" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
+
+    </picture><figcaption class="caption">ETF sponsors and products</figcaption>
+
+</figure>
+
+<h2 id="so-goals-are-the-guiding-drift-that-shape-our-lifes-random-walk-journey">So goals are the guiding drift that shape our life’s random walk journey.</h2>]]></content><author><name></name></author><summary type="html"><![CDATA[Goals and Random Walk]]></summary></entry><entry><title type="html">Qabus-name (in Farsi)</title><link href="https://azareei.github.io/blog/2023/qabus-name/" rel="alternate" type="text/html" title="Qabus-name (in Farsi)" /><published>2023-03-25T15:30:00-07:00</published><updated>2023-03-25T15:30:00-07:00</updated><id>https://azareei.github.io/blog/2023/qabus-name</id><content type="html" xml:base="https://azareei.github.io/blog/2023/qabus-name/"><![CDATA[<p>This is Qabus name</p>
 
 <p style="text-align:right;dir:rtl;">
 ویرایش کتاب قابوس‌نامه به گیت‌هاب اضافه شد. این کتاب سال ۲۰۲۱ در دور همی مجازی خوانده شد و توسط خوانندگاه ویرایش شد. در زیر مقدمه تدوین رو میذارم.
@@ -30,7 +138,7 @@
 <p><br />
 <br /></p>
 
-<p><a href="https://github.com/azareei/Qabus-nama">Github Link for Qabus-nama</a></p>]]></content><author><name></name></author><summary type="html"><![CDATA[Qabusname]]></summary></entry><entry><title type="html">My Notes on Investments by Bodie</title><link href="https://azareei.github.io/blog/2023/Bodie-Investments/" rel="alternate" type="text/html" title="My Notes on Investments by Bodie" /><published>2023-03-11T08:30:00+10:00</published><updated>2023-03-11T08:30:00+10:00</updated><id>https://azareei.github.io/blog/2023/Bodie-Investments</id><content type="html" xml:base="https://azareei.github.io/blog/2023/Bodie-Investments/"><![CDATA[<p>In this post, I share my notes on the book Investments by Bodie.</p>
+<p><a href="https://github.com/azareei/Qabus-nama">Github Link for Qabus-nama</a></p>]]></content><author><name></name></author><summary type="html"><![CDATA[Qabusname]]></summary></entry><entry><title type="html">My Notes on Investments by Bodie</title><link href="https://azareei.github.io/blog/2023/Bodie-Investments/" rel="alternate" type="text/html" title="My Notes on Investments by Bodie" /><published>2023-03-10T14:30:00-08:00</published><updated>2023-03-10T14:30:00-08:00</updated><id>https://azareei.github.io/blog/2023/Bodie-Investments</id><content type="html" xml:base="https://azareei.github.io/blog/2023/Bodie-Investments/"><![CDATA[<p>In this post, I share my notes on the book Investments by Bodie.</p>
 
 <ul>
   <li>
@@ -2112,159 +2220,7 @@
 
     <p>to be cont’d</p>
   </li>
-</ul>]]></content><author><name></name></author><summary type="html"><![CDATA[investment]]></summary></entry><entry><title type="html">Optimum first guess for Persian Wordle (in Farsi)</title><link href="https://azareei.github.io/blog/2022/wordle/" rel="alternate" type="text/html" title="Optimum first guess for Persian Wordle (in Farsi)" /><published>2022-01-26T08:30:00+10:00</published><updated>2022-01-26T08:30:00+10:00</updated><id>https://azareei.github.io/blog/2022/wordle</id><content type="html" xml:base="https://azareei.github.io/blog/2022/wordle/"><![CDATA[<p><a href="vajoor.ir">Vaajoor</a> is the persian version of <a href="https://www.powerlanguage.co.uk/wordle/">wordle</a>. In this post I explore the optimum first guess for <a href="vajoor.ir">Vaajoor</a> in persian.</p>
-
-<p><br /></p>
-
-<p style="text-align:right;dir:rtl;">
-در بازی واجور هدف حدس زدن یک کلمه پنج حرفیه. در این بازی امکان پنج‌بار حدس زدن وجود داره. برای هر کلمه‌ای که حدس میزنیم، برای هر حرف سه حالت وجود داره: اگر حرف در کلمه اصلی وجود نداشته باشه، حرف قرمز میشه. اگر حرف در کلمه اصلی وجود داشته باشد، اما مکانش درست نباشه، زرد میشه. و اگر حرف هم در کلمه اصلی باشه و هم مکانش درست باشه، سبز میشه. خیلی شبیه به بازی فکر‌بکر هست اگه توی بچگی بازی کرده باشین. حال با حدس کلمه و اینکه هر حرف‌ آن در چه حالتی است، کلمه اصلی حدس زده میشه 
-</p>
-
-<p><br />
-<br /></p>
-
-<p style="text-align:right;dir:rtl;">
-نمونه‌ای از بازی
-</p>
-
-<div class="row mt-3" style="text-align:center;">
-    <div class="col-sm mt-3 mt-md-0">
-        <img class="img-fluid rounded z-depth-1" width="300" src="/assets/posts/vajoor_sample.png" />
-    </div>
-</div>
-
-<p><br />
-<br /></p>
-
-<p style="text-align:right;dir:rtl;">
-
-سوالی که پیش میآید این هست که آیا حدس اول بهینه‌ای وجود داره؟
-
-<br />
-
-با نگاهی به لغات ۵ حرفی فرهنگ معین میبینیم که تعداد لغات پنج‌حرفی ۸۲۱۶ کلمه هست. حدس اول میتونه از کل این لیست باشه. با توجه به حدس اول، و اینکه چه حرف‌هایی در آن هست و نیست لیست کلمات قابل قبول برای حدس دوم کمتر میشه. سوال این هست که آیا حدس اولیه بهینه‌ای وجود داره؟
-<br />
-
-هر حدسی که ما میزنیم، بقیه کلمات رو به ۳*۳*۳*۳*۳ دسته تقسیم میکنه، با توجه به اینکه هر حرف این حدس ما در کدوم گروه سبز یا زرد یا قرمز میافته. پس هر کلمه‌ای، بقیه کلمات رو بین این ۳*۳*۳*۳*۳ = ۲۴۳ گروه تقسیم میکنه. حالا با توجه به اینکه کدوم گروه انتخاب شده، ادامه مسیر از بین کلمات اون گروه خواهد بود. حالا اگه حدس اولیه‌ای بهینه باشه، باید کلمات رو جوری بین این گروه‌ها تقسیم کنه، که لیست تعداد کلمات بعدی کمترین باشه! اگه اینجوری باشه، این کلمه انتخاب خوبی بوده
-<br />
-
-برای اینکه کلمه بهینه برای انتخاب اول رو پیدا کنیم، روی لیست تمام کلمات میگردیم، برای هر کلمه نگاه میکنیم که بقیه کلمات چه‌طور بین این ۲۴۳ گروه تقسیم میشن. برای هر گروه تعدادی ثبت میشه. ماکزیمم تعداد کلمات در یه گروه از این ۲۴۳ گروه رو برای اون کلمه ثبت میکنیم. در نهایت کلمه‌ای رو انتخاب میکنیم که این عدد ماکزیممش کمترین باشه. یعنی مینیمم این ماکزیمم رو پیدا میکنیم. در این صورت، در بدترین حالت حدسمون، تعداد کلمات برای انتخاب دوم کمترین شده
-<br />
-
-حالا همین کار رو من برای کلمات فارسی فرهنگ معین انجام دادم (کد شخمی نوشته شده پایین همین صفحه هست). به نظر میاد که حدس بهینه اول کلمه تریان هست. منم نمیدونستم تریان یعنی چه ! انگار به معنی چیزی هست که طبقی شکل هست و بافته شده از شاخ بید! والا منم نفهمیدم یعنی چی. حالا اگه کلمه تریان رو به عنوان انتخاب اول بزاریم، ماکزیمم تعداد کلمات در اون ۲۴۳ گروه فقط ۵۴۲ کلمه هست. یعنی در بد‌ترین حالت برای حدس دوم باید فقط از بین این ۵۴۲ کلمه انتخاب کنیم. حالا همین داستان رو برای حدس دوم هم میشه انجام داد، البته وقتی حدس اول در اومده باشه
-
-<br />
-
-حالا چون تریان خیلی واژه سختی شد، کلمه دوم هم نگاه کردم دیدم خیلی ساده‌تره: تیمار. هم کلمه راحت‌تری هست و هم آدم یادش بمونه. اگه کلمه تیمار رو برای حدس اول انتخاب کنین، برای حدس دوم در بدترین حالت فقط باید بین ۵۶۰ کلمه، اون کلمه مورد نظر رو پیدا کنین. در ادامه هم لینک گیت‌هاب این کد سر‌سری پایتون و لیست کلمات فرهنگ معین رو میزارم خواستین خودتون باش ور برین
-
-</p>
-<p><br />
-<br /></p>
-
-<p><a href="https://github.com/ahmadzareei/vajoor">Github Link</a></p>
-
-<p><br />
-<br /></p>
-
-<figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-</pre></td><td class="code"><pre><span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
-
-<span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="s">'Moin_dictionary_words.txt'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-<span class="n">lines</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="nf">readlines</span><span class="p">()</span>
-
-<span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">]</span>
-
-<span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">lines</span> <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">==</span><span class="mi">5</span><span class="p">]</span>
-
-<span class="kn">from</span> <span class="n">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
-<span class="n">score</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>\<span class="o">*</span><span class="nf">len</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">j</span><span class="p">,</span><span class="n">w</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">words</span><span class="p">):</span>
-<span class="n">category</span> <span class="o">=</span> <span class="nf">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">w_inquiry</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
-<span class="n">key</span> <span class="o">=</span> <span class="s">''</span>
-<span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">ch</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">w</span><span class="p">):</span>
-<span class="k">if</span> <span class="n">ch</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">w_inquiry</span><span class="p">:</span>
-<span class="n">key</span> <span class="o">+=</span> <span class="s">'K'</span> <span class="c1"># it's black
-</span><span class="k">else</span><span class="p">:</span>
-<span class="k">if</span> <span class="n">ch</span> <span class="o">==</span> <span class="n">w_inquiry</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
-<span class="n">key</span> <span class="o">+=</span> <span class="s">'G'</span> <span class="c1"># it should be green
-</span><span class="k">else</span><span class="p">:</span>
-<span class="n">key</span> <span class="o">+=</span> <span class="s">'Y'</span> <span class="c1"># then it's yellow
-</span><span class="n">category</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-<span class="n">score</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="nf">max</span><span class="p">(</span><span class="n">category</span><span class="p">.</span><span class="nf">values</span><span class="p">())</span>
-
-<span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">(</span><span class="n">score</span><span class="p">).</span><span class="nf">argsort</span><span class="p">()[:</span><span class="mi">20</span><span class="p">]:</span>
-<span class="nf">print</span><span class="p">(</span><span class="n">score</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span><span class="n">words</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
-</pre></td></tr></tbody></table></code></pre></figure>
-
-<p style="text-align:right;dir:rtl;">
-542 تریان
-<br />
-560 تیمار
-<br />
-611 رمانی
-<br />
-631 نوایر
-<br />
-631 روانی
-<br />
-643 ربانی
-<br />
-643 برانی
-<br />
-644 منابر
-<br />
-656 نرمال
-<br />
-661 بهیار
-<br />
-661 بیراه
-<br />
-663 ویران
-<br />
-663 رویان
-<br />
-680 تریاک
-<br />
-681 مهوار
-<br />
-681 میراب
-<br />
-681 هموار
-<br />
-681 بیمار
-<br />
-686 نهاری
-<br />
-686 مناره
-</p>]]></content><author><name></name></author><summary type="html"><![CDATA[Molavi]]></summary></entry><entry><title type="html">Bayesian Machine Learning</title><link href="https://azareei.github.io/blog/2022/Baysian-ml/" rel="alternate" type="text/html" title="Bayesian Machine Learning" /><published>2022-01-26T08:30:00+10:00</published><updated>2022-01-26T08:30:00+10:00</updated><id>https://azareei.github.io/blog/2022/Baysian-ml</id><content type="html" xml:base="https://azareei.github.io/blog/2022/Baysian-ml/"><![CDATA[<p>These is a review of Bayesian Machine Learning. It’s based on HSE’s course on this topic.</p>
+</ul>]]></content><author><name></name></author><summary type="html"><![CDATA[investment]]></summary></entry><entry><title type="html">Bayesian Machine Learning</title><link href="https://azareei.github.io/blog/2022/Baysian-ml/" rel="alternate" type="text/html" title="Bayesian Machine Learning" /><published>2022-01-25T14:30:00-08:00</published><updated>2022-01-25T14:30:00-08:00</updated><id>https://azareei.github.io/blog/2022/Baysian-ml</id><content type="html" xml:base="https://azareei.github.io/blog/2022/Baysian-ml/"><![CDATA[<p>These is a review of Bayesian Machine Learning. It’s based on HSE’s course on this topic.</p>
 
 <h3 id="maximum-likelihood-estimation-mle">Maximum Likelihood Estimation (MLE)</h3>
 
@@ -2810,7 +2766,159 @@
 
 <p>Or we can summarize it as</p>
 
-\[A(x_0\to x_1) = \min\left(1, \frac{p(x_1)}{p(x_0)} \frac{Q(x_1\to x_0)}{Q(x_0\to x_1)} \right)\]]]></content><author><name></name></author><summary type="html"><![CDATA[Machine learning]]></summary></entry><entry><title type="html">KL Divergence between two normal distributions</title><link href="https://azareei.github.io/blog/2021/KL-Divergence/" rel="alternate" type="text/html" title="KL Divergence between two normal distributions" /><published>2021-03-11T08:10:00+10:00</published><updated>2021-03-11T08:10:00+10:00</updated><id>https://azareei.github.io/blog/2021/KL-Divergence</id><content type="html" xml:base="https://azareei.github.io/blog/2021/KL-Divergence/"><![CDATA[<p>These is a review of Bayesian Machine Learning. It’s based on HSE’s course on this topic.</p>
+\[A(x_0\to x_1) = \min\left(1, \frac{p(x_1)}{p(x_0)} \frac{Q(x_1\to x_0)}{Q(x_0\to x_1)} \right)\]]]></content><author><name></name></author><summary type="html"><![CDATA[Machine learning]]></summary></entry><entry><title type="html">Optimum first guess for Persian Wordle (in Farsi)</title><link href="https://azareei.github.io/blog/2022/wordle/" rel="alternate" type="text/html" title="Optimum first guess for Persian Wordle (in Farsi)" /><published>2022-01-25T14:30:00-08:00</published><updated>2022-01-25T14:30:00-08:00</updated><id>https://azareei.github.io/blog/2022/wordle</id><content type="html" xml:base="https://azareei.github.io/blog/2022/wordle/"><![CDATA[<p><a href="vajoor.ir">Vaajoor</a> is the persian version of <a href="https://www.powerlanguage.co.uk/wordle/">wordle</a>. In this post I explore the optimum first guess for <a href="vajoor.ir">Vaajoor</a> in persian.</p>
+
+<p><br /></p>
+
+<p style="text-align:right;dir:rtl;">
+در بازی واجور هدف حدس زدن یک کلمه پنج حرفیه. در این بازی امکان پنج‌بار حدس زدن وجود داره. برای هر کلمه‌ای که حدس میزنیم، برای هر حرف سه حالت وجود داره: اگر حرف در کلمه اصلی وجود نداشته باشه، حرف قرمز میشه. اگر حرف در کلمه اصلی وجود داشته باشد، اما مکانش درست نباشه، زرد میشه. و اگر حرف هم در کلمه اصلی باشه و هم مکانش درست باشه، سبز میشه. خیلی شبیه به بازی فکر‌بکر هست اگه توی بچگی بازی کرده باشین. حال با حدس کلمه و اینکه هر حرف‌ آن در چه حالتی است، کلمه اصلی حدس زده میشه 
+</p>
+
+<p><br />
+<br /></p>
+
+<p style="text-align:right;dir:rtl;">
+نمونه‌ای از بازی
+</p>
+
+<div class="row mt-3" style="text-align:center;">
+    <div class="col-sm mt-3 mt-md-0">
+        <img class="img-fluid rounded z-depth-1" width="300" src="/assets/posts/vajoor_sample.png" />
+    </div>
+</div>
+
+<p><br />
+<br /></p>
+
+<p style="text-align:right;dir:rtl;">
+
+سوالی که پیش میآید این هست که آیا حدس اول بهینه‌ای وجود داره؟
+
+<br />
+
+با نگاهی به لغات ۵ حرفی فرهنگ معین میبینیم که تعداد لغات پنج‌حرفی ۸۲۱۶ کلمه هست. حدس اول میتونه از کل این لیست باشه. با توجه به حدس اول، و اینکه چه حرف‌هایی در آن هست و نیست لیست کلمات قابل قبول برای حدس دوم کمتر میشه. سوال این هست که آیا حدس اولیه بهینه‌ای وجود داره؟
+<br />
+
+هر حدسی که ما میزنیم، بقیه کلمات رو به ۳*۳*۳*۳*۳ دسته تقسیم میکنه، با توجه به اینکه هر حرف این حدس ما در کدوم گروه سبز یا زرد یا قرمز میافته. پس هر کلمه‌ای، بقیه کلمات رو بین این ۳*۳*۳*۳*۳ = ۲۴۳ گروه تقسیم میکنه. حالا با توجه به اینکه کدوم گروه انتخاب شده، ادامه مسیر از بین کلمات اون گروه خواهد بود. حالا اگه حدس اولیه‌ای بهینه باشه، باید کلمات رو جوری بین این گروه‌ها تقسیم کنه، که لیست تعداد کلمات بعدی کمترین باشه! اگه اینجوری باشه، این کلمه انتخاب خوبی بوده
+<br />
+
+برای اینکه کلمه بهینه برای انتخاب اول رو پیدا کنیم، روی لیست تمام کلمات میگردیم، برای هر کلمه نگاه میکنیم که بقیه کلمات چه‌طور بین این ۲۴۳ گروه تقسیم میشن. برای هر گروه تعدادی ثبت میشه. ماکزیمم تعداد کلمات در یه گروه از این ۲۴۳ گروه رو برای اون کلمه ثبت میکنیم. در نهایت کلمه‌ای رو انتخاب میکنیم که این عدد ماکزیممش کمترین باشه. یعنی مینیمم این ماکزیمم رو پیدا میکنیم. در این صورت، در بدترین حالت حدسمون، تعداد کلمات برای انتخاب دوم کمترین شده
+<br />
+
+حالا همین کار رو من برای کلمات فارسی فرهنگ معین انجام دادم (کد شخمی نوشته شده پایین همین صفحه هست). به نظر میاد که حدس بهینه اول کلمه تریان هست. منم نمیدونستم تریان یعنی چه ! انگار به معنی چیزی هست که طبقی شکل هست و بافته شده از شاخ بید! والا منم نفهمیدم یعنی چی. حالا اگه کلمه تریان رو به عنوان انتخاب اول بزاریم، ماکزیمم تعداد کلمات در اون ۲۴۳ گروه فقط ۵۴۲ کلمه هست. یعنی در بد‌ترین حالت برای حدس دوم باید فقط از بین این ۵۴۲ کلمه انتخاب کنیم. حالا همین داستان رو برای حدس دوم هم میشه انجام داد، البته وقتی حدس اول در اومده باشه
+
+<br />
+
+حالا چون تریان خیلی واژه سختی شد، کلمه دوم هم نگاه کردم دیدم خیلی ساده‌تره: تیمار. هم کلمه راحت‌تری هست و هم آدم یادش بمونه. اگه کلمه تیمار رو برای حدس اول انتخاب کنین، برای حدس دوم در بدترین حالت فقط باید بین ۵۶۰ کلمه، اون کلمه مورد نظر رو پیدا کنین. در ادامه هم لینک گیت‌هاب این کد سر‌سری پایتون و لیست کلمات فرهنگ معین رو میزارم خواستین خودتون باش ور برین
+
+</p>
+<p><br />
+<br /></p>
+
+<p><a href="https://github.com/ahmadzareei/vajoor">Github Link</a></p>
+
+<p><br />
+<br /></p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+</pre></td><td class="code"><pre><span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
+
+<span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="s">'Moin_dictionary_words.txt'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="n">lines</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="nf">readlines</span><span class="p">()</span>
+
+<span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">]</span>
+
+<span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">lines</span> <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">==</span><span class="mi">5</span><span class="p">]</span>
+
+<span class="kn">from</span> <span class="n">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
+<span class="n">score</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>\<span class="o">*</span><span class="nf">len</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">j</span><span class="p">,</span><span class="n">w</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">words</span><span class="p">):</span>
+<span class="n">category</span> <span class="o">=</span> <span class="nf">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">w_inquiry</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
+<span class="n">key</span> <span class="o">=</span> <span class="s">''</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">ch</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">w</span><span class="p">):</span>
+<span class="k">if</span> <span class="n">ch</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">w_inquiry</span><span class="p">:</span>
+<span class="n">key</span> <span class="o">+=</span> <span class="s">'K'</span> <span class="c1"># it's black
+</span><span class="k">else</span><span class="p">:</span>
+<span class="k">if</span> <span class="n">ch</span> <span class="o">==</span> <span class="n">w_inquiry</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+<span class="n">key</span> <span class="o">+=</span> <span class="s">'G'</span> <span class="c1"># it should be green
+</span><span class="k">else</span><span class="p">:</span>
+<span class="n">key</span> <span class="o">+=</span> <span class="s">'Y'</span> <span class="c1"># then it's yellow
+</span><span class="n">category</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="n">score</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="nf">max</span><span class="p">(</span><span class="n">category</span><span class="p">.</span><span class="nf">values</span><span class="p">())</span>
+
+<span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">(</span><span class="n">score</span><span class="p">).</span><span class="nf">argsort</span><span class="p">()[:</span><span class="mi">20</span><span class="p">]:</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">score</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span><span class="n">words</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p style="text-align:right;dir:rtl;">
+542 تریان
+<br />
+560 تیمار
+<br />
+611 رمانی
+<br />
+631 نوایر
+<br />
+631 روانی
+<br />
+643 ربانی
+<br />
+643 برانی
+<br />
+644 منابر
+<br />
+656 نرمال
+<br />
+661 بهیار
+<br />
+661 بیراه
+<br />
+663 ویران
+<br />
+663 رویان
+<br />
+680 تریاک
+<br />
+681 مهوار
+<br />
+681 میراب
+<br />
+681 هموار
+<br />
+681 بیمار
+<br />
+686 نهاری
+<br />
+686 مناره
+</p>]]></content><author><name></name></author><summary type="html"><![CDATA[Molavi]]></summary></entry><entry><title type="html">KL Divergence between two normal distributions</title><link href="https://azareei.github.io/blog/2021/KL-Divergence/" rel="alternate" type="text/html" title="KL Divergence between two normal distributions" /><published>2021-03-10T14:10:00-08:00</published><updated>2021-03-10T14:10:00-08:00</updated><id>https://azareei.github.io/blog/2021/KL-Divergence</id><content type="html" xml:base="https://azareei.github.io/blog/2021/KL-Divergence/"><![CDATA[<p>These is a review of Bayesian Machine Learning. It’s based on HSE’s course on this topic.</p>
 
 <h3 id="maximum-likelihood-estimation-mle">Maximum Likelihood Estimation (MLE)</h3>
 
@@ -3384,7 +3492,7 @@
 
 <p>Or we can summarize it as</p>
 
-\[A(x_0\to x_1) = \min\left(1, \frac{p(x_1)}{p(x_0)} \frac{Q(x_1\to x_0)}{Q(x_0\to x_1)} \right)\]]]></content><author><name></name></author><summary type="html"><![CDATA[KL Divergence]]></summary></entry><entry><title type="html">Kalman Filter</title><link href="https://azareei.github.io/blog/2021/Kalman-Filter/" rel="alternate" type="text/html" title="Kalman Filter" /><published>2021-03-02T08:10:00+10:00</published><updated>2021-03-02T08:10:00+10:00</updated><id>https://azareei.github.io/blog/2021/Kalman-Filter</id><content type="html" xml:base="https://azareei.github.io/blog/2021/Kalman-Filter/"><![CDATA[<p>Kalman filter is a classic state estimation technique that has found application in many places. In this simple tutorial, I will try to explain Kalman filter in an intuitive way. This is the most basic introduction to the Kalman filter and basically how I learned it. Before getting to the Kalman filter, I will first review some basic materials that we need.</p>
+\[A(x_0\to x_1) = \min\left(1, \frac{p(x_1)}{p(x_0)} \frac{Q(x_1\to x_0)}{Q(x_0\to x_1)} \right)\]]]></content><author><name></name></author><summary type="html"><![CDATA[KL Divergence]]></summary></entry><entry><title type="html">Kalman Filter</title><link href="https://azareei.github.io/blog/2021/Kalman-Filter/" rel="alternate" type="text/html" title="Kalman Filter" /><published>2021-03-01T14:10:00-08:00</published><updated>2021-03-01T14:10:00-08:00</updated><id>https://azareei.github.io/blog/2021/Kalman-Filter</id><content type="html" xml:base="https://azareei.github.io/blog/2021/Kalman-Filter/"><![CDATA[<p>Kalman filter is a classic state estimation technique that has found application in many places. In this simple tutorial, I will try to explain Kalman filter in an intuitive way. This is the most basic introduction to the Kalman filter and basically how I learned it. Before getting to the Kalman filter, I will first review some basic materials that we need.</p>
 
 <p><br /></p>
 <h1 id="prerequisite">Prerequisite</h1>
@@ -3586,7 +3694,7 @@ is an invertible matrix, it can be removed from both sides, and we obtain</p>
 
 <p>Note that the covariance matrix can be obtained using the above equation as</p>
 
-\[\boxed{\Sigma_{t|t} = \left( \mathbf{I} - \mathbf{K}_t \mathbf{H}_t\right)\Sigma_{t|t-1} \left( \mathbf{I} - \mathbf{K}_t \mathbf{H}_t\right)^\top + \mathbf{K}_t \mathbf{R}_t \mathbf{K}_t^\top}\]]]></content><author><name></name></author><summary type="html"><![CDATA[Kalman Filter Tutorial]]></summary></entry><entry><title type="html">Option Pricing</title><link href="https://azareei.github.io/blog/2021/Option-Pricing/" rel="alternate" type="text/html" title="Option Pricing" /><published>2021-02-25T08:10:00+10:00</published><updated>2021-02-25T08:10:00+10:00</updated><id>https://azareei.github.io/blog/2021/Option-Pricing</id><content type="html" xml:base="https://azareei.github.io/blog/2021/Option-Pricing/"><![CDATA[<p>I have recently got interested in options and how they are priced. In this post, I plan to briefly summarize what I have learned so far about options and how they are priced. First I start with what options are, then I cover the bounds for an option price. Next, I briefly discuss what a Weiner process or an Ito process is, and at the end I derive the famous Black-Sholes equation. Disclaimer: I don’t have any background in finance, and these are my understandings.</p>
+\[\boxed{\Sigma_{t|t} = \left( \mathbf{I} - \mathbf{K}_t \mathbf{H}_t\right)\Sigma_{t|t-1} \left( \mathbf{I} - \mathbf{K}_t \mathbf{H}_t\right)^\top + \mathbf{K}_t \mathbf{R}_t \mathbf{K}_t^\top}\]]]></content><author><name></name></author><summary type="html"><![CDATA[Kalman Filter Tutorial]]></summary></entry><entry><title type="html">Option Pricing</title><link href="https://azareei.github.io/blog/2021/Option-Pricing/" rel="alternate" type="text/html" title="Option Pricing" /><published>2021-02-24T14:10:00-08:00</published><updated>2021-02-24T14:10:00-08:00</updated><id>https://azareei.github.io/blog/2021/Option-Pricing</id><content type="html" xml:base="https://azareei.github.io/blog/2021/Option-Pricing/"><![CDATA[<p>I have recently got interested in options and how they are priced. In this post, I plan to briefly summarize what I have learned so far about options and how they are priced. First I start with what options are, then I cover the bounds for an option price. Next, I briefly discuss what a Weiner process or an Ito process is, and at the end I derive the famous Black-Sholes equation. Disclaimer: I don’t have any background in finance, and these are my understandings.</p>
 
 <h1 id="options">Options</h1>
 
@@ -3879,7 +3987,7 @@ is an invertible matrix, it can be removed from both sides, and we obtain</p>
 
 <p>In summary, we have</p>
 
-\[\boxed{C+ Xe^{-rT} \leq S_0+P \leq C+ X}\]]]></content><author><name></name></author><summary type="html"><![CDATA[How options are priced?]]></summary></entry><entry><title type="html">You are what you seek (in Farsi)</title><link href="https://azareei.github.io/blog/2020/Molavi/" rel="alternate" type="text/html" title="You are what you seek (in Farsi)" /><published>2020-12-30T00:30:00+10:00</published><updated>2020-12-30T00:30:00+10:00</updated><id>https://azareei.github.io/blog/2020/Molavi</id><content type="html" xml:base="https://azareei.github.io/blog/2020/Molavi/"><![CDATA[<p><br /></p>
+\[\boxed{C+ Xe^{-rT} \leq S_0+P \leq C+ X}\]]]></content><author><name></name></author><summary type="html"><![CDATA[How options are priced?]]></summary></entry><entry><title type="html">You are what you seek (in Farsi)</title><link href="https://azareei.github.io/blog/2020/Molavi/" rel="alternate" type="text/html" title="You are what you seek (in Farsi)" /><published>2020-12-29T06:30:00-08:00</published><updated>2020-12-29T06:30:00-08:00</updated><id>https://azareei.github.io/blog/2020/Molavi</id><content type="html" xml:base="https://azareei.github.io/blog/2020/Molavi/"><![CDATA[<p><br /></p>
 
 <p>I made the following calligraphy in persian that reads “What you seek is seeking you”. This is part of a two-couplets from Rumi</p>
 
@@ -3898,7 +4006,7 @@ is an invertible matrix, it can be removed from both sides, and we obtain</p>
     <div class="col-sm mt-3 mt-md-0">
         <img class="img-fluid rounded z-depth-1" width="500" src="/assets/posts/what-you-seek.png" />
     </div>
-</div>]]></content><author><name></name></author><summary type="html"><![CDATA[Molavi]]></summary></entry><entry><title type="html">Baye’s rule in odds form</title><link href="https://azareei.github.io/blog/2020/Bayes-Rule-Odds-form/" rel="alternate" type="text/html" title="Baye’s rule in odds form" /><published>2020-12-27T00:30:00+10:00</published><updated>2020-12-27T00:30:00+10:00</updated><id>https://azareei.github.io/blog/2020/Bayes-Rule-Odds-form</id><content type="html" xml:base="https://azareei.github.io/blog/2020/Bayes-Rule-Odds-form/"><![CDATA[<p>Bayes rule discusses the probability of an event based on prior knowledge and new conditions that have occurred. It basically states the following equation</p>
+</div>]]></content><author><name></name></author><summary type="html"><![CDATA[Molavi]]></summary></entry><entry><title type="html">Baye’s rule in odds form</title><link href="https://azareei.github.io/blog/2020/Bayes-Rule-Odds-form/" rel="alternate" type="text/html" title="Baye’s rule in odds form" /><published>2020-12-26T06:30:00-08:00</published><updated>2020-12-26T06:30:00-08:00</updated><id>https://azareei.github.io/blog/2020/Bayes-Rule-Odds-form</id><content type="html" xml:base="https://azareei.github.io/blog/2020/Bayes-Rule-Odds-form/"><![CDATA[<p>Bayes rule discusses the probability of an event based on prior knowledge and new conditions that have occurred. It basically states the following equation</p>
 
 \[P(A\vert B) = \frac{P(A\cap B)}{P(B)} =  \frac{P(B\vert A)(A)}{P(B)} = \frac{P(B\vert A)(A)}{P(B\vert A)P(A) + P(B\vert \neg A) P(\neg A)}\]
 
@@ -3930,12 +4038,4 @@ is an invertible matrix, it can be removed from both sides, and we obtain</p>
 
 \[O(C:\neg C\vert +) = \frac{P(C\vert +)}{P(\neg C\vert +)} = \left( \frac{0.1}{0.9} \right) \left( \frac{0.9}{0.2} \right) = \frac{1}{2}\]
 
-<p>So initially, the odds of having cancer was \(1:9\). After the positive result, the odds are updated using Baye’s rule and it becomes \(1:2\). If the test becomes \(90\%\) specific, the above equation immediately tells us that the odds updates to \((1:9)\times(0.9/0.1) = 1:1\). This makes Baye’s rule more intuitive to work with.</p>]]></content><author><name></name></author><summary type="html"><![CDATA[Baye's rule in odds form]]></summary></entry><entry><title type="html">Sharing internet using Ethernet connection</title><link href="https://azareei.github.io/blog/2020/Sharing-internet-using-ethernet/" rel="alternate" type="text/html" title="Sharing internet using Ethernet connection" /><published>2020-12-23T08:30:00+10:00</published><updated>2020-12-23T08:30:00+10:00</updated><id>https://azareei.github.io/blog/2020/Sharing-internet-using-ethernet</id><content type="html" xml:base="https://azareei.github.io/blog/2020/Sharing-internet-using-ethernet/"><![CDATA[<p>Say you have a Jetson nano, and you want to connect it to the internet using an Ethernet connection with your PC/Laptop. This is straightforward with just a few clicks. I have Ubuntu as my OS and this is what I did</p>
-
-<ul>
-  <li>Open network manager (you can run your network manager by typing <code class="language-plaintext highlighter-rouge">nm-connection-editor</code> in your terminal)</li>
-  <li>Click on creating a new connection</li>
-  <li>Select Ethernet, name is as you wish, e.g., Jetson</li>
-  <li>Go to “IPv4 Settings”, and select “Shared to the other computers” method</li>
-  <li>Now plug in the Ethernet cable to your pc and Jetson. Select jetson connection on your PC and your PC will act as a router for your Jetson.</li>
-</ul>]]></content><author><name></name></author><summary type="html"><![CDATA[Sharing internet using Ethernet]]></summary></entry></feed>
+<p>So initially, the odds of having cancer was \(1:9\). After the positive result, the odds are updated using Baye’s rule and it becomes \(1:2\). If the test becomes \(90\%\) specific, the above equation immediately tells us that the odds updates to \((1:9)\times(0.9/0.1) = 1:1\). This makes Baye’s rule more intuitive to work with.</p>]]></content><author><name></name></author><summary type="html"><![CDATA[Baye's rule in odds form]]></summary></entry></feed>
