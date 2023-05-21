@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<title>Ahmad (Ady) Zareei | Weighing balance puzzle</title>
+<title>Ahmad (Ady) Zareei | Unveiling the Odd Marble</title>
 <meta name="description" content="Personal homepage of Ahmad Zareei.
 ">
 
@@ -153,23 +153,20 @@
 <div class="post">
 
   <header class="post-header">
-    <h1 class="post-title">Weighing balance puzzle</h1>
+    <h1 class="post-title">Unveiling the Odd Marble</h1>
     <p class="post-meta">March 14, 2020</p>
   </header>
 
   <article class="post-content">
     <p><br></p>
 
-<p>
-You have a balance and 12 marbles: 11 identical, one secretly
-lighter/heavier. Balance lets you see whether LHS is &gt;, =, or &lt;
-RHS. Determine which marble is weird and whether it is lighter or
-heavier in 3 weighings.
-</p>
+<p>You’re given a balance scale and 12 marbles. Out of the 12, 11 are identical and there’s one marble that’s either heavier or lighter - we don’t know. The task is to identify this different marble and whether it’s lighter or heavier using the balance only 3 times.</p>
 
-<p>
-We first see if such solution is feasible. There are 3 outcomes per each balance test (LHS&gt;RHS, LHS=RHS, or LHS&lt;RHS). So if we run 3 weighings, then we will have 3x3x3 different distinct outcomes. Considering the fact that each marble can be lighter or heavier or all equal, then we have 2x12+1=25 different cases. Since 25&lt;27, then we can definitely design the weighings so that each outcome corresponds to one case. An example of such case is shown below: 
-</p>
+<p>Let’s now confirm whether it’s possible to achieve this. Each time we use the balance, we get one of three results: left side heavier (LHS &gt; RHS), both sides equal (LHS = RHS), or right side heavier (LHS &lt; RHS).</p>
+
+<p>So if we use the balance 3 times, we can have 3x3x3=27 unique outcomes. We need to account for each marble possibly being the odd one out (lighter or heavier) or all marbles being equal. This means we have 2x12+1=25 unique scenarios to cover.</p>
+
+<p>Since we have more potential balance outcomes (27) than we do marble scenarios (25), we theoretically have the potential to design the balance tests so each distinct outcome corresponds to a unique scenario. The structure of how these tests might look is suggested below:</p>
 
 <div class="figure">
 <p><img src="/assets/posts/marbles.png" alt="marbles.png" width="800px">
