@@ -8,7 +8,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
 <title>Ade  Zareei | Goals and The Drift That Directs Your Life's Random Walk</title>
-<meta name="description" content="Personal homepage of Ade Zareei
+<meta name="description" content="Personal homepage of Ade Zareei, Personal homepage of Ahmad Zareei
 ">
 
 <!-- Open Graph -->
@@ -174,23 +174,23 @@
 
 \[Var[step] =  \mathbb{E}[step^2] - (\mathbb{E}[step])^2 = 1\]
 
-<p>However, when we do have a goal, it introduces a drift, a subtle push for our walk in one direction. This goal doesn’t remove the randomness or unpredictability of life; there will still be steps forward and backward. But the drift gently nudges us towards making progress $+1$ more often than experiencing setbacks $-1$. It’s like a compass guiding us through the randomness. We call this a drift $d$, that pushes us more toward one direction. So the steps each day are</p>
+<p>However, when we do have a goal, it introduces a drift, a subtle push for our walk in one direction. This goal doesn’t remove the randomness or unpredictability of life; there will still be steps forward and backward. But the drift gently nudges us towards making progress \(+1\) more often than experiencing setbacks \(-1\). It’s like a compass guiding us through the randomness. We call this a drift \(d\), that pushes us more toward one direction. So the steps each day are</p>
 
 \[\text{step} = \begin{cases} +1, &amp;  p=0.5+d/2 \\ -1, &amp;  p=-0.5 - d/2 \end{cases}\]
 
-<p>Now let’s see what happens, after  $n$ days. This time the progress is not zero, in fact after $n$ days,</p>
+<p>Now let’s see what happens, after  \(n\) days. This time the progress is not zero, in fact after \(n\) days,</p>
 
 \[\mathbb{E}[\text{distance}] = \mathbb{E}[\text{step}_1 + \text{step}_2 + … + \text{step}_n] = n \mathbb{E}[step] = n  (-1 \times (0.5-d/2) + 1 \times (0.5+d/2)) = n\cdot d\]
 
-<p>which means we are not at zero anymore, and in fact with that slight drift, now we are and $n\cdot d$. It’s interesting to see that the randomness, or the standard deviation of where we are also decreases,</p>
+<p>which means we are not at zero anymore, and in fact with that slight drift, now we are and \(n\cdot d\). It’s interesting to see that the randomness, or the standard deviation of where we are also decreases,</p>
 
 \[Var[\text{distance}] = Var[\text{step}_1 + \text{step}_2 + … + \text{step}_n] = n Var[step] = n \cdot (1-d^2)\]
 
 \[Var[step] =  \mathbb{E}[step^2] - (\mathbb{E}[step])^2 = 1 - d^2\]
 
-<p>Let’s simulate this to see it in action. We create a simulation of both a random walk example, and a drifted random walk, with setting the drift value only to ! meaning that you take a positive direction action with probability of only $p=0.55$ (a bit more than average)!</p>
+<p>Let’s simulate this to see it in action. We create a simulation of both a random walk example, and a drifted random walk, with setting the drift value only to ! meaning that you take a positive direction action with probability of only \(p=0.55\) (a bit more than average)!</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
 <span class="kn">import</span> <span class="n">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
 
 <span class="c1"># Number of steps
@@ -250,10 +250,9 @@
 <span class="n">plt</span><span class="p">.</span><span class="nf">xlabel</span><span class="p">(</span><span class="s">'Number of steps'</span><span class="p">)</span>
 <span class="n">plt</span><span class="p">.</span><span class="nf">ylabel</span><span class="p">(</span><span class="s">'Distance'</span><span class="p">)</span>
 <span class="n">plt</span><span class="p">.</span><span class="nf">title</span><span class="p">(</span><span class="s">'Comparison of Random Walk and Drifted Walk Distance with sqrt(n)'</span><span class="p">)</span>
-<span class="n">plt</span><span class="p">.</span><span class="nf">show</span><span class="p">()</span>
-</code></pre></div></div>
+<span class="n">plt</span><span class="p">.</span><span class="nf">show</span><span class="p">()</span></code></pre></figure>
 
-<p>The blue curve shows a person doing random walk, always around 0 with a standard deviation of $\sqrt{n}$. The more they have lived, the more probability of being somewhere further out from 0 on the positive or negative side! however, when taking small actions (drift) toward a goal daily, after $n$ days, linearly proportional to the number of days, $n$, they are distanced from $0$, and further more the standard deviation of their place has been reduced by $\sqrt{n(1-d^2)}$. So take small actions daily toward a goal, as they matter a lot over a long run.</p>
+<p>The blue curve shows a person doing random walk, always around \(0\) with a standard deviation of \(\sqrt{n}\). The more they have lived, the more probability of being somewhere further out from \(0\) on the positive or negative side! however, when taking small actions (drift) toward a goal daily, after \(n\) days, linearly proportional to the number of days, \(n\), they are distanced from \(0\), and further more the standard deviation of their place has been reduced by \(\sqrt{n(1-d^2)}\). So take small actions daily toward a goal, as they matter a lot over a long run.</p>
 
 <figure>
     <picture>
@@ -284,7 +283,7 @@
     © Copyright 2023 Ade  Zareei.
     <!--  -->     
     
-    Last updated: May 28, 2023.
+    Last updated: May 29, 2023.
     
   </div>
 </footer>
