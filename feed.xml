@@ -1,11 +1,60 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://azareei.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://azareei.github.io/" rel="alternate" type="text/html" /><updated>2023-05-31T22:55:23-07:00</updated><id>https://azareei.github.io/feed.xml</id><title type="html">Ahmad Zareei</title><subtitle>Personal homepage of Ahmad Zareei, Personal homepage of Ahmad Zareei
-</subtitle><entry><title type="html">Goals and The Drift That Directs Your Life’s Random Walk</title><link href="https://azareei.github.io/blog/2023/Goals-drift/" rel="alternate" type="text/html" title="Goals and The Drift That Directs Your Life’s Random Walk" /><published>2023-05-21T03:30:00-07:00</published><updated>2023-05-21T03:30:00-07:00</updated><id>https://azareei.github.io/blog/2023/Goals-drift</id><content type="html" xml:base="https://azareei.github.io/blog/2023/Goals-drift/"><![CDATA[<p>Life can often feel like a random walk, a journey where every step is influenced by countless variables, many beyond our control. In this context, imagine each step as a day, and each direction as a decision that either takes us in positive (+1) or negative direction.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://azareei.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://azareei.github.io/" rel="alternate" type="text/html" /><updated>2024-02-18T23:40:29-08:00</updated><id>https://azareei.github.io/feed.xml</id><title type="html">Ahmad Zareei</title><subtitle>Personal homepage of Ahmad Zareei, Personal homepage of Ahmad Zareei
+</subtitle><entry><title type="html">Cross Entropy Loss Derivation</title><link href="https://azareei.github.io/blog/2024/Cross-Entropy-loss/" rel="alternate" type="text/html" title="Cross Entropy Loss Derivation" /><published>2024-02-14T02:30:00-08:00</published><updated>2024-02-14T02:30:00-08:00</updated><id>https://azareei.github.io/blog/2024/Cross-Entropy-loss</id><content type="html" xml:base="https://azareei.github.io/blog/2024/Cross-Entropy-loss/"><![CDATA[<h1 id="cross-entropy-loss">Cross Entropy Loss</h1>
+
+<p><a href="https://pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html">Cross entropy loss</a> is defined as</p>
+
+\[L = \frac{1}{N} \sum_{n=1}^N l_n, \qquad l_n = -  \frac{\exp(x_{n,c})}{\sum_i \exp(x_{n,i})}, \text{where } y_n=c\]
+
+<p>where $x$ is the input, $y$ is the target, $C$ is the number of classes, $N$ is the mini-batch size. So the network for each case of $n$, predicts values of $[x_{n,1}, …, x_{n,C}]^T$, and we pass it to log-soft-max, and then depending on what class it belongs to $y_{n,c}$ use that value, and then average over all the cases of mini-batch $n=1, …, N$.  Note that $y_{n} $ here represents the group that it belongs to, in terms of one-hot vector it can also be written as</p>
+
+\[L = \frac{1}{N} \sum_{n=1}^N l_n, \qquad l_n = -  \sum_{c=1}^C \frac{\exp(x_{n,c})}{\sum_i \exp(x_{n,i})} y_{n,c}\]
+
+<p>where here we used the one-hot representation of $y_n$.</p>
+
+<p>Our goal here is to do a derivation, to show why is the cross-entropy loss is defined as above.</p>
+
+<p>The Kullback-Leibler (KL) divergence between the two probability distribution $q(z)$ and $p(z)$ is defined as</p>
+
+\[D_{KL}[q||p] = \int_{-\infty}^{\infty} q(z) \log \frac{q(z)}{p(z)} dz\]
+
+<p>Now consider that we observe an empirical data ${y_i}_{i=1}^{N}$ (which are the classes for each case of the data). We can consider the output distribution is a weighted sum of the point masses as</p>
+
+\[q(y) = \frac{1}{N} \sum_{i=1}^N \delta (y-y_{i})\]
+
+<table>
+  <tbody>
+    <tr>
+      <td>where $\delta(\cdot)$ is the delta Dirac function. We want to minimize the KL divergence between the output of the neural network $P(y</td>
+      <td>\theta)$, and this empirical distribution,</td>
+    </tr>
+  </tbody>
+</table>
+
+\[\hat{\theta} = \arg\min_\theta \left[ \int_{-\infty}^{\infty} q(y) \log {q(y)} dy - \int_{-\infty}^{\infty} q(y) \log {p(y)} dy \right]\]
+
+\[\hat{\theta} = - \arg\min_\theta  \int_{-\infty}^{\infty} q(y) \log {P(y|\theta)} dy\]
+
+<p>Now, we replace for $q(y)$ to find</p>
+
+\[\hat{\theta} = - \arg\min_\theta \int_{-\infty}^{\infty} \left( \frac{1}{N} \sum_{n=1}^N \delta (y-y_{n}) \right)  \log {P(y|\theta)} dy\]
+
+\[\hat{\theta} = - \arg\min_\theta \frac{1}{N}  \sum_{n=1}^N \log {P(y_n|\theta)}\]
+
+<p>Note that the output of the network is  $[x_{n,1}, …, x_{n,C}]^T$, that is transformed into probabilities using a soft-max function as</p>
+
+\[P(y_n|\theta) = \sum_{c=1}^C \frac{\exp(x_{n,c})}{\sum_i \exp(x_{n,i})} y_{n,c}\]
+
+<p>So as can be seen above the loss can be written as</p>
+
+\[L = \frac{1}{N} \sum_{n=1}^N l_n, \qquad l_n = -  \sum_{c=1}^C \frac{\exp(x_{n,c})}{\sum_i \exp(x_{n,i})} y_{n,c}\]
+
+<p>So that’s it. Basically cross-entropy loss is the KL divergence between the point-mass distribution and the output probability prediction of the network (using a soft-max probability assignment).</p>]]></content><author><name></name></author><summary type="html"><![CDATA[Cross Entropy Loss]]></summary></entry><entry><title type="html">Goals and The Drift That Directs Your Life’s Random Walk</title><link href="https://azareei.github.io/blog/2023/Goals-drift/" rel="alternate" type="text/html" title="Goals and The Drift That Directs Your Life’s Random Walk" /><published>2023-05-21T03:30:00-07:00</published><updated>2023-05-21T03:30:00-07:00</updated><id>https://azareei.github.io/blog/2023/Goals-drift</id><content type="html" xml:base="https://azareei.github.io/blog/2023/Goals-drift/"><![CDATA[<p>Life can often feel like a random walk, a journey where every step is influenced by countless variables, many beyond our control. In this context, imagine each step as a day, and each direction as a decision that either takes us in positive (+1) or negative direction (-1).</p>
 
 <p>When we don’t have a clear goal or purpose, our life is like a random walk with equal probabilities. Some days we make progress (+1), while on others we face setbacks (-1). Each day our steps will be</p>
 
 \[\text{step} = \begin{cases} +1, &amp;  p=0.5 \\ -1, &amp;  p=-0.5 \end{cases}\]
 
-<p>Over time, after  $n$ days, the average progress is zero - meaning we stay roughly where we started - and the range of places where we might end up (the standard deviation) is quite large (proportional to $\sqrt{n}$). It’s unpredictable and can feel like we’re drifting aimlessly.</p>
+<p>Over time, after  \(n\) days, the average progress is zero - meaning we stay roughly where we started - and the range of places where we might end up (the standard deviation) is quite large (proportional to \(\sqrt{n}\)). It’s unpredictable and can feel like we’re drifting aimlessly.</p>
 
 \[\mathbb{E}[\text{distance}] = \mathbb{E}[\text{step}_1 + \text{step}_2 + … + \text{step}_n] = n \mathbb{E}[step] = n  (-1 \times 0.5 + 1 \times 0.5) = 0\]
 
@@ -106,10 +155,10 @@
 
 </figure>
 
-<h2 id="so-goals-are-the-guiding-drift-that-shape-our-lifes-random-walk-journey">So goals are the guiding drift that shape our life’s random walk journey.</h2>]]></content><author><name></name></author><summary type="html"><![CDATA[Goals and Random Walk]]></summary></entry><entry><title type="html">Qabus-name (in Farsi)</title><link href="https://azareei.github.io/blog/2023/qabus-name/" rel="alternate" type="text/html" title="Qabus-name (in Farsi)" /><published>2023-03-25T15:30:00-07:00</published><updated>2023-03-25T15:30:00-07:00</updated><id>https://azareei.github.io/blog/2023/qabus-name</id><content type="html" xml:base="https://azareei.github.io/blog/2023/qabus-name/"><![CDATA[<p>This is Qabus name</p>
+<h2 id="so-goals-can-be-the-small-guiding-drift-that-shapes-our-lifes-random-walk-journey">So goals can be the small guiding drift that shapes our life’s random walk journey.</h2>]]></content><author><name></name></author><summary type="html"><![CDATA[Goals and Random Walk]]></summary></entry><entry><title type="html">Qabus-name (in Farsi)</title><link href="https://azareei.github.io/blog/2023/qabus-name/" rel="alternate" type="text/html" title="Qabus-name (in Farsi)" /><published>2023-03-25T15:30:00-07:00</published><updated>2023-03-25T15:30:00-07:00</updated><id>https://azareei.github.io/blog/2023/qabus-name</id><content type="html" xml:base="https://azareei.github.io/blog/2023/qabus-name/"><![CDATA[<p>This is Qabus name</p>
 
 <p style="text-align:right;dir:rtl;">
-ویرایش کتاب قابوس‌نامه به گیت‌هاب اضافه شد. این کتاب سال ۲۰۲۱ در دور همی مجازی خوانده شد و توسط خوانندگاه ویرایش شد. در زیر مقدمه تدوین رو میذارم.
+ویرایش کتاب قابوس‌نامه به گیت‌هاب اضافه شد. این کتاب سال ۲۰۲۱ در دور همی مجازی خوانده شد و توسط خوانندگان ویرایش شد. در زیر مقدمه تدوین رو میذارم:ـ
 </p>
 
 <p><br /></p>
@@ -120,14 +169,13 @@
 
 <p style="text-align:right;dir:rtl;">
 کتاب قابوس‌نامه نیاز به معرفی ندارد که مقدمه‌ای از تدوینگران لازم داشته باشد. صرفا در این چند سطر، چندُ‌و‌چون شکل‌گیری این تدوین و خاطرات خواندن اثر را به یادگار مینویسم. در جمعی از دوستان، معروف به کوهنوردان سابق این اثر هفنگی، به صورت مجازی، در دوران پندمیک کویید۱۹ خوانده شد. 
-در ابتدای پندمیک، گلستان مقبول نظر جمع بود و خوانده شد. اگر خواننده این سطور تا کنون گلستان را نخوانده، اکیدا توصیه میشود که ابتدای امر آن کتاب حضرت عجل خوانده شود. بعد از خوانش گلستان سعدی، این اثر مقبول نظر جمع کوهنورد افتاد. از آنجا که دسترسی به این کتاب به سادگی میسر نبود و از آنجا که نویسنده سال‌های سال بود که دار فانی را وداع گفته بود، نظر جمع بر آن گشت که تلاشی در جهت جمع‌آوری این مطالب و تدوین آن به اندازه تلاش 
-خود شود. تدینگران اثر بر اساس اندک سواد و ذوقی که داشتند اثر را جمع‌آوری و تدوین کردند. خواننده محترم برای نظر کارشناسی پیرامون مدخلات به ادیبان حاذق ارجاع داده میشود. فلذا این اثر، ذوق چند تنی دوست‌دار ادبیات میباشد که در دور‌همی‌های مجازی پدید آمده است. 
-
+در ابتدای پندمیک، گلستان مقبول نظر جمع بود و خوانده شد. اگر خواننده این سطور تا کنون گلستان را نخوانده، اکیدا توصیه میشود که ابتدای امر آن کتاب حضرت عجل خوانده شود. بعد از خوانش گلستان سعدی، این اثر مقبول نظر جمع کوهنورد افتاد. از آنجا که دسترسی به این کتاب در آن زمان به سادگی میسر نبود و از آنجا که نویسنده سال‌های سال بود که دار فانی را وداع گفته بود، نظر جمع بر آن گشت که تلاشی در جهت جمع‌آوری این مطالب و تدوین آن به اندازه تلاش 
+خود شود. تدوینگران اثر بر اساس اندک سواد و ذوقی که داشتند اثر را جمع‌آوری و تدوین کردند. خواننده محترم برای نظر کارشناسی پیرامون مدخلات به ادیبان حاذق ارجاع داده میشود. فلذا این اثر، ذوق چند تنی دوست‌دار ادبیات میباشد که در دور‌همی‌های مجازی پدید آمده است.ـ
 در خلال این جلسات، متاسفانه دوستی از حلقه خوانش دچار سرطانی لاعلاج گردید و همه را در تاثر و شگفتی از حکمت روزگار گذاشت. شوربختانه، عزیز ما درگذشت و همه ما را در غم دوری خود گذاشت. این تدوین ابتدای امر دور هم برای ذوق خود خوانندگان گردآوری شده بود و قصد انتشاری وجود نداشت. ولی برای زنده نگه داشتن یاد و خاطره آن عزیز رفته هم که شده،‌ تصمیم ما به انتشار این تدوین شد. فلذا تقدیم به شما دوست عزیز و با یاد آن دوست رفته.
 <br />
 <br />
 
-تقدیم به میثم حقدان
+تقدیم به میثم عزیز
 <br />
 <br />
 
@@ -137,7 +185,7 @@
 <p><br />
 <br /></p>
 
-<p><a href="https://github.com/azareei/Qabus-nama">Github Link for Qabus-nama</a></p>]]></content><author><name></name></author><summary type="html"><![CDATA[Qabusname]]></summary></entry><entry><title type="html">My Notes on Investments by Bodie</title><link href="https://azareei.github.io/blog/2023/Bodie-Investments/" rel="alternate" type="text/html" title="My Notes on Investments by Bodie" /><published>2023-03-10T14:30:00-08:00</published><updated>2023-03-10T14:30:00-08:00</updated><id>https://azareei.github.io/blog/2023/Bodie-Investments</id><content type="html" xml:base="https://azareei.github.io/blog/2023/Bodie-Investments/"><![CDATA[<p>In this post, I share my notes on the book Investments by Bodie.</p>
+<p><a href="https://github.com/azareei/Qabus-nama">Github Link for Qabus-nama</a></p>]]></content><author><name></name></author><summary type="html"><![CDATA[Qabusname]]></summary></entry><entry><title type="html">My Notes on Investments by Bodie</title><link href="https://azareei.github.io/blog/2023/Bodie-Investments/" rel="alternate" type="text/html" title="My Notes on Investments by Bodie" /><published>2023-03-10T14:30:00-08:00</published><updated>2023-03-10T14:30:00-08:00</updated><id>https://azareei.github.io/blog/2023/Bodie-Investments</id><content type="html" xml:base="https://azareei.github.io/blog/2023/Bodie-Investments/"><![CDATA[<p>In this post, I share my notes from when I was reading the book Investments by Bodie ~2014. Please refer to the latest edition of the book for updated information.</p>
 
 <ul>
   <li>
@@ -2269,7 +2317,7 @@
 
 <h3 id="point-estimation-and-probabilistic-linear-regression">Point estimation and probabilistic linear regression</h3>
 
-<p>Imagine we are given $m$ datapoints, \((x_1,y_1), \cdots, (x_m,y_m)\), where \(x_i\)’s are independent variables and \(y_i\)’s are dependent. Assuming a linear relationship as</p>
+<p>Imagine we are given \(m\) datapoints, \((x_1,y_1), \cdots, (x_m,y_m)\), where \(x_i\)’s are independent variables and \(y_i\)’s are dependent. Assuming a linear relationship as</p>
 
 \[y_i \sim \theta^\top x_i + \epsilon\]
 
@@ -2309,13 +2357,13 @@
 
 \[\boxed{p(y_i\mid \theta) = f(y) g(\theta)\exp(\phi(\theta)^\top u(y_i))}\]
 
-<p>where $f(\cdot), g(\cdot), \phi(\cdot),u(\cdot)$ are some functions. For example, an exponential distribution is an exponential family distribution:</p>
+<p>where \(f(\cdot), g(\cdot), \phi(\cdot),u(\cdot)\) are some functions. For example, an exponential distribution is an exponential family distribution:</p>
 
 \[p(y\mid \theta) = \theta e^{-\theta y}\]
 
 <p>or a beta distribution:</p>
 
-\[p(y\mid \theta) = \theta^{y} (1-\theta)^{1-y} = \exp(y\log\theta + (1-y)\log(1-\theta)) = (1-\theta)\log(y \log\frac{\theta}{1-\theta})\]
+\[p(y\mid \theta) = \theta^{y} (1-\theta)^{1-y} = \exp(y\log\theta + (1-y)\log(1-\theta)) = (1-\theta)\exp(y \log\frac{\theta}{1-\theta})\]
 
 <p>Normal distribution is also an exponential family.</p>
 
@@ -2329,7 +2377,7 @@
 
 <p>where \(\eta,\nu\) are hyper-parameters.</p>
 
-<p>Now you might ask, doesn’t the choice of prior doesn’t matter? Can we really pick any prior distribution? <strong>In the next part, we show that as long as you pick a prior that assigns non-zero probabilities to every possible value of $\theta$, the solution of MAP converges to the true solution $\theta^<em>$, or more precisely, $\theta^</em>$ corresponds to the likelihood model which is closest to the true generating distribution. The closeness of the distributions is defined using KL divergence.</strong></p>
+<p>Now you might ask, shouldn’t the choice of prior matter here? Can we really pick the prior distribution only based on making the problem tracktable? In the next part, we show that as long as you pick a prior that assigns non-zero probabilities to every possible value of \(\theta\), the solution of MAP converges to the true solution \(\theta^*\), or more precisely, \(theta^*\) corresponds to the likelihood model which is closest to the true generating distribution. The closeness of the distributions is defined using KL divergence.</p>
 
 <h3 id="kl-divergence">KL divergence</h3>
 
@@ -4005,36 +4053,4 @@ is an invertible matrix, it can be removed from both sides, and we obtain</p>
     <div class="col-sm mt-3 mt-md-0">
         <img class="img-fluid rounded z-depth-1" width="500" src="/assets/posts/what-you-seek.png" />
     </div>
-</div>]]></content><author><name></name></author><summary type="html"><![CDATA[Molavi]]></summary></entry><entry><title type="html">Baye’s rule in odds form</title><link href="https://azareei.github.io/blog/2020/Bayes-Rule-Odds-form/" rel="alternate" type="text/html" title="Baye’s rule in odds form" /><published>2020-12-26T06:30:00-08:00</published><updated>2020-12-26T06:30:00-08:00</updated><id>https://azareei.github.io/blog/2020/Bayes-Rule-Odds-form</id><content type="html" xml:base="https://azareei.github.io/blog/2020/Bayes-Rule-Odds-form/"><![CDATA[<p>Bayes rule discusses the probability of an event based on prior knowledge and new conditions that have occurred. It basically states the following equation</p>
-
-\[P(A\vert B) = \frac{P(A\cap B)}{P(B)} =  \frac{P(B\vert A)(A)}{P(B)} = \frac{P(B\vert A)(A)}{P(B\vert A)P(A) + P(B\vert \neg A) P(\neg A)}\]
-
-<p>where \(A\) and \(B\) are two events and \(P(B) \neq 0\). The most commonly used form of Baye’s rule is the last equality or</p>
-
-\[P(A\vert B) = \frac{P(B\vert A)(A)}{P(B\vert A)P(A) + P(B\vert \neg A) P(\neg A)}\]
-
-<p>Let’s use this equation for a cancer diagnosis test. We are interested to find the probability of having cancer given a positive test result. \(A,B\) are then the events of <em>having cancer</em> and <em>testing positive</em>. The Baye’s rule then becomes</p>
-
-\[P(C\vert +) = \frac{P(+\vert C)P(C)}{P(+\vert C)P(C) + P(+\vert \neg C) P(\neg C)}\]
-
-<p>where \(P(C)\) is the probability of having cancer and \(P(\neg C)\)  is the probability of not having cancer. These two probabilities are priors or assumptions that we make about the initial rate of cancer in society and the test does not have to do anything with it. On the other hand, \(P(+\vert C)\) is the true positive rate of the test, and \(P(+\vert \neg C)\) is the false positive rate where they depend on the test and its performance.  All the terms (those that depend on the prior knowledge or the test performance) on the RHS are intertangled, and this makes it hard and sometimes counter-intuitive to work with Baye’s rule to understand probabilities. One easy fix is to work with odds instead of probabilities. For example, if \(P(C) = 0.1\), it means that among 10 people, the odds of having cancer to not having cancer is \(1:9\). If we use the odds, Baye’s rule becomes intuitive. We can manipulate Baye’s rule to work with the odds</p>
-
-\[\frac{P(C\vert +)}{1-P(C\vert +)} = \frac{\frac{P(+\vert C)P(C)}{P(+\vert C)P(C) + P(+\vert \neg C) P(\neg C)}}{1- \frac{P(+\vert C)P(C)}{P(+\vert C)P(C) + P(+\vert \neg C) P(\neg C)}} = \frac{P(+\vert C)P(C)}{P(+\vert \neg C)P(\neg C)}  = \left( \frac{P(C)}{P(\neg C)}\right) \left( \frac{P(+\vert C)}{P(+\vert \neg C)} \right)\]
-
-<p>In summary we found that</p>
-
-\[\frac{P(C\vert +)}{P(\neg C\vert +)} = \left( \frac{P(C)}{P(\neg C)}\right) \left( \frac{P(+\vert C)}{P(+\vert \neg C)} \right)\]
-
-<p>The left-hand side is the odds of having cancer given a positive test. On the right-hand side, the first part is the prior that doesn’t depend on the test: it’s the odds of having cancer. The second part is Baye’s factor that depends on the test: the ratio between positive results given cancer (true positive rate) and positive results without cancer (false positive rate). To make the above equation simpler, we can define the odds of an event as</p>
-
-\[O(A_1 : A_2) = \frac{P(A_1)}{P(A_2)}\]
-
-<p>As a result the Baye’s rule in odds form becomes</p>
-
-\[O(C:\neg C\vert +) = O(C:\neg C) \cdot \frac{P(+\vert C)}{P(+\vert \neg C)}\]
-
-<p>Let’s use the odds form in an example. Suppose \(1\%\) of women have breast cancer. So the odds of having breast cancer among women is \(1:9\). This is a prior assumption that we make. Now we would like to see how these odds change if one has a positive test result. Assume that we have developed a test that is \(90\%\) accurate, \(P(+\vert C) = 0.90\). This is usually called the <em>sensitivity</em> of the test, meaning that if one has breast cancer, \(90\%\) of times this test correctly gives out a positive result (true positive rate of our test). Our test is also \(80\%\) specific. This means that the true negative rate is \(P(-\vert \neg C) = 0.80\). As a result, the false-positive rate becomes \(P(+\vert \neg C) = 0.2\). Now, a woman tests positive, what are the odds of having cancer?</p>
-
-\[O(C:\neg C\vert +) = \frac{P(C\vert +)}{P(\neg C\vert +)} = \left( \frac{0.1}{0.9} \right) \left( \frac{0.9}{0.2} \right) = \frac{1}{2}\]
-
-<p>So initially, the odds of having cancer was \(1:9\). After the positive result, the odds are updated using Baye’s rule and it becomes \(1:2\). If the test becomes \(90\%\) specific, the above equation immediately tells us that the odds updates to \((1:9)\times(0.9/0.1) = 1:1\). This makes Baye’s rule more intuitive to work with.</p>]]></content><author><name></name></author><summary type="html"><![CDATA[Baye's rule in odds form]]></summary></entry></feed>
+</div>]]></content><author><name></name></author><summary type="html"><![CDATA[Molavi]]></summary></entry></feed>

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<title>Ahmad  Zareei | Backpropagation in Neural Networks</title>
+<title>Ahmad  Zareei | Cross Entropy Loss Derivation</title>
 <meta name="description" content="Personal homepage of Ahmad Zareei, Personal homepage of Ahmad Zareei
 ">
 
@@ -30,7 +30,7 @@
 <link rel="shortcut icon" href="/assets/img/logo.ico">
 <link rel="stylesheet" href="/assets/css/main.css">
 
-<link rel="canonical" href="/blog/2018/backprop-gradients/">
+<link rel="canonical" href="/blog/2024/Cross-Entropy-loss/">
 
 <!-- Theming-->
 
@@ -153,131 +153,61 @@
 <div class="post">
 
   <header class="post-header">
-    <h1 class="post-title">Backpropagation in Neural Networks</h1>
-    <p class="post-meta">April 7, 2018</p>
+    <h1 class="post-title">Cross Entropy Loss Derivation</h1>
+    <p class="post-meta">February 14, 2024</p>
   </header>
 
   <article class="post-content">
-    <h2> Backpropagation of Gradients </h2>
+    <h1 id="cross-entropy-loss">Cross Entropy Loss</h1>
 
-<p>Layer ( l) values in the neural network after applying activation function is stored in a column vecotr ( {a}^l). The subscript represent the layer number. The connections are stored in a weight matrix ( W^l ), and the bias column vector is assumed to be ( b^l). The forward propagation is then obtained as</p>
+<p><a href="https://pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html" rel="external nofollow noopener" target="_blank">Cross entropy loss</a> is defined as</p>
 
-<p>&lt;/p&gt;</p>
+\[L = \frac{1}{N} \sum_{n=1}^N l_n, \qquad l_n = -  \frac{\exp(x_{n,c})}{\sum_i \exp(x_{n,i})}, \text{where } y_n=c\]
 
-<p>
-\[ a^l = \sigma ( W^l a^{l-1} + b^l) \]
-</p>
+<p>where $x$ is the input, $y$ is the target, $C$ is the number of classes, $N$ is the mini-batch size. So the network for each case of $n$, predicts values of $[x_{n,1}, …, x_{n,C}]^T$, and we pass it to log-soft-max, and then depending on what class it belongs to $y_{n,c}$ use that value, and then average over all the cases of mini-batch $n=1, …, N$.  Note that $y_{n} $ here represents the group that it belongs to, in terms of one-hot vector it can also be written as</p>
 
-<p>
-We introduce a new vector  \( z^l = W^l a^{l-1} + b^l \), which is the layer \( l \) values before applying the transfer function \( \sigma() \). In summary, the neural network procedure is summarized as  
-\[ a^l = \sigma ( z^l ) \]
-\[ z^l = W^l a^{l-1} + b^l \]
-</p>
+\[L = \frac{1}{N} \sum_{n=1}^N l_n, \qquad l_n = -  \sum_{c=1}^C \frac{\exp(x_{n,c})}{\sum_i \exp(x_{n,i})} y_{n,c}\]
 
-<p>
-To simplify the procedure, we assume a simple 3 layer network as 
-</p>
+<p>where here we used the one-hot representation of $y_n$.</p>
 
-<div class="row mt-3" style="text-align:center;">
-    <div class="col-sm mt-3 mt-md-0">
-        <img class="img-fluid rounded z-depth-1" width="500" src="/assets/posts/network-sample-3layer.png">
-    </div>
-</div>
+<p>Our goal here is to do a derivation, to show why is the cross-entropy loss is defined as above.</p>
 
-<p>
-In this network, we have  
-</p>
-<ul class="org-ul">
-<li>Input:  \( a^0 \)</li>
-<li>Layer1: \( z^1 = W^1 a^0 + b^1 \) and \(a^1 = \sigma (z^1) \)</li>
-<li>Layer2: \( z^2 = W^2 a^1 + b^2 \) and \(a^2 = \sigma (z^2) \)</li>
-</ul>
+<p>The Kullback-Leibler (KL) divergence between the two probability distribution $q(z)$ and $p(z)$ is defined as</p>
 
-<p>
-where the dimensions are \( [W^1]_{ 4 \times 3} \), \( [W^2]_{ 2
-\times 4}\), also \([a^0]_{ 3\times 1}\), \( [a^1] _{4 \times 1},
-[b^1] _{4 \times 1}, [z^1] _{4 \times 1}\), and \( [z^2]_{2\times 1},
-[a^2]_{2\times 1} \).  Our objective is minimize the distance between
-the network's output \( a^2\) and \( t\). A simple cost function here
-would be \( C = \frac{1}{2} || a^2 - t ||^2 \). The weights matrix and
-bias vectors are updated usinng gradient descent method, where we need to find the derivatives of the loss
-function with respect to the weights and biases as 
-</p>
+\[D_{KL}[q||p] = \int_{-\infty}^{\infty} q(z) \log \frac{q(z)}{p(z)} dz\]
 
-<p>
-\[ W^l = W^l - \alpha \frac{ \partial C}{\partial W^l}, \quad b^l = b^l - \alpha \frac{ \partial C}{\partial b^l}, \qquad \qquad l=\{1,2\} \] 
-</p>
+<p>Now consider that we observe an empirical data ${y_i}_{i=1}^{N}$ (which are the classes for each case of the data). We can consider the output distribution is a weighted sum of the point masses as</p>
 
-<p>
-We start by finding the derivatives of the weights w.r.t \( W^2 \), we have
-\[ \frac{\partial C}{\partial W^2} = ( a^2 - t) \frac{\partial a^2}{\partial W^2} = (a^2-t) \circ \sigma'(z^2) \frac{\partial z^2}{\partial W^2} = (a^2-t) \circ \sigma'(z^2) \frac{\partial W^2 a^1 + b^2}{\partial W^2} \]
-where \( A\circ B\) is the entry-wise product (i.e. \( (A\circ B)_i = A_i B_i\)). We further simplify the above relation as 
-\[ \frac{\partial C}{\partial W^2}=  \left[ (a^2-t) \circ \sigma '(z^2) \right] [a^1]^\top   = \delta^2 [a^1]^\top, \qquad   \delta^2 \equiv (a^2-t) \circ  \sigma'(z^2)  \]
-</p>
+\[q(y) = \frac{1}{N} \sum_{i=1}^N \delta (y-y_{i})\]
 
-<p>
-Notice that the dimensions work out perfectly as 
-</p>
+<table>
+  <tbody>
+    <tr>
+      <td>where $\delta(\cdot)$ is the delta Dirac function. We want to minimize the KL divergence between the output of the neural network $P(y</td>
+      <td>\theta)$, and this empirical distribution,</td>
+    </tr>
+  </tbody>
+</table>
 
-<p>
-\[ \left[ \frac{ \partial C}{\partial W^2} \right] _{2\times 4} = \left[ \delta^2\right] _{2\times 1} \left[ a^1\right]_{4\times 1}^\top \]
-</p>
+\[\hat{\theta} = \arg\min_\theta \left[ \int_{-\infty}^{\infty} q(y) \log {q(y)} dy - \int_{-\infty}^{\infty} q(y) \log {p(y)} dy \right]\]
 
-<p>
-Furthermore, we need to calculate the derivatives with respect to \( b^2 \), where we similarly find that 
-</p>
+\[\hat{\theta} = - \arg\min_\theta  \int_{-\infty}^{\infty} q(y) \log {P(y|\theta)} dy\]
 
-<p>
-\[ \left[ \frac{ \partial C}{\partial b^2} \right] _{2\times 1} = (a^2-t) \circ \sigma'(z^2) \frac{\partial W^2 a^1 + b^2}{\partial b^2} = \left[ \delta^3\right] _{2\times 1} \]
-</p>
+<p>Now, we replace for $q(y)$ to find</p>
 
-<p>
-Now, we take the derivatives with respect to \( W^1 \), we find
-</p>
+\[\hat{\theta} = - \arg\min_\theta \int_{-\infty}^{\infty} \left( \frac{1}{N} \sum_{n=1}^N \delta (y-y_{n}) \right)  \log {P(y|\theta)} dy\]
 
-<p>
-\[ \displaylines{\frac{\partial C}{\partial W^1} = ( a^2 - t) \frac{\partial a^2}{\partial W^1} = \left[ (a^2-t) \circ \sigma'(z^2)\right]  \frac{\partial z^2}{\partial W^1} = \delta^2 \frac{\partial W^2 a^1 + b^2}{\partial W^1} \\ \\ =  [W^2]^\top \delta^3 \circ \sigma'(z^1) \frac{\partial z^1}{\partial W^1} =  [W^2]^\top \delta^3 \circ \sigma'(z^1) \frac{\partial W^1 a^0 + b^1 }{\partial W^1} }\]
-</p>
+\[\hat{\theta} = - \arg\min_\theta \frac{1}{N}  \sum_{n=1}^N \log {P(y_n|\theta)}\]
 
-<p>
-To summarize we have 
-</p>
+<p>Note that the output of the network is  $[x_{n,1}, …, x_{n,C}]^T$, that is transformed into probabilities using a soft-max function as</p>
 
-<p>
-\[ \frac{\partial C}{\partial W^1} = \left[ (W^2)^\top \delta^3 \circ \sigma'(z^1)\right]  [ a^0]^\top  = \delta^1 [a^0] ^\top, \qquad \delta ^1 [\equiv W^2]^\top \delta^2 \circ \sigma'(z^1)\]
-</p>
+\[P(y_n|\theta) = \sum_{c=1}^C \frac{\exp(x_{n,c})}{\sum_i \exp(x_{n,i})} y_{n,c}\]
 
-<p>
-In terms of dimensions we have
-</p>
+<p>So as can be seen above the loss can be written as</p>
 
-<p>
-\[ \left[ \frac{\partial C}{\partial W^1}\right]_{4\times 3} =  \left[ \delta^1\right]_{4\times 1} \left[ a^0 \right]_{3\times 1}^\top \qquad \left[\delta ^1\right]_{4\times 1} = \left[W^2_{2\times 4} \right]^\top \left[\delta^3\right]_{2\times 1} \circ \left[\sigma'(z^1)\right]_{4\times 1} \]
-</p>
+\[L = \frac{1}{N} \sum_{n=1}^N l_n, \qquad l_n = -  \sum_{c=1}^C \frac{\exp(x_{n,c})}{\sum_i \exp(x_{n,i})} y_{n,c}\]
 
-<p>
-Similarly taking the derivatives w.r.t the bias vector \( b^1 \), we find that  
-</p>
-
-<p>
-\[ \left[ \frac{\partial C}{\partial b^1}\right]_{4\times 1} = \left[ \delta^1\right]_{4\times 1} \]
-</p>
-
-<p>
-To summarize, we obtained the following result  
-</p>
-
-<p>
-\[ \frac{ \partial C}{\partial W^2} =  \delta^2 [a^1]^\top, \qquad \frac{ \partial C}{\partial b^2} =  \delta^2, \qquad \delta^2 \equiv  (a^2-t) \circ  \sigma'(z^2) \] 
-</p>
-
-<p>
-\[ \frac{\partial C}{\partial W^1} = \delta^1 [a^0] ^\top, \qquad \frac{\partial C}{\partial b^1} = \delta^1, \qquad \delta ^1 \equiv [W^2]^\top \delta^3 \circ \sigma'(z^1)  \] 
-</p>
-
-<p>
-Note that if we increase the number of layers, a similar pattern shows up. 
-</p>
+<p>So that’s it. Basically cross-entropy loss is the KL divergence between the point-mass distribution and the output probability prediction of the network (using a soft-max probability assignment).</p>
 
   </article>
 
