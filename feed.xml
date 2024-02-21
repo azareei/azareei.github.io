@@ -1,34 +1,35 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://azareei.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://azareei.github.io/" rel="alternate" type="text/html" /><updated>2024-02-21T02:05:16-08:00</updated><id>https://azareei.github.io/feed.xml</id><title type="html">Ahmad Zareei</title><subtitle>Personal homepage of Ahmad Zareei, Senion AI research Scientist @META
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://azareei.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://azareei.github.io/" rel="alternate" type="text/html" /><updated>2024-02-21T02:15:20-08:00</updated><id>https://azareei.github.io/feed.xml</id><title type="html">Ahmad Zareei</title><subtitle>Personal homepage of Ahmad Zareei, Senion AI research Scientist @META
 </subtitle><entry><title type="html">From Bias Variance Trade Off to Double Descent</title><link href="https://azareei.github.io/blog/2024/Bias-Variance-Trade-off/" rel="alternate" type="text/html" title="From Bias Variance Trade Off to Double Descent" /><published>2024-02-20T06:00:00-08:00</published><updated>2024-02-20T06:00:00-08:00</updated><id>https://azareei.github.io/blog/2024/Bias-Variance-Trade-off</id><content type="html" xml:base="https://azareei.github.io/blog/2024/Bias-Variance-Trade-off/"><![CDATA[<p>This whole section is adapted from <a href="https://udlbook.github.io/udlbook/">Understanding Deep Learning</a>.</p>
 
 <h2 id="test-error-formulation">Test Error Formulation</h2>
 
 <p>Let’s start with a 1D regression problem. Consider</p>
 
-<p>\(y_i = f(x_i) + \epsilon\) 
-as a true model, where $\epsilon$ is the noise with mean 0 and variation $\sigma^2$. Given a dataset $\mathcal{D} = {(x_i, y_i)}_{i=1}^N$, the prediction model’s goal is to estimate $f$ . Assume a Model $\phi$ that given some data that it uses for training, can make prediction for each $x_i$. So $\phi(x_i; \mathcal{D})$ is the output of our model which is trained on dataset $\mathcal{D}$ predicting the output for $x_i$. The loss of our model can be written as</p>
+\[y_i = f(x_i) + \epsilon\]
+
+<p>as a true model, where \(\epsilon\) is the noise with mean 0 and variation \(\sigma^2\). Given a dataset \(\mathcal{D} = \{(x_i, y_i)\}_{i=1}^N\), the prediction model’s goal is to estimate \(f\) . Assume a Model \(\phi\) that given some data that it uses for training, can make prediction for each \(x_i\). So \(\phi(x_i; \mathcal{D})\) is the output of our model which is trained on dataset \(\mathcal{D}\) predicting the output for \(x_i\). The loss of our model can be written as</p>
 
 \[L = \left( \phi(x; \mathcal{D}) - y \right)^2\]
 
-<p>The loss here is stochastic, and we need to take the expectation over all possible outputs $y$ and all possible datasets $\mathcal{D}$ used in training. Lets start by replacing for $y$ with the ground truth model first</p>
+<p>The loss here is stochastic, and we need to take the expectation over all possible outputs \(y\) and all possible datasets \(\mathcal{D}\) used in training. Lets start by replacing for \(y\) with the ground truth model first</p>
 
 <p>\(L = \left( \phi(x; \mathcal{D}) - y \right)^2 =  \left( \phi(x; \mathcal{D}) - f(x) - \epsilon \right)^2\) 
 \(L = \left( \phi(x; \mathcal{D}) - f(x) \right)^2 - 2 \left( \phi(x; \mathcal{D}) - f(x) \right) \epsilon  + \epsilon^2\)</p>
 
-<p>taking the expectation over all possible outputs $y$ given some data $x$, we find</p>
+<p>taking the expectation over all possible outputs \(y\) given some data \(x\), we find</p>
 
 \[\mathbb{E}_y[ L |x] = \mathbb{E}_y \left[ \left( \phi(x; \mathcal{D}) - f(x) \right)^2 \right] -2 \mathbb{E}_y \left[ \left( \phi(x; \mathcal{D}) - f(x) \right) \epsilon\right]  + \mathbb{E}_y \left[ \epsilon ^2\right]\]
 
 <p>\(\mathbb{E}_y[ L |x] = \left( \phi(x; \mathcal{D}) - f(x) \right)^2  -2  \left( \phi(x; \mathcal{D}) - f(x) \right) \mathbb{E}_y \left[ \epsilon\right]  + \sigma^2\) 
-Since $\mathbb{E}[\epsilon] =0$, then</p>
+Since \(\mathbb{E}[\epsilon] =0\), then</p>
 
 \[\mathbb{E}_y[ L |x] = \left( \phi(x; \mathcal{D}) - f(x) \right)^2  + \sigma^2\]
 
 <table>
   <tbody>
     <tr>
-      <td>Last but not least, we need to take the expectation over all possible datasets $\mathcal{D}$ used for training our model $\phi$. We first call $\mathbb{E}\left[ \phi(x;\mathcal{D})</td>
-      <td>\mathcal{D}\right] = \bar{f}(x)$, this is basically the expected performance of our model given all possible data that it can see. Given this definition, we find that</td>
+      <td>Last but not least, we need to take the expectation over all possible datasets \(\mathcal{D}\) used for training our model \(\phi\). We first call $$\mathbb{E}\left[ \phi(x;\mathcal{D})</td>
+      <td>\mathcal{D}\right] = \bar{f}(x)$$, this is basically the expected performance of our model given all possible data that it can see. Given this definition, we find that</td>
     </tr>
   </tbody>
 </table>
@@ -41,15 +42,15 @@ Since $\mathbb{E}[\epsilon] =0$, then</p>
 
 \[\mathbb{E}_\mathcal{D}\left[  \mathbb{E}_y \left[ L \right] \right] = \left( \phi(x; \mathcal{D}) -\bar{f}(x)\right)^2  + \left( \bar{f}(x) - f(x) \right)^2  + \sigma^2\]
 
-<p>That’s it! So the expected loss after considering the uncertainty in the data $\mathcal{D}$ and the output test data $y$ consists of three additive parts: The first term  $\left( \phi(x; \mathcal{D}) -\bar{f}(x)\right)^2$ is the variance of the fitted model due to a particular training dataset that we sample; The second term  $\left( \bar{f}(x) - f(x) \right)^2$  is the bias, which is the systematic deviation of the model from the mean of the functions that we model; The last term is just the inherent noise in the data or inherent uncertainty in the true mapping from input to output in the model.</p>
+<p>That’s it! So the expected loss after considering the uncertainty in the data \(\mathcal{D}\) and the output test data \(y\) consists of three additive parts: The first term  \(\left( \phi(x; \mathcal{D}) -\bar{f}(x)\right)^2\) is the variance of the fitted model due to a particular training dataset that we sample; The second term  \(\left( \bar{f}(x) - f(x) \right)^2\)  is the bias, which is the systematic deviation of the model from the mean of the functions that we model; The last term is just the inherent noise in the data or inherent uncertainty in the true mapping from input to output in the model.</p>
 
 <h2 id="variance">Variance</h2>
 
 <table>
   <tbody>
     <tr>
-      <td>So the variance results from seeing limited noisy training data. Fitting the model $\phi(x</td>
-      <td>\mathcal{D})$ depends on the training sets, and slight difference results in different parameters. We can reduce the variance by increasing the size of data $\mathcal{D}$. This averages out the inherent noise and ensured that the input space is well sampled.</td>
+      <td>So the variance results from seeing limited noisy training data. Fitting the model $$\phi(x</td>
+      <td>\mathcal{D})\(depends on the training sets, and slight difference results in different parameters. We can reduce the variance by increasing the size of data\)\mathcal{D}$$. This averages out the inherent noise and ensured that the input space is well sampled.</td>
     </tr>
   </tbody>
 </table>
@@ -71,7 +72,7 @@ Since $\mathbb{E}[\epsilon] =0$, then</p>
 
 <p>The bias term comes from the inability of the model to describe the true underlying function. If we increase the complexity of our model, and as a result make it more flexible the bias reduces. This is usually done by increasing the number of parameters of the model.</p>
 
-<p>Check out the following figure again from the book. In this model, linear line line model is used in 3, 5, and 10 regions (dividing the interval of $[0,1]$ into 3, 5, 10 regions). As expected, increasing the number of regions, the model can better match with the original data. However as you see in the second row, the variance of the model is increased, since the model overfits to the data used. This is known as bias-variance trade-off.</p>
+<p>Check out the following figure again from the book. In this model, linear line line model is used in 3, 5, and 10 regions (dividing the interval of \([0,1]\) into 3, 5, 10 regions). As expected, increasing the number of regions, the model can better match with the original data. However as you see in the second row, the variance of the model is increased, since the model overfits to the data used. This is known as bias-variance trade-off.</p>
 
 <figure>
     <picture>
@@ -129,33 +130,31 @@ Since $\mathbb{E}[\epsilon] =0$, then</p>
 
 <p>As capacity increases, models can create smoother interpolations between data points, which is believed to enhance generalization to new data. This phenomenon suggests that model capacity contributes to a form of regularization, guiding models towards smoother functions that better predict unseen data. However, the mechanisms driving this smoothness, whether through network initialization or the training algorithm’s inherent preferences, remain uncertain.</p>
 
-<p>Essentially, the discovery of double descent reveals that adding parameters to a model beyond the point of memorization can lead to better performance, due to the model’s capacity for smoother function interpolation in the vast, sparse high-dimensional input space.</p>]]></content><author><name></name></author><summary type="html"><![CDATA[This whole section is adapted from Understanding Deep Learning.]]></summary></entry><entry><title type="html">Cross Entropy Loss Derivation</title><link href="https://azareei.github.io/blog/2024/Cross-Entropy-loss/" rel="alternate" type="text/html" title="Cross Entropy Loss Derivation" /><published>2024-02-14T02:30:00-08:00</published><updated>2024-02-14T02:30:00-08:00</updated><id>https://azareei.github.io/blog/2024/Cross-Entropy-loss</id><content type="html" xml:base="https://azareei.github.io/blog/2024/Cross-Entropy-loss/"><![CDATA[<h1 id="cross-entropy-loss">Cross Entropy Loss</h1>
-
-<p><a href="https://pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html">Cross entropy loss</a> is defined as</p>
+<p>Essentially, the discovery of double descent reveals that adding parameters to a model beyond the point of memorization can lead to better performance, due to the model’s capacity for smoother function interpolation in the vast, sparse high-dimensional input space.</p>]]></content><author><name></name></author><summary type="html"><![CDATA[This whole section is adapted from Understanding Deep Learning.]]></summary></entry><entry><title type="html">Cross Entropy Loss Derivation</title><link href="https://azareei.github.io/blog/2024/Cross-Entropy-loss/" rel="alternate" type="text/html" title="Cross Entropy Loss Derivation" /><published>2024-02-14T02:30:00-08:00</published><updated>2024-02-14T02:30:00-08:00</updated><id>https://azareei.github.io/blog/2024/Cross-Entropy-loss</id><content type="html" xml:base="https://azareei.github.io/blog/2024/Cross-Entropy-loss/"><![CDATA[<p><a href="https://pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html">Cross entropy loss</a> is defined as</p>
 
 \[L = \frac{1}{N} \sum_{n=1}^N l_n, \qquad l_n = -  \frac{\exp(x_{n,c})}{\sum_i \exp(x_{n,i})}, \text{where } y_n=c\]
 
-<p>where $x$ is the input, $y$ is the target, $C$ is the number of classes, $N$ is the mini-batch size. So the network for each case of $n$, predicts values of $[x_{n,1}, …, x_{n,C}]^T$, and we pass it to log-soft-max, and then depending on what class it belongs to $y_{n,c}$ use that value, and then average over all the cases of mini-batch $n=1, …, N$.  Note that $y_{n} $ here represents the group that it belongs to, in terms of one-hot vector it can also be written as</p>
+<p>where \(x\) is the input, \(y\) is the target, \(C\) is the number of classes, \(N\) is the mini-batch size. So the network for each case of \(n\), predicts values of \([x_{n,1}, ..., x_{n,C}]^T\), and we pass it to log-soft-max, and then depending on what class it belongs to \(y_{n,c}\) use that value, and then average over all the cases of mini-batch \(n=1, ..., N\).  Note that \(y_{n}\) here represents the group that it belongs to, in terms of one-hot vector it can also be written as</p>
 
 \[L = \frac{1}{N} \sum_{n=1}^N l_n, \qquad l_n = -  \sum_{c=1}^C \frac{\exp(x_{n,c})}{\sum_i \exp(x_{n,i})} y_{n,c}\]
 
-<p>where here we used the one-hot representation of $y_n$.</p>
+<p>where here we used the one-hot representation of \(y_n\).</p>
 
 <p>Our goal here is to do a derivation, to show why is the cross-entropy loss is defined as above.</p>
 
-<p>The Kullback-Leibler (KL) divergence between the two probability distribution $q(z)$ and $p(z)$ is defined as</p>
+<p>The Kullback-Leibler (KL) divergence between the two probability distribution \(q(z)\) and \(p(z)\) is defined as</p>
 
 \[D_{KL}[q||p] = \int_{-\infty}^{\infty} q(z) \log \frac{q(z)}{p(z)} dz\]
 
-<p>Now consider that we observe an empirical data ${y_i}_{i=1}^{N}$ (which are the classes for each case of the data). We can consider the output distribution is a weighted sum of the point masses as</p>
+<p>Now consider that we observe an empirical data \(\{y_i\}_{i=1}^{N}\) (which are the classes for each case of the data). We can consider the output distribution is a weighted sum of the point masses as</p>
 
 \[q(y) = \frac{1}{N} \sum_{i=1}^N \delta (y-y_{i})\]
 
 <table>
   <tbody>
     <tr>
-      <td>where $\delta(\cdot)$ is the delta Dirac function. We want to minimize the KL divergence between the output of the neural network $P(y</td>
-      <td>\theta)$, and this empirical distribution,</td>
+      <td>where \(\delta(\cdot)\) is the delta Dirac function. We want to minimize the KL divergence between the output of the neural network $$P(y</td>
+      <td>\theta)$$, and this empirical distribution,</td>
     </tr>
   </tbody>
 </table>
@@ -164,13 +163,13 @@ Since $\mathbb{E}[\epsilon] =0$, then</p>
 
 \[\hat{\theta} = - \arg\min_\theta  \int_{-\infty}^{\infty} q(y) \log {P(y|\theta)} dy\]
 
-<p>Now, we replace for $q(y)$ to find</p>
+<p>Now, we replace for \(q(y)\) to find</p>
 
 \[\hat{\theta} = - \arg\min_\theta \int_{-\infty}^{\infty} \left( \frac{1}{N} \sum_{n=1}^N \delta (y-y_{n}) \right)  \log {P(y|\theta)} dy\]
 
 \[\hat{\theta} = - \arg\min_\theta \frac{1}{N}  \sum_{n=1}^N \log {P(y_n|\theta)}\]
 
-<p>Note that the output of the network is  $[x_{n,1}, …, x_{n,C}]^T$, that is transformed into probabilities using a soft-max function as</p>
+<p>Note that the output of the network is  \([x_{n,1}, ..., x_{n,C}]^T\), that is transformed into probabilities using a soft-max function as</p>
 
 \[P(y_n|\theta) = \sum_{c=1}^C \frac{\exp(x_{n,c})}{\sum_i \exp(x_{n,i})} y_{n,c}\]
 

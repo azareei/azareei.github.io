@@ -164,30 +164,31 @@
 
 <p>Let’s start with a 1D regression problem. Consider</p>
 
-<p>\(y_i = f(x_i) + \epsilon\) 
-as a true model, where $\epsilon$ is the noise with mean 0 and variation $\sigma^2$. Given a dataset $\mathcal{D} = {(x_i, y_i)}_{i=1}^N$, the prediction model’s goal is to estimate $f$ . Assume a Model $\phi$ that given some data that it uses for training, can make prediction for each $x_i$. So $\phi(x_i; \mathcal{D})$ is the output of our model which is trained on dataset $\mathcal{D}$ predicting the output for $x_i$. The loss of our model can be written as</p>
+\[y_i = f(x_i) + \epsilon\]
+
+<p>as a true model, where \(\epsilon\) is the noise with mean 0 and variation \(\sigma^2\). Given a dataset \(\mathcal{D} = \{(x_i, y_i)\}_{i=1}^N\), the prediction model’s goal is to estimate \(f\) . Assume a Model \(\phi\) that given some data that it uses for training, can make prediction for each \(x_i\). So \(\phi(x_i; \mathcal{D})\) is the output of our model which is trained on dataset \(\mathcal{D}\) predicting the output for \(x_i\). The loss of our model can be written as</p>
 
 \[L = \left( \phi(x; \mathcal{D}) - y \right)^2\]
 
-<p>The loss here is stochastic, and we need to take the expectation over all possible outputs $y$ and all possible datasets $\mathcal{D}$ used in training. Lets start by replacing for $y$ with the ground truth model first</p>
+<p>The loss here is stochastic, and we need to take the expectation over all possible outputs \(y\) and all possible datasets \(\mathcal{D}\) used in training. Lets start by replacing for \(y\) with the ground truth model first</p>
 
 <p>\(L = \left( \phi(x; \mathcal{D}) - y \right)^2 =  \left( \phi(x; \mathcal{D}) - f(x) - \epsilon \right)^2\) 
 \(L = \left( \phi(x; \mathcal{D}) - f(x) \right)^2 - 2 \left( \phi(x; \mathcal{D}) - f(x) \right) \epsilon  + \epsilon^2\)</p>
 
-<p>taking the expectation over all possible outputs $y$ given some data $x$, we find</p>
+<p>taking the expectation over all possible outputs \(y\) given some data \(x\), we find</p>
 
 \[\mathbb{E}_y[ L |x] = \mathbb{E}_y \left[ \left( \phi(x; \mathcal{D}) - f(x) \right)^2 \right] -2 \mathbb{E}_y \left[ \left( \phi(x; \mathcal{D}) - f(x) \right) \epsilon\right]  + \mathbb{E}_y \left[ \epsilon ^2\right]\]
 
 <p>\(\mathbb{E}_y[ L |x] = \left( \phi(x; \mathcal{D}) - f(x) \right)^2  -2  \left( \phi(x; \mathcal{D}) - f(x) \right) \mathbb{E}_y \left[ \epsilon\right]  + \sigma^2\) 
-Since $\mathbb{E}[\epsilon] =0$, then</p>
+Since \(\mathbb{E}[\epsilon] =0\), then</p>
 
 \[\mathbb{E}_y[ L |x] = \left( \phi(x; \mathcal{D}) - f(x) \right)^2  + \sigma^2\]
 
 <table>
   <tbody>
     <tr>
-      <td>Last but not least, we need to take the expectation over all possible datasets $\mathcal{D}$ used for training our model $\phi$. We first call $\mathbb{E}\left[ \phi(x;\mathcal{D})</td>
-      <td>\mathcal{D}\right] = \bar{f}(x)$, this is basically the expected performance of our model given all possible data that it can see. Given this definition, we find that</td>
+      <td>Last but not least, we need to take the expectation over all possible datasets \(\mathcal{D}\) used for training our model \(\phi\). We first call $$\mathbb{E}\left[ \phi(x;\mathcal{D})</td>
+      <td>\mathcal{D}\right] = \bar{f}(x)$$, this is basically the expected performance of our model given all possible data that it can see. Given this definition, we find that</td>
     </tr>
   </tbody>
 </table>
@@ -200,15 +201,15 @@ Since $\mathbb{E}[\epsilon] =0$, then</p>
 
 \[\mathbb{E}_\mathcal{D}\left[  \mathbb{E}_y \left[ L \right] \right] = \left( \phi(x; \mathcal{D}) -\bar{f}(x)\right)^2  + \left( \bar{f}(x) - f(x) \right)^2  + \sigma^2\]
 
-<p>That’s it! So the expected loss after considering the uncertainty in the data $\mathcal{D}$ and the output test data $y$ consists of three additive parts: The first term  $\left( \phi(x; \mathcal{D}) -\bar{f}(x)\right)^2$ is the variance of the fitted model due to a particular training dataset that we sample; The second term  $\left( \bar{f}(x) - f(x) \right)^2$  is the bias, which is the systematic deviation of the model from the mean of the functions that we model; The last term is just the inherent noise in the data or inherent uncertainty in the true mapping from input to output in the model.</p>
+<p>That’s it! So the expected loss after considering the uncertainty in the data \(\mathcal{D}\) and the output test data \(y\) consists of three additive parts: The first term  \(\left( \phi(x; \mathcal{D}) -\bar{f}(x)\right)^2\) is the variance of the fitted model due to a particular training dataset that we sample; The second term  \(\left( \bar{f}(x) - f(x) \right)^2\)  is the bias, which is the systematic deviation of the model from the mean of the functions that we model; The last term is just the inherent noise in the data or inherent uncertainty in the true mapping from input to output in the model.</p>
 
 <h2 id="variance">Variance</h2>
 
 <table>
   <tbody>
     <tr>
-      <td>So the variance results from seeing limited noisy training data. Fitting the model $\phi(x</td>
-      <td>\mathcal{D})$ depends on the training sets, and slight difference results in different parameters. We can reduce the variance by increasing the size of data $\mathcal{D}$. This averages out the inherent noise and ensured that the input space is well sampled.</td>
+      <td>So the variance results from seeing limited noisy training data. Fitting the model $$\phi(x</td>
+      <td>\mathcal{D})\(depends on the training sets, and slight difference results in different parameters. We can reduce the variance by increasing the size of data\)\mathcal{D}$$. This averages out the inherent noise and ensured that the input space is well sampled.</td>
     </tr>
   </tbody>
 </table>
@@ -230,7 +231,7 @@ Since $\mathbb{E}[\epsilon] =0$, then</p>
 
 <p>The bias term comes from the inability of the model to describe the true underlying function. If we increase the complexity of our model, and as a result make it more flexible the bias reduces. This is usually done by increasing the number of parameters of the model.</p>
 
-<p>Check out the following figure again from the book. In this model, linear line line model is used in 3, 5, and 10 regions (dividing the interval of $[0,1]$ into 3, 5, 10 regions). As expected, increasing the number of regions, the model can better match with the original data. However as you see in the second row, the variance of the model is increased, since the model overfits to the data used. This is known as bias-variance trade-off.</p>
+<p>Check out the following figure again from the book. In this model, linear line line model is used in 3, 5, and 10 regions (dividing the interval of \([0,1]\) into 3, 5, 10 regions). As expected, increasing the number of regions, the model can better match with the original data. However as you see in the second row, the variance of the model is increased, since the model overfits to the data used. This is known as bias-variance trade-off.</p>
 
 <figure>
     <picture>
