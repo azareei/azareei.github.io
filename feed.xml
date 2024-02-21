@@ -1,5 +1,135 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://azareei.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://azareei.github.io/" rel="alternate" type="text/html" /><updated>2024-02-19T14:10:55-08:00</updated><id>https://azareei.github.io/feed.xml</id><title type="html">Ahmad Zareei</title><subtitle>Personal homepage of Ahmad Zareei, Senion AI research Scientist @META
-</subtitle><entry><title type="html">Cross Entropy Loss Derivation</title><link href="https://azareei.github.io/blog/2024/Cross-Entropy-loss/" rel="alternate" type="text/html" title="Cross Entropy Loss Derivation" /><published>2024-02-14T02:30:00-08:00</published><updated>2024-02-14T02:30:00-08:00</updated><id>https://azareei.github.io/blog/2024/Cross-Entropy-loss</id><content type="html" xml:base="https://azareei.github.io/blog/2024/Cross-Entropy-loss/"><![CDATA[<h1 id="cross-entropy-loss">Cross Entropy Loss</h1>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://azareei.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://azareei.github.io/" rel="alternate" type="text/html" /><updated>2024-02-21T02:05:16-08:00</updated><id>https://azareei.github.io/feed.xml</id><title type="html">Ahmad Zareei</title><subtitle>Personal homepage of Ahmad Zareei, Senion AI research Scientist @META
+</subtitle><entry><title type="html">From Bias Variance Trade Off to Double Descent</title><link href="https://azareei.github.io/blog/2024/Bias-Variance-Trade-off/" rel="alternate" type="text/html" title="From Bias Variance Trade Off to Double Descent" /><published>2024-02-20T06:00:00-08:00</published><updated>2024-02-20T06:00:00-08:00</updated><id>https://azareei.github.io/blog/2024/Bias-Variance-Trade-off</id><content type="html" xml:base="https://azareei.github.io/blog/2024/Bias-Variance-Trade-off/"><![CDATA[<p>This whole section is adapted from <a href="https://udlbook.github.io/udlbook/">Understanding Deep Learning</a>.</p>
+
+<h2 id="test-error-formulation">Test Error Formulation</h2>
+
+<p>Let’s start with a 1D regression problem. Consider</p>
+
+<p>\(y_i = f(x_i) + \epsilon\) 
+as a true model, where $\epsilon$ is the noise with mean 0 and variation $\sigma^2$. Given a dataset $\mathcal{D} = {(x_i, y_i)}_{i=1}^N$, the prediction model’s goal is to estimate $f$ . Assume a Model $\phi$ that given some data that it uses for training, can make prediction for each $x_i$. So $\phi(x_i; \mathcal{D})$ is the output of our model which is trained on dataset $\mathcal{D}$ predicting the output for $x_i$. The loss of our model can be written as</p>
+
+\[L = \left( \phi(x; \mathcal{D}) - y \right)^2\]
+
+<p>The loss here is stochastic, and we need to take the expectation over all possible outputs $y$ and all possible datasets $\mathcal{D}$ used in training. Lets start by replacing for $y$ with the ground truth model first</p>
+
+<p>\(L = \left( \phi(x; \mathcal{D}) - y \right)^2 =  \left( \phi(x; \mathcal{D}) - f(x) - \epsilon \right)^2\) 
+\(L = \left( \phi(x; \mathcal{D}) - f(x) \right)^2 - 2 \left( \phi(x; \mathcal{D}) - f(x) \right) \epsilon  + \epsilon^2\)</p>
+
+<p>taking the expectation over all possible outputs $y$ given some data $x$, we find</p>
+
+\[\mathbb{E}_y[ L |x] = \mathbb{E}_y \left[ \left( \phi(x; \mathcal{D}) - f(x) \right)^2 \right] -2 \mathbb{E}_y \left[ \left( \phi(x; \mathcal{D}) - f(x) \right) \epsilon\right]  + \mathbb{E}_y \left[ \epsilon ^2\right]\]
+
+<p>\(\mathbb{E}_y[ L |x] = \left( \phi(x; \mathcal{D}) - f(x) \right)^2  -2  \left( \phi(x; \mathcal{D}) - f(x) \right) \mathbb{E}_y \left[ \epsilon\right]  + \sigma^2\) 
+Since $\mathbb{E}[\epsilon] =0$, then</p>
+
+\[\mathbb{E}_y[ L |x] = \left( \phi(x; \mathcal{D}) - f(x) \right)^2  + \sigma^2\]
+
+<table>
+  <tbody>
+    <tr>
+      <td>Last but not least, we need to take the expectation over all possible datasets $\mathcal{D}$ used for training our model $\phi$. We first call $\mathbb{E}\left[ \phi(x;\mathcal{D})</td>
+      <td>\mathcal{D}\right] = \bar{f}(x)$, this is basically the expected performance of our model given all possible data that it can see. Given this definition, we find that</td>
+    </tr>
+  </tbody>
+</table>
+
+\[\mathbb{E}_\mathcal{D} \left[ \mathbb{E}_y[ L |x] | \mathcal{D}\right]  = \left( \phi(x; \mathcal{D}) - f(x) \right)^2  + \sigma^2\]
+
+\[\mathbb{E}_\mathcal{D} \left[ \mathbb{E}_y[ L |x] | \mathcal{D}\right]  = \mathbb{E}_\mathcal{D} \left[ \left( \phi(x; \mathcal{D}) -\bar{f}(x) + \bar{f}(x) - f(x) \right)^2\right]  + \sigma^2\]
+
+\[\mathbb{E}_\mathcal{D} \left[ \mathbb{E}_y[ L |x] | \mathcal{D}\right]  = \left( \phi(x; \mathcal{D}) -\bar{f}(x)\right)^2 + 2 \mathbb{E}_\mathcal{D} \left[ \phi(x; \mathcal{D}) -\bar{f}(x)\right] \left( \bar{f}(x) - f(x) \right)  + \left( \bar{f}(x) - f(x) \right)^2  + \sigma^2\]
+
+\[\mathbb{E}_\mathcal{D}\left[  \mathbb{E}_y \left[ L \right] \right] = \left( \phi(x; \mathcal{D}) -\bar{f}(x)\right)^2  + \left( \bar{f}(x) - f(x) \right)^2  + \sigma^2\]
+
+<p>That’s it! So the expected loss after considering the uncertainty in the data $\mathcal{D}$ and the output test data $y$ consists of three additive parts: The first term  $\left( \phi(x; \mathcal{D}) -\bar{f}(x)\right)^2$ is the variance of the fitted model due to a particular training dataset that we sample; The second term  $\left( \bar{f}(x) - f(x) \right)^2$  is the bias, which is the systematic deviation of the model from the mean of the functions that we model; The last term is just the inherent noise in the data or inherent uncertainty in the true mapping from input to output in the model.</p>
+
+<h2 id="variance">Variance</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td>So the variance results from seeing limited noisy training data. Fitting the model $\phi(x</td>
+      <td>\mathcal{D})$ depends on the training sets, and slight difference results in different parameters. We can reduce the variance by increasing the size of data $\mathcal{D}$. This averages out the inherent noise and ensured that the input space is well sampled.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>See the following figure from the book. It shows the effect of training with 6, 10, and 100 samples at each column. The best-fitting model varies a lot when we use 6 points, and the variation reduces with increasing the number of samples. When we use 100 samples, the model almost does not change at all.</p>
+
+<figure>
+    <picture>
+        
+
+        <!-- Fallback to the original file -->
+        <img src="/assets/img/posts/bias_variance_trade_off/20240221000130.png" class="img-fluid rounded z-depth-1" width="auto" height="auto" data-zoomable="" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
+
+    </picture>
+
+</figure>
+
+<h2 id="bias">Bias</h2>
+
+<p>The bias term comes from the inability of the model to describe the true underlying function. If we increase the complexity of our model, and as a result make it more flexible the bias reduces. This is usually done by increasing the number of parameters of the model.</p>
+
+<p>Check out the following figure again from the book. In this model, linear line line model is used in 3, 5, and 10 regions (dividing the interval of $[0,1]$ into 3, 5, 10 regions). As expected, increasing the number of regions, the model can better match with the original data. However as you see in the second row, the variance of the model is increased, since the model overfits to the data used. This is known as bias-variance trade-off.</p>
+
+<figure>
+    <picture>
+        
+
+        <!-- Fallback to the original file -->
+        <img src="/assets/img/posts/bias_variance_trade_off/20240221000927.png" class="img-fluid rounded z-depth-1" width="auto" height="auto" data-zoomable="" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
+
+    </picture>
+
+</figure>
+
+<h2 id="bias-variance-trade-off">Bias Variance Trade-off</h2>
+
+<p>The above figure showed a side effect of increasing the model complexity. Given a fixed-size training data, as we increase the complexity the variance term increases. So increasing the model complexity does not necessarily reduce the test error. This is what is known as <strong>bias variance trade-off</strong>.</p>
+
+<p>The following figure shows this trade-off in another way. The first row shows that we fit three linear region to a sampled 15 points data (sampled three different times). All the time we find almost the same set of linear lines, meaning that variance is small. However, in the second row, we increase the number of regions to 15. Now the model better fits to the data points we sampled, however, each time we sample another dataset, we literally fit to the data, and we find a totally different fit. The model output varies given different datasets and shows the increase in the variance of the model given different sampled data. This is also known as overfitting. 
+![[Pasted image 20240221001728.png]]</p>
+
+<h2 id="double-descent">Double descent</h2>
+
+<p>Consider this experiment: Consider the MNIST-1D dataset involving 10,000 training and 5,000 test examples. We then increase the model’s capacity and observed its impact on performance of the model. As the number of parameters in the model increases (model capacity increases), then the training error decreases to nearly zero (even before reaching a capacity equal to the number of training examples). Also we observe that the test error also decreases, which contradicts the expected increase in test error due to the bias-variance trade-off. Instead, test error continued to decrease, showcasing an unusual pattern (see following figure from the book)</p>
+
+<p>A follow-up experiment with 15% randomized training labels reveals a similar trend in training error reduction. However, the test error initially followed the anticipated bias-variance pattern, increasing up to a point, but then unexpectedly decreased again with added capacity, even falling below earlier minimum levels. This “double descent” phenomenon, where error rates drop after initially increasing as capacity grows, was observed in both the original and noisy datasets, indicating distinct under-parameterized and over-parameterized regimes, with a critical regime in between where error rates peak. Similar patters also is seen on CIFAR-100 data with Resnet-18 network.</p>
+
+<figure>
+    <picture>
+        
+
+        <!-- Fallback to the original file -->
+        <img src="/assets/img/posts/bias_variance_trade_off/20240221002957.png" class="img-fluid rounded z-depth-1" width="auto" height="auto" data-zoomable="" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
+
+    </picture>
+
+</figure>
+
+<h2 id="but-why">But why?</h2>
+
+<p>The concept of double descent challenges traditional understanding by showing that test performance first worsens as models gain just enough capacity to memorize data, then improves even after achieving perfect training performance. This contradicts expectations since over-parameterized models, with parameters outnumbering training data points, should not improve due to lack of constraints.</p>
+
+<p>So when the number of parameters increases the model has enough capacity to fit the whole data with zero training loss. So it can fit the training data perfectly. So increasing the number of parameters would not result in the model fitting the training data better (since the loss is already zero)! So if anything happens is because of some-change that occurs for in-between training data, or how the model prioritize one solution over another as it extrapolates between data points (this is known as inductive bias). Inductive bias is the assumption that a learning algorithm uses to predict outputs given inputs that it has not encountered before.</p>
+
+<p>Note that the data is in high dimension. Considering the number of possibilities for input data and the number of data points we have, you can easily see that we have sparse data in high dimension, so the ability of the model to predict in-between training data points is very important. This situation is simplified to the following figure. we have a limited number of data points. Now you can see that as we increase the number of hidden-units in NN, the model predicts smoother functions between the datapoints. Commonly it is thought that in double descent as we increase the number of parameters in our model, it interpolates more smoothly between training data points, and hence generalize better to new data. Interestingly as seen in the following figure, when the number of hidden units are exactly the same as the number of datapoints, the output distorts to fit the data (similar to increase we saw in the test error for bias-variance trade-off cases above), but as we increase the number of parameters the function becomes smoother.</p>
+
+<figure>
+    <picture>
+        
+
+        <!-- Fallback to the original file -->
+        <img src="/assets/img/posts/bias_variance_trade_off/20240221004513.png" class="img-fluid rounded z-depth-1" width="auto" height="auto" data-zoomable="" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
+
+    </picture>
+
+</figure>
+
+<p>As capacity increases, models can create smoother interpolations between data points, which is believed to enhance generalization to new data. This phenomenon suggests that model capacity contributes to a form of regularization, guiding models towards smoother functions that better predict unseen data. However, the mechanisms driving this smoothness, whether through network initialization or the training algorithm’s inherent preferences, remain uncertain.</p>
+
+<p>Essentially, the discovery of double descent reveals that adding parameters to a model beyond the point of memorization can lead to better performance, due to the model’s capacity for smoother function interpolation in the vast, sparse high-dimensional input space.</p>]]></content><author><name></name></author><summary type="html"><![CDATA[This whole section is adapted from Understanding Deep Learning.]]></summary></entry><entry><title type="html">Cross Entropy Loss Derivation</title><link href="https://azareei.github.io/blog/2024/Cross-Entropy-loss/" rel="alternate" type="text/html" title="Cross Entropy Loss Derivation" /><published>2024-02-14T02:30:00-08:00</published><updated>2024-02-14T02:30:00-08:00</updated><id>https://azareei.github.io/blog/2024/Cross-Entropy-loss</id><content type="html" xml:base="https://azareei.github.io/blog/2024/Cross-Entropy-loss/"><![CDATA[<h1 id="cross-entropy-loss">Cross Entropy Loss</h1>
 
 <p><a href="https://pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html">Cross entropy loss</a> is defined as</p>
 
@@ -119,27 +249,27 @@
 
 <span class="c1"># Plot the mean and standard deviation of the distances and sqrt(n) for comparison
 </span><span class="n">plt</span><span class="p">.</span><span class="nf">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">mean_distances_random</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">'Mean of random walk distances'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">'blue'</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">mean_distances_drifted</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">'Mean of drifted walk distances'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">'red'</span><span class="p">,</span><span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">mean_distances_random</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sh">'</span><span class="s">Mean of random walk distances</span><span class="sh">'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="sh">'</span><span class="s">blue</span><span class="sh">'</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">mean_distances_drifted</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sh">'</span><span class="s">Mean of drifted walk distances</span><span class="sh">'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="sh">'</span><span class="s">red</span><span class="sh">'</span><span class="p">,</span><span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">mean_distances_random_theory</span><span class="p">,</span> <span class="s">'--'</span><span class="p">,</span>  <span class="n">color</span><span class="o">=</span><span class="s">'green'</span><span class="p">)</span>
-<span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">mean_distances_drifted_theory</span><span class="p">,</span> <span class="s">'--'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">'green'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">mean_distances_random_theory</span><span class="p">,</span> <span class="sh">'</span><span class="s">--</span><span class="sh">'</span><span class="p">,</span>  <span class="n">color</span><span class="o">=</span><span class="sh">'</span><span class="s">green</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">mean_distances_drifted_theory</span><span class="p">,</span> <span class="sh">'</span><span class="s">--</span><span class="sh">'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="sh">'</span><span class="s">green</span><span class="sh">'</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="p">.</span><span class="nf">fill_between</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">mean_distances_random</span> <span class="o">-</span> <span class="n">std_distances_random</span><span class="p">,</span> <span class="n">mean_distances_random</span> <span class="o">+</span> <span class="n">std_distances_random</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">'blue'</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">fill_between</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">mean_distances_random</span> <span class="o">-</span> <span class="n">std_distances_random</span><span class="p">,</span> <span class="n">mean_distances_random</span> <span class="o">+</span> <span class="n">std_distances_random</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="sh">'</span><span class="s">blue</span><span class="sh">'</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="p">.</span><span class="nf">fill_between</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">mean_distances_drifted</span> <span class="o">-</span> <span class="n">std_distances_drifted</span><span class="p">,</span> <span class="n">mean_distances_drifted</span> <span class="o">+</span> <span class="n">std_distances_drifted</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">'red'</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">fill_between</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">mean_distances_drifted</span> <span class="o">-</span> <span class="n">std_distances_drifted</span><span class="p">,</span> <span class="n">mean_distances_drifted</span> <span class="o">+</span> <span class="n">std_distances_drifted</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="sh">'</span><span class="s">red</span><span class="sh">'</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">mean_distances_random_theory</span> <span class="o">+</span> <span class="n">sqrt_n</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s">':'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">'green'</span><span class="p">)</span>
-<span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">mean_distances_random_theory</span> <span class="o">-</span> <span class="n">sqrt_n</span><span class="p">,</span>  <span class="n">linestyle</span><span class="o">=</span><span class="s">':'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">'green'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">mean_distances_random_theory</span> <span class="o">+</span> <span class="n">sqrt_n</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="sh">'</span><span class="s">:</span><span class="sh">'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="sh">'</span><span class="s">green</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">mean_distances_random_theory</span> <span class="o">-</span> <span class="n">sqrt_n</span><span class="p">,</span>  <span class="n">linestyle</span><span class="o">=</span><span class="sh">'</span><span class="s">:</span><span class="sh">'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="sh">'</span><span class="s">green</span><span class="sh">'</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">mean_distances_drifted_theory</span> <span class="o">+</span> <span class="n">sqrt_n_drift</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s">':'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">'green'</span><span class="p">)</span>
-<span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">mean_distances_drifted_theory</span> <span class="o">-</span> <span class="n">sqrt_n_drift</span><span class="p">,</span>  <span class="n">linestyle</span><span class="o">=</span><span class="s">':'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">'green'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">mean_distances_drifted_theory</span> <span class="o">+</span> <span class="n">sqrt_n_drift</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="sh">'</span><span class="s">:</span><span class="sh">'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="sh">'</span><span class="s">green</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">mean_distances_drifted_theory</span> <span class="o">-</span> <span class="n">sqrt_n_drift</span><span class="p">,</span>  <span class="n">linestyle</span><span class="o">=</span><span class="sh">'</span><span class="s">:</span><span class="sh">'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="sh">'</span><span class="s">green</span><span class="sh">'</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="p">.</span><span class="nf">grid</span><span class="p">()</span>
 <span class="n">plt</span><span class="p">.</span><span class="nf">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="p">.</span><span class="nf">xlabel</span><span class="p">(</span><span class="s">'Number of steps'</span><span class="p">)</span>
-<span class="n">plt</span><span class="p">.</span><span class="nf">ylabel</span><span class="p">(</span><span class="s">'Distance'</span><span class="p">)</span>
-<span class="n">plt</span><span class="p">.</span><span class="nf">title</span><span class="p">(</span><span class="s">'Comparison of Random Walk and Drifted Walk Distance with sqrt(n)'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">xlabel</span><span class="p">(</span><span class="sh">'</span><span class="s">Number of steps</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">ylabel</span><span class="p">(</span><span class="sh">'</span><span class="s">Distance</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">title</span><span class="p">(</span><span class="sh">'</span><span class="s">Comparison of Random Walk and Drifted Walk Distance with sqrt(n)</span><span class="sh">'</span><span class="p">)</span>
 <span class="n">plt</span><span class="p">.</span><span class="nf">show</span><span class="p">()</span></code></pre></figure>
 
 <p>The blue curve shows a person doing random walk, always around \(0\) with a standard deviation of \(\sqrt{n}\). The more they have lived, the more probability of being somewhere further out from \(0\) on the positive or negative side! however, when taking small actions (drift) toward a goal daily, after \(n\) days, linearly proportional to the number of days, \(n\), they are distanced from \(0\), and further more the standard deviation of their place has been reduced by \(\sqrt{n(1-d^2)}\). So take small actions daily toward a goal, as they matter a lot over a long run.</p>
@@ -2000,40 +2130,40 @@
 35
 36
 </pre></td><td class="code"><pre><span class="kn">import</span> <span class="n">matplotlib</span>
-<span class="n">matplotlib</span><span class="p">.</span><span class="nf">use</span><span class="p">(</span><span class="s">'Agg'</span><span class="p">)</span>
+<span class="n">matplotlib</span><span class="p">.</span><span class="nf">use</span><span class="p">(</span><span class="sh">'</span><span class="s">Agg</span><span class="sh">'</span><span class="p">)</span>
 <span class="kn">import</span> <span class="n">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
 <span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
 <span class="n">fig</span><span class="o">=</span><span class="n">plt</span><span class="p">.</span><span class="nf">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">4</span><span class="p">));</span>
 <span class="c1"># T varies between a day (T = 1/365) up to a year (T=1).
 </span><span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">arange</span><span class="p">(</span><span class="mf">0.0027</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">);</span>
 <span class="n">TT</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0027</span><span class="p">,</span> <span class="mf">0.0833</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.50</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">];</span>
-<span class="n">Tlabel</span> <span class="o">=</span> <span class="p">[</span><span class="s">'1 day'</span><span class="p">,</span> <span class="s">'1 mon'</span><span class="p">,</span> <span class="s">'1 quar'</span><span class="p">,</span> <span class="s">'6 mon'</span><span class="p">,</span> <span class="s">'1 yr '</span> <span class="p">];</span>
+<span class="n">Tlabel</span> <span class="o">=</span> <span class="p">[</span><span class="sh">'</span><span class="s">1 day</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">1 mon</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">1 quar</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">6 mon</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">1 yr </span><span class="sh">'</span> <span class="p">];</span>
 <span class="c1"># Calculating APR for a fixed EAR = 5%
 </span><span class="n">ear</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">;</span>
 <span class="n">apr</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">power</span><span class="p">((</span><span class="mi">1</span><span class="o">+</span><span class="n">ear</span><span class="p">),</span><span class="n">T</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">T</span><span class="p">;</span>
 <span class="n">plt</span><span class="p">.</span><span class="nf">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="n">apr</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span> <span class="s">'r--'</span><span class="p">)</span>
-<span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">np</span><span class="p">.</span><span class="nf">ones</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">size</span><span class="p">(</span><span class="n">T</span><span class="p">))</span><span class="o">*</span><span class="n">ear</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span> <span class="s">'b--'</span><span class="p">)</span>
-<span class="n">plt</span><span class="p">.</span><span class="nf">ylabel</span><span class="p">(</span><span class="s">'APR and EAR (%)'</span><span class="p">)</span>
-<span class="n">plt</span><span class="p">.</span><span class="nf">title</span><span class="p">(</span><span class="s">'EAR is fixed at %s'</span> <span class="o">%</span><span class="n">ear</span><span class="p">)</span>
-<span class="n">plt</span><span class="p">.</span><span class="nf">xlabel</span><span class="p">(</span><span class="s">'T varies between a day to a year'</span><span class="p">)</span>
-<span class="n">plt</span><span class="p">.</span><span class="nf">xticks</span><span class="p">(</span><span class="n">TT</span><span class="p">,</span> <span class="n">Tlabel</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="s">'vertical'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="n">apr</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span> <span class="sh">'</span><span class="s">r--</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">np</span><span class="p">.</span><span class="nf">ones</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">size</span><span class="p">(</span><span class="n">T</span><span class="p">))</span><span class="o">*</span><span class="n">ear</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span> <span class="sh">'</span><span class="s">b--</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">ylabel</span><span class="p">(</span><span class="sh">'</span><span class="s">APR and EAR (%)</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">title</span><span class="p">(</span><span class="sh">'</span><span class="s">EAR is fixed at %s</span><span class="sh">'</span> <span class="o">%</span><span class="n">ear</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">xlabel</span><span class="p">(</span><span class="sh">'</span><span class="s">T varies between a day to a year</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">xticks</span><span class="p">(</span><span class="n">TT</span><span class="p">,</span> <span class="n">Tlabel</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="sh">'</span><span class="s">vertical</span><span class="sh">'</span><span class="p">)</span>
 <span class="n">plt</span><span class="p">.</span><span class="nf">subplots_adjust</span><span class="p">(</span><span class="n">bottom</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 <span class="n">plt</span><span class="p">.</span><span class="nf">grid</span><span class="p">()</span>
 <span class="c1"># Calculating EAR based on a fix APR = 5%
 </span><span class="n">apr</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">;</span>
 <span class="n">ear</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">power</span><span class="p">((</span><span class="mi">1</span><span class="o">+</span><span class="n">apr</span><span class="o">*</span><span class="n">T</span><span class="p">),</span><span class="mi">1</span><span class="o">/</span><span class="n">T</span><span class="p">)</span> <span class="o">-</span><span class="mi">1</span> <span class="p">;</span>
 <span class="n">plt</span><span class="p">.</span><span class="nf">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">EAR</span><span class="p">,</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="n">ear</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span> <span class="s">'b--'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">'EAR'</span><span class="p">)</span>
-<span class="n">APR</span><span class="p">,</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">np</span><span class="p">.</span><span class="nf">ones</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">size</span><span class="p">(</span><span class="n">T</span><span class="p">))</span><span class="o">*</span><span class="n">apr</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span> <span class="s">'r--'</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s">'APR'</span><span class="p">)</span>
-<span class="n">plt</span><span class="p">.</span><span class="nf">title</span><span class="p">(</span><span class="s">'APR is fixed at %s'</span> <span class="o">%</span><span class="n">apr</span><span class="p">)</span>
-<span class="n">plt</span><span class="p">.</span><span class="nf">xlabel</span><span class="p">(</span><span class="s">'T varies between a day to a year'</span><span class="p">)</span>
-<span class="n">plt</span><span class="p">.</span><span class="nf">xticks</span><span class="p">(</span><span class="n">TT</span><span class="p">,</span> <span class="n">Tlabel</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="s">'vertical'</span><span class="p">)</span>
+<span class="n">EAR</span><span class="p">,</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="n">ear</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span> <span class="sh">'</span><span class="s">b--</span><span class="sh">'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sh">'</span><span class="s">EAR</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">APR</span><span class="p">,</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">np</span><span class="p">.</span><span class="nf">ones</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">size</span><span class="p">(</span><span class="n">T</span><span class="p">))</span><span class="o">*</span><span class="n">apr</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span> <span class="sh">'</span><span class="s">r--</span><span class="sh">'</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="sh">'</span><span class="s">APR</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">title</span><span class="p">(</span><span class="sh">'</span><span class="s">APR is fixed at %s</span><span class="sh">'</span> <span class="o">%</span><span class="n">apr</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">xlabel</span><span class="p">(</span><span class="sh">'</span><span class="s">T varies between a day to a year</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">xticks</span><span class="p">(</span><span class="n">TT</span><span class="p">,</span> <span class="n">Tlabel</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="sh">'</span><span class="s">vertical</span><span class="sh">'</span><span class="p">)</span>
 <span class="n">plt</span><span class="p">.</span><span class="nf">subplots_adjust</span><span class="p">(</span><span class="n">bottom</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 <span class="n">plt</span><span class="p">.</span><span class="nf">grid</span><span class="p">()</span>
 <span class="n">plt</span><span class="p">.</span><span class="nf">legend</span><span class="p">(</span><span class="n">handles</span><span class="o">=</span><span class="p">[</span><span class="n">APR</span><span class="p">,</span> <span class="n">EAR</span><span class="p">]);</span>
 <span class="c1"># Saving and showing the result
-</span><span class="n">plt</span><span class="p">.</span><span class="nf">savefig</span><span class="p">(</span><span class="s">'img/apr-for-fixed-ear.png'</span><span class="p">,</span><span class="n">bbox_inches</span><span class="o">=</span><span class="s">'tight'</span><span class="p">)</span>
+</span><span class="n">plt</span><span class="p">.</span><span class="nf">savefig</span><span class="p">(</span><span class="sh">'</span><span class="s">img/apr-for-fixed-ear.png</span><span class="sh">'</span><span class="p">,</span><span class="n">bbox_inches</span><span class="o">=</span><span class="sh">'</span><span class="s">tight</span><span class="sh">'</span><span class="p">)</span>
 <span class="c1">#'img/apr-for-fixed-ear.png' # return this to org-mode</span>
 </pre></td></tr></tbody></table></code></pre></figure>
 
@@ -2267,7 +2397,159 @@
 
     <p>to be cont’d</p>
   </li>
-</ul>]]></content><author><name></name></author><summary type="html"><![CDATA[investment]]></summary></entry><entry><title type="html">Bayesian Machine Learning</title><link href="https://azareei.github.io/blog/2022/Baysian-ml/" rel="alternate" type="text/html" title="Bayesian Machine Learning" /><published>2022-01-25T14:30:00-08:00</published><updated>2022-01-25T14:30:00-08:00</updated><id>https://azareei.github.io/blog/2022/Baysian-ml</id><content type="html" xml:base="https://azareei.github.io/blog/2022/Baysian-ml/"><![CDATA[<p>These is a review of Bayesian Machine Learning. It’s based on HSE’s course on this topic.</p>
+</ul>]]></content><author><name></name></author><summary type="html"><![CDATA[investment]]></summary></entry><entry><title type="html">Optimum first guess for Persian Wordle (in Farsi)</title><link href="https://azareei.github.io/blog/2022/wordle/" rel="alternate" type="text/html" title="Optimum first guess for Persian Wordle (in Farsi)" /><published>2022-01-25T14:30:00-08:00</published><updated>2022-01-25T14:30:00-08:00</updated><id>https://azareei.github.io/blog/2022/wordle</id><content type="html" xml:base="https://azareei.github.io/blog/2022/wordle/"><![CDATA[<p><a href="vajoor.ir">Vaajoor</a> is the persian version of <a href="https://www.powerlanguage.co.uk/wordle/">wordle</a>. In this post I explore the optimum first guess for <a href="vajoor.ir">Vaajoor</a> in persian.</p>
+
+<p><br /></p>
+
+<p style="text-align:right;dir:rtl;">
+در بازی واجور هدف حدس زدن یک کلمه پنج حرفیه. در این بازی امکان پنج‌بار حدس زدن وجود داره. برای هر کلمه‌ای که حدس میزنیم، برای هر حرف سه حالت وجود داره: اگر حرف در کلمه اصلی وجود نداشته باشه، حرف قرمز میشه. اگر حرف در کلمه اصلی وجود داشته باشد، اما مکانش درست نباشه، زرد میشه. و اگر حرف هم در کلمه اصلی باشه و هم مکانش درست باشه، سبز میشه. خیلی شبیه به بازی فکر‌بکر هست اگه توی بچگی بازی کرده باشین. حال با حدس کلمه و اینکه هر حرف‌ آن در چه حالتی است، کلمه اصلی حدس زده میشه 
+</p>
+
+<p><br />
+<br /></p>
+
+<p style="text-align:right;dir:rtl;">
+نمونه‌ای از بازی
+</p>
+
+<div class="row mt-3" style="text-align:center;">
+    <div class="col-sm mt-3 mt-md-0">
+        <img class="img-fluid rounded z-depth-1" width="300" src="/assets/posts/vajoor_sample.png" />
+    </div>
+</div>
+
+<p><br />
+<br /></p>
+
+<p style="text-align:right;dir:rtl;">
+
+سوالی که پیش میآید این هست که آیا حدس اول بهینه‌ای وجود داره؟
+
+<br />
+
+با نگاهی به لغات ۵ حرفی فرهنگ معین میبینیم که تعداد لغات پنج‌حرفی ۸۲۱۶ کلمه هست. حدس اول میتونه از کل این لیست باشه. با توجه به حدس اول، و اینکه چه حرف‌هایی در آن هست و نیست لیست کلمات قابل قبول برای حدس دوم کمتر میشه. سوال این هست که آیا حدس اولیه بهینه‌ای وجود داره؟
+<br />
+
+هر حدسی که ما میزنیم، بقیه کلمات رو به ۳*۳*۳*۳*۳ دسته تقسیم میکنه، با توجه به اینکه هر حرف این حدس ما در کدوم گروه سبز یا زرد یا قرمز میافته. پس هر کلمه‌ای، بقیه کلمات رو بین این ۳*۳*۳*۳*۳ = ۲۴۳ گروه تقسیم میکنه. حالا با توجه به اینکه کدوم گروه انتخاب شده، ادامه مسیر از بین کلمات اون گروه خواهد بود. حالا اگه حدس اولیه‌ای بهینه باشه، باید کلمات رو جوری بین این گروه‌ها تقسیم کنه، که لیست تعداد کلمات بعدی کمترین باشه! اگه اینجوری باشه، این کلمه انتخاب خوبی بوده
+<br />
+
+برای اینکه کلمه بهینه برای انتخاب اول رو پیدا کنیم، روی لیست تمام کلمات میگردیم، برای هر کلمه نگاه میکنیم که بقیه کلمات چه‌طور بین این ۲۴۳ گروه تقسیم میشن. برای هر گروه تعدادی ثبت میشه. ماکزیمم تعداد کلمات در یه گروه از این ۲۴۳ گروه رو برای اون کلمه ثبت میکنیم. در نهایت کلمه‌ای رو انتخاب میکنیم که این عدد ماکزیممش کمترین باشه. یعنی مینیمم این ماکزیمم رو پیدا میکنیم. در این صورت، در بدترین حالت حدسمون، تعداد کلمات برای انتخاب دوم کمترین شده
+<br />
+
+حالا همین کار رو من برای کلمات فارسی فرهنگ معین انجام دادم (کد شخمی نوشته شده پایین همین صفحه هست). به نظر میاد که حدس بهینه اول کلمه تریان هست. منم نمیدونستم تریان یعنی چه ! انگار به معنی چیزی هست که طبقی شکل هست و بافته شده از شاخ بید! والا منم نفهمیدم یعنی چی. حالا اگه کلمه تریان رو به عنوان انتخاب اول بزاریم، ماکزیمم تعداد کلمات در اون ۲۴۳ گروه فقط ۵۴۲ کلمه هست. یعنی در بد‌ترین حالت برای حدس دوم باید فقط از بین این ۵۴۲ کلمه انتخاب کنیم. حالا همین داستان رو برای حدس دوم هم میشه انجام داد، البته وقتی حدس اول در اومده باشه
+
+<br />
+
+حالا چون تریان خیلی واژه سختی شد، کلمه دوم هم نگاه کردم دیدم خیلی ساده‌تره: تیمار. هم کلمه راحت‌تری هست و هم آدم یادش بمونه. اگه کلمه تیمار رو برای حدس اول انتخاب کنین، برای حدس دوم در بدترین حالت فقط باید بین ۵۶۰ کلمه، اون کلمه مورد نظر رو پیدا کنین. در ادامه هم لینک گیت‌هاب این کد سر‌سری پایتون و لیست کلمات فرهنگ معین رو میزارم خواستین خودتون باش ور برین
+
+</p>
+<p><br />
+<br /></p>
+
+<p><a href="https://github.com/ahmadzareei/vajoor">Github Link</a></p>
+
+<p><br />
+<br /></p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+</pre></td><td class="code"><pre><span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
+
+<span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="sh">'</span><span class="s">Moin_dictionary_words.txt</span><span class="sh">'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="n">lines</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="nf">readlines</span><span class="p">()</span>
+
+<span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">]</span>
+
+<span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">lines</span> <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">==</span><span class="mi">5</span><span class="p">]</span>
+
+<span class="kn">from</span> <span class="n">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
+<span class="n">score</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>\<span class="o">*</span><span class="nf">len</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">j</span><span class="p">,</span><span class="n">w</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">words</span><span class="p">):</span>
+<span class="n">category</span> <span class="o">=</span> <span class="nf">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">w_inquiry</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
+<span class="n">key</span> <span class="o">=</span> <span class="sh">''</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">ch</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">w</span><span class="p">):</span>
+<span class="k">if</span> <span class="n">ch</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">w_inquiry</span><span class="p">:</span>
+<span class="n">key</span> <span class="o">+=</span> <span class="sh">'</span><span class="s">K</span><span class="sh">'</span> <span class="c1"># it's black
+</span><span class="k">else</span><span class="p">:</span>
+<span class="k">if</span> <span class="n">ch</span> <span class="o">==</span> <span class="n">w_inquiry</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+<span class="n">key</span> <span class="o">+=</span> <span class="sh">'</span><span class="s">G</span><span class="sh">'</span> <span class="c1"># it should be green
+</span><span class="k">else</span><span class="p">:</span>
+<span class="n">key</span> <span class="o">+=</span> <span class="sh">'</span><span class="s">Y</span><span class="sh">'</span> <span class="c1"># then it's yellow
+</span><span class="n">category</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="n">score</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="nf">max</span><span class="p">(</span><span class="n">category</span><span class="p">.</span><span class="nf">values</span><span class="p">())</span>
+
+<span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">(</span><span class="n">score</span><span class="p">).</span><span class="nf">argsort</span><span class="p">()[:</span><span class="mi">20</span><span class="p">]:</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">score</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span><span class="n">words</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p style="text-align:right;dir:rtl;">
+542 تریان
+<br />
+560 تیمار
+<br />
+611 رمانی
+<br />
+631 نوایر
+<br />
+631 روانی
+<br />
+643 ربانی
+<br />
+643 برانی
+<br />
+644 منابر
+<br />
+656 نرمال
+<br />
+661 بهیار
+<br />
+661 بیراه
+<br />
+663 ویران
+<br />
+663 رویان
+<br />
+680 تریاک
+<br />
+681 مهوار
+<br />
+681 میراب
+<br />
+681 هموار
+<br />
+681 بیمار
+<br />
+686 نهاری
+<br />
+686 مناره
+</p>]]></content><author><name></name></author><summary type="html"><![CDATA[Molavi]]></summary></entry><entry><title type="html">Bayesian Machine Learning</title><link href="https://azareei.github.io/blog/2022/Baysian-ml/" rel="alternate" type="text/html" title="Bayesian Machine Learning" /><published>2022-01-25T14:30:00-08:00</published><updated>2022-01-25T14:30:00-08:00</updated><id>https://azareei.github.io/blog/2022/Baysian-ml</id><content type="html" xml:base="https://azareei.github.io/blog/2022/Baysian-ml/"><![CDATA[<p>These is a review of Bayesian Machine Learning. It’s based on HSE’s course on this topic.</p>
 
 <h3 id="maximum-likelihood-estimation-mle">Maximum Likelihood Estimation (MLE)</h3>
 
@@ -2562,7 +2844,7 @@
 # where N is the number of poitns i=1,...,N
 # and C is the number of clusters
 </span><span class="k">def</span> <span class="nf">E_step</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">pi</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">):</span>
-    <span class="s">"""
+    <span class="sh">"""</span><span class="s">
     Performs E-step on GMM model
     Each input is numpy array:
     X: (N x d), data points
@@ -2575,7 +2857,7 @@
 
     P(z\mid x) = (p(x\mid z) p(z))/(sum_z p(x\mid z) p(z) )
     gamma  =
-    """</span>
+    </span><span class="sh">"""</span>
     <span class="n">N</span> <span class="o">=</span> <span class="n">X</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># number of objects
 </span>    <span class="n">C</span> <span class="o">=</span> <span class="n">pi</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># number of clusters
 </span>    <span class="n">d</span> <span class="o">=</span> <span class="n">mu</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># dimension of each object
@@ -2589,7 +2871,7 @@
     <span class="k">return</span> <span class="n">gamma</span>
 
 <span class="k">def</span> <span class="nf">M_step</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">gamma</span><span class="p">):</span>
-    <span class="s">"""
+    <span class="sh">"""</span><span class="s">
     Performs M-step on GMM model
     Each input is numpy array:
     X: (N x d), data points
@@ -2599,7 +2881,7 @@
     pi: (C)
     mu: (C x d)
     sigma: (C x d x d)
-    """</span>
+    </span><span class="sh">"""</span>
     <span class="n">N</span> <span class="o">=</span> <span class="n">X</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># number of objects
 </span>    <span class="n">C</span> <span class="o">=</span> <span class="n">gamma</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># number of clusters
 </span>    <span class="n">d</span> <span class="o">=</span> <span class="n">X</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># dimension of each object
@@ -2619,14 +2901,14 @@
     <span class="k">return</span> <span class="n">pi</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span>
 
 <span class="k">def</span> <span class="nf">train_EM</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">restarts</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
-    <span class="s">'''
+    <span class="sh">'''</span><span class="s">
     Starts with random initialization *restarts* times
     Runs optimization until saturation with *rtol* reached
     or *max_iter* iterations were made.
 
     X: (N, d), data points
     C: int, number of clusters
-    '''</span>
+    </span><span class="sh">'''</span>
     <span class="n">N</span> <span class="o">=</span> <span class="n">X</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># number of objects
 </span>    <span class="n">d</span> <span class="o">=</span> <span class="n">X</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># dimension of each object
 </span>    <span class="n">best_loss</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="p">.</span><span class="n">inf</span>
@@ -2659,7 +2941,7 @@
               <span class="n">prev_loss</span> <span class="o">=</span> <span class="n">loss</span>
 
         <span class="k">except</span> <span class="n">np</span><span class="p">.</span><span class="n">linalg</span><span class="p">.</span><span class="n">LinAlgError</span><span class="p">:</span>
-            <span class="nf">print</span><span class="p">(</span><span class="s">"Singular matrix: components collapsed"</span><span class="p">)</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">Singular matrix: components collapsed</span><span class="sh">"</span><span class="p">)</span>
             <span class="k">pass</span>
 
     <span class="k">return</span> <span class="n">best_loss</span><span class="p">,</span> <span class="n">best_pi</span><span class="p">,</span> <span class="n">best_mu</span><span class="p">,</span> <span class="n">best_sigma</span>
@@ -2813,159 +3095,7 @@
 
 <p>Or we can summarize it as</p>
 
-\[A(x_0\to x_1) = \min\left(1, \frac{p(x_1)}{p(x_0)} \frac{Q(x_1\to x_0)}{Q(x_0\to x_1)} \right)\]]]></content><author><name></name></author><summary type="html"><![CDATA[Machine learning]]></summary></entry><entry><title type="html">Optimum first guess for Persian Wordle (in Farsi)</title><link href="https://azareei.github.io/blog/2022/wordle/" rel="alternate" type="text/html" title="Optimum first guess for Persian Wordle (in Farsi)" /><published>2022-01-25T14:30:00-08:00</published><updated>2022-01-25T14:30:00-08:00</updated><id>https://azareei.github.io/blog/2022/wordle</id><content type="html" xml:base="https://azareei.github.io/blog/2022/wordle/"><![CDATA[<p><a href="vajoor.ir">Vaajoor</a> is the persian version of <a href="https://www.powerlanguage.co.uk/wordle/">wordle</a>. In this post I explore the optimum first guess for <a href="vajoor.ir">Vaajoor</a> in persian.</p>
-
-<p><br /></p>
-
-<p style="text-align:right;dir:rtl;">
-در بازی واجور هدف حدس زدن یک کلمه پنج حرفیه. در این بازی امکان پنج‌بار حدس زدن وجود داره. برای هر کلمه‌ای که حدس میزنیم، برای هر حرف سه حالت وجود داره: اگر حرف در کلمه اصلی وجود نداشته باشه، حرف قرمز میشه. اگر حرف در کلمه اصلی وجود داشته باشد، اما مکانش درست نباشه، زرد میشه. و اگر حرف هم در کلمه اصلی باشه و هم مکانش درست باشه، سبز میشه. خیلی شبیه به بازی فکر‌بکر هست اگه توی بچگی بازی کرده باشین. حال با حدس کلمه و اینکه هر حرف‌ آن در چه حالتی است، کلمه اصلی حدس زده میشه 
-</p>
-
-<p><br />
-<br /></p>
-
-<p style="text-align:right;dir:rtl;">
-نمونه‌ای از بازی
-</p>
-
-<div class="row mt-3" style="text-align:center;">
-    <div class="col-sm mt-3 mt-md-0">
-        <img class="img-fluid rounded z-depth-1" width="300" src="/assets/posts/vajoor_sample.png" />
-    </div>
-</div>
-
-<p><br />
-<br /></p>
-
-<p style="text-align:right;dir:rtl;">
-
-سوالی که پیش میآید این هست که آیا حدس اول بهینه‌ای وجود داره؟
-
-<br />
-
-با نگاهی به لغات ۵ حرفی فرهنگ معین میبینیم که تعداد لغات پنج‌حرفی ۸۲۱۶ کلمه هست. حدس اول میتونه از کل این لیست باشه. با توجه به حدس اول، و اینکه چه حرف‌هایی در آن هست و نیست لیست کلمات قابل قبول برای حدس دوم کمتر میشه. سوال این هست که آیا حدس اولیه بهینه‌ای وجود داره؟
-<br />
-
-هر حدسی که ما میزنیم، بقیه کلمات رو به ۳*۳*۳*۳*۳ دسته تقسیم میکنه، با توجه به اینکه هر حرف این حدس ما در کدوم گروه سبز یا زرد یا قرمز میافته. پس هر کلمه‌ای، بقیه کلمات رو بین این ۳*۳*۳*۳*۳ = ۲۴۳ گروه تقسیم میکنه. حالا با توجه به اینکه کدوم گروه انتخاب شده، ادامه مسیر از بین کلمات اون گروه خواهد بود. حالا اگه حدس اولیه‌ای بهینه باشه، باید کلمات رو جوری بین این گروه‌ها تقسیم کنه، که لیست تعداد کلمات بعدی کمترین باشه! اگه اینجوری باشه، این کلمه انتخاب خوبی بوده
-<br />
-
-برای اینکه کلمه بهینه برای انتخاب اول رو پیدا کنیم، روی لیست تمام کلمات میگردیم، برای هر کلمه نگاه میکنیم که بقیه کلمات چه‌طور بین این ۲۴۳ گروه تقسیم میشن. برای هر گروه تعدادی ثبت میشه. ماکزیمم تعداد کلمات در یه گروه از این ۲۴۳ گروه رو برای اون کلمه ثبت میکنیم. در نهایت کلمه‌ای رو انتخاب میکنیم که این عدد ماکزیممش کمترین باشه. یعنی مینیمم این ماکزیمم رو پیدا میکنیم. در این صورت، در بدترین حالت حدسمون، تعداد کلمات برای انتخاب دوم کمترین شده
-<br />
-
-حالا همین کار رو من برای کلمات فارسی فرهنگ معین انجام دادم (کد شخمی نوشته شده پایین همین صفحه هست). به نظر میاد که حدس بهینه اول کلمه تریان هست. منم نمیدونستم تریان یعنی چه ! انگار به معنی چیزی هست که طبقی شکل هست و بافته شده از شاخ بید! والا منم نفهمیدم یعنی چی. حالا اگه کلمه تریان رو به عنوان انتخاب اول بزاریم، ماکزیمم تعداد کلمات در اون ۲۴۳ گروه فقط ۵۴۲ کلمه هست. یعنی در بد‌ترین حالت برای حدس دوم باید فقط از بین این ۵۴۲ کلمه انتخاب کنیم. حالا همین داستان رو برای حدس دوم هم میشه انجام داد، البته وقتی حدس اول در اومده باشه
-
-<br />
-
-حالا چون تریان خیلی واژه سختی شد، کلمه دوم هم نگاه کردم دیدم خیلی ساده‌تره: تیمار. هم کلمه راحت‌تری هست و هم آدم یادش بمونه. اگه کلمه تیمار رو برای حدس اول انتخاب کنین، برای حدس دوم در بدترین حالت فقط باید بین ۵۶۰ کلمه، اون کلمه مورد نظر رو پیدا کنین. در ادامه هم لینک گیت‌هاب این کد سر‌سری پایتون و لیست کلمات فرهنگ معین رو میزارم خواستین خودتون باش ور برین
-
-</p>
-<p><br />
-<br /></p>
-
-<p><a href="https://github.com/ahmadzareei/vajoor">Github Link</a></p>
-
-<p><br />
-<br /></p>
-
-<figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-</pre></td><td class="code"><pre><span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
-
-<span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="s">'Moin_dictionary_words.txt'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-<span class="n">lines</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="nf">readlines</span><span class="p">()</span>
-
-<span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">]</span>
-
-<span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">lines</span> <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">==</span><span class="mi">5</span><span class="p">]</span>
-
-<span class="kn">from</span> <span class="n">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
-<span class="n">score</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>\<span class="o">*</span><span class="nf">len</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">j</span><span class="p">,</span><span class="n">w</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">words</span><span class="p">):</span>
-<span class="n">category</span> <span class="o">=</span> <span class="nf">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">w_inquiry</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
-<span class="n">key</span> <span class="o">=</span> <span class="s">''</span>
-<span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">ch</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">w</span><span class="p">):</span>
-<span class="k">if</span> <span class="n">ch</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">w_inquiry</span><span class="p">:</span>
-<span class="n">key</span> <span class="o">+=</span> <span class="s">'K'</span> <span class="c1"># it's black
-</span><span class="k">else</span><span class="p">:</span>
-<span class="k">if</span> <span class="n">ch</span> <span class="o">==</span> <span class="n">w_inquiry</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
-<span class="n">key</span> <span class="o">+=</span> <span class="s">'G'</span> <span class="c1"># it should be green
-</span><span class="k">else</span><span class="p">:</span>
-<span class="n">key</span> <span class="o">+=</span> <span class="s">'Y'</span> <span class="c1"># then it's yellow
-</span><span class="n">category</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-<span class="n">score</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="nf">max</span><span class="p">(</span><span class="n">category</span><span class="p">.</span><span class="nf">values</span><span class="p">())</span>
-
-<span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">(</span><span class="n">score</span><span class="p">).</span><span class="nf">argsort</span><span class="p">()[:</span><span class="mi">20</span><span class="p">]:</span>
-<span class="nf">print</span><span class="p">(</span><span class="n">score</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span><span class="n">words</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
-</pre></td></tr></tbody></table></code></pre></figure>
-
-<p style="text-align:right;dir:rtl;">
-542 تریان
-<br />
-560 تیمار
-<br />
-611 رمانی
-<br />
-631 نوایر
-<br />
-631 روانی
-<br />
-643 ربانی
-<br />
-643 برانی
-<br />
-644 منابر
-<br />
-656 نرمال
-<br />
-661 بهیار
-<br />
-661 بیراه
-<br />
-663 ویران
-<br />
-663 رویان
-<br />
-680 تریاک
-<br />
-681 مهوار
-<br />
-681 میراب
-<br />
-681 هموار
-<br />
-681 بیمار
-<br />
-686 نهاری
-<br />
-686 مناره
-</p>]]></content><author><name></name></author><summary type="html"><![CDATA[Molavi]]></summary></entry><entry><title type="html">KL Divergence between two normal distributions</title><link href="https://azareei.github.io/blog/2021/KL-Divergence/" rel="alternate" type="text/html" title="KL Divergence between two normal distributions" /><published>2021-03-10T14:10:00-08:00</published><updated>2021-03-10T14:10:00-08:00</updated><id>https://azareei.github.io/blog/2021/KL-Divergence</id><content type="html" xml:base="https://azareei.github.io/blog/2021/KL-Divergence/"><![CDATA[<p>These is a review of Bayesian Machine Learning. It’s based on HSE’s course on this topic.</p>
+\[A(x_0\to x_1) = \min\left(1, \frac{p(x_1)}{p(x_0)} \frac{Q(x_1\to x_0)}{Q(x_0\to x_1)} \right)\]]]></content><author><name></name></author><summary type="html"><![CDATA[Machine learning]]></summary></entry><entry><title type="html">KL Divergence between two normal distributions</title><link href="https://azareei.github.io/blog/2021/KL-Divergence/" rel="alternate" type="text/html" title="KL Divergence between two normal distributions" /><published>2021-03-10T14:10:00-08:00</published><updated>2021-03-10T14:10:00-08:00</updated><id>https://azareei.github.io/blog/2021/KL-Divergence</id><content type="html" xml:base="https://azareei.github.io/blog/2021/KL-Divergence/"><![CDATA[<p>These is a review of Bayesian Machine Learning. It’s based on HSE’s course on this topic.</p>
 
 <h3 id="maximum-likelihood-estimation-mle">Maximum Likelihood Estimation (MLE)</h3>
 
@@ -3276,7 +3406,7 @@
 # where N is the number of poitns i=1,...,N
 # and C is the number of clusters
 </span><span class="k">def</span> <span class="nf">E_step</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">pi</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">):</span>
-    <span class="s">"""
+    <span class="sh">"""</span><span class="s">
     Performs E-step on GMM model
     Each input is numpy array:
     X: (N x d), data points
@@ -3289,7 +3419,7 @@
 
     P(z\mid x) = (p(x\mid z) p(z))/(sum_z p(x\mid z) p(z) )
     gamma  =
-    """</span>
+    </span><span class="sh">"""</span>
     <span class="n">N</span> <span class="o">=</span> <span class="n">X</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># number of objects
 </span>    <span class="n">C</span> <span class="o">=</span> <span class="n">pi</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># number of clusters
 </span>    <span class="n">d</span> <span class="o">=</span> <span class="n">mu</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># dimension of each object
@@ -3303,7 +3433,7 @@
     <span class="k">return</span> <span class="n">gamma</span>
 
 <span class="k">def</span> <span class="nf">M_step</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">gamma</span><span class="p">):</span>
-    <span class="s">"""
+    <span class="sh">"""</span><span class="s">
     Performs M-step on GMM model
     Each input is numpy array:
     X: (N x d), data points
@@ -3313,7 +3443,7 @@
     pi: (C)
     mu: (C x d)
     sigma: (C x d x d)
-    """</span>
+    </span><span class="sh">"""</span>
     <span class="n">N</span> <span class="o">=</span> <span class="n">X</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># number of objects
 </span>    <span class="n">C</span> <span class="o">=</span> <span class="n">gamma</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># number of clusters
 </span>    <span class="n">d</span> <span class="o">=</span> <span class="n">X</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># dimension of each object
@@ -3333,14 +3463,14 @@
     <span class="k">return</span> <span class="n">pi</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span>
 
 <span class="k">def</span> <span class="nf">train_EM</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">restarts</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
-    <span class="s">'''
+    <span class="sh">'''</span><span class="s">
     Starts with random initialization *restarts* times
     Runs optimization until saturation with *rtol* reached
     or *max_iter* iterations were made.
 
     X: (N, d), data points
     C: int, number of clusters
-    '''</span>
+    </span><span class="sh">'''</span>
     <span class="n">N</span> <span class="o">=</span> <span class="n">X</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># number of objects
 </span>    <span class="n">d</span> <span class="o">=</span> <span class="n">X</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># dimension of each object
 </span>    <span class="n">best_loss</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="p">.</span><span class="n">inf</span>
@@ -3373,7 +3503,7 @@
               <span class="n">prev_loss</span> <span class="o">=</span> <span class="n">loss</span>
 
         <span class="k">except</span> <span class="n">np</span><span class="p">.</span><span class="n">linalg</span><span class="p">.</span><span class="n">LinAlgError</span><span class="p">:</span>
-            <span class="nf">print</span><span class="p">(</span><span class="s">"Singular matrix: components collapsed"</span><span class="p">)</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">Singular matrix: components collapsed</span><span class="sh">"</span><span class="p">)</span>
             <span class="k">pass</span>
 
     <span class="k">return</span> <span class="n">best_loss</span><span class="p">,</span> <span class="n">best_pi</span><span class="p">,</span> <span class="n">best_mu</span><span class="p">,</span> <span class="n">best_sigma</span>
@@ -3876,11 +4006,11 @@ is an invertible matrix, it can be removed from both sides, and we obtain</p>
     <span class="n">S</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">S0</span><span class="p">;</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nf">int</span><span class="p">((</span><span class="n">T</span><span class="o">-</span><span class="n">dt</span><span class="p">)</span><span class="o">/</span><span class="n">dt</span><span class="p">)):</span>
         <span class="n">S</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="n">S</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">np</span><span class="p">.</span><span class="nf">exp</span><span class="p">(</span><span class="n">mu</span><span class="o">*</span><span class="n">dt</span><span class="o">+</span><span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">randn</span><span class="p">(</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">sigma</span><span class="o">*</span><span class="n">np</span><span class="p">.</span><span class="nf">sqrt</span><span class="p">(</span><span class="n">dt</span><span class="p">));</span>
-    <span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">S</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s">'b'</span><span class="p">)</span>
+    <span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">S</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="sh">'</span><span class="s">b</span><span class="sh">'</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="p">.</span><span class="nf">yscale</span><span class="p">(</span><span class="s">'log'</span><span class="p">)</span>
-<span class="n">plt</span><span class="p">.</span><span class="nf">xlabel</span><span class="p">(</span><span class="s">'time'</span><span class="p">)</span>
-<span class="n">plt</span><span class="p">.</span><span class="nf">ylabel</span><span class="p">(</span><span class="s">'Log(S/S_0)'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">yscale</span><span class="p">(</span><span class="sh">'</span><span class="s">log</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">xlabel</span><span class="p">(</span><span class="sh">'</span><span class="s">time</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">ylabel</span><span class="p">(</span><span class="sh">'</span><span class="s">Log(S/S_0)</span><span class="sh">'</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="p">.</span><span class="nf">show</span><span class="p">()</span>
 </code></pre></div></div>
@@ -4034,23 +4164,4 @@ is an invertible matrix, it can be removed from both sides, and we obtain</p>
 
 <p>In summary, we have</p>
 
-\[\boxed{C+ Xe^{-rT} \leq S_0+P \leq C+ X}\]]]></content><author><name></name></author><summary type="html"><![CDATA[How options are priced?]]></summary></entry><entry><title type="html">You are what you seek (in Farsi)</title><link href="https://azareei.github.io/blog/2020/Molavi/" rel="alternate" type="text/html" title="You are what you seek (in Farsi)" /><published>2020-12-29T06:30:00-08:00</published><updated>2020-12-29T06:30:00-08:00</updated><id>https://azareei.github.io/blog/2020/Molavi</id><content type="html" xml:base="https://azareei.github.io/blog/2020/Molavi/"><![CDATA[<p><br /></p>
-
-<p>I made the following calligraphy in persian that reads “What you seek is seeking you”. This is part of a two-couplets from Rumi</p>
-
-<p style="text-align:right;dir:rtl;">
-تا در طلب گوهر کانی کانی <br />
-تا در هوس لقمهٔ نانی نانی <br />
-<br /><br />
-این نکتهٔ رمز اگر بدانی دانی <br />
-هر چیزی که در جستن آنی آنی <br />
-</p>
-
-<p><br />
-<br /></p>
-
-<div class="row mt-3" style="text-align:center;">
-    <div class="col-sm mt-3 mt-md-0">
-        <img class="img-fluid rounded z-depth-1" width="500" src="/assets/posts/what-you-seek.png" />
-    </div>
-</div>]]></content><author><name></name></author><summary type="html"><![CDATA[Molavi]]></summary></entry></feed>
+\[\boxed{C+ Xe^{-rT} \leq S_0+P \leq C+ X}\]]]></content><author><name></name></author><summary type="html"><![CDATA[How options are priced?]]></summary></entry></feed>

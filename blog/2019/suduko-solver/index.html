@@ -21,7 +21,7 @@
 <!-- Fonts & Icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.0/css/academicons.min.css" integrity="sha512-W4yqoT1+8NLkinBLBZko+dFB2ZbHsYLDdr50VElllRcNt2Q4/GSs6u71UHKxB7S6JEMCp5Ve4xjh3eGQl/HRvg==" crossorigin="anonymous">
-<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700%7CRoboto+Slab:100,300,400,500,700%7CMaterial+Icons">
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons">
 
 <!-- Code Syntax Highlighting -->
 <link rel="stylesheet" href="https://combinatronics.io/jwarby/pygments-css/master/github.css">
@@ -352,11 +352,11 @@ The following code finds a solution to the Sudoku puzzle using recursive methods
 
 
 <span class="k">def</span> <span class="nf">checkRules</span><span class="p">(</span><span class="n">puzzle</span><span class="p">):</span>
-    <span class="s">""" this function receives a sudoku puzzle as a 9x9 list.
+    <span class="sh">"""</span><span class="s"> this function receives a sudoku puzzle as a 9x9 list.
     and checks if it satisfies the rules of Sudoku, specifically
     (i): if all the numbers in rows are unique.
     (ii): if all the numbers in columns are unique
-    (iii): if all the numbers in cells are unique"""</span>
+    (iii): if all the numbers in cells are unique</span><span class="sh">"""</span>
     
 
     <span class="c1"># Checking condition (i)
@@ -398,10 +398,10 @@ The following code finds a solution to the Sudoku puzzle using recursive methods
 
 
 <span class="k">def</span> <span class="nf">possibilities</span><span class="p">(</span><span class="n">puzzle</span><span class="p">,</span> <span class="n">index1</span><span class="p">,</span> <span class="n">index2</span><span class="p">):</span>
-    <span class="s">""" This function receives a puzzle, and two indices
+    <span class="sh">"""</span><span class="s"> This function receives a puzzle, and two indices
     for the row (index1), and column (index2), and retuns all the possibilites 
     of filling the tile at puzzle[index1][index2]
-    """</span>
+    </span><span class="sh">"""</span>
     <span class="c1"># The row corresponding to the tile puzzle[index1][index2]
 </span>    <span class="n">row</span> <span class="o">=</span> <span class="n">puzzle</span><span class="p">[</span><span class="n">index1</span><span class="p">][:];</span>
     <span class="c1"># The column corresponding to the tile puzzle[index1][index2]
@@ -423,11 +423,11 @@ The following code finds a solution to the Sudoku puzzle using recursive methods
 </span>    <span class="k">return</span> <span class="n">out</span>
 
 <span class="k">def</span> <span class="nf">solve_sodoku</span><span class="p">(</span><span class="n">puzzle</span><span class="p">):</span>
-    <span class="s">""" This function solves the sudoku puzzle
+    <span class="sh">"""</span><span class="s"> This function solves the sudoku puzzle
     and returns the solution
     and a conditional which is true if the puzzle is solvable and
     False if not solvable.
-    """</span>
+    </span><span class="sh">"""</span>
     <span class="c1"># Checking if the puzzle satisfy the rules of the puzzle
 </span>    <span class="c1"># and is already a solved puzzle
 </span>    <span class="nf">if </span><span class="p">(</span><span class="nf">checkRules</span><span class="p">(</span><span class="n">puzzle</span><span class="p">)):</span>
@@ -487,7 +487,7 @@ The following code finds a solution to the Sudoku puzzle using recursive methods
     
 
 
-<span class="k">if</span> <span class="n">__name__</span><span class="o">==</span><span class="s">'__main__'</span><span class="p">:</span>
+<span class="k">if</span> <span class="n">__name__</span><span class="o">==</span><span class="sh">'</span><span class="s">__main__</span><span class="sh">'</span><span class="p">:</span>
     
     <span class="c1"># Easy puzzle
 </span>    <span class="n">puzzle1</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
@@ -511,20 +511,20 @@ The following code finds a solution to the Sudoku puzzle using recursive methods
                <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">9</span><span class="p">]];</span>
 
 
-    <span class="nf">print</span><span class="p">(</span><span class="s">'---------------Solving an easy puzzle ------------'</span><span class="p">)</span>
-    <span class="nf">print</span><span class="p">(</span><span class="s">"The puzzle:"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s">---------------Solving an easy puzzle ------------</span><span class="sh">'</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">The puzzle:</span><span class="sh">"</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">puzzle1</span><span class="p">:</span>
         <span class="nf">print</span><span class="p">(</span><span class="n">r</span><span class="p">);</span>
     <span class="n">sol</span><span class="p">,</span><span class="n">con</span> <span class="o">=</span> <span class="nf">solve_sodoku</span><span class="p">(</span><span class="n">puzzle1</span><span class="p">)</span>
-    <span class="nf">print</span><span class="p">(</span><span class="s">"The solution is:"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">The solution is:</span><span class="sh">"</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">sol</span><span class="p">:</span>
         <span class="nf">print</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
-    <span class="nf">print</span><span class="p">(</span><span class="s">'---------------Solving a hard puzzle ------------'</span><span class="p">)</span>        
-    <span class="nf">print</span><span class="p">(</span><span class="s">"The puzzle:"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s">---------------Solving a hard puzzle ------------</span><span class="sh">'</span><span class="p">)</span>        
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">The puzzle:</span><span class="sh">"</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">puzzle2</span><span class="p">:</span>
         <span class="nf">print</span><span class="p">(</span><span class="n">r</span><span class="p">);</span>
     <span class="n">sol</span><span class="p">,</span><span class="n">con</span> <span class="o">=</span> <span class="nf">solve_sodoku</span><span class="p">(</span><span class="n">puzzle2</span><span class="p">)</span>
-    <span class="nf">print</span><span class="p">(</span><span class="s">"The solution is:"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">The solution is:</span><span class="sh">"</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">sol</span><span class="p">:</span>
         <span class="nf">print</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>    
 </pre></td>
@@ -545,7 +545,7 @@ The following code finds a solution to the Sudoku puzzle using recursive methods
     © Copyright 2024 Ahmad  Zareei.
     <!--  -->     
     
-    Last updated: February 19, 2024.
+    Last updated: February 21, 2024.
     
   </div>
 </footer>
