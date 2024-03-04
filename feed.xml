@@ -1,5 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://azareei.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://azareei.github.io/" rel="alternate" type="text/html" /><updated>2024-02-21T02:17:36-08:00</updated><id>https://azareei.github.io/feed.xml</id><title type="html">Ahmad Zareei</title><subtitle>Personal homepage of Ahmad Zareei, Senion AI research Scientist @META
-</subtitle><entry><title type="html">From Bias Variance Trade Off to Double Descent</title><link href="https://azareei.github.io/blog/2024/Bias-Variance-Trade-off/" rel="alternate" type="text/html" title="From Bias Variance Trade Off to Double Descent" /><published>2024-02-20T06:00:00-08:00</published><updated>2024-02-20T06:00:00-08:00</updated><id>https://azareei.github.io/blog/2024/Bias-Variance-Trade-off</id><content type="html" xml:base="https://azareei.github.io/blog/2024/Bias-Variance-Trade-off/"><![CDATA[<p>This whole section is adapted from <a href="https://udlbook.github.io/udlbook/">Understanding Deep Learning</a>.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://azareei.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://azareei.github.io/" rel="alternate" type="text/html" /><updated>2024-03-03T17:18:57-08:00</updated><id>https://azareei.github.io/feed.xml</id><title type="html">Ahmad Zareei</title><subtitle>Personal homepage of Ahmad Zareei, Senion AI research Scientist @META
+</subtitle><entry><title type="html">Adversarial thinking with AI</title><link href="https://azareei.github.io/blog/2024/Adversarial-thinking-ai/" rel="alternate" type="text/html" title="Adversarial thinking with AI" /><published>2024-03-03T06:00:00-08:00</published><updated>2024-03-03T06:00:00-08:00</updated><id>https://azareei.github.io/blog/2024/Adversarial-thinking-ai</id><content type="html" xml:base="https://azareei.github.io/blog/2024/Adversarial-thinking-ai/"><![CDATA[<p>Today, I tuned into a podcast episode from <a href="https://tbf.fm/episodes/299-adversarial-thinking-in-entrepreneurship">Boostrapped Founder</a>, featuring Arvid discussing the power of AI in fostering adversarial thinking for entrepreneurs. He highlighted using AI, like ChatGPT, to critically assess our ideas and messages. This means having ChatGPT spot potential misunderstandings in our emails, critique our writing, or evaluate our tweets for possible criticisms. This method not only uncovers flaws in our logic but also helps us fix these issues, with AI offering suggestions for improvements. These strategies are part of what’s called prompt engineering, and mastering several can be quite beneficial.</p>
+
+<p>Another prompt engineering technique I find really helpful is this: I ask ChatGPT a question and at the end I ask it to come up with ten clarifying yes/no questions  and only after I answered those questions, provide me an answer. This ensures the AI completely understands my question, resulting in responses that are more precise and tailored to my needs. Using this method has consistently improved the feedback I receive. This shows the power of AI in refining our thought processes and decision-making!</p>]]></content><author><name></name></author><summary type="html"><![CDATA[Today, I tuned into a podcast episode from Boostrapped Founder, featuring Arvid discussing the power of AI in fostering adversarial thinking for entrepreneurs. He highlighted using AI, like ChatGPT, to critically assess our ideas and messages. This means having ChatGPT spot potential misunderstandings in our emails, critique our writing, or evaluate our tweets for possible criticisms. This method not only uncovers flaws in our logic but also helps us fix these issues, with AI offering suggestions for improvements. These strategies are part of what’s called prompt engineering, and mastering several can be quite beneficial.]]></summary></entry><entry><title type="html">From Bias Variance Trade Off to Double Descent</title><link href="https://azareei.github.io/blog/2024/Bias-Variance-Trade-off/" rel="alternate" type="text/html" title="From Bias Variance Trade Off to Double Descent" /><published>2024-02-20T06:00:00-08:00</published><updated>2024-02-20T06:00:00-08:00</updated><id>https://azareei.github.io/blog/2024/Bias-Variance-Trade-off</id><content type="html" xml:base="https://azareei.github.io/blog/2024/Bias-Variance-Trade-off/"><![CDATA[<p>This whole section is adapted from <a href="https://udlbook.github.io/udlbook/">Understanding Deep Learning</a>.</p>
 
 <h2 id="test-error-formulation">Test Error Formulation</h2>
 
@@ -2389,159 +2391,7 @@ Since \(\mathbb{E}[\epsilon] =0\), then</p>
 
     <p>to be cont’d</p>
   </li>
-</ul>]]></content><author><name></name></author><summary type="html"><![CDATA[investment]]></summary></entry><entry><title type="html">Optimum first guess for Persian Wordle (in Farsi)</title><link href="https://azareei.github.io/blog/2022/wordle/" rel="alternate" type="text/html" title="Optimum first guess for Persian Wordle (in Farsi)" /><published>2022-01-25T14:30:00-08:00</published><updated>2022-01-25T14:30:00-08:00</updated><id>https://azareei.github.io/blog/2022/wordle</id><content type="html" xml:base="https://azareei.github.io/blog/2022/wordle/"><![CDATA[<p><a href="vajoor.ir">Vaajoor</a> is the persian version of <a href="https://www.powerlanguage.co.uk/wordle/">wordle</a>. In this post I explore the optimum first guess for <a href="vajoor.ir">Vaajoor</a> in persian.</p>
-
-<p><br /></p>
-
-<p style="text-align:right;dir:rtl;">
-در بازی واجور هدف حدس زدن یک کلمه پنج حرفیه. در این بازی امکان پنج‌بار حدس زدن وجود داره. برای هر کلمه‌ای که حدس میزنیم، برای هر حرف سه حالت وجود داره: اگر حرف در کلمه اصلی وجود نداشته باشه، حرف قرمز میشه. اگر حرف در کلمه اصلی وجود داشته باشد، اما مکانش درست نباشه، زرد میشه. و اگر حرف هم در کلمه اصلی باشه و هم مکانش درست باشه، سبز میشه. خیلی شبیه به بازی فکر‌بکر هست اگه توی بچگی بازی کرده باشین. حال با حدس کلمه و اینکه هر حرف‌ آن در چه حالتی است، کلمه اصلی حدس زده میشه 
-</p>
-
-<p><br />
-<br /></p>
-
-<p style="text-align:right;dir:rtl;">
-نمونه‌ای از بازی
-</p>
-
-<div class="row mt-3" style="text-align:center;">
-    <div class="col-sm mt-3 mt-md-0">
-        <img class="img-fluid rounded z-depth-1" width="300" src="/assets/posts/vajoor_sample.png" />
-    </div>
-</div>
-
-<p><br />
-<br /></p>
-
-<p style="text-align:right;dir:rtl;">
-
-سوالی که پیش میآید این هست که آیا حدس اول بهینه‌ای وجود داره؟
-
-<br />
-
-با نگاهی به لغات ۵ حرفی فرهنگ معین میبینیم که تعداد لغات پنج‌حرفی ۸۲۱۶ کلمه هست. حدس اول میتونه از کل این لیست باشه. با توجه به حدس اول، و اینکه چه حرف‌هایی در آن هست و نیست لیست کلمات قابل قبول برای حدس دوم کمتر میشه. سوال این هست که آیا حدس اولیه بهینه‌ای وجود داره؟
-<br />
-
-هر حدسی که ما میزنیم، بقیه کلمات رو به ۳*۳*۳*۳*۳ دسته تقسیم میکنه، با توجه به اینکه هر حرف این حدس ما در کدوم گروه سبز یا زرد یا قرمز میافته. پس هر کلمه‌ای، بقیه کلمات رو بین این ۳*۳*۳*۳*۳ = ۲۴۳ گروه تقسیم میکنه. حالا با توجه به اینکه کدوم گروه انتخاب شده، ادامه مسیر از بین کلمات اون گروه خواهد بود. حالا اگه حدس اولیه‌ای بهینه باشه، باید کلمات رو جوری بین این گروه‌ها تقسیم کنه، که لیست تعداد کلمات بعدی کمترین باشه! اگه اینجوری باشه، این کلمه انتخاب خوبی بوده
-<br />
-
-برای اینکه کلمه بهینه برای انتخاب اول رو پیدا کنیم، روی لیست تمام کلمات میگردیم، برای هر کلمه نگاه میکنیم که بقیه کلمات چه‌طور بین این ۲۴۳ گروه تقسیم میشن. برای هر گروه تعدادی ثبت میشه. ماکزیمم تعداد کلمات در یه گروه از این ۲۴۳ گروه رو برای اون کلمه ثبت میکنیم. در نهایت کلمه‌ای رو انتخاب میکنیم که این عدد ماکزیممش کمترین باشه. یعنی مینیمم این ماکزیمم رو پیدا میکنیم. در این صورت، در بدترین حالت حدسمون، تعداد کلمات برای انتخاب دوم کمترین شده
-<br />
-
-حالا همین کار رو من برای کلمات فارسی فرهنگ معین انجام دادم (کد شخمی نوشته شده پایین همین صفحه هست). به نظر میاد که حدس بهینه اول کلمه تریان هست. منم نمیدونستم تریان یعنی چه ! انگار به معنی چیزی هست که طبقی شکل هست و بافته شده از شاخ بید! والا منم نفهمیدم یعنی چی. حالا اگه کلمه تریان رو به عنوان انتخاب اول بزاریم، ماکزیمم تعداد کلمات در اون ۲۴۳ گروه فقط ۵۴۲ کلمه هست. یعنی در بد‌ترین حالت برای حدس دوم باید فقط از بین این ۵۴۲ کلمه انتخاب کنیم. حالا همین داستان رو برای حدس دوم هم میشه انجام داد، البته وقتی حدس اول در اومده باشه
-
-<br />
-
-حالا چون تریان خیلی واژه سختی شد، کلمه دوم هم نگاه کردم دیدم خیلی ساده‌تره: تیمار. هم کلمه راحت‌تری هست و هم آدم یادش بمونه. اگه کلمه تیمار رو برای حدس اول انتخاب کنین، برای حدس دوم در بدترین حالت فقط باید بین ۵۶۰ کلمه، اون کلمه مورد نظر رو پیدا کنین. در ادامه هم لینک گیت‌هاب این کد سر‌سری پایتون و لیست کلمات فرهنگ معین رو میزارم خواستین خودتون باش ور برین
-
-</p>
-<p><br />
-<br /></p>
-
-<p><a href="https://github.com/ahmadzareei/vajoor">Github Link</a></p>
-
-<p><br />
-<br /></p>
-
-<figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-</pre></td><td class="code"><pre><span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
-
-<span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="sh">'</span><span class="s">Moin_dictionary_words.txt</span><span class="sh">'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-<span class="n">lines</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="nf">readlines</span><span class="p">()</span>
-
-<span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">]</span>
-
-<span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">lines</span> <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">==</span><span class="mi">5</span><span class="p">]</span>
-
-<span class="kn">from</span> <span class="n">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
-<span class="n">score</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>\<span class="o">*</span><span class="nf">len</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">j</span><span class="p">,</span><span class="n">w</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">words</span><span class="p">):</span>
-<span class="n">category</span> <span class="o">=</span> <span class="nf">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">w_inquiry</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
-<span class="n">key</span> <span class="o">=</span> <span class="sh">''</span>
-<span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">ch</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">w</span><span class="p">):</span>
-<span class="k">if</span> <span class="n">ch</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">w_inquiry</span><span class="p">:</span>
-<span class="n">key</span> <span class="o">+=</span> <span class="sh">'</span><span class="s">K</span><span class="sh">'</span> <span class="c1"># it's black
-</span><span class="k">else</span><span class="p">:</span>
-<span class="k">if</span> <span class="n">ch</span> <span class="o">==</span> <span class="n">w_inquiry</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
-<span class="n">key</span> <span class="o">+=</span> <span class="sh">'</span><span class="s">G</span><span class="sh">'</span> <span class="c1"># it should be green
-</span><span class="k">else</span><span class="p">:</span>
-<span class="n">key</span> <span class="o">+=</span> <span class="sh">'</span><span class="s">Y</span><span class="sh">'</span> <span class="c1"># then it's yellow
-</span><span class="n">category</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-<span class="n">score</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="nf">max</span><span class="p">(</span><span class="n">category</span><span class="p">.</span><span class="nf">values</span><span class="p">())</span>
-
-<span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">(</span><span class="n">score</span><span class="p">).</span><span class="nf">argsort</span><span class="p">()[:</span><span class="mi">20</span><span class="p">]:</span>
-<span class="nf">print</span><span class="p">(</span><span class="n">score</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span><span class="n">words</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
-</pre></td></tr></tbody></table></code></pre></figure>
-
-<p style="text-align:right;dir:rtl;">
-542 تریان
-<br />
-560 تیمار
-<br />
-611 رمانی
-<br />
-631 نوایر
-<br />
-631 روانی
-<br />
-643 ربانی
-<br />
-643 برانی
-<br />
-644 منابر
-<br />
-656 نرمال
-<br />
-661 بهیار
-<br />
-661 بیراه
-<br />
-663 ویران
-<br />
-663 رویان
-<br />
-680 تریاک
-<br />
-681 مهوار
-<br />
-681 میراب
-<br />
-681 هموار
-<br />
-681 بیمار
-<br />
-686 نهاری
-<br />
-686 مناره
-</p>]]></content><author><name></name></author><summary type="html"><![CDATA[Molavi]]></summary></entry><entry><title type="html">Bayesian Machine Learning</title><link href="https://azareei.github.io/blog/2022/Baysian-ml/" rel="alternate" type="text/html" title="Bayesian Machine Learning" /><published>2022-01-25T14:30:00-08:00</published><updated>2022-01-25T14:30:00-08:00</updated><id>https://azareei.github.io/blog/2022/Baysian-ml</id><content type="html" xml:base="https://azareei.github.io/blog/2022/Baysian-ml/"><![CDATA[<p>These is a review of Bayesian Machine Learning. It’s based on HSE’s course on this topic.</p>
+</ul>]]></content><author><name></name></author><summary type="html"><![CDATA[investment]]></summary></entry><entry><title type="html">Bayesian Machine Learning</title><link href="https://azareei.github.io/blog/2022/Baysian-ml/" rel="alternate" type="text/html" title="Bayesian Machine Learning" /><published>2022-01-25T14:30:00-08:00</published><updated>2022-01-25T14:30:00-08:00</updated><id>https://azareei.github.io/blog/2022/Baysian-ml</id><content type="html" xml:base="https://azareei.github.io/blog/2022/Baysian-ml/"><![CDATA[<p>These is a review of Bayesian Machine Learning. It’s based on HSE’s course on this topic.</p>
 
 <h3 id="maximum-likelihood-estimation-mle">Maximum Likelihood Estimation (MLE)</h3>
 
@@ -3087,7 +2937,159 @@ Since \(\mathbb{E}[\epsilon] =0\), then</p>
 
 <p>Or we can summarize it as</p>
 
-\[A(x_0\to x_1) = \min\left(1, \frac{p(x_1)}{p(x_0)} \frac{Q(x_1\to x_0)}{Q(x_0\to x_1)} \right)\]]]></content><author><name></name></author><summary type="html"><![CDATA[Machine learning]]></summary></entry><entry><title type="html">KL Divergence between two normal distributions</title><link href="https://azareei.github.io/blog/2021/KL-Divergence/" rel="alternate" type="text/html" title="KL Divergence between two normal distributions" /><published>2021-03-10T14:10:00-08:00</published><updated>2021-03-10T14:10:00-08:00</updated><id>https://azareei.github.io/blog/2021/KL-Divergence</id><content type="html" xml:base="https://azareei.github.io/blog/2021/KL-Divergence/"><![CDATA[<p>These is a review of Bayesian Machine Learning. It’s based on HSE’s course on this topic.</p>
+\[A(x_0\to x_1) = \min\left(1, \frac{p(x_1)}{p(x_0)} \frac{Q(x_1\to x_0)}{Q(x_0\to x_1)} \right)\]]]></content><author><name></name></author><summary type="html"><![CDATA[Machine learning]]></summary></entry><entry><title type="html">Optimum first guess for Persian Wordle (in Farsi)</title><link href="https://azareei.github.io/blog/2022/wordle/" rel="alternate" type="text/html" title="Optimum first guess for Persian Wordle (in Farsi)" /><published>2022-01-25T14:30:00-08:00</published><updated>2022-01-25T14:30:00-08:00</updated><id>https://azareei.github.io/blog/2022/wordle</id><content type="html" xml:base="https://azareei.github.io/blog/2022/wordle/"><![CDATA[<p><a href="vajoor.ir">Vaajoor</a> is the persian version of <a href="https://www.powerlanguage.co.uk/wordle/">wordle</a>. In this post I explore the optimum first guess for <a href="vajoor.ir">Vaajoor</a> in persian.</p>
+
+<p><br /></p>
+
+<p style="text-align:right;dir:rtl;">
+در بازی واجور هدف حدس زدن یک کلمه پنج حرفیه. در این بازی امکان پنج‌بار حدس زدن وجود داره. برای هر کلمه‌ای که حدس میزنیم، برای هر حرف سه حالت وجود داره: اگر حرف در کلمه اصلی وجود نداشته باشه، حرف قرمز میشه. اگر حرف در کلمه اصلی وجود داشته باشد، اما مکانش درست نباشه، زرد میشه. و اگر حرف هم در کلمه اصلی باشه و هم مکانش درست باشه، سبز میشه. خیلی شبیه به بازی فکر‌بکر هست اگه توی بچگی بازی کرده باشین. حال با حدس کلمه و اینکه هر حرف‌ آن در چه حالتی است، کلمه اصلی حدس زده میشه 
+</p>
+
+<p><br />
+<br /></p>
+
+<p style="text-align:right;dir:rtl;">
+نمونه‌ای از بازی
+</p>
+
+<div class="row mt-3" style="text-align:center;">
+    <div class="col-sm mt-3 mt-md-0">
+        <img class="img-fluid rounded z-depth-1" width="300" src="/assets/posts/vajoor_sample.png" />
+    </div>
+</div>
+
+<p><br />
+<br /></p>
+
+<p style="text-align:right;dir:rtl;">
+
+سوالی که پیش میآید این هست که آیا حدس اول بهینه‌ای وجود داره؟
+
+<br />
+
+با نگاهی به لغات ۵ حرفی فرهنگ معین میبینیم که تعداد لغات پنج‌حرفی ۸۲۱۶ کلمه هست. حدس اول میتونه از کل این لیست باشه. با توجه به حدس اول، و اینکه چه حرف‌هایی در آن هست و نیست لیست کلمات قابل قبول برای حدس دوم کمتر میشه. سوال این هست که آیا حدس اولیه بهینه‌ای وجود داره؟
+<br />
+
+هر حدسی که ما میزنیم، بقیه کلمات رو به ۳*۳*۳*۳*۳ دسته تقسیم میکنه، با توجه به اینکه هر حرف این حدس ما در کدوم گروه سبز یا زرد یا قرمز میافته. پس هر کلمه‌ای، بقیه کلمات رو بین این ۳*۳*۳*۳*۳ = ۲۴۳ گروه تقسیم میکنه. حالا با توجه به اینکه کدوم گروه انتخاب شده، ادامه مسیر از بین کلمات اون گروه خواهد بود. حالا اگه حدس اولیه‌ای بهینه باشه، باید کلمات رو جوری بین این گروه‌ها تقسیم کنه، که لیست تعداد کلمات بعدی کمترین باشه! اگه اینجوری باشه، این کلمه انتخاب خوبی بوده
+<br />
+
+برای اینکه کلمه بهینه برای انتخاب اول رو پیدا کنیم، روی لیست تمام کلمات میگردیم، برای هر کلمه نگاه میکنیم که بقیه کلمات چه‌طور بین این ۲۴۳ گروه تقسیم میشن. برای هر گروه تعدادی ثبت میشه. ماکزیمم تعداد کلمات در یه گروه از این ۲۴۳ گروه رو برای اون کلمه ثبت میکنیم. در نهایت کلمه‌ای رو انتخاب میکنیم که این عدد ماکزیممش کمترین باشه. یعنی مینیمم این ماکزیمم رو پیدا میکنیم. در این صورت، در بدترین حالت حدسمون، تعداد کلمات برای انتخاب دوم کمترین شده
+<br />
+
+حالا همین کار رو من برای کلمات فارسی فرهنگ معین انجام دادم (کد شخمی نوشته شده پایین همین صفحه هست). به نظر میاد که حدس بهینه اول کلمه تریان هست. منم نمیدونستم تریان یعنی چه ! انگار به معنی چیزی هست که طبقی شکل هست و بافته شده از شاخ بید! والا منم نفهمیدم یعنی چی. حالا اگه کلمه تریان رو به عنوان انتخاب اول بزاریم، ماکزیمم تعداد کلمات در اون ۲۴۳ گروه فقط ۵۴۲ کلمه هست. یعنی در بد‌ترین حالت برای حدس دوم باید فقط از بین این ۵۴۲ کلمه انتخاب کنیم. حالا همین داستان رو برای حدس دوم هم میشه انجام داد، البته وقتی حدس اول در اومده باشه
+
+<br />
+
+حالا چون تریان خیلی واژه سختی شد، کلمه دوم هم نگاه کردم دیدم خیلی ساده‌تره: تیمار. هم کلمه راحت‌تری هست و هم آدم یادش بمونه. اگه کلمه تیمار رو برای حدس اول انتخاب کنین، برای حدس دوم در بدترین حالت فقط باید بین ۵۶۰ کلمه، اون کلمه مورد نظر رو پیدا کنین. در ادامه هم لینک گیت‌هاب این کد سر‌سری پایتون و لیست کلمات فرهنگ معین رو میزارم خواستین خودتون باش ور برین
+
+</p>
+<p><br />
+<br /></p>
+
+<p><a href="https://github.com/ahmadzareei/vajoor">Github Link</a></p>
+
+<p><br />
+<br /></p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+</pre></td><td class="code"><pre><span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
+
+<span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="sh">'</span><span class="s">Moin_dictionary_words.txt</span><span class="sh">'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="n">lines</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="nf">readlines</span><span class="p">()</span>
+
+<span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">]</span>
+
+<span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">lines</span> <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">==</span><span class="mi">5</span><span class="p">]</span>
+
+<span class="kn">from</span> <span class="n">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
+<span class="n">score</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>\<span class="o">*</span><span class="nf">len</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">j</span><span class="p">,</span><span class="n">w</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">words</span><span class="p">):</span>
+<span class="n">category</span> <span class="o">=</span> <span class="nf">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">w_inquiry</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
+<span class="n">key</span> <span class="o">=</span> <span class="sh">''</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">ch</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">w</span><span class="p">):</span>
+<span class="k">if</span> <span class="n">ch</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">w_inquiry</span><span class="p">:</span>
+<span class="n">key</span> <span class="o">+=</span> <span class="sh">'</span><span class="s">K</span><span class="sh">'</span> <span class="c1"># it's black
+</span><span class="k">else</span><span class="p">:</span>
+<span class="k">if</span> <span class="n">ch</span> <span class="o">==</span> <span class="n">w_inquiry</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+<span class="n">key</span> <span class="o">+=</span> <span class="sh">'</span><span class="s">G</span><span class="sh">'</span> <span class="c1"># it should be green
+</span><span class="k">else</span><span class="p">:</span>
+<span class="n">key</span> <span class="o">+=</span> <span class="sh">'</span><span class="s">Y</span><span class="sh">'</span> <span class="c1"># then it's yellow
+</span><span class="n">category</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="n">score</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="nf">max</span><span class="p">(</span><span class="n">category</span><span class="p">.</span><span class="nf">values</span><span class="p">())</span>
+
+<span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">(</span><span class="n">score</span><span class="p">).</span><span class="nf">argsort</span><span class="p">()[:</span><span class="mi">20</span><span class="p">]:</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">score</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span><span class="n">words</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p style="text-align:right;dir:rtl;">
+542 تریان
+<br />
+560 تیمار
+<br />
+611 رمانی
+<br />
+631 نوایر
+<br />
+631 روانی
+<br />
+643 ربانی
+<br />
+643 برانی
+<br />
+644 منابر
+<br />
+656 نرمال
+<br />
+661 بهیار
+<br />
+661 بیراه
+<br />
+663 ویران
+<br />
+663 رویان
+<br />
+680 تریاک
+<br />
+681 مهوار
+<br />
+681 میراب
+<br />
+681 هموار
+<br />
+681 بیمار
+<br />
+686 نهاری
+<br />
+686 مناره
+</p>]]></content><author><name></name></author><summary type="html"><![CDATA[Molavi]]></summary></entry><entry><title type="html">KL Divergence between two normal distributions</title><link href="https://azareei.github.io/blog/2021/KL-Divergence/" rel="alternate" type="text/html" title="KL Divergence between two normal distributions" /><published>2021-03-10T14:10:00-08:00</published><updated>2021-03-10T14:10:00-08:00</updated><id>https://azareei.github.io/blog/2021/KL-Divergence</id><content type="html" xml:base="https://azareei.github.io/blog/2021/KL-Divergence/"><![CDATA[<p>These is a review of Bayesian Machine Learning. It’s based on HSE’s course on this topic.</p>
 
 <h3 id="maximum-likelihood-estimation-mle">Maximum Likelihood Estimation (MLE)</h3>
 
@@ -3863,297 +3865,4 @@ is an invertible matrix, it can be removed from both sides, and we obtain</p>
 
 <p>Note that the covariance matrix can be obtained using the above equation as</p>
 
-\[\boxed{\Sigma_{t|t} = \left( \mathbf{I} - \mathbf{K}_t \mathbf{H}_t\right)\Sigma_{t|t-1} \left( \mathbf{I} - \mathbf{K}_t \mathbf{H}_t\right)^\top + \mathbf{K}_t \mathbf{R}_t \mathbf{K}_t^\top}\]]]></content><author><name></name></author><summary type="html"><![CDATA[Kalman Filter Tutorial]]></summary></entry><entry><title type="html">Option Pricing</title><link href="https://azareei.github.io/blog/2021/Option-Pricing/" rel="alternate" type="text/html" title="Option Pricing" /><published>2021-02-24T14:10:00-08:00</published><updated>2021-02-24T14:10:00-08:00</updated><id>https://azareei.github.io/blog/2021/Option-Pricing</id><content type="html" xml:base="https://azareei.github.io/blog/2021/Option-Pricing/"><![CDATA[<p>Recently, I’ve developed a fascination for options trading and the mechanisms behind their pricing. This piece is aimed at sharing my understanding so far about options and their pricing structure. I’ll start with the basics of options, then move onto discussing the limits within which an option’s price can fluctuate. Subsequently, I’ll shed some light on concepts like the Weiner process and the Ito process. To round off, I’ll derive the well-known Black-Scholes equation. Please note: I don’t come from a financial background, so what I’m sharing here are my personal interpretations and learning.</p>
-
-<h1 id="options">Options</h1>
-
-<p>An options is a contract that gives the buyer the <em>option,</em> but not obligation, to buy (i.e., <strong>Call</strong> option) or sell (i.e., <strong>Put</strong> option) an asset (such as stock) at a specific strike price before a certain date (<strong>American</strong> option) or at a certain date (<strong>European</strong> option).</p>
-
-<p>To make it easier we focus on European options. In summary we then have the following two primary option categories: <strong>calls</strong> and <strong>puts</strong>.</p>
-
-<ul>
-  <li><strong>Call</strong>: The right to purchase stock at the strike price \(P\) from the seller of the option at time \(T.\)</li>
-  <li><strong>Put</strong>: The right to sell a stock at price \(P\) to the seller of option at time \(T\).</li>
-</ul>
-
-<p>The objective of option pricing is to answer how much an option contract worth at time \(t&lt;T\) ?</p>
-
-<div class="row mt-3" style="text-align:center;">
-    <div class="col-sm mt-3 mt-md-0">
-        <img class="img-fluid rounded z-depth-1" width="900" src="/assets/posts/options.png" />
-    </div>
-</div>
-
-<p><br /></p>
-
-<h2 id="interest-rate">Interest rate</h2>
-
-<p>Interest rate is the cost of borrowing money. If you borrow/lend \(X\)amount of money, you are expected to give-back/take \(Xe^{rT}\) after time \(T\). Basically it means time is money.</p>
-
-<p><br /></p>
-<h2 id="bounds-on-option-price">Bounds on Option Price</h2>
-
-<p>We can find bounds on the values of options.</p>
-
-<p><br /></p>
-<h3 id="call-option">Call Option:</h3>
-
-<p>The price of a call option \(c\) at the time of purchase \(t=t_0\) is  \(c = \mathbb{E}(S_T) - X\). The price of an option cannot be larger than the stock price, i.e., \(\boxed{c \leq S_0}\). If this was the case, one would sell the call options, buy the stock and invest the rest. On the other hand to find the lower bound, consider the following portfolios</p>
-
-<ul>
-  <li>One call option and \(Xe^{-rT}\) amount of money invested risk-free</li>
-  <li>One stock at \(S_0\)</li>
-</ul>
-
-<p>In the first scenario the bond worth \(X\) amount of money, and the call option worth \(\max(S_T-X,0)\), so in total we will have \(X+\max(S_T-X,0) = \max(S_T,X)\) The second portfolio however worth \(S_T\). comparing the two, we find that</p>
-
-\[\text{since }  \max(S_T,X) \geq S_T \to c + Xe^{-rT} \geq S_0 \to \boxed{c \geq S_0 - Xe^{-rT}}\]
-
-<p><br /></p>
-<h3 id="put-option">Put Option</h3>
-
-<p>The value of a put option is \(p = X-\mathbb{E}(S_T)\). The put option can not worth more than the discounted value of the strike price, i.e., \(\boxed{p \leq Xe^{-rT}}\). Since if this wasn’t the case, one would sell the put option, invest the money, and at the exiration date, he will have more money that he needs for settlement.  To find the lower bound, we consider the following portfolios</p>
-
-<ul>
-  <li>One put option \(p\) and one stock \(S_0\)</li>
-  <li>A bond paying \(X\) at time \(t=T\). It should basically cost \(Xe^{-rT}\).</li>
-</ul>
-
-<p>In the first scenario, the stock worth \(S_T\), and the put worth \(\max(X-S_T,0)\). So the portfolio, worth \(\max(X,S_T)\). on the other hand, the second portfolio worth \(X\). As a result, we have</p>
-
-\[\text{since }\max(X,S_T) \geq X \to p + S_0 \geq Xe^{-rT} \to \boxed{p \geq Xe^{-rT}-S_0}\]
-
-<p><br /></p>
-<h3 id="put-call-parity">Put-Call Parity</h3>
-
-\[\text{call option at }c \text{ matures to } \max(S_T-X,0) \\ \text{put option at }p \text{ matures to } \max(X-S_T,0) \\\]
-
-<p>No, imagine we buy a call option and a bond at \(Xe^{-rT}\) on one hand, and a put option and a stock at \(S_0\). The portiolios then become</p>
-
-<ul>
-  <li>call option \(c\) + bond \(Xe^{-rT}\) matures to \(\max(S_T-X,0) + X = \max(S_T,X)\)</li>
-  <li>put option \(p\) + stock \(S_0\) matures to \(\max(X-S_T,0) + S_T = \max(X,S_T)\)</li>
-</ul>
-
-<p>Since these two profiles have the same maturity, they should be equal or</p>
-
-\[\boxed{c + Xe^{-rT} = p + S_0}\]
-
-<p>The above equation is known as put-call parity which relates the price of a call option to the price of a call option.</p>
-
-<p><br /></p>
-<h2 id="weiner-process">Weiner Process</h2>
-
-<p>A variable \(z\) follows a Weiner process, if the following two properties hold</p>
-
-<ul>
-  <li>The change \(\Delta z\) during period \(\Delta t\), is \(\Delta z = \epsilon \sqrt{\Delta t}\), where \(\epsilon\) has a standard normal distribution with mean zero and standard deviation unity, i.e., \(\epsilon \in \mathcal{N}(0,1)\).</li>
-  <li>The values of \(\Delta z\) fr any two short intervals of time, \(\Delta t\), are independent.</li>
-</ul>
-
-<p>From the first property, we can conclude that \(\Delta z\) has a normal distribution as \(\mathcal{N}(0,\Delta t)\). If we also consider the changes from \(t=0\), to \(t=T\), we have</p>
-
-\[z(T)-z(0) = \sum \epsilon_i \sqrt{\Delta t}\]
-
-<p>where all of the \(\epsilon_i\)s are independent and are distributed \(\mathcal{N}(0,1)\). Since \(\epsilon_i\)s are independent, then \(z(T)-z(0) \in \mathcal(0,N\Delta t) = \mathcal{N}(0,T)\).</p>
-
-<p><br /></p>
-<h2 id="generalized-weiner-process">Generalized Weiner Process</h2>
-
-<p>A generalized Weiner process for a random variable \(x\)  is defined as</p>
-
-\[\Delta x = a \Delta t + b \epsilon \sqrt{\Delta t}\]
-
-<p>where \(a,b\) are constants. If \(a\) and \(b\) are a function of \(x,t\) then, this process is called an <strong>Ito Process.</strong></p>
-
-<p><br /></p>
-<h2 id="itos-lemma">Ito’s Lemma</h2>
-
-<p>Suppose a random variable \(x\) follows an Ito process</p>
-
-\[dx = a(x,t) dt + b(x,t) dz\]
-
-<p>If \(G\) is a function of \(x\) and \(t\), then</p>
-
-\[dG = \left(\frac{\partial G}{\partial t} +  \frac{\partial G}{\partial x} a + \frac{1}{2}\frac{\partial^2 G}{\partial x^2} b^2\right) dt + \frac{\partial G}{\partial x} b ~dz\]
-
-<p><br /></p>
-<h2 id="stock-price-as-random-walk">Stock Price as Random Walk</h2>
-
-<p>Stock price return does a random walk with drift \(\mu\) and</p>
-
-\[\frac{dS}{S} = \mu  dt + \zeta\]
-
-<p>where \(\zeta\) is a noise term (e.g., Gaussian) with standard deviation \(\zeta_0\) and vanishing mean. Each time step has a variance of \(\zeta_0^2\), and the number of steps are \(t/dt\). Therefore the standard deviation will be \(\zeta_0 \sqrt{t/dt}\). In order for the limit of \(dt\to0\) to make sense, \(\zeta_0 \propto \sqrt{dt}\). Therefore, we write the noise term as \(\zeta=\sigma \epsilon \sqrt{dt}\)  , where \(\sigma\) is the volatility of the stock return and \(\epsilon\) is a Gaussian random number with zero mean and unit standard deviation \(\mathcal{N}(0,1)\).</p>
-
-<p>Let’s first take a look at the stocks random walk. In the following we assume a \(15\%\) return (\(\mu = 0.15\)) and a volatility of \(30\%\) (\(\sigma =0.15\)).</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span> 
-<span class="kn">import</span> <span class="n">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
-
-<span class="n">S0</span> <span class="o">=</span> <span class="mf">1.</span><span class="p">;</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">;</span> <span class="n">mu</span><span class="o">=</span><span class="mf">0.15</span><span class="p">;</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.3</span><span class="p">;</span> <span class="n">T</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
-<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">T</span><span class="p">,</span><span class="n">dt</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
-    <span class="n">S</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">zeros</span><span class="p">(</span><span class="n">t</span><span class="p">.</span><span class="n">shape</span><span class="p">)</span>
-    <span class="n">S</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">S0</span><span class="p">;</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nf">int</span><span class="p">((</span><span class="n">T</span><span class="o">-</span><span class="n">dt</span><span class="p">)</span><span class="o">/</span><span class="n">dt</span><span class="p">)):</span>
-        <span class="n">S</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="n">S</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">np</span><span class="p">.</span><span class="nf">exp</span><span class="p">(</span><span class="n">mu</span><span class="o">*</span><span class="n">dt</span><span class="o">+</span><span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">randn</span><span class="p">(</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">sigma</span><span class="o">*</span><span class="n">np</span><span class="p">.</span><span class="nf">sqrt</span><span class="p">(</span><span class="n">dt</span><span class="p">));</span>
-    <span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">S</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="sh">'</span><span class="s">b</span><span class="sh">'</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="p">.</span><span class="nf">yscale</span><span class="p">(</span><span class="sh">'</span><span class="s">log</span><span class="sh">'</span><span class="p">)</span>
-<span class="n">plt</span><span class="p">.</span><span class="nf">xlabel</span><span class="p">(</span><span class="sh">'</span><span class="s">time</span><span class="sh">'</span><span class="p">)</span>
-<span class="n">plt</span><span class="p">.</span><span class="nf">ylabel</span><span class="p">(</span><span class="sh">'</span><span class="s">Log(S/S_0)</span><span class="sh">'</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="p">.</span><span class="nf">show</span><span class="p">()</span>
-</code></pre></div></div>
-
-<div class="row mt-3" style="text-align:center;">
-    <div class="col-sm mt-3 mt-md-0">
-        <img class="img-fluid rounded z-depth-1" width="700" src="/assets/posts/Stocks.png" />
-    </div>
-</div>
-
-<p>In summary we had</p>
-
-\[dS = \mu S dt + \sigma S dz\]
-
-<p>Now, imagine that \(G = \ln S\), from Ito’s Lemma, we have</p>
-
-\[\frac{\partial G}{\partial S} = \frac{1}{S}, \quad \frac{\partial^2 G}{\partial S^2} = \frac{-1}{S^2}, \quad \frac{\partial G}{\partial t} = 0\]
-
-<p>As a result, we find that</p>
-
-\[dG = \left( \mu - \frac{\sigma^2}{2}\right) dt + \sigma dz\]
-
-<p>So, we can say that</p>
-
-\[\ln S_T - \ln S_0 \sim \mathcal{N}\left( (\mu - \frac{\sigma^2}{2})T, \sigma^2 T\right)\]
-
-<p>Example. Imagine a stock price of \(10\$\), with annual return of \(16\%\), and volatility of \(20\%\). After \(6\) months, what is the probability distribution of stock price?</p>
-
-\[\ln S_T - \ln10 \sim \mathcal{N}\left( (0.16-\frac{0.2^2}{2})\frac{1}{2}, 0.2^2 \frac{1}{2} \right)\\\]
-
-\[\ln S_T - \ln10 \sim \mathcal{N}\left(0.07, 0.2 \right)\\\]
-
-\[10 e^{0.07-0.2}\leq S_T \leq 10 e^{0.07+0.2} \to 8.78 \leq S_T \leq 13.10\]
-
-<p>with \(90\%\) probability the stock price lies in this interval.</p>
-
-<h1 id="derivation-of-black-scholes-merton">Derivation of Black-Scholes-Merton</h1>
-
-<p>Assume \(f\) is the price of an option at time \(t\) contingent of stock \(S\). The variable \(f\) should be a function of \(S\) and t. Using Ito’s lemma, we have</p>
-
-\[df = \left( \frac{\partial f}{\partial t} +  \frac{\partial f}{\partial S} \mu S + \frac{1}{2}  \frac{\partial^2 f}{\partial S^2} \sigma^2 S^2  \right) dt + \frac{\partial f}{\partial S} \sigma S dz\]
-
-<p>Imagine a portfolio \(\Pi\) made of \(-1\) derivative and \(\partial f/\partial S\) shares, i.e.,</p>
-
-\[\Pi = -f + \frac{\partial f}{\partial S} S\]
-
-<p>The change in the portfolio then becomes</p>
-
-\[\Delta \Pi = -\Delta f + \frac{\partial f}{\partial S} \Delta S\]
-
-<p>Using the obtained results so far, we have</p>
-
-\[\Delta \Pi = \left( -\frac{\partial f}{\partial t} - \frac{1}{2} \frac{\partial^2 f}{\partial S^2} \sigma^2 S^2 \right)\Delta t\]
-
-<p>The above equation, does not involve \(\Delta z\), so it must be risk-less during the time \(\Delta t\). If it earned more than return, it will be a risk-less profit by borrowing money and buying the portfolio. If this portfolio earns less than r, shorting such portfolio results in a risk-less profit.</p>
-
-\[\Delta \Pi = r \Pi \Delta t\]
-
-\[\left( -\frac{\partial f}{\partial t} - \frac{1}{2} \frac{\partial^2 f}{\partial S^2} \sigma^2 S^2 \right)\Delta t = r \left( -f + \frac{\partial f}{\partial S} S \right) \Delta t\]
-
-\[\boxed{\frac{\partial f}{\partial t} + \frac{1}{2}\sigma^2 S^2  \frac{\partial^2 f}{\partial S^2} +r S\frac{\partial f}{\partial S} = r f }\]
-
-<p>The boundary condition for a European option is</p>
-
-<ul>
-  <li>Call option at \(t=T\), \(f=\max(S-X,0)\)</li>
-  <li>Put option at \(t=T\), \(f = \max(X-S,T)\)</li>
-</ul>
-
-<p><br /></p>
-<h2 id="solving-black-scholes-equation">Solving Black-Scholes Equation</h2>
-
-<p>We first take the following change of variables</p>
-
-\[\tilde S = \log S, \quad \tilde t = T-t\]
-
-<p>As a result</p>
-
-\[\frac{\partial f}{\partial S} = \frac{1}{S} \frac{\partial f}{\partial \tilde S} , \quad \frac{\partial^2 f}{\partial S^2} = \frac{-1}{S^2} \frac{\partial f}{\partial \tilde S}  + \frac{1}{S^2} \frac{\partial^2 f}{\partial \tilde S^2}, \quad \frac{\partial f}{\partial t} = -\frac{\partial f}{\partial t}\]
-
-<p>w and the B-S equation becomes</p>
-
-\[- \frac{\partial f}{\partial \tilde t} + \frac{1}{2}\sigma^2 S^2  \left( \frac{-1}{S^2} \frac{\partial f}{\partial \tilde S}  + \frac{1}{S^2} \frac{\partial^2 f}{\partial \tilde S^2} \right) +r S\left( \frac{1}{S} \frac{\partial f}{\partial \tilde S} \right) = r f\]
-
-\[- \frac{\partial f}{\partial \tilde t} + \frac{1}{2}\sigma^2   \frac{\partial^2 f}{\partial \tilde S^2}  + \left( r- \frac{\sigma^2}{2}\right)   \frac{\partial f}{\partial \tilde S} = r f\]
-
-<p>Next, taking out the risk-free movement in the price \(\tilde f = e^{-r\tilde t}f\), we find that</p>
-
-\[\frac{\partial \tilde f}{\partial \tilde t} = \frac{1}{2}\sigma^2   \frac{\partial^2 \tilde  f}{\partial \tilde S^2}  + \left( r- \frac{\sigma^2}{2}\right)   \frac{\partial \tilde f}{\partial \tilde S}\]
-
-<p>The first derivative can also be taken out using method of lines, i.e., defining a new variable \(x =\tilde S + (r-\sigma^2/2)\tilde t\), we find that</p>
-
-\[\frac{\partial \tilde f}{\partial \tilde t} = \frac{\sigma^2}{2} \frac{\partial^2 \tilde f}{\partial x^2}\]
-
-<p>where \(\tilde f = e^{-r\tilde t} f\), and \(x = \log S + (r-\sigma^2/2)\tilde t\). The initial condition then becoms that at \(\tilde t = 0\)</p>
-
-<ul>
-  <li>Call option \(\tilde f(x,0)=\max(e^x-X,0)\)</li>
-  <li>Put option \(\tilde f(x,0)=\max(X-e^x,0)\)</li>
-</ul>
-
-<p>The Green’s function for the heats equation solution is</p>
-
-\[\frac{\partial u}{\partial t} = D \frac{\partial^2 u}{\partial x^2} \to G(t,t',x,x') = \frac{1}{\sqrt{4\pi D |t-t'|}} e^{-\frac{(x-x')^2}{4D|t-t'|}}\]
-
-<p>As a result the solution to the above equation becomes</p>
-
-\[\tilde f (x,t) = \frac{1}{\sqrt{2\pi \sigma^2}} \int_{-\infty}^{\infty} e^{-\frac{(x-x')^2}{2\sigma^2 t}} \max(e^{x'}-X,0)dx'\]
-
-\[\tilde f (x,t) = \frac{1}{\sqrt{2\pi \sigma^2}} \left[ \int_{-\infty}^{\log X} e^{-\frac{(x-x')^2}{2\sigma^2 t}} (X-e^{x'})dx' + \int_{\log X}^{\infty} e^{-\frac{(x-x')^2}{2\sigma^2 t}} (e^{x'}-X)dx'\right]\]
-
-<p><br /></p>
-<h2 id="put-call-parity-american-option">Put-Call Parity (American Option)</h2>
-<p>So far, what we have discussed was about European options. But what happens in American options? Let’s start with Put-Call parity and what it looks like for American options. Consider the following portfolios</p>
-
-<ul>
-  <li>One stock \(S_0\) and a put option \(P\) at strike price \(X\)</li>
-  <li>A call option \(C\) with strike price \(X\), and cash \(X\) invested at a risk free rate \(r\)</li>
-</ul>
-
-<p>Imagine that we exercise at time \(t&lt;T\). The payoff of the first portfolio is</p>
-
-\[\left[\max(X-S_t,0) + S_t\right] e^{r(T-t)} = \max(X,S_t) e^{r(T-t)}\]
-
-<p>where we imagined that the cash received at time \(t\), is reinvested at the risk-free rate \(r\). The payoff of the second portfolio is</p>
-
-\[\left[ \max(S_t-X,0) + Xe^{rt}  \right] e^{r(T-t)} = \left[ \max(S_t,X) + X(e^{rt}-1)  \right] e^{r(T-t)} = \max(S_t,X)e^{r(T-t)} + X(e^{rT} - e^{r(T-t)})\]
-
-<p>As a result we have</p>
-
-\[S_0 + P \leq C + X\]
-
-<p>Similarly, imagine the following portfolios</p>
-
-<ul>
-  <li>One stock \(S_0\) and a put option \(P\) at strike price \(X\)</li>
-  <li>A call option \(C\) at strike price \(X\) and and \(Xe^{-rT}\) invested at a risk free rate \(r\)</li>
-</ul>
-
-<p>Again, imagine that we exercise at time \(t\), again the first portfolio payoff is</p>
-
-\[\left[\max(X-S_t,0) + S_t\right] e^{r(T-t)} = \max(X,S_t) e^{r(T-t)}\]
-
-<p>The second portfolio can only be traded at \(t=T\), since otherwise the money will not be enough. Therefore the payoff of the second portfolio becomes</p>
-
-\[\max(S_T-X,0) + X = \max(S_T,X)\]
-
-<p>As a result, the payoff of the first portfolio is larger, or</p>
-
-\[C + Xe^{-rT} \leq S_0 + P\]
-
-<p>In summary, we have</p>
-
-\[\boxed{C+ Xe^{-rT} \leq S_0+P \leq C+ X}\]]]></content><author><name></name></author><summary type="html"><![CDATA[How options are priced?]]></summary></entry></feed>
+\[\boxed{\Sigma_{t|t} = \left( \mathbf{I} - \mathbf{K}_t \mathbf{H}_t\right)\Sigma_{t|t-1} \left( \mathbf{I} - \mathbf{K}_t \mathbf{H}_t\right)^\top + \mathbf{K}_t \mathbf{R}_t \mathbf{K}_t^\top}\]]]></content><author><name></name></author><summary type="html"><![CDATA[Kalman Filter Tutorial]]></summary></entry></feed>

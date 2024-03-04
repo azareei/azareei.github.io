@@ -1175,8 +1175,8 @@ Fluids simulations for incompressible, inviscid Navier-Stokes equation solved wi
     const width = 300;
     const height = 400;
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, width / height, 1, 10000);
-    const scale = 0.7;
+    const camera = new THREE.PerspectiveCamera(90, width / height, 1, 10000);
+    const scale = 0.77;
     camera.position.set(200 * scale, 70 * scale, 400 * scale);
 
     const renderer = new THREE.WebGLRenderer();
@@ -1185,10 +1185,10 @@ Fluids simulations for incompressible, inviscid Navier-Stokes equation solved wi
     renderer.domElement.style.borderRadius = '20px';
     renderer.domElement.style.overflow = 'hidden';
     // Improved lighting
-    const ambientLight = new THREE.AmbientLight(0xffffff, 5.5); // Soft white light
+    const ambientLight = new THREE.AmbientLight(0xffffff, 9.50); // Soft white light
     scene.add(ambientLight);
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 5.8);
-    directionalLight.position.set(0, 1, 1);
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 2.5);
+    directionalLight.position.set(100, 150, 50);
     scene.add(directionalLight);
 
     // OrbitControls for camera interaction
@@ -1239,7 +1239,7 @@ Fluids simulations for incompressible, inviscid Navier-Stokes equation solved wi
     © Copyright 2024 Ahmad  Zareei.
     <!--  -->     
     
-    Last updated: February 21, 2024.
+    Last updated: March 03, 2024.
     
   </div>
 </footer>
