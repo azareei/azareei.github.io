@@ -2,12 +2,19 @@
  * Content
  ******************************************************************************/
 
-@use 'variables';
-
 body {
   padding-bottom: 70px;
   color: var(--global-text-color);
   background-color: var(--global-bg-color);
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    scroll-margin-top: 66px;
+  }
 }
 
 body.fixed-top-nav {
@@ -18,11 +25,10 @@ body.fixed-top-nav {
 body.sticky-bottom-footer {
   // Remove padding below footer.
   padding-bottom: 0;
-  text-align: center;
 }
 
 .container {
-  max-width: variables.$max-content-width;
+  max-width: $max-content-width;
 }
 
 // Profile
@@ -35,13 +41,13 @@ body.sticky-bottom-footer {
 // TODO: redefine content layout.
 
 /******************************************************************************
-  * Publications
-  ******************************************************************************/
+ * Publications
+ ******************************************************************************/
 
 // TODO: redefine publications layout.
 
 /*****************************************************************************
-  * Projects
-  *****************************************************************************/
+* Projects
+*****************************************************************************/
 
 // TODO: redefine projects layout.
