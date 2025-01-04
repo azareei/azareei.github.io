@@ -4,5 +4,5 @@ Kd .8 0.9 1.0  # Keep diffuse color to allow texture colors to show.
 Ka .2 .2 .2  # Reduced ambient color to prevent flatness.
 Ks .2 .2 .2  # Reduced specular color to decrease glossiness.
 Ns 1.2  # Lower specular exponent to spread the highlight, reducing the 'glossy' look.
-map_Kd texture.png# Texture map
+map_Kd texture.JPG# Texture map
 Ni 1.00
