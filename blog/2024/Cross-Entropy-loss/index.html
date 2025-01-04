@@ -178,14 +178,9 @@
 
 \[q(y) = \frac{1}{N} \sum_{i=1}^N \delta (y-y_{i})\]
 
-<table>
-  <tbody>
-    <tr>
-      <td>where \(\delta(\cdot)\) is the delta Dirac function. We want to minimize the KL divergence between the output of the neural network $$P(y</td>
-      <td>\theta)$$, and this empirical distribution,</td>
-    </tr>
-  </tbody>
-</table>
+<p>where \(\delta(\cdot)\) is the delta Dirac function. We want to minimize the KL divergence between the output of the neural network 
+\(P(y|\theta)\), 
+and this empirical distribution,</p>
 
 \[\hat{\theta} = \arg\min_\theta \left[ \int_{-\infty}^{\infty} q(y) \log {q(y)} dy - \int_{-\infty}^{\infty} q(y) \log {p(y)} dy \right]\]
 
