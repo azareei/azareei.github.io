@@ -1,8 +1,0 @@
-newmtl 08_22_2022_002-ref:initialShadingGroup
-illum 2  # Use a simpler lighting model that includes diffuse and specular, without reflection.
-Kd .8 0.9 1.0  # Keep diffuse color to allow texture colors to show.
-Ka .2 .2 .2  # Reduced ambient color to prevent flatness.
-Ks .2 .2 .2  # Reduced specular color to decrease glossiness.
-Ns 1.2  # Lower specular exponent to spread the highlight, reducing the 'glossy' look.
-map_Kd texture.png# Texture map
-Ni 1.00
