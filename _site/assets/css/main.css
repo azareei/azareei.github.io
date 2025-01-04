@@ -25,12 +25,12 @@
 }
 
 html[data-theme=dark] {
-  --global-bg-color: #424242;
+  --global-bg-color: rgb(66.25, 66.25, 66.25);
   --global-text-color: #e8e8e8;
   --global-theme-color: #2698BA;
-  --global-hover-color: #7bcce4;
+  --global-hover-color: rgb(123.3883928571, 204.0535714286, 228.1116071429);
   --global-footer-bg-color: #e8e8e8;
-  --global-footer-text-color: #424242;
+  --global-footer-text-color: rgb(66.25, 66.25, 66.25);
   --global-footer-link-color: #000000;
   --global-icon-color: navajowhite;
 }
@@ -171,7 +171,7 @@ a:hover:after, table.table a:hover:after {
   display: block;
   width: 22px;
   height: 2px;
-  background-color: #424242;
+  background-color: rgb(66.25, 66.25, 66.25);
   border-radius: 1px;
   margin-bottom: 4px;
   transition: all 0.2s;
