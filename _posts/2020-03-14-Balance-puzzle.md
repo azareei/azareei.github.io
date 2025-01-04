@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  Unveiling the Odd Marble
-date: 2020-03-14 21:01:00
+date: 2020-03-14 21:01:00-0400
 description: Problem-Solving in Three Weighings
 ---
 

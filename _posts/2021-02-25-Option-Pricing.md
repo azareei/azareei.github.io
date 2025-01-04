@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  Option Pricing
-date: 2021-2-24 22:10:00
+date: 2021-2-24 22:10:00-0400
 description: How options are priced?
 ---
 

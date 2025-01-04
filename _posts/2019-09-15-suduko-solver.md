@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Sudoku solver with Pyhton
-date: 2019-09-15 15:09:00
+date: 2019-09-15 15:09:00-0400
 description: How to solve Sudoku with Python?
 ---
 

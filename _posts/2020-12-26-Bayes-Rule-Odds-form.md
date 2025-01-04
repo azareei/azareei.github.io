@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  Baye's rule in odds form
-date: 2020-12-26 14:30:00
+date: 2020-12-26 14:30:00-0400
 description: Baye's rule in odds form
 ---
 

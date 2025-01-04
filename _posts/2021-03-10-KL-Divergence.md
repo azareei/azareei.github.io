@@ -1,7 +1,7 @@
 ---
 layout: post
 title: KL Divergence between two normal distributions
-date: 2021-03-10 22:10:00
+date: 2021-03-10 22:10:00-0400
 description: KL Divergence
 ---
 

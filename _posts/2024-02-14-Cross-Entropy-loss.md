@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Cross Entropy Loss Derivation
-date: 2024-02-14 10:30:00
+date: 2024-02-14 10:30:00-0400
 description: Cross Entropy Loss
 ---
 

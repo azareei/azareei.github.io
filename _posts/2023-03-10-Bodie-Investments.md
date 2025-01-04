@@ -1,7 +1,7 @@
 ---
 layout: post
 title: My Notes on Investments by Bodie
-date: 2023-03-10 22:30:00
+date: 2023-03-10 22:30:00-0400
 description: investment
 ---
 

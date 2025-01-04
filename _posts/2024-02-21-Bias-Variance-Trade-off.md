@@ -1,7 +1,7 @@
 ---
 layout: post
 title: From Bias Variance Trade Off to Double Descent 
-date: 2024-02-20 14:00:00
+date: 2024-02-20 14:00:00-0400
 description: 
 ---
 

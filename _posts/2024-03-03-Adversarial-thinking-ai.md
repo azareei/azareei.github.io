@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Adversarial thinking with AI
-date: 2024-03-03 14:00:00
+date: 2024-03-03 14:00:00-0400
 description: 
 ---
 

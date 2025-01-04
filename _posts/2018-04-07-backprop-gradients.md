@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Backpropagation in Neural Networks
-date: 2018-04-07 16:34:00
+date: 2018-04-07 16:34:00-0400
 ---
 
 <h2> Backpropagation of Gradients </h2>

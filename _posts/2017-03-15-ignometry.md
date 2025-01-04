@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Ignometry 
-date: 2016-04-08 18:00:00
+date: 2016-04-08 18:00:00-0400
 description: 
 ---
 

@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  Buffon's Needle
-date: 2020-10-27 22:30:00
+date: 2020-10-27 22:30:00-0400
 description: Buffon's Needle
 ---
 

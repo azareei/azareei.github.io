@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  Maximizing Consumption from Investment
-date: 2020-09-18 22:10:00
+date: 2020-09-18 22:10:00-0400
 description: A Guide on Interest Reinvestment Strategies
 ---
 

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Goals and The Drift That Directs Your Life's Random Walk
-date: 2023-05-21 10:30:00
+date: 2023-05-21 10:30:00-0400
 description: Goals and Random Walk
 ---
 

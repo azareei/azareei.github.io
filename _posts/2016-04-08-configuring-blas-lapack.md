@@ -1,7 +1,7 @@
 ---
 layout: post
 title: How to install Lapack & Blas on linux? 
-date: 2016-04-08 14:00:00
+date: 2016-04-08 14:00:00-0400
 description: 
 ---
 

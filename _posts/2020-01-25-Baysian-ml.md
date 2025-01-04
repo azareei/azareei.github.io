@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Bayesian Machine Learning
-date: 2022-01-25 22:30:00
+date: 2022-01-25 22:30:00-0400
 description: Machine learning
 ---
 

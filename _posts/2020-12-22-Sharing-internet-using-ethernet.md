@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  Sharing internet using Ethernet connection
-date: 2020-12-22 22:30:00
+date: 2020-12-22 22:30:00-0400
 description: Sharing internet using Ethernet
 ---
 

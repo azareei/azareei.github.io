@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Qabus-name (in Farsi)
-date: 2023-03-25 22:30:00
+date: 2023-03-25 22:30:00-0400
 description: Qabusname
 ---
 

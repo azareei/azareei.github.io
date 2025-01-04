@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  Kalman Filter
-date: 2021-03-01 22:10:00
+date: 2021-03-01 22:10:00-0400
 description: Kalman Filter Tutorial
 ---
 
