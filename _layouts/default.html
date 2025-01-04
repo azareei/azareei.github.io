@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  {% include head.html %}
+  {% include scripts/mathjax.html %}
+  <meta name="google-site-verification" content="SwVgS1KjZmScXzgcGAsFKN5eksnUe79r12brKRMZLko" />
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TWETJLDW9Z"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-TWETJLDW9Z');
+  </script>
+</head>
+
+<body
+  class="{% if site.navbar_fixed %}fixed-top-nav{% endif %} {% unless site.footer_fixed %}sticky-bottom-footer{% endunless %}">
+
+  <!-- Header -->
+
+  {% include header.html %}
+
+  <!-- Content -->
+
+  <div class="container mt-5">
+    {{ content }}
+  </div>
+
+  <!-- Footer -->
+
+  {% include footer.html %}
+
+</body>
+
+{% include scripts/jquery.html %}
+{% include scripts/bootstrap.html %}
+{% include scripts/mansory.html %}
+{% include scripts/misc.html %}
+
+</html>
+
+{% include google-analytics.html %}
