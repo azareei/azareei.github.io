@@ -3,7 +3,7 @@ name: Build and Deploy Jekyll Site
 on:
   push:
     branches:
-      - main # Adjust to your default branch
+      - main  # Adjust to your default branch
 
 jobs:
   build:
@@ -11,16 +11,15 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - name: Set up Ruby
+      - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.1 # Match your Ruby version
-      - name: Install dependencies
-        run: |
-          bundle install
-      - name: Build the site
-        run: |
-          bundle exec jekyll build
+          ruby-version: '3.1'  # Match your local Ruby version
+          bundler-cache: true
+      - name: Install Dependencies
+        run: bundle install
+      - name: Build Site
+        run: bundle exec jekyll build
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:

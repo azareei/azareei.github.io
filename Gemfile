@@ -1,28 +1,45 @@
 source 'https://rubygems.org'
 
-gem 'github-pages', group: :jekyll_plugins # Handles dependencies for GitHub Pages
-gem 'webrick', '~> 1.7' # Necessary for Jekyll with newer Ruby versions
+gem 'jekyll', '~> 4.3'
+gem 'webrick', '~> 1.9' # Required for Ruby 3.x compatibility
 
 group :jekyll_plugins do
-  gem 'jekyll-archives'
-  gem 'jekyll-diagrams'
-  gem 'jekyll-email-protect'
   gem 'jekyll-feed'
-  gem 'jekyll-imagemagick'
-  gem 'jekyll-minifier'
   gem 'jekyll-paginate-v2'
-  gem 'jekyll-scholar'
-  gem 'jekyll-sitemap'
-  gem 'jekyll-link-attributes'
+  gem 'jekyll-seo-tag'
+  gem 'jekyll-scholar', '~> 7.1' # Compatible with Jekyll 4.x
+  gem 'jekyll-minifier', '~> 0.1.10'
+  gem 'jekyll-email-protect'
+  gem 'jekyll-diagrams', '~> 0.10.0'
   gem 'jekyll-twitter-plugin'
+  gem 'jekyll-archives', '~> 2.3.0'
+  gem 'jekyll-imagemagick'
+  gem 'jekyll-link-attributes'
   gem 'jemoji'
-  gem 'jekyll-github-metadata'
+  gem 'jekyll-github-metadata' # Required gem
+  gem 'jekyll-sass-converter', '~> 3.0'
 end
 
-group :other_plugins do
-  gem 'httparty'
-  gem 'feedjira'
-end
-
-gem 'jekyll-sass-converter', '~> 1.5.0' # Ensures compatibility with GitHub Pages
-gem 'faraday-retry' # Fix for Faraday-related warnings
+# Other dependencies
+gem 'httparty'
+gem 'feedjira'
+gem 'faraday-retry'
+gem 'cssminify2'
+gem 'htmlcompressor'
+gem 'json-minify'
+gem 'uglifier'
+gem 'bibtex-ruby', '~> 6.0'
+gem 'citeproc-ruby', '~> 1.1.14'
+gem 'csl-styles'
+gem 'csv'
+gem 'mini_mime'
+gem 'multi_xml'
+gem 'loofah'
+gem 'sax-machine'
+gem 'faraday'
+gem 'dnsruby'
+gem 'i18n'
+gem 'commonmarker'
+gem 'latex-decode'
+gem 'citeproc'
+gem 'csl'
