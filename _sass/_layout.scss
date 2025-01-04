@@ -2,25 +2,27 @@
  * Content
  ******************************************************************************/
 
- body {
-   padding-bottom: 70px;
-   color: var(--global-text-color);
-   background-color: var(--global-bg-color);
- }
+@use 'variables';
 
- body.fixed-top-nav {
-   // Add some padding for the nav-bar.
-   padding-top: 56px;
- }
+body {
+  padding-bottom: 70px;
+  color: var(--global-text-color);
+  background-color: var(--global-bg-color);
+}
 
- body.sticky-bottom-footer {
-   // Remove padding below footer.
-     padding-bottom: 0;
-     text-align: center;     
- }
+body.fixed-top-nav {
+  // Add some padding for the nav-bar.
+  padding-top: 56px;
+}
+
+body.sticky-bottom-footer {
+  // Remove padding below footer.
+  padding-bottom: 0;
+  text-align: center;
+}
 
 .container {
-    max-width: $max-content-width;
+  max-width: variables.$max-content-width;
 }
 
 // Profile
@@ -32,16 +34,14 @@
 
 // TODO: redefine content layout.
 
-
 /******************************************************************************
- * Publications
- ******************************************************************************/
+  * Publications
+  ******************************************************************************/
 
 // TODO: redefine publications layout.
 
-
 /*****************************************************************************
-* Projects
-*****************************************************************************/
+  * Projects
+  *****************************************************************************/
 
 // TODO: redefine projects layout.

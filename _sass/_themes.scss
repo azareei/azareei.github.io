@@ -1,43 +1,43 @@
-/*******************************************************************************
- * Themes
- ******************************************************************************/
- 
+@use 'variables';
+
 :root {
-  --global-bg-color: #{$white-color};
-  --global-text-color: #{$black-color};
-  --global-theme-color: #{$blue-color-dark};
-  --global-hover-color: #{$blue-color};
-  --global-footer-bg-color: #{$grey-color-light};
-  --global-footer-text-color: #{$black-color};
-  --global-footer-link-color: #{$white-color};
-  --global-icon-color: #{$blue-color-dark};
+  --global-bg-color: #{variables.$white-color};
+  --global-text-color: #{variables.$black-color};
+  --global-theme-color: #{variables.$blue-color-dark};
+  --global-hover-color: #{variables.$blue-color};
+  --global-footer-bg-color: #{variables.$grey-color-light};
+  --global-footer-text-color: #{variables.$black-color};
+  --global-footer-link-color: #{variables.$white-color};
+  --global-icon-color: #{variables.$blue-color-dark};
 
   .fa-sun {
-    display : none;
+    display: none;
   }
+
   .fa-moon {
     padding-left: 10px;
     padding-top: 12px;
-    display : block;
+    display: block;
   }
 }
 
 html[data-theme='dark'] {
-  --global-bg-color: #{$grey-color-dark};
-  --global-text-color: #{$grey-color-light};
-  --global-theme-color: #{$cyan-color};
-  --global-hover-color: #{$light-cyan-color};
-  --global-footer-bg-color: #{$grey-color-light};
-  --global-footer-text-color: #{$grey-color-dark};
-  --global-footer-link-color: #{$black-color};
+  --global-bg-color: #{variables.$grey-color-dark};
+  --global-text-color: #{variables.$grey-color-light};
+  --global-theme-color: #{variables.$cyan-color};
+  --global-hover-color: #{variables.$light-cyan-color};
+  --global-footer-bg-color: #{variables.$grey-color-light};
+  --global-footer-text-color: #{variables.$grey-color-dark};
+  --global-footer-link-color: #{variables.$black-color};
   --global-icon-color: navajowhite;
 
   .fa-sun {
     padding-left: 10px;
     padding-top: 12px;
-    display : block;
+    display: block;
   }
+
   .fa-moon {
-    display : none;
+    display: none;
   }
 }
