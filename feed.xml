@@ -1,5 +1,113 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="https://azareei.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://azareei.github.io/" rel="alternate" type="text/html" /><updated>2025-01-08T09:43:15+00:00</updated><id>https://azareei.github.io/feed.xml</id><title type="html">Ahmad Zareei</title><subtitle>Personal homepage of Ahmad Zareei, Senion AI research Scientist @META
-</subtitle><entry><title type="html">Generative AI</title><link href="https://azareei.github.io/blog/2025/Generative-AI/" rel="alternate" type="text/html" title="Generative AI" /><published>2025-01-07T18:00:00+00:00</published><updated>2025-01-07T18:00:00+00:00</updated><id>https://azareei.github.io/blog/2025/Generative-AI</id><content type="html" xml:base="https://azareei.github.io/blog/2025/Generative-AI/"><![CDATA[<p>My intention here is to share my journey in learning generative AI.</p>]]></content><author><name></name></author><summary type="html"><![CDATA[My intention here is to share my journey in learning generative AI.]]></summary></entry><entry><title type="html">Adversarial thinking with AI</title><link href="https://azareei.github.io/blog/2024/Adversarial-thinking-ai/" rel="alternate" type="text/html" title="Adversarial thinking with AI" /><published>2024-03-03T18:00:00+00:00</published><updated>2024-03-03T18:00:00+00:00</updated><id>https://azareei.github.io/blog/2024/Adversarial-thinking-ai</id><content type="html" xml:base="https://azareei.github.io/blog/2024/Adversarial-thinking-ai/"><![CDATA[<p>Today, I tuned into a podcast episode from <a href="https://tbf.fm/episodes/299-adversarial-thinking-in-entrepreneurship">Boostrapped Founder</a>, featuring Arvid discussing the power of AI in fostering adversarial thinking for entrepreneurs. He highlighted using AI, like ChatGPT, to critically assess our ideas and messages. This means having ChatGPT spot potential misunderstandings in our emails, critique our writing, or evaluate our tweets for possible criticisms. This method not only uncovers flaws in our logic but also helps us fix these issues, with AI offering suggestions for improvements. These strategies are part of what’s called prompt engineering, and mastering several can be quite beneficial.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="https://azareei.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://azareei.github.io/" rel="alternate" type="text/html" /><updated>2025-01-12T21:29:50+00:00</updated><id>https://azareei.github.io/feed.xml</id><title type="html">Ahmad Zareei</title><subtitle>Personal homepage of Ahmad Zareei, Senion AI research Scientist @META
+</subtitle><entry><title type="html">Generative AI</title><link href="https://azareei.github.io/blog/2025/Generative-AI/" rel="alternate" type="text/html" title="Generative AI" /><published>2025-01-07T18:00:00+00:00</published><updated>2025-01-07T18:00:00+00:00</updated><id>https://azareei.github.io/blog/2025/Generative-AI</id><content type="html" xml:base="https://azareei.github.io/blog/2025/Generative-AI/"><![CDATA[<h2 id="what-are-generative-models">What are Generative Models?</h2>
+
+<p>A generative model is a <em>joint</em> probability distribution $p(x)$, for $x\in\mathcal{X}$ . It’s a joint distribution because $x$ can be multidimensional where, i.e. consists of multiple variables  $(x_1, x_2, \ldots, x_n)$.</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>We also have <em>conditional</em> generative model, $p(x</td>
+      <td>c)$, in which the generative model would be conditioned on inputs or covariates $c \in C$.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="types-of-generative-models">Types of generative Models</h2>
+
+<ul>
+  <li><strong>Probabilistic graphical models (PGM):</strong> uses simple, often linear, mappings to map a set of interconnected latent variables $z_1, \ldots, z_L$ to observed variables $x_1, \ldots, x_D$.</li>
+  <li><strong>*Deep Generative Models (DGM):</strong> uses deep neural networks to learn a complex mapping from a single latent vector $z$ to the observed data $x$. Types of DGM are
+    <ul>
+      <li><strong>Variational Autoencoders (VAE)</strong></li>
+      <li><strong>AutoRegressive Models (ARM) models</strong></li>
+      <li><strong>Normalizing Flows</strong></li>
+      <li><strong>Diffusion Models</strong></li>
+      <li><strong>Energy Based Models (EBM)</strong></li>
+      <li><strong>Generative Adversarial Networks (GAN)</strong></li>
+    </ul>
+  </li>
+</ul>
+
+<p>The following table summarizes the different generative models across different aspects:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th><strong>Model</strong></th>
+      <th><strong>Density</strong></th>
+      <th><strong>Sampling</strong></th>
+      <th><strong>Training</strong></th>
+      <th><strong>Latents</strong></th>
+      <th><strong>Architecture</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>PGM-D</strong><br />i.e., Probabilistic Graphical Model - Directed</td>
+      <td>Exact, fast: The joint distribution $p(x)$ can be computed exactly and efficiently, leveraging the directed graph structure.</td>
+      <td>Fast: Sampling is efficient using ancestral sampling, which sequentially samples variables based on dependencies in the DAG.</td>
+      <td>MLE: Trained using Maximum Likelihood Estimation, which directly optimizes the likelihood of observed data.</td>
+      <td>Optional: Latent variables (hidden variables) can be included but are not required for the model.</td>
+      <td>Sparse DAG: The model uses a sparse Directed Acyclic Graph, where edges capture directed dependencies.</td>
+    </tr>
+    <tr>
+      <td><strong>PGM-U</strong><br />i.e., Probabilistic Graphical Model - Undirected</td>
+      <td>Approximate, slow: The joint distribution $p(x)$ requires approximations due to the intractable partition function, making it computationally slow</td>
+      <td>Slow: Sampling typically involves computationally expensive methods like Markov Chain Monte Carlo (MCMC).</td>
+      <td>MLE-A: Trained using approximate Maximum Likelihood Estimation, as exact computation of likelihood is infeasible.</td>
+      <td>Optional: Latent variables can be included but are not mandatory for the model.</td>
+      <td>Sparse graph: The model uses a sparse undirected graph, where edges represent mutual dependencies.</td>
+    </tr>
+    <tr>
+      <td><strong>VAE</strong><br />i.e., Variational Auto Encoder</td>
+      <td>LB, fast: Provides a <strong>lower bound</strong> on the likelihood (e.g., Evidence Lower Bound, or ELBO) and is computationally efficient for density modeling.</td>
+      <td>Fast: Efficient sampling is achieved via reparameterization, enabling smooth gradient-based optimization in latent space.</td>
+      <td>MLE-LB: Trained by maximizing a lower bound on the likelihood, balancing reconstruction and latent regularization.</td>
+      <td>$\mathbb{R}^L$: Latent representations (e.g., a compressed representation of the data) are a central feature of the model.</td>
+      <td>Encoder-Decoder: Uses an encoder to map data to latent space and a decoder to reconstruct the data from the latent space.</td>
+    </tr>
+    <tr>
+      <td><strong>ARM</strong><br />i.d., AutoRegressive Model</td>
+      <td>Exact, fast: The joint distribution p(x)p(x)p(x) is computed exactly and efficiently using the sequential nature of the model.</td>
+      <td>Slow: Sampling is sequential, requiring one variable to be sampled at a time, which increases computation time.</td>
+      <td>MLE: Trained using Maximum Likelihood Estimation, directly optimizing the likelihood of sequentially modeled variables.</td>
+      <td>None: Does not use latent variables; it explicitly models the observed data.</td>
+      <td>Sequential: Processes data one variable at a time, reflecting the sequential dependency structure of the model.</td>
+    </tr>
+    <tr>
+      <td><strong>Flows</strong></td>
+      <td>Exact, slow/fast: Exact computation of p(x)p(x)p(x), but speed depends on the specific normalizing flow architecture and its invertible transformations.</td>
+      <td>Slow: Sampling involves applying invertible transformations, which can be computationally expensive depending on the model.</td>
+      <td>MLE: Trained using Maximum Likelihood Estimation by directly optimizing the likelihood of the transformed data.</td>
+      <td>$\mathbb{R}^D$: Latent representations are central, as flows map data to and from latent space using invertible transformations.</td>
+      <td>Invertible: Uses invertible transformations to map between data and latent space, ensuring exact density computation.</td>
+    </tr>
+    <tr>
+      <td><strong>EBM</strong>, <br />i.e., Energy Based Models</td>
+      <td>Approx, slow: Density estimation is approximate due to the need to compute a complex energy-based objective, which is computationally expensive.</td>
+      <td>Slow: Sampling often relies on expensive iterative methods like Langevin Dynamics to generate samples.</td>
+      <td>MLE-A: Trained using approximate Maximum Likelihood Estimation due to challenges in normalizing the energy function.</td>
+      <td>Optional: Latent variables can be included but are not essential for energy-based models.</td>
+      <td>Discriminative: Models the energy function to differentiate between observed and unobserved data rather than direct probabilities.</td>
+    </tr>
+    <tr>
+      <td><strong>Diffusion</strong></td>
+      <td>LB: Provides a <strong>lower bound</strong> on likelihood during training by modeling a sequence of forward and reverse processes.</td>
+      <td>Slow: Sampling involves iterative denoising steps (e.g., reversing the diffusion process), which is computationally intensive.</td>
+      <td>MLE-LB: Trained by maximizing a lower bound on the likelihood, optimizing the reconstruction of data from corrupted inputs.</td>
+      <td>$\mathbb{R}^D$: Latent representations are central, as the diffusion process maps data into progressively noisier latent spaces.</td>
+      <td>Encoder-Decoder: Uses an encoder to add noise to data (diffusion) and a decoder to reverse the process (denoising).</td>
+    </tr>
+    <tr>
+      <td><strong>GAN</strong>, <br />i.e., Generative Adversarial Networks</td>
+      <td>NA: Does not explicitly model the density p(x)p(x)p(x); instead, it learns to generate data by adversarial training.</td>
+      <td>Fast: Sampling is efficient, as the generator directly maps random noise to generated data in one forward pass.</td>
+      <td>Min-max: Trained using adversarial training, where a generator and discriminator compete to improve data generation.</td>
+      <td>$\mathbb{R}^L$: Latent representations (e.g., random noise vectors) are central to generating data.</td>
+      <td>Generator-Discriminator: Combines a generator (to create data) and a discriminator (to evaluate its realism).</td>
+    </tr>
+  </tbody>
+</table>]]></content><author><name></name></author><summary type="html"><![CDATA[What are Generative Models?]]></summary></entry><entry><title type="html">Adversarial thinking with AI</title><link href="https://azareei.github.io/blog/2024/Adversarial-thinking-ai/" rel="alternate" type="text/html" title="Adversarial thinking with AI" /><published>2024-03-03T18:00:00+00:00</published><updated>2024-03-03T18:00:00+00:00</updated><id>https://azareei.github.io/blog/2024/Adversarial-thinking-ai</id><content type="html" xml:base="https://azareei.github.io/blog/2024/Adversarial-thinking-ai/"><![CDATA[<p>Today, I tuned into a podcast episode from <a href="https://tbf.fm/episodes/299-adversarial-thinking-in-entrepreneurship">Boostrapped Founder</a>, featuring Arvid discussing the power of AI in fostering adversarial thinking for entrepreneurs. He highlighted using AI, like ChatGPT, to critically assess our ideas and messages. This means having ChatGPT spot potential misunderstandings in our emails, critique our writing, or evaluate our tweets for possible criticisms. This method not only uncovers flaws in our logic but also helps us fix these issues, with AI offering suggestions for improvements. These strategies are part of what’s called prompt engineering, and mastering several can be quite beneficial.</p>
 
 <p>Another prompt engineering technique I find really helpful is this: I ask ChatGPT a question and at the end I ask it to come up with ten clarifying yes/no questions  and only after I answered those questions, provide me an answer. This ensures the AI completely understands my question, resulting in responses that are more precise and tailored to my needs. Using this method has consistently improved the feedback I receive. This shows the power of AI in refining our thought processes and decision-making!</p>]]></content><author><name></name></author><summary type="html"><![CDATA[Today, I tuned into a podcast episode from Boostrapped Founder, featuring Arvid discussing the power of AI in fostering adversarial thinking for entrepreneurs. He highlighted using AI, like ChatGPT, to critically assess our ideas and messages. This means having ChatGPT spot potential misunderstandings in our emails, critique our writing, or evaluate our tweets for possible criticisms. This method not only uncovers flaws in our logic but also helps us fix these issues, with AI offering suggestions for improvements. These strategies are part of what’s called prompt engineering, and mastering several can be quite beneficial.]]></summary></entry><entry><title type="html">From Bias Variance Trade Off to Double Descent</title><link href="https://azareei.github.io/blog/2024/Bias-Variance-Trade-off/" rel="alternate" type="text/html" title="From Bias Variance Trade Off to Double Descent" /><published>2024-02-20T18:00:00+00:00</published><updated>2024-02-20T18:00:00+00:00</updated><id>https://azareei.github.io/blog/2024/Bias-Variance-Trade-off</id><content type="html" xml:base="https://azareei.github.io/blog/2024/Bias-Variance-Trade-off/"><![CDATA[<p>This whole section is adapted from <a href="https://udlbook.github.io/udlbook/">Understanding Deep Learning</a>.</p>
 
