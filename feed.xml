@@ -1,13 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="https://azareei.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://azareei.github.io/" rel="alternate" type="text/html" /><updated>2025-01-12T21:29:50+00:00</updated><id>https://azareei.github.io/feed.xml</id><title type="html">Ahmad Zareei</title><subtitle>Personal homepage of Ahmad Zareei, Senion AI research Scientist @META
-</subtitle><entry><title type="html">Generative AI</title><link href="https://azareei.github.io/blog/2025/Generative-AI/" rel="alternate" type="text/html" title="Generative AI" /><published>2025-01-07T18:00:00+00:00</published><updated>2025-01-07T18:00:00+00:00</updated><id>https://azareei.github.io/blog/2025/Generative-AI</id><content type="html" xml:base="https://azareei.github.io/blog/2025/Generative-AI/"><![CDATA[<h2 id="what-are-generative-models">What are Generative Models?</h2>
-
-<p>A generative model is a <em>joint</em> probability distribution $p(x)$, for $x\in\mathcal{X}$ . It’s a joint distribution because $x$ can be multidimensional where, i.e. consists of multiple variables  $(x_1, x_2, \ldots, x_n)$.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="https://azareei.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://azareei.github.io/" rel="alternate" type="text/html" /><updated>2025-01-12T21:48:59+00:00</updated><id>https://azareei.github.io/feed.xml</id><title type="html">Ahmad Zareei</title><subtitle>Personal homepage of Ahmad Zareei, Senion AI research Scientist @META
+</subtitle><entry><title type="html">Generative AI</title><link href="https://azareei.github.io/blog/2025/Generative-AI/" rel="alternate" type="text/html" title="Generative AI" /><published>2025-01-07T18:00:00+00:00</published><updated>2025-01-07T18:00:00+00:00</updated><id>https://azareei.github.io/blog/2025/Generative-AI</id><content type="html" xml:base="https://azareei.github.io/blog/2025/Generative-AI/"><![CDATA[<p>A generative model is a <em>joint</em> probability distribution \(p(x)\), for \(x\in\mathcal{X}\) . It’s a joint distribution because $x$ can be multidimensional where, i.e. consists of multiple variables  \((x_1, x_2, \ldots, x_n)\).</p>
 
 <table>
   <tbody>
     <tr>
-      <td>We also have <em>conditional</em> generative model, $p(x</td>
-      <td>c)$, in which the generative model would be conditioned on inputs or covariates $c \in C$.</td>
+      <td>We also have <em>conditional</em> generative model, $$p(x</td>
+      <td>c)\(, in which the generative model would be conditioned on inputs or covariates\)c \in C$$.</td>
     </tr>
   </tbody>
 </table>
@@ -28,7 +26,7 @@
   </li>
 </ul>
 
-<p>The following table summarizes the different generative models across different aspects:</p>
+<p>The following table summarizes the different generative models across different aspects (we’ll discuss why in the next chapters):</p>
 
 <table>
   <thead>
@@ -68,7 +66,7 @@
     </tr>
     <tr>
       <td><strong>ARM</strong><br />i.d., AutoRegressive Model</td>
-      <td>Exact, fast: The joint distribution p(x)p(x)p(x) is computed exactly and efficiently using the sequential nature of the model.</td>
+      <td>Exact, fast: The joint distribution $p(x)$ is computed exactly and efficiently using the sequential nature of the model.</td>
       <td>Slow: Sampling is sequential, requiring one variable to be sampled at a time, which increases computation time.</td>
       <td>MLE: Trained using Maximum Likelihood Estimation, directly optimizing the likelihood of sequentially modeled variables.</td>
       <td>None: Does not use latent variables; it explicitly models the observed data.</td>
@@ -76,7 +74,7 @@
     </tr>
     <tr>
       <td><strong>Flows</strong></td>
-      <td>Exact, slow/fast: Exact computation of p(x)p(x)p(x), but speed depends on the specific normalizing flow architecture and its invertible transformations.</td>
+      <td>Exact, slow/fast: Exact computation of $p(x)$, but speed depends on the specific normalizing flow architecture and its invertible transformations.</td>
       <td>Slow: Sampling involves applying invertible transformations, which can be computationally expensive depending on the model.</td>
       <td>MLE: Trained using Maximum Likelihood Estimation by directly optimizing the likelihood of the transformed data.</td>
       <td>$\mathbb{R}^D$: Latent representations are central, as flows map data to and from latent space using invertible transformations.</td>
@@ -100,14 +98,35 @@
     </tr>
     <tr>
       <td><strong>GAN</strong>, <br />i.e., Generative Adversarial Networks</td>
-      <td>NA: Does not explicitly model the density p(x)p(x)p(x); instead, it learns to generate data by adversarial training.</td>
+      <td>NA: Does not explicitly model the density $p(x)$; instead, it learns to generate data by adversarial training.</td>
       <td>Fast: Sampling is efficient, as the generator directly maps random noise to generated data in one forward pass.</td>
       <td>Min-max: Trained using adversarial training, where a generator and discriminator compete to improve data generation.</td>
       <td>$\mathbb{R}^L$: Latent representations (e.g., random noise vectors) are central to generating data.</td>
       <td>Generator-Discriminator: Combines a generator (to create data) and a discriminator (to evaluate its realism).</td>
     </tr>
   </tbody>
-</table>]]></content><author><name></name></author><summary type="html"><![CDATA[What are Generative Models?]]></summary></entry><entry><title type="html">Adversarial thinking with AI</title><link href="https://azareei.github.io/blog/2024/Adversarial-thinking-ai/" rel="alternate" type="text/html" title="Adversarial thinking with AI" /><published>2024-03-03T18:00:00+00:00</published><updated>2024-03-03T18:00:00+00:00</updated><id>https://azareei.github.io/blog/2024/Adversarial-thinking-ai</id><content type="html" xml:base="https://azareei.github.io/blog/2024/Adversarial-thinking-ai/"><![CDATA[<p>Today, I tuned into a podcast episode from <a href="https://tbf.fm/episodes/299-adversarial-thinking-in-entrepreneurship">Boostrapped Founder</a>, featuring Arvid discussing the power of AI in fostering adversarial thinking for entrepreneurs. He highlighted using AI, like ChatGPT, to critically assess our ideas and messages. This means having ChatGPT spot potential misunderstandings in our emails, critique our writing, or evaluate our tweets for possible criticisms. This method not only uncovers flaws in our logic but also helps us fix these issues, with AI offering suggestions for improvements. These strategies are part of what’s called prompt engineering, and mastering several can be quite beneficial.</p>
+</table>
+
+<h2 id="goals-of-generative-ai">Goals of Generative AI</h2>
+
+<ol>
+  <li><strong>Data Generation</strong>: One of the primary goals of generative AI is <strong>data generation</strong>, where models create new data samples that resemble the original data they were trained on. This includes generating realistic images, text, audio, or other forms of data. Generative AI is also used for various tasks, such as:
+    <ul>
+      <li><strong>Creating synthetic data</strong> for training discriminative models.</li>
+      <li><strong>Conditional generation</strong> to control outputs based on specific inputs, enabling applications such as:
+        <ul>
+          <li>Text-to-image (e.g., generating an image from a text description).</li>
+          <li>Image-to-text (e.g., image captioning).</li>
+          <li>Image-to-image (e.g., colorization, inpainting, uncropping, and restoration).</li>
+          <li>Speech-to-text (e.g., automatic speech recognition).</li>
+          <li>Sequence-to-sequence (e.g., machine translation or text continuation).</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ol>
+
+<p>The difference between conditional generative models and discriminative models lies in the outputs: generative models allow multiple valid outputs, whereas discriminative models assume a single correct output.</p>]]></content><author><name></name></author><summary type="html"><![CDATA[A generative model is a joint probability distribution \(p(x)\), for \(x\in\mathcal{X}\) . It’s a joint distribution because $x$ can be multidimensional where, i.e. consists of multiple variables  \((x_1, x_2, \ldots, x_n)\).]]></summary></entry><entry><title type="html">Adversarial thinking with AI</title><link href="https://azareei.github.io/blog/2024/Adversarial-thinking-ai/" rel="alternate" type="text/html" title="Adversarial thinking with AI" /><published>2024-03-03T18:00:00+00:00</published><updated>2024-03-03T18:00:00+00:00</updated><id>https://azareei.github.io/blog/2024/Adversarial-thinking-ai</id><content type="html" xml:base="https://azareei.github.io/blog/2024/Adversarial-thinking-ai/"><![CDATA[<p>Today, I tuned into a podcast episode from <a href="https://tbf.fm/episodes/299-adversarial-thinking-in-entrepreneurship">Boostrapped Founder</a>, featuring Arvid discussing the power of AI in fostering adversarial thinking for entrepreneurs. He highlighted using AI, like ChatGPT, to critically assess our ideas and messages. This means having ChatGPT spot potential misunderstandings in our emails, critique our writing, or evaluate our tweets for possible criticisms. This method not only uncovers flaws in our logic but also helps us fix these issues, with AI offering suggestions for improvements. These strategies are part of what’s called prompt engineering, and mastering several can be quite beneficial.</p>
 
 <p>Another prompt engineering technique I find really helpful is this: I ask ChatGPT a question and at the end I ask it to come up with ten clarifying yes/no questions  and only after I answered those questions, provide me an answer. This ensures the AI completely understands my question, resulting in responses that are more precise and tailored to my needs. Using this method has consistently improved the feedback I receive. This shows the power of AI in refining our thought processes and decision-making!</p>]]></content><author><name></name></author><summary type="html"><![CDATA[Today, I tuned into a podcast episode from Boostrapped Founder, featuring Arvid discussing the power of AI in fostering adversarial thinking for entrepreneurs. He highlighted using AI, like ChatGPT, to critically assess our ideas and messages. This means having ChatGPT spot potential misunderstandings in our emails, critique our writing, or evaluate our tweets for possible criticisms. This method not only uncovers flaws in our logic but also helps us fix these issues, with AI offering suggestions for improvements. These strategies are part of what’s called prompt engineering, and mastering several can be quite beneficial.]]></summary></entry><entry><title type="html">From Bias Variance Trade Off to Double Descent</title><link href="https://azareei.github.io/blog/2024/Bias-Variance-Trade-off/" rel="alternate" type="text/html" title="From Bias Variance Trade Off to Double Descent" /><published>2024-02-20T18:00:00+00:00</published><updated>2024-02-20T18:00:00+00:00</updated><id>https://azareei.github.io/blog/2024/Bias-Variance-Trade-off</id><content type="html" xml:base="https://azareei.github.io/blog/2024/Bias-Variance-Trade-off/"><![CDATA[<p>This whole section is adapted from <a href="https://udlbook.github.io/udlbook/">Understanding Deep Learning</a>.</p>
 
