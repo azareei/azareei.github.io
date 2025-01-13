@@ -4,11 +4,9 @@ title: Generative AI
 date: 2025-01-07 14:00:00-0400
 ---
 
-A generative model is a *joint* probability distribution $$p(x)$$, for $$x\in\mathcal{X}$$ . It's a joint distribution because $x$ can be multidimensional where, i.e. consists of multiple variables  $$(x_1, x_2, \ldots, x_n)$$. 
+A generative model is a *joint* probability distribution $p(x)$, for $x\in\mathcal{X}$ . It's a joint distribution because $x$ can be multidimensional where, i.e. consists of multiple variables  $(x_1, x_2, \ldots, x_n)$. 
 
-
-We also have conditional generative model $p(x\vert c)$ in which the generative model would be conditioned on inputs or covariates $$c\in C$$.
-
+We also have conditional generative model $p(x\vert c)$ in which the generative model would be conditioned on inputs or covariates $c\in C$.
 
 
 ## Types of generative Models
