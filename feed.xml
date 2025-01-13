@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="https://azareei.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://azareei.github.io/" rel="alternate" type="text/html" /><updated>2025-01-13T02:01:16+00:00</updated><id>https://azareei.github.io/feed.xml</id><title type="html">Ahmad Zareei</title><subtitle>Personal homepage of Ahmad Zareei, Senion AI research Scientist @META
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="https://azareei.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://azareei.github.io/" rel="alternate" type="text/html" /><updated>2025-01-13T02:16:05+00:00</updated><id>https://azareei.github.io/feed.xml</id><title type="html">Ahmad Zareei</title><subtitle>Personal homepage of Ahmad Zareei, Senion AI research Scientist @META
 </subtitle><entry><title type="html">Generative AI</title><link href="https://azareei.github.io/blog/2025/Generative-AI/" rel="alternate" type="text/html" title="Generative AI" /><published>2025-01-07T18:00:00+00:00</published><updated>2025-01-07T18:00:00+00:00</updated><id>https://azareei.github.io/blog/2025/Generative-AI</id><content type="html" xml:base="https://azareei.github.io/blog/2025/Generative-AI/"><![CDATA[<p>A generative model is a <em>joint</em> probability distribution $p(x)$, for $x\in\mathcal{X}$ . It’s a joint distribution because $x$ can be multidimensional where it consists of multiple variables  $(x_1, x_2, \ldots, x_n)$.</p>
 
 <p>We also have <em>conditional</em> generative model $p(x\vert c)$ in which the generative model would be conditioned on inputs or covariates $c\in C$.</p>
@@ -159,7 +159,39 @@
   <li><strong>Sample Quality</strong>: Do the generated examples look realistic and belong to the same type of data as the training set?</li>
   <li><strong>Sample Diversity</strong>: Do the generated examples represent all the different variations present in the real data?</li>
   <li><strong>Generalization</strong>: Can the model create new examples that go beyond simply memorizing the training data?</li>
-</ol>]]></content><author><name></name></author><summary type="html"><![CDATA[A generative model is a joint probability distribution $p(x)$, for $x\in\mathcal{X}$ . It’s a joint distribution because $x$ can be multidimensional where it consists of multiple variables  $(x_1, x_2, \ldots, x_n)$.]]></summary></entry><entry><title type="html">Adversarial thinking with AI</title><link href="https://azareei.github.io/blog/2024/Adversarial-thinking-ai/" rel="alternate" type="text/html" title="Adversarial thinking with AI" /><published>2024-03-03T18:00:00+00:00</published><updated>2024-03-03T18:00:00+00:00</updated><id>https://azareei.github.io/blog/2024/Adversarial-thinking-ai</id><content type="html" xml:base="https://azareei.github.io/blog/2024/Adversarial-thinking-ai/"><![CDATA[<p>Today, I tuned into a podcast episode from <a href="https://tbf.fm/episodes/299-adversarial-thinking-in-entrepreneurship">Boostrapped Founder</a>, featuring Arvid discussing the power of AI in fostering adversarial thinking for entrepreneurs. He highlighted using AI, like ChatGPT, to critically assess our ideas and messages. This means having ChatGPT spot potential misunderstandings in our emails, critique our writing, or evaluate our tweets for possible criticisms. This method not only uncovers flaws in our logic but also helps us fix these issues, with AI offering suggestions for improvements. These strategies are part of what’s called prompt engineering, and mastering several can be quite beneficial.</p>
+</ol>
+
+<p>No single metric captures all above, we use different metrics for each or combine parts.</p>
+
+<h3 id="likelihood-based-evaluation">Likelihood-based evaluation</h3>
+<p>To evaluate how well a generative model $q$ matches the true data distribution $p$, <strong>KL Divergence</strong> is a commonly used metric:</p>
+
+\[D_{KL}(p \parallel q) = \int p(x) \log \frac{p(x)}{q(x)} dx = \int p(x) \log p(x) \, dx - \int p(x) \log q(x) \, dx = - H(p) + H_{ce}(p, q)\]
+
+<p>The $D_{KL}$ measures the <em>distance</em> between the two distributions. Smaller value indicates that the model closely approximates the true data distribution. The first term on the RHS is the <strong>entropy</strong> of $p(x)$, denoted as H(p). Since $H(p)$ depends only on the true distribution $p(x)$, it is a constant when evaluating the model $q(x)$. The second term is the <strong>cross-entropy</strong> between $p(x)$ and $q(x)$, denoted as $H_{ce}(p, q)$.</p>
+
+<p>Minimizing $D_{KL}(p \parallel q)$ is equivalent to minimizing the cross-entropy $H_{ce}(p, q)$ (remember entropy term is constant and does not depend on $q$).</p>
+
+<p>Approximating $p(x)$ with the empirical data distribution represented by a finite dataset ${x_1, x_2, \dots, x_N}$, then $p(x) = \frac{1}{N} \sum_{i=1}^N \delta (x-x_i)$, where $x_i$ is the $i$th observed data, and $\delta(.)$ is the Dirac’s delta function, then the cross-entropy becomes:</p>
+
+\[H_{ce}(p, q) = -\frac{1}{N} \sum_{n=1}^{N} \log q(x_n)\]
+
+<p>This is known as the <strong>Negative Log Likelihood (NLL)</strong>.</p>
+
+\[\text{NLL} = -\frac{1}{N} \sum_{n=1}^{N} \log q(x_n)\]
+
+<p>Key Insights:</p>
+<ul>
+  <li>
+    <p><strong>*NLL and Cross-Entropy</strong>: The NLL represents the average penalty for the model q(x) assigning probabilities to observed data points in a dataset.</p>
+  </li>
+  <li>
+    <p><strong>Test Set Evaluation</strong>: NLL is typically computed on a held-out test set to measure the model’s generalization ability.</p>
+  </li>
+  <li>
+    <p><strong>Entropy</strong> H(p): Since entropy is a constant with respect to the model q(x), it does not affect optimization when training the model.</p>
+  </li>
+</ul>]]></content><author><name></name></author><summary type="html"><![CDATA[A generative model is a joint probability distribution $p(x)$, for $x\in\mathcal{X}$ . It’s a joint distribution because $x$ can be multidimensional where it consists of multiple variables  $(x_1, x_2, \ldots, x_n)$.]]></summary></entry><entry><title type="html">Adversarial thinking with AI</title><link href="https://azareei.github.io/blog/2024/Adversarial-thinking-ai/" rel="alternate" type="text/html" title="Adversarial thinking with AI" /><published>2024-03-03T18:00:00+00:00</published><updated>2024-03-03T18:00:00+00:00</updated><id>https://azareei.github.io/blog/2024/Adversarial-thinking-ai</id><content type="html" xml:base="https://azareei.github.io/blog/2024/Adversarial-thinking-ai/"><![CDATA[<p>Today, I tuned into a podcast episode from <a href="https://tbf.fm/episodes/299-adversarial-thinking-in-entrepreneurship">Boostrapped Founder</a>, featuring Arvid discussing the power of AI in fostering adversarial thinking for entrepreneurs. He highlighted using AI, like ChatGPT, to critically assess our ideas and messages. This means having ChatGPT spot potential misunderstandings in our emails, critique our writing, or evaluate our tweets for possible criticisms. This method not only uncovers flaws in our logic but also helps us fix these issues, with AI offering suggestions for improvements. These strategies are part of what’s called prompt engineering, and mastering several can be quite beneficial.</p>
 
 <p>Another prompt engineering technique I find really helpful is this: I ask ChatGPT a question and at the end I ask it to come up with ten clarifying yes/no questions  and only after I answered those questions, provide me an answer. This ensures the AI completely understands my question, resulting in responses that are more precise and tailored to my needs. Using this method has consistently improved the feedback I receive. This shows the power of AI in refining our thought processes and decision-making!</p>]]></content><author><name></name></author><summary type="html"><![CDATA[Today, I tuned into a podcast episode from Boostrapped Founder, featuring Arvid discussing the power of AI in fostering adversarial thinking for entrepreneurs. He highlighted using AI, like ChatGPT, to critically assess our ideas and messages. This means having ChatGPT spot potential misunderstandings in our emails, critique our writing, or evaluate our tweets for possible criticisms. This method not only uncovers flaws in our logic but also helps us fix these issues, with AI offering suggestions for improvements. These strategies are part of what’s called prompt engineering, and mastering several can be quite beneficial.]]></summary></entry><entry><title type="html">From Bias Variance Trade Off to Double Descent</title><link href="https://azareei.github.io/blog/2024/Bias-Variance-Trade-off/" rel="alternate" type="text/html" title="From Bias Variance Trade Off to Double Descent" /><published>2024-02-20T18:00:00+00:00</published><updated>2024-02-20T18:00:00+00:00</updated><id>https://azareei.github.io/blog/2024/Bias-Variance-Trade-off</id><content type="html" xml:base="https://azareei.github.io/blog/2024/Bias-Variance-Trade-off/"><![CDATA[<p>This whole section is adapted from <a href="https://udlbook.github.io/udlbook/">Understanding Deep Learning</a>.</p>
 

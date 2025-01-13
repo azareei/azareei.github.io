@@ -352,6 +352,38 @@
 <strong>Generalization</strong>: Can the model create new examples that go beyond simply memorizing the training data?</li>
 </ol>
 
+<p>No single metric captures all above, we use different metrics for each or combine parts.</p>
+
+<h3 id="likelihood-based-evaluation">Likelihood-based evaluation</h3>
+<p>To evaluate how well a generative model $q$ matches the true data distribution $p$, <strong>KL Divergence</strong> is a commonly used metric:</p>
+
+\[D_{KL}(p \parallel q) = \int p(x) \log \frac{p(x)}{q(x)} dx = \int p(x) \log p(x) \, dx - \int p(x) \log q(x) \, dx = - H(p) + H_{ce}(p, q)\]
+
+<p>The $D_{KL}$ measures the <em>distance</em> between the two distributions. Smaller value indicates that the model closely approximates the true data distribution. The first term on the RHS is the <strong>entropy</strong> of $p(x)$, denoted as H(p). Since $H(p)$ depends only on the true distribution $p(x)$, it is a constant when evaluating the model $q(x)$. The second term is the <strong>cross-entropy</strong> between $p(x)$ and $q(x)$, denoted as $H_{ce}(p, q)$.</p>
+
+<p>Minimizing $D_{KL}(p \parallel q)$ is equivalent to minimizing the cross-entropy $H_{ce}(p, q)$ (remember entropy term is constant and does not depend on $q$).</p>
+
+<p>Approximating $p(x)$ with the empirical data distribution represented by a finite dataset ${x_1, x_2, \dots, x_N}$, then $p(x) = \frac{1}{N} \sum_{i=1}^N \delta (x-x_i)$, where $x_i$ is the $i$th observed data, and $\delta(.)$ is the Dirac’s delta function, then the cross-entropy becomes:</p>
+
+\[H_{ce}(p, q) = -\frac{1}{N} \sum_{n=1}^{N} \log q(x_n)\]
+
+<p>This is known as the <strong>Negative Log Likelihood (NLL)</strong>.</p>
+
+\[\text{NLL} = -\frac{1}{N} \sum_{n=1}^{N} \log q(x_n)\]
+
+<p>Key Insights:</p>
+<ul>
+  <li>
+    <p><strong>*NLL and Cross-Entropy</strong>: The NLL represents the average penalty for the model q(x) assigning probabilities to observed data points in a dataset.</p>
+  </li>
+  <li>
+    <p><strong>Test Set Evaluation</strong>: NLL is typically computed on a held-out test set to measure the model’s generalization ability.</p>
+  </li>
+  <li>
+    <p><strong>Entropy</strong> H(p): Since entropy is a constant with respect to the model q(x), it does not affect optimization when training the model.</p>
+  </li>
+</ul>
+
   </article>
 
   
