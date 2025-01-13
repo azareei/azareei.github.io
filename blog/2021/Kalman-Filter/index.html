@@ -42,7 +42,20 @@
 <!-- MathJax -->
 <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js"></script>
 <script defer src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-
+<script>
+    window.MathJax = {
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            processEscapes: true,
+            processEnvironments: true
+        },
+        options: {
+            skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+            ignoreHtmlClass: 'tex2jax_ignore',
+            processHtmlClass: 'tex2jax_process'
+        }
+    };
+</script>
 
   <meta name="google-site-verification" content="SwVgS1KjZmScXzgcGAsFKN5eksnUe79r12brKRMZLko">
   <!-- Google tag (gtag.js) -->
@@ -378,7 +391,7 @@ is an invertible matrix, it can be removed from both sides, and we obtain</p>
     © Copyright 2025 Ahmad  Zareei.
     <!--  -->     
     
-    Last updated: January 12, 2025.
+    Last updated: January 13, 2025.
     
   </div>
 </footer>

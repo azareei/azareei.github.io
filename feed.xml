@@ -1,14 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="https://azareei.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://azareei.github.io/" rel="alternate" type="text/html" /><updated>2025-01-12T21:48:59+00:00</updated><id>https://azareei.github.io/feed.xml</id><title type="html">Ahmad Zareei</title><subtitle>Personal homepage of Ahmad Zareei, Senion AI research Scientist @META
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="https://azareei.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://azareei.github.io/" rel="alternate" type="text/html" /><updated>2025-01-13T01:19:04+00:00</updated><id>https://azareei.github.io/feed.xml</id><title type="html">Ahmad Zareei</title><subtitle>Personal homepage of Ahmad Zareei, Senion AI research Scientist @META
 </subtitle><entry><title type="html">Generative AI</title><link href="https://azareei.github.io/blog/2025/Generative-AI/" rel="alternate" type="text/html" title="Generative AI" /><published>2025-01-07T18:00:00+00:00</published><updated>2025-01-07T18:00:00+00:00</updated><id>https://azareei.github.io/blog/2025/Generative-AI</id><content type="html" xml:base="https://azareei.github.io/blog/2025/Generative-AI/"><![CDATA[<p>A generative model is a <em>joint</em> probability distribution \(p(x)\), for \(x\in\mathcal{X}\) . It’s a joint distribution because $x$ can be multidimensional where, i.e. consists of multiple variables  \((x_1, x_2, \ldots, x_n)\).</p>
 
-<table>
-  <tbody>
-    <tr>
-      <td>We also have <em>conditional</em> generative model, $$p(x</td>
-      <td>c)\(, in which the generative model would be conditioned on inputs or covariates\)c \in C$$.</td>
-    </tr>
-  </tbody>
-</table>
+<p>We also have conditional generative model $p(x\vert c)$ in which the generative model would be conditioned on inputs or covariates \(c\in C\).</p>
 
 <h2 id="types-of-generative-models">Types of generative Models</h2>
 

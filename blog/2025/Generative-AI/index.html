@@ -42,7 +42,20 @@
 <!-- MathJax -->
 <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js"></script>
 <script defer src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-
+<script>
+    window.MathJax = {
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            processEscapes: true,
+            processEnvironments: true
+        },
+        options: {
+            skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+            ignoreHtmlClass: 'tex2jax_ignore',
+            processHtmlClass: 'tex2jax_process'
+        }
+    };
+</script>
 
   <meta name="google-site-verification" content="SwVgS1KjZmScXzgcGAsFKN5eksnUe79r12brKRMZLko">
   <!-- Google tag (gtag.js) -->
@@ -160,14 +173,7 @@
   <article class="post-content">
     <p>A generative model is a <em>joint</em> probability distribution \(p(x)\), for \(x\in\mathcal{X}\) . It’s a joint distribution because $x$ can be multidimensional where, i.e. consists of multiple variables  \((x_1, x_2, \ldots, x_n)\).</p>
 
-<table>
-  <tbody>
-    <tr>
-      <td>We also have <em>conditional</em> generative model, $$p(x</td>
-      <td>c)\(, in which the generative model would be conditioned on inputs or covariates\)c \in C$$.</td>
-    </tr>
-  </tbody>
-</table>
+<p>We also have conditional generative model $p(x\vert c)$ in which the generative model would be conditioned on inputs or covariates \(c\in C\).</p>
 
 <h2 id="types-of-generative-models">Types of generative Models</h2>
 
@@ -314,7 +320,7 @@
     © Copyright 2025 Ahmad  Zareei.
     <!--  -->     
     
-    Last updated: January 12, 2025.
+    Last updated: January 13, 2025.
     
   </div>
 </footer>
