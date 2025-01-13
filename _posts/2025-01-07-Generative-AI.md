@@ -88,7 +88,7 @@ D_{KL}(p \parallel q) = \int p(x) \log \frac{p(x)}{q(x)} dx = \int p(x) \log p(x
 $$
   
 
-  The $D_{KL}$ measures the *distance* between the two distributions. Smaller value indicates that the model closely approximates the true data distribution. The first term on the RHS is the **entropy** of $p(x)$, denoted as H(p). Since $H(p)$ depends only on the true distribution $p(x)$, it is a constant when evaluating the model $q(x)$. The second term is the **cross-entropy** between $p(x)$ and $q(x)$, denoted as $H_{ce}(p, q)$.  
+  The $D_{KL}$ measures the *distance* between the two distributions. Smaller value indicates that the model closely approximates the true data distribution. The first term on the RHS is the **entropy** of $p(x)$, denoted as $H(p)$. Since $H(p)$ depends only on the true distribution $p(x)$, it is a constant when evaluating the model $q(x)$. The second term is the **cross-entropy** between $p(x)$ and $q(x)$, denoted as $H_{ce}(p, q)$.  
   
   Minimizing $D_{KL}(p \parallel q)$ is equivalent to minimizing the cross-entropy $H_{ce}(p, q)$ (remember entropy term is constant and does not depend on $q$).
   
@@ -104,7 +104,7 @@ $$\text{NLL} = -\frac{1}{N} \sum_{n=1}^{N} \log q(x_n)
 $$
 
 Key Insights: 
-* ***NLL and Cross-Entropy**: The NLL represents the average penalty for the model q(x) assigning probabilities to observed data points in a dataset.
+* ***NLL and Cross-Entropy**: The NLL represents the average penalty for the model $q(x)$ assigning probabilities to observed data points in a dataset.
   
 * **Test Set Evaluation**: NLL is typically computed on a held-out test set to measure the model’s generalization ability.
   
@@ -142,4 +142,22 @@ Mathematically, perplexity is defined as:
 where $H = \text{NLL}$. Lower perplexity indicates better performance, as the model is less “confused” and more confident in its predictions.
 
 
+##### More about KL divergence
 
+The KL Divergence is defined as:
+
+$$D_{KL}(p \parallel q) = \int p(x) \log \frac{p(x)}{q(x)} dx
+$$
+  
+This measures the average difference in log probabilities between the true distribution $p(x)$ and the model distribution $q(x)$, weighted by $p(x)$. Two interpretations: 
+1. **Information Loss**: $D_{KL}$ quantifies how much information is lost when $q(x)$(the model) is used to approximate $p(x)$ (the ground truth): In information theory, the information content (or “surprise”) of an event$ x$ occurring under a probability distribution $p(x)$ is given by $-\log p(x)$. So $D_{KL}$ is the information difference when we use the model $q(x)$ instead of true model $p(x)$, i.e.,  $-\log q(x) - (-\log p(x))$, weighted and averaged by the by $p(x)$. 
+2. **Encoding**: How inefficient is it to encode samples from $p(x)$ using a code optimized for $q(x)$: In information theory, the length of a code for an event $x$ is proportional to $-\log p(x)$, minimizing the average code length (Shannon’s Source Coding Theorem). If you use a code based on $q(x)$ instead of $p(x)$, the expected length of the code will increase. The extra cost per event is: $\log \frac{p(x)}{q(x)} = \log p(x) - \log q(x)$. Then, the expected extra cost is the KL divergence: $D_{KL}(p \parallel q) = \int p(x) \big[\log p(x) - \log q(x)\big] dx$. 
+
+#### Handling Discrete Data in Generative Models
+
+In image and audio data, we have the following challenge with likelihood:
+
+* The **model** typically represents the data using a **continuous probability density function (PDF)** $p(x)$, where $x$ can take any real value.
+* However, the **data** itself is discrete (e.g., pixel intensities are integers from 0 to 255).
+
+Since a PDF can take values greater than 1, the average log-likelihood for discrete data can become arbitrarily large, making direct evaluation difficult. To address this, **uniform dequantization** is used. 
