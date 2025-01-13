@@ -4,15 +4,16 @@ title: Generative AI
 date: 2025-01-07 14:00:00-0400
 ---
 
-A generative model is a *joint* probability distribution $p(x)$, for $x\in\mathcal{X}$ . It's a joint distribution because $x$ can be multidimensional where, i.e. consists of multiple variables  $(x_1, x_2, \ldots, x_n)$. 
+A generative model is a *joint* probability distribution $p(x)$, for $x\in\mathcal{X}$ . It's a joint distribution because $x$ can be multidimensional where it consists of multiple variables  $(x_1, x_2, \ldots, x_n)$. 
 
-We also have conditional generative model $p(x\vert c)$ in which the generative model would be conditioned on inputs or covariates $c\in C$.
+We also have *conditional* generative model $p(x\vert c)$ in which the generative model would be conditioned on inputs or covariates $c\in C$.
 
 
 ## Types of generative Models
 
+
 *  **Probabilistic graphical models (PGM):** uses simple, often linear, mappings to map a set of interconnected latent variables $z_1, \ldots, z_L$ to observed variables $x_1, \ldots, x_D$. 
-* ***Deep Generative Models (DGM):** uses deep neural networks to learn a complex mapping from a single latent vector $z$ to the observed data $x$. Types of DGM are
+* **Deep Generative Models (DGM):** uses deep neural networks to learn a complex mapping from a single latent vector $z$ to the observed data $x$. Types of DGM are
 	* **Variational Autoencoders (VAE)**
 	* **AutoRegressive Models (ARM) models**
 	* **Normalizing Flows**
@@ -42,7 +43,29 @@ The following table summarizes the different generative models across different 
 	    - Text-to-image (e.g., generating an image from a text description).
 	    - Image-to-text (e.g., image captioning).
 	    - Image-to-image (e.g., colorization, inpainting, uncropping, and restoration).
-	    - Speech-to-text (e.g., automatic speech recognition).
+	    - Speech-to-text (e.g., automatic speech recognition or ASR).
 	    - Sequence-to-sequence (e.g., machine translation or text continuation).
 
-The difference between conditional generative models and discriminative models lies in the outputs: generative models allow multiple valid outputs, whereas discriminative models assume a single correct output.
+	The difference between conditional generative models and discriminative models lies in the outputs: generative models allow multiple valid outputs, whereas discriminative models assume a single correct output.
+	
+2.  **Density estimation**: Generative models are useful for calculating the probability of observed data, $p(x)$, which is known as density function. This has applications in: 
+	- **Outlier detection**: Identifying data points with low probability under the estimated distribution, which may indicate anomalies or rare events. 
+	- **Data compression**: Using the probability distribution to represent data more efficiently by assigning shorter codes to more likely outcomes.
+	- **Generative classification**: Classifying data by estimating class-conditional densities $p(x\vert c)$ and combining them with prior probabilities to make decisions.
+	- **Model comparison**: Evaluating and comparing different models by analyzing how well they represent the observed data distribution.
+  
+	Simple methods like kernel density estimation (KDE) are effective in low dimensions, using kernels (e.g., uniform or Gaussian) to estimate $p(x\vert \mathcal{D})$ based on observed data $\mathcal{D}$. However, KDE faces challenges in high dimensions due to the curse of dimensionality, requiring the use of parametric models  $p_\theta(x)$ for efficient and scalable density estimation.
+	
+3. **Missing Data Imputation**: missing values in a dataset are filled in using probabilistic methods. For example, a simple approach like mean value imputation replaces missing values with the average of observed values for each feature but ignores dependencies between variables. A more advanced method involves fitting a generative model to the observed data  $p(X_o)$ and sampling missing values conditioned on the observed data $p(X_m | X_o)$. This approach, called multiple imputation, can handle complex data types, such as filling in missing pixels in images (in-painting). Generative models provide a more robust solution by capturing variable dependencies and offering uncertainty estimates for the imputed values.
+
+4. **Structure Discovery**: Generative models with latent variables can uncover hidden patterns or structures in data by inferring the latent causes $z$ that generate observed data $x$ using Bayes’ rule $p(z\vert x) \propto p(z)p(x\vert z)$. For example, in social network analysis, a generative model can represent each user’s behavior and interactions using latent variables $z$  that correspond to hidden community memberships or shared interests. By applying Bayes’ rule, the model can infer these latent communities $z$ from observed interaction patterns $x$, revealing the underlying structure of the network and grouping users with similar behaviors or preferences.
+5.  **Latent Space Interpolation**: Generative models with latent variable representations enable **latent space interpolation**, where new data is generated by smoothly blending features between existing data points. For example, given two images, their latent encodings $z_1$ and$ z_2$ can serve as anchors in the latent space. By interpolating linearly between these encodings $z = \lambda z_1 + (1-\lambda)z_2$ and decoding the results, the model generates images combining characteristics of both inputs, such as transitioning between two digits or blending facial attributes. Additionally, **latent space arithmetic** allows modifying specific attributes. For example, in a model trained on celebrity faces, adding a learned offset vector for “sunglasses” to a latent encoding can generate a version of the face with sunglasses, while subtracting the vector can remove them. These techniques make latent spaces powerful for generating and manipulating data with meaningful variations.
+   
+6. **Generative Design**: Generative models are used to explore designs with specific properties. For example, in material science, a model trained on molecular data can generate new chemical structures optimized for properties like higher conductivity or stability by searching the latent space.
+
+7. **Model-Based Reinforcement Learning**: Generative models simulate environments, such as robotics tasks, enabling agents to practice and plan in virtual settings, reducing reliance on expensive real-world data collection.
+
+8. **Representation Learning**: Generative models learn compact latent representations $z$ that capture the underlying structure of data. For example, a model trained on medical images can extract features like the presence of tumors, which can then be used for tasks like diagnosis or prediction.
+
+9. **Data Compression**: Generative models predict the probability of data patterns and assign shorter codes to frequent patterns, enabling efficient storage and transmission of data, as described by Shannon’s information theory.
+
