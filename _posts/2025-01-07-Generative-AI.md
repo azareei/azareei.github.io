@@ -77,3 +77,35 @@ The generative AI models are evaluated on three aspects
 1. **Sample Quality**: Do the generated examples look realistic and belong to the same type of data as the training set?
 2. **Sample Diversity**: Do the generated examples represent all the different variations present in the real data?
 3. **Generalization**: Can the model create new examples that go beyond simply memorizing the training data?
+
+No single metric captures all above, we use different metrics for each or combine parts. 
+
+### Likelihood-based evaluation
+To evaluate how well a generative model $q$ matches the true data distribution $p$, **KL Divergence** is a commonly used metric:
+
+$$
+D_{KL}(p \parallel q) = \int p(x) \log \frac{p(x)}{q(x)} dx = \int p(x) \log p(x) \, dx - \int p(x) \log q(x) \, dx = - H(p) + H_{ce}(p, q)
+$$
+  
+
+  The $D_{KL}$ measures the *distance* between the two distributions. Smaller value indicates that the model closely approximates the true data distribution. The first term on the RHS is the **entropy** of $p(x)$, denoted as H(p). Since $H(p)$ depends only on the true distribution $p(x)$, it is a constant when evaluating the model $q(x)$. The second term is the **cross-entropy** between $p(x)$ and $q(x)$, denoted as $H_{ce}(p, q)$.  
+  
+  Minimizing $D_{KL}(p \parallel q)$ is equivalent to minimizing the cross-entropy $H_{ce}(p, q)$ (remember entropy term is constant and does not depend on $q$).
+  
+  Approximating $p(x)$ with the empirical data distribution represented by a finite dataset $\{x_1, x_2, \dots, x_N\}$, then $p(x) = \frac{1}{N} \sum_{i=1}^N \delta (x-x_i)$, where $x_i$ is the $i$th observed data, and $\delta(.)$ is the Dirac's delta function, then the cross-entropy becomes:
+  
+
+$$H_{ce}(p, q) = -\frac{1}{N} \sum_{n=1}^{N} \log q(x_n)
+$$
+
+This is known as the **Negative Log Likelihood (NLL)**.
+
+$$\text{NLL} = -\frac{1}{N} \sum_{n=1}^{N} \log q(x_n)
+$$
+
+Key Insights: 
+* ***NLL and Cross-Entropy**: The NLL represents the average penalty for the model q(x) assigning probabilities to observed data points in a dataset.
+  
+* **Test Set Evaluation**: NLL is typically computed on a held-out test set to measure the model’s generalization ability.
+  
+* **Entropy** H(p): Since entropy is a constant with respect to the model q(x), it does not affect optimization when training the model.
