@@ -108,4 +108,38 @@ Key Insights:
   
 * **Test Set Evaluation**: NLL is typically computed on a held-out test set to measure the model’s generalization ability.
   
-* **Entropy** H(p): Since entropy is a constant with respect to the model q(x), it does not affect optimization when training the model.
+* **Entropy** $H(p)$: Since entropy is a constant with respect to the model $q(x)$, it does not affect optimization when training the model.
+
+
+#### NLL and perplexity 
+
+For models of discrete data, such as language models, **Negative Log Likelihood (NLL)** is a straightforward way to measure how well the model predicts the data. NLL evaluates the average “surprise” the model experiences when it encounters the actual outcomes in the dataset, based on the probabilities it assigns to them. The term “surprise” refers to how unexpected an event is, given the model’s prediction. If the model assigns a high probability to the correct outcome, the surprise (and NLL) is low. Conversely, if the model assigns a low probability, the surprise is high, reflecting the model’s uncertainty.
+ * ***Example:**	
+	Suppose a language model predicts the next word in the sentence “The cat sat on the __” with the following probabilities:
+	
+	• $q(\text{“mat”}) = 0.6$,
+	• $q(\text{“floor”}) = 0.3$,
+	• $q(\text{“table”}) = 0.1.$
+	
+	
+	If the correct word is “mat,” the NLL for this prediction is simply:
+	
+	$$\text{NLL} = -\log_2(q(\text{“mat”})) = -\log_2(0.6) \approx 0.737
+	$$
+	
+	The NLL for a dataset averages these values across all predictions, measuring how well the model predicts the actual words.
+
+Interpreting NLL directly can be unintuitive. To make it easier to understand, **perplexity** is used. Perplexity translates NLL into a measure that reflects how “confused” the model is—essentially, the average number of equally likely choices the model is effectively guessing from.
+* ***Why Does Perplexity Represent Choices?**: If a model has a perplexity of $P$, it behaves as if it is guessing from $P$ equally likely options. This comes from the relationship between NLL and uniform distributions: for $P$ equally likely outcomes, $q(x) = 1/P$, and the NLL is:
+  
+  $$\text{NLL} = -\log_2(1/P) = \log_2(P)$$
+  
+  Inverting this gives $P = 2^{\text{NLL}}$.
+
+Mathematically, perplexity is defined as:
+  $$\text{Perplexity} = 2^H$$
+
+where $H = \text{NLL}$. Lower perplexity indicates better performance, as the model is less “confused” and more confident in its predictions.
+
+
+
