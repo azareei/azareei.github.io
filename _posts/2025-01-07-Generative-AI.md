@@ -4,7 +4,7 @@ title: Generative AI
 date: 2025-01-07 14:00:00-0400
 number headings: first-level 1, max 6, start-at 1, _.1.1
 toc: 
-beginning: true
+	beginning: true
 ---
 
 
