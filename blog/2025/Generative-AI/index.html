@@ -171,108 +171,7 @@
   </header>
 
   <article class="post-content">
-    <ul>
-  <li>
-    <table>
-      <tbody>
-        <tr>
-          <td>[[#1 Types of generative Models</td>
-          <td>1 Types of generative Models]]</td>
-        </tr>
-      </tbody>
-    </table>
-  </li>
-  <li>
-    <table>
-      <tbody>
-        <tr>
-          <td>[[#2 Goals of Generative AI</td>
-          <td>2 Goals of Generative AI]]</td>
-        </tr>
-      </tbody>
-    </table>
-  </li>
-  <li>
-    <table>
-      <tbody>
-        <tr>
-          <td>[[#3 Evaluating generative models</td>
-          <td>3 Evaluating generative models]]</td>
-        </tr>
-      </tbody>
-    </table>
-    <ul>
-      <li>
-        <table>
-          <tbody>
-            <tr>
-              <td>[[#3 Evaluating generative models#3.1 Likelihood-based evaluation</td>
-              <td>3.1 Likelihood-based evaluation]]</td>
-            </tr>
-          </tbody>
-        </table>
-        <ul>
-          <li>
-            <table>
-              <tbody>
-                <tr>
-                  <td>[[#3.1 Likelihood-based evaluation#3.1.1 NLL and perplexity</td>
-                  <td>3.1.1 NLL and perplexity]]</td>
-                </tr>
-              </tbody>
-            </table>
-            <ul>
-              <li>
-                <table>
-                  <tbody>
-                    <tr>
-                      <td>[[#3.1.1 NLL and perplexity#3.1.1.1 More about KL divergence</td>
-                      <td>3.1.1.1 More about KL divergence]]</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <table>
-              <tbody>
-                <tr>
-                  <td>[[#3.1 Likelihood-based evaluation#3.1.2 Handling Continuous Data:</td>
-                  <td>3.1.2 Handling Continuous Data:]]</td>
-                </tr>
-              </tbody>
-            </table>
-            <ul>
-              <li>
-                <table>
-                  <tbody>
-                    <tr>
-                      <td>[[#3.1.2 Handling Continuous Data:#3.1.2.1 Dequantization when handling Continuous Data</td>
-                      <td>3.1.2.1 Dequantization when handling Continuous Data]]</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <table>
-              <tbody>
-                <tr>
-                  <td>[[#3.1 Likelihood-based evaluation#3.1.3 Likelihood can be hard to compute</td>
-                  <td>3.1.3 Likelihood can be hard to compute]]</td>
-                </tr>
-              </tbody>
-            </table>
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-</ul>
-
-<p>A generative model is a <em>joint</em> probability distribution $p(x)$, for $x\in\mathcal{X}$ . It’s a joint distribution because $x$ can be multidimensional where it consists of multiple variables  $(x_1, x_2, \ldots, x_n)$.</p>
+    <p>A generative model is a <em>joint</em> probability distribution $p(x)$, for $x\in\mathcal{X}$ . It’s a joint distribution because $x$ can be multidimensional where it consists of multiple variables  $(x_1, x_2, \ldots, x_n)$.</p>
 
 <p>We also have <em>conditional</em> generative model $p(x\vert c)$ in which the generative model would be conditioned on inputs or covariates $c\in C$.</p>
 
@@ -594,6 +493,67 @@
 
 <h4 id="313-likelihood-can-be-hard-to-compute">3.1.3 Likelihood can be hard to compute</h4>
 
+<p>• In many generative models, we want to compute the <strong>likelihood</strong>  $p(x)$ , which tells us how well the model explains the data  $x$. Computing  $p(x)$  often requires evaluating a <strong>normalization constant</strong></p>
+
+<p>$p(x) = \frac{\tilde{p}(x)}{Z}, \quad Z = \int \tilde{p}(x) dx$</p>
+
+<p>where $\tilde{p}(x)$  is an unnormalized probability, and  $Z$  ensures the total probability integrates to $1$. Computing  $Z$  involves an integral over the entire data space, which can be very expensive, especially for high-dimensional data (e.g., images or text).</p>
+
+<h5 id="3131-example">3.1.3.1 Example</h5>
+
+<p>In a model with latent variables  $z$ , $ p(x)$  is computed as:</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>$p(x) = \int p(x</td>
+      <td>z)p(z) dz$</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>This requires integrating over all possible  $z$ , which can be computationally infeasible for complex models. We basically need to find all $z$ that result in that generated data $x$.</p>
+
+<h5 id="3132-solution-1-variational-inference">3.1.3.2 Solution 1: <strong>Variational Inference</strong>
+</h5>
+
+<table>
+  <tbody>
+    <tr>
+      <td>
+<strong>Variational Inference (VI)</strong> is a technique to approximate  $p(x)$  without explicitly calculating the normalization constant. It introduces a simpler distribution $ q(z</td>
+      <td>x)$  to approximate the true posterior  $p(z</td>
+      <td>x)$. Instead of directly computing  $\log p(x)$ , we compute a <strong>lower bound</strong> (called the ELBO):</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>We start with:
+$p(x) = \int p(x, z) \, dz =  \int q(z|x) \frac{p(x, z)}{q(z|x)} \, dz$
+Applying Jenson’s inequality;
+$\log p(x) = \log \int q(z\vert x) \frac{p(x, z)}{q(z\vert x)} \, dz \geq \int q(z\vert x) \log \frac{p(x, z)}{q(z\vert x)} \, dz$
+Noting that: 
+$\log \frac{p(x, z)}{q(z\vert x)} = \log p(x\vert z) + \log p(z) - \log q(z\vert x)$
+We find 
+$\log p(x) \geq \int q(z\vert x) \log p(x\vert z) \, dz + \int q(z\vert x) \log p(z) \, dz - \int q(z\vert x) \log q(z\vert x) \, dz$
+Apply the KL Divergence:
+$\text{KL}(q(z\vert x) | p(z)) = \int q(z\vert x) \log \frac{q(z\vert x)}{p(z)} \, dz$
+Final ELBO:
+$\log p(x) \geq \mathbb{E}_{q(z\vert x)}[\log p(x\vert z)] - \text{KL}(q(z\vert x) | p(z))$
+This avoids the expensive integral over  $z$  and allows us to optimize the model using the lower bound. In the ELBO expression above</p>
+<ul>
+  <li>$\mathbb{E}_{q(z\vert x)}[\log p(x\vert z)]$ : Encourages  $q(z\vert x)$  to explain the observed data well.</li>
+  <li>$\text{KL}(q(z\vert x) | p(z))$ : Ensures $q(z\vert x)$  stays close to the prior  $p(z)$ , avoiding overfitting.</li>
+</ul>
+
+<p>For example, in Variational Autoencoders (VAEs), we:</p>
+<ol>
+  <li>Approximate the true posterior $p(z\vert x)$ with a simpler  $q(z\vert x)$ (like a Gaussian)</li>
+  <li>Optimize the ELBO to train the model without computing the exact  $p(x)$</li>
+</ol>
+
+<h5 id="3133-solution-2-annealed-importance-sampling-ais">3.1.3.3 Solution 2: <strong>Annealed Importance Sampling (AIS)</strong>
+</h5>
 
   </article>
 
