@@ -2,16 +2,9 @@
 layout: post
 title: Generative AI
 date: 2025-01-07 14:00:00-0400
+number headings: first-level 1, max 6, start-at 1, _.1.1
+toc: "beginning: true"
 ---
-- [[#1 Types of generative Models|1 Types of generative Models]]
-- [[#2 Goals of Generative AI|2 Goals of Generative AI]]
-- [[#3 Evaluating generative models|3 Evaluating generative models]]
-	- [[#3 Evaluating generative models#3.1 Likelihood-based evaluation|3.1 Likelihood-based evaluation]]
-		- [[#3.1 Likelihood-based evaluation#3.1.1 NLL and perplexity|3.1.1 NLL and perplexity]]
-			- [[#3.1.1 NLL and perplexity#3.1.1.1 More about KL divergence|3.1.1.1 More about KL divergence]]
-		- [[#3.1 Likelihood-based evaluation#3.1.2 Handling Continuous Data:|3.1.2 Handling Continuous Data:]]
-			- [[#3.1.2 Handling Continuous Data:#3.1.2.1 Dequantization when handling Continuous Data|3.1.2.1 Dequantization when handling Continuous Data]]
-		- [[#3.1 Likelihood-based evaluation#3.1.3 Likelihood can be hard to compute|3.1.3 Likelihood can be hard to compute]]
 
 
 A generative model is a *joint* probability distribution $p(x)$, for $x\in\mathcal{X}$ . It's a joint distribution because $x$ can be multidimensional where it consists of multiple variables  $(x_1, x_2, \ldots, x_n)$. 
@@ -200,3 +193,43 @@ Dequantization is a method used in probabilistic modeling to handle discrete dat
 
 #### 3.1.3 Likelihood can be hard to compute
 
+• In many generative models, we want to compute the **likelihood**  $p(x)$ , which tells us how well the model explains the data  $x$. Computing  $p(x)$  often requires evaluating a **normalization constant**
+
+  $p(x) = \frac{\tilde{p}(x)}{Z}, \quad Z = \int \tilde{p}(x) dx$
+
+where $\tilde{p}(x)$  is an unnormalized probability, and  $Z$  ensures the total probability integrates to $1$. Computing  $Z$  involves an integral over the entire data space, which can be very expensive, especially for high-dimensional data (e.g., images or text).
+
+##### 3.1.3.1 Example
+
+In a model with latent variables  $z$ , $ p(x)$  is computed as:  
+
+$p(x) = \int p(x|z)p(z) dz$
+
+This requires integrating over all possible  $z$ , which can be computationally infeasible for complex models. We basically need to find all $z$ that result in that generated data $x$. 
+
+
+##### 3.1.3.2 Solution 1: **Variational Inference**
+
+**Variational Inference (VI)** is a technique to approximate  $p(x)$  without explicitly calculating the normalization constant. It introduces a simpler distribution $ q(z|x)$  to approximate the true posterior  $p(z|x)$. Instead of directly computing  $\log p(x)$ , we compute a **lower bound** (called the ELBO):
+
+We start with:
+$p(x) = \int p(x, z) \, dz =  \int q(z|x) \frac{p(x, z)}{q(z|x)} \, dz$
+Applying Jenson's inequality;
+$\log p(x) = \log \int q(z\vert x) \frac{p(x, z)}{q(z\vert x)} \, dz \geq \int q(z\vert x) \log \frac{p(x, z)}{q(z\vert x)} \, dz$
+Noting that: 
+$\log \frac{p(x, z)}{q(z\vert x)} = \log p(x\vert z) + \log p(z) - \log q(z\vert x)$
+We find 
+$\log p(x) \geq \int q(z\vert x) \log p(x\vert z) \, dz + \int q(z\vert x) \log p(z) \, dz - \int q(z\vert x) \log q(z\vert x) \, dz$
+Apply the KL Divergence:
+$\text{KL}(q(z\vert x) \| p(z)) = \int q(z\vert x) \log \frac{q(z\vert x)}{p(z)} \, dz$
+Final ELBO:
+$\log p(x) \geq \mathbb{E}_{q(z\vert x)}[\log p(x\vert z)] - \text{KL}(q(z\vert x) \| p(z))$
+This avoids the expensive integral over  $z$  and allows us to optimize the model using the lower bound. In the ELBO expression above
+* $\mathbb{E}_{q(z\vert x)}[\log p(x\vert z)]$ : Encourages  $q(z\vert x)$  to explain the observed data well.
+* $\text{KL}(q(z\vert x) \| p(z))$ : Ensures $q(z\vert x)$  stays close to the prior  $p(z)$ , avoiding overfitting.
+
+For example, in Variational Autoencoders (VAEs), we:
+1. Approximate the true posterior $p(z\vert x)$ with a simpler  $q(z\vert x)$ (like a Gaussian)
+2. Optimize the ELBO to train the model without computing the exact  $p(x)$
+
+##### 3.1.3.3 Solution 2: **Annealed Importance Sampling (AIS)**
