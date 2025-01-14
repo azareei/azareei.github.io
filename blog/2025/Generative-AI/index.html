@@ -171,11 +171,112 @@
   </header>
 
   <article class="post-content">
-    <p>A generative model is a <em>joint</em> probability distribution $p(x)$, for $x\in\mathcal{X}$ . It’s a joint distribution because $x$ can be multidimensional where it consists of multiple variables  $(x_1, x_2, \ldots, x_n)$.</p>
+    <ul>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>[[#1 Types of generative Models</td>
+          <td>1 Types of generative Models]]</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>[[#2 Goals of Generative AI</td>
+          <td>2 Goals of Generative AI]]</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>[[#3 Evaluating generative models</td>
+          <td>3 Evaluating generative models]]</td>
+        </tr>
+      </tbody>
+    </table>
+    <ul>
+      <li>
+        <table>
+          <tbody>
+            <tr>
+              <td>[[#3 Evaluating generative models#3.1 Likelihood-based evaluation</td>
+              <td>3.1 Likelihood-based evaluation]]</td>
+            </tr>
+          </tbody>
+        </table>
+        <ul>
+          <li>
+            <table>
+              <tbody>
+                <tr>
+                  <td>[[#3.1 Likelihood-based evaluation#3.1.1 NLL and perplexity</td>
+                  <td>3.1.1 NLL and perplexity]]</td>
+                </tr>
+              </tbody>
+            </table>
+            <ul>
+              <li>
+                <table>
+                  <tbody>
+                    <tr>
+                      <td>[[#3.1.1 NLL and perplexity#3.1.1.1 More about KL divergence</td>
+                      <td>3.1.1.1 More about KL divergence]]</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <table>
+              <tbody>
+                <tr>
+                  <td>[[#3.1 Likelihood-based evaluation#3.1.2 Handling Continuous Data:</td>
+                  <td>3.1.2 Handling Continuous Data:]]</td>
+                </tr>
+              </tbody>
+            </table>
+            <ul>
+              <li>
+                <table>
+                  <tbody>
+                    <tr>
+                      <td>[[#3.1.2 Handling Continuous Data:#3.1.2.1 Dequantization when handling Continuous Data</td>
+                      <td>3.1.2.1 Dequantization when handling Continuous Data]]</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <table>
+              <tbody>
+                <tr>
+                  <td>[[#3.1 Likelihood-based evaluation#3.1.3 Likelihood can be hard to compute</td>
+                  <td>3.1.3 Likelihood can be hard to compute]]</td>
+                </tr>
+              </tbody>
+            </table>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p>A generative model is a <em>joint</em> probability distribution $p(x)$, for $x\in\mathcal{X}$ . It’s a joint distribution because $x$ can be multidimensional where it consists of multiple variables  $(x_1, x_2, \ldots, x_n)$.</p>
 
 <p>We also have <em>conditional</em> generative model $p(x\vert c)$ in which the generative model would be conditioned on inputs or covariates $c\in C$.</p>
 
-<h2 id="types-of-generative-models">Types of generative Models</h2>
+<h2 id="1-types-of-generative-models">1 Types of generative Models</h2>
 
 <ul>
   <li>
@@ -280,7 +381,7 @@
   </tbody>
 </table>
 
-<h2 id="goals-of-generative-ai">Goals of Generative AI</h2>
+<h2 id="2-goals-of-generative-ai">2 Goals of Generative AI</h2>
 
 <ol>
   <li>
@@ -340,7 +441,7 @@
 <strong>Data Compression</strong>: Generative models predict the probability of data patterns and assign shorter codes to frequent patterns, enabling efficient storage and transmission of data, as described by Shannon’s information theory.</li>
 </ol>
 
-<h2 id="evaluating-generative-models">Evaluating generative models</h2>
+<h2 id="3-evaluating-generative-models">3 Evaluating generative models</h2>
 
 <p>The generative AI models are evaluated on three aspects</p>
 <ol>
@@ -354,7 +455,7 @@
 
 <p>No single metric captures all above, we use different metrics for each or combine parts.</p>
 
-<h3 id="likelihood-based-evaluation">Likelihood-based evaluation</h3>
+<h3 id="31-likelihood-based-evaluation">3.1 Likelihood-based evaluation</h3>
 <p>To evaluate how well a generative model $q$ matches the true data distribution $p$, <strong>KL Divergence</strong> is a commonly used metric:</p>
 
 \[D_{KL}(p \parallel q) = \int p(x) \log \frac{p(x)}{q(x)} dx = \int p(x) \log p(x) \, dx - \int p(x) \log q(x) \, dx = - H(p) + H_{ce}(p, q)\]
@@ -384,7 +485,7 @@
   </li>
 </ul>
 
-<h4 id="nll-and-perplexity">NLL and perplexity</h4>
+<h4 id="311-nll-and-perplexity">3.1.1 NLL and perplexity</h4>
 
 <p>For models of discrete data, such as language models, <strong>Negative Log Likelihood (NLL)</strong> is a straightforward way to measure how well the model predicts the data. NLL evaluates the average “surprise” the model experiences when it encounters the actual outcomes in the dataset, based on the probabilities it assigns to them. The term “surprise” refers to how unexpected an event is, given the model’s prediction. If the model assigns a high probability to the correct outcome, the surprise (and NLL) is low. Conversely, if the model assigns a low probability, the surprise is high, reflecting the model’s uncertainty.</p>
 <ul>
@@ -420,7 +521,7 @@
 
 <p>where $H = \text{NLL}$. Lower perplexity indicates better performance, as the model is less “confused” and more confident in its predictions.</p>
 
-<h5 id="more-about-kl-divergence">More about KL divergence</h5>
+<h5 id="3111-more-about-kl-divergence">3.1.1.1 More about KL divergence</h5>
 
 <p>The KL Divergence is defined as:</p>
 
@@ -434,7 +535,7 @@
 <strong>Encoding</strong>: How inefficient is it to encode samples from $p(x)$ using a code optimized for $q(x)$: In information theory, the length of a code for an event $x$ is proportional to $-\log p(x)$, minimizing the average code length (Shannon’s Source Coding Theorem). If you use a code based on $q(x)$ instead of $p(x)$, the expected length of the code will increase. The extra cost per event is: $\log \frac{p(x)}{q(x)} = \log p(x) - \log q(x)$. Then, the expected extra cost is the KL divergence: $D_{KL}(p \parallel q) = \int p(x) \big[\log p(x) - \log q(x)\big] dx$.</li>
 </ol>
 
-<h4 id="handling-discrete-data-in-generative-models">Handling Discrete Data in Generative Models</h4>
+<h4 id="312-handling-continuous-data">3.1.2 Handling Continuous Data:</h4>
 
 <p>In image and audio data, we have the following challenge with likelihood:</p>
 
@@ -445,7 +546,7 @@
 
 <p>Since a PDF can take values greater than 1, the average log-likelihood for discrete data can become arbitrarily large, making direct evaluation difficult. To address this, <strong>uniform dequantization</strong> is used.</p>
 
-<h4 id="dequantization">Dequantization</h4>
+<h5 id="3121-dequantization-when-handling-continuous-data">3.1.2.1 Dequantization when handling Continuous Data</h5>
 
 <p>Dequantization is a method used in probabilistic modeling to handle discrete data (e.g., pixel intensities $0–255$) with continuous probability density functions (PDFs), such as in image and audio models. Directly modeling discrete data with continuous PDFs can lead to degenerate solutions where arbitrarily high likelihoods are assigned to discrete points. To mitigate this, uniform random noise is added to discrete values, transforming them into continuous values. This process avoids undefined densities and provides a lower bound for the discrete log-likelihood. Following are steps to take</p>
 
@@ -490,6 +591,8 @@
     </ul>
   </li>
 </ul>
+
+<h4 id="313-likelihood-can-be-hard-to-compute">3.1.3 Likelihood can be hard to compute</h4>
 
 
   </article>
