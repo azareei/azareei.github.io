@@ -3,13 +3,23 @@ layout: post
 title: Generative AI
 date: 2025-01-07 14:00:00-0400
 ---
+- [[#1 Types of generative Models|1 Types of generative Models]]
+- [[#2 Goals of Generative AI|2 Goals of Generative AI]]
+- [[#3 Evaluating generative models|3 Evaluating generative models]]
+	- [[#3 Evaluating generative models#3.1 Likelihood-based evaluation|3.1 Likelihood-based evaluation]]
+		- [[#3.1 Likelihood-based evaluation#3.1.1 NLL and perplexity|3.1.1 NLL and perplexity]]
+			- [[#3.1.1 NLL and perplexity#3.1.1.1 More about KL divergence|3.1.1.1 More about KL divergence]]
+		- [[#3.1 Likelihood-based evaluation#3.1.2 Handling Continuous Data:|3.1.2 Handling Continuous Data:]]
+			- [[#3.1.2 Handling Continuous Data:#3.1.2.1 Dequantization when handling Continuous Data|3.1.2.1 Dequantization when handling Continuous Data]]
+		- [[#3.1 Likelihood-based evaluation#3.1.3 Likelihood can be hard to compute|3.1.3 Likelihood can be hard to compute]]
+
 
 A generative model is a *joint* probability distribution $p(x)$, for $x\in\mathcal{X}$ . It's a joint distribution because $x$ can be multidimensional where it consists of multiple variables  $(x_1, x_2, \ldots, x_n)$. 
 
 We also have *conditional* generative model $p(x\vert c)$ in which the generative model would be conditioned on inputs or covariates $c\in C$.
 
 
-## Types of generative Models
+## 1 Types of generative Models
 
 
 *  **Probabilistic graphical models (PGM):** uses simple, often linear, mappings to map a set of interconnected latent variables $z_1, \ldots, z_L$ to observed variables $x_1, \ldots, x_D$. 
@@ -35,7 +45,7 @@ The following table summarizes the different generative models across different 
 | **GAN**, <br>i.e., Generative Adversarial Networks            | NA: Does not explicitly model the density $p(x)$; instead, it learns to generate data by adversarial training.                                      | Fast: Sampling is efficient, as the generator directly maps random noise to generated data in one forward pass.                | Min-max: Trained using adversarial training, where a generator and discriminator compete to improve data generation.        | $\mathbb{R}^L$: Latent representations (e.g., random noise vectors) are central to generating data.                              | Generator-Discriminator: Combines a generator (to create data) and a discriminator (to evaluate its realism).                      |
 
 
-## Goals of Generative AI
+## 2 Goals of Generative AI
 
 1. **Data Generation**: One of the primary goals of generative AI is **data generation**, where models create new data samples that resemble the original data they were trained on. This includes generating realistic images, text, audio, or other forms of data. Generative AI is also used for various tasks, such as:
 	- **Creating synthetic data** for training discriminative models.
@@ -71,7 +81,7 @@ The following table summarizes the different generative models across different 
 9. **Data Compression**: Generative models predict the probability of data patterns and assign shorter codes to frequent patterns, enabling efficient storage and transmission of data, as described by Shannon’s information theory.
 
 
-## Evaluating generative models
+## 3 Evaluating generative models
 
 The generative AI models are evaluated on three aspects 
 1. **Sample Quality**: Do the generated examples look realistic and belong to the same type of data as the training set?
@@ -80,7 +90,7 @@ The generative AI models are evaluated on three aspects
 
 No single metric captures all above, we use different metrics for each or combine parts. 
 
-### Likelihood-based evaluation
+### 3.1 Likelihood-based evaluation
 To evaluate how well a generative model $q$ matches the true data distribution $p$, **KL Divergence** is a commonly used metric:
 
 $$
@@ -111,7 +121,7 @@ Key Insights:
 * **Entropy** $H(p)$: Since entropy is a constant with respect to the model $q(x)$, it does not affect optimization when training the model.
 
 
-#### NLL and perplexity 
+#### 3.1.1 NLL and perplexity 
 
 For models of discrete data, such as language models, **Negative Log Likelihood (NLL)** is a straightforward way to measure how well the model predicts the data. NLL evaluates the average “surprise” the model experiences when it encounters the actual outcomes in the dataset, based on the probabilities it assigns to them. The term “surprise” refers to how unexpected an event is, given the model’s prediction. If the model assigns a high probability to the correct outcome, the surprise (and NLL) is low. Conversely, if the model assigns a low probability, the surprise is high, reflecting the model’s uncertainty.
  * **Example:**	
@@ -139,7 +149,7 @@ Mathematically, perplexity is defined as:
 where $H = \text{NLL}$. Lower perplexity indicates better performance, as the model is less “confused” and more confident in its predictions.
 
 
-##### More about KL divergence
+##### 3.1.1.1 More about KL divergence
 
 The KL Divergence is defined as:
 
@@ -150,7 +160,7 @@ This measures the average difference in log probabilities between the true distr
 1. **Information Loss**: $D_{KL}$ quantifies how much information is lost when $q(x)$(the model) is used to approximate $p(x)$ (the ground truth): In information theory, the information content (or “surprise”) of an event$ x$ occurring under a probability distribution $p(x)$ is given by $-\log p(x)$. So $D_{KL}$ is the information difference when we use the model $q(x)$ instead of true model $p(x)$, i.e.,  $-\log q(x) - (-\log p(x))$, weighted and averaged by the by $p(x)$. 
 2. **Encoding**: How inefficient is it to encode samples from $p(x)$ using a code optimized for $q(x)$: In information theory, the length of a code for an event $x$ is proportional to $-\log p(x)$, minimizing the average code length (Shannon’s Source Coding Theorem). If you use a code based on $q(x)$ instead of $p(x)$, the expected length of the code will increase. The extra cost per event is: $\log \frac{p(x)}{q(x)} = \log p(x) - \log q(x)$. Then, the expected extra cost is the KL divergence: $D_{KL}(p \parallel q) = \int p(x) \big[\log p(x) - \log q(x)\big] dx$. 
 
-#### Handling Discrete Data in Generative Models
+#### 3.1.2 Handling Continuous Data:
 
 In image and audio data, we have the following challenge with likelihood:
 
@@ -159,7 +169,7 @@ In image and audio data, we have the following challenge with likelihood:
 
 Since a PDF can take values greater than 1, the average log-likelihood for discrete data can become arbitrarily large, making direct evaluation difficult. To address this, **uniform dequantization** is used. 
 
-#### Dequantization 
+##### 3.1.2.1 Dequantization when handling Continuous Data   
 
 Dequantization is a method used in probabilistic modeling to handle discrete data (e.g., pixel intensities $0–255$) with continuous probability density functions (PDFs), such as in image and audio models. Directly modeling discrete data with continuous PDFs can lead to degenerate solutions where arbitrarily high likelihoods are assigned to discrete points. To mitigate this, uniform random noise is added to discrete values, transforming them into continuous values. This process avoids undefined densities and provides a lower bound for the discrete log-likelihood. Following are steps to take 
 
@@ -187,4 +197,6 @@ Dequantization is a method used in probabilistic modeling to handle discrete dat
 		$\log p(x) \geq \mathbb{E}_{q(z\vert x)} \left[\log p(z) - \log q(z\vert x)\right]$
 		**The prior likelihood term**: $\log p(z)$ encourages the latent variable $z$ (the output of the flow transformations applied to the input $x$) to follow a predefined distribution, such as a Gaussian.
 		**The dequantization likelihood term**: $-\log q(z\vert x)$ models the distribution $q(z\vert x)$, which is the distribution of the dequantized variable $z$ given the discrete input $x$.
+
+#### 3.1.3 Likelihood can be hard to compute
 
