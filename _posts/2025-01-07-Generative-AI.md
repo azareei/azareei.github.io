@@ -211,20 +211,31 @@ This requires integrating over all possible  $z$ , which can be computationally
 
 ##### 3.1.3.2 Solution 1: **Variational Inference**
 
-**Variational Inference (VI)** is a technique to approximate  $p(x)$  without explicitly calculating the normalization constant. It introduces a simpler distribution $ q(z|x)$  to approximate the true posterior  $p(z|x)$. Instead of directly computing  $\log p(x)$ , we compute a **lower bound** (called the ELBO):
+**Variational Inference (VI)** is a technique to approximate  $p(x)$  without explicitly calculating the normalization constant. It introduces a simpler distribution $q(z\vert x)$  to approximate the true posterior  $p(z\vert x)$. Instead of directly computing  $\log p(x)$ , we compute a **lower bound** (called the ELBO):
 
 We start with:
-$p(x) = \int p(x, z) \, dz =  \int q(z|x) \frac{p(x, z)}{q(z|x)} \, dz$
+$p(x) = \int p(x, z) \, dz =  \int q(z|x) \frac{p(x, z)}{q(z\vert x)} \, dz$
+
 Applying Jenson's inequality;
+
 $\log p(x) = \log \int q(z\vert x) \frac{p(x, z)}{q(z\vert x)} \, dz \geq \int q(z\vert x) \log \frac{p(x, z)}{q(z\vert x)} \, dz$
+
 Noting that: 
+
 $\log \frac{p(x, z)}{q(z\vert x)} = \log p(x\vert z) + \log p(z) - \log q(z\vert x)$
+
 We find 
+
 $\log p(x) \geq \int q(z\vert x) \log p(x\vert z) \, dz + \int q(z\vert x) \log p(z) \, dz - \int q(z\vert x) \log q(z\vert x) \, dz$
-Apply the KL Divergence:
+
+Apply the KL Divergence
+
 $\text{KL}(q(z\vert x) \| p(z)) = \int q(z\vert x) \log \frac{q(z\vert x)}{p(z)} \, dz$
-Final ELBO:
+
+Final ELBO
+
 $\log p(x) \geq \mathbb{E}_{q(z\vert x)}[\log p(x\vert z)] - \text{KL}(q(z\vert x) \| p(z))$
+
 This avoids the expensive integral over  $z$  and allows us to optimize the model using the lower bound. In the ELBO expression above
 * $\mathbb{E}_{q(z\vert x)}[\log p(x\vert z)]$ : Encourages  $q(z\vert x)$  to explain the observed data well.
 * $\text{KL}(q(z\vert x) \| p(z))$ : Ensures $q(z\vert x)$  stays close to the prior  $p(z)$ , avoiding overfitting.
