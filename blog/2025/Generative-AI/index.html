@@ -361,9 +361,9 @@
 
 <p>The $D_{KL}$ measures the <em>distance</em> between the two distributions. Smaller value indicates that the model closely approximates the true data distribution. The first term on the RHS is the <strong>entropy</strong> of $p(x)$, denoted as $H(p)$. Since $H(p)$ depends only on the true distribution $p(x)$, it is a constant when evaluating the model $q(x)$. The second term is the <strong>cross-entropy</strong> between $p(x)$ and $q(x)$, denoted as $H_{ce}(p, q)$.</p>
 
-<p>Minimizing $D_{KL}(p \parallel q)$ is equivalent to minimizing the cross-entropy $H_{ce}(p, q)$ (remember entropy term is constant and does not depend on $q$).</p>
+<p>Minimizing $D_{KL}(p \parallel q)$ is equivalent to minimizing the cross-entropy $H_{ce}(p, q)$ (note that the entropy term,  $H(p)$, is constant and does not depend on $q$).</p>
 
-<p>Approximating $p(x)$ with the empirical data distribution represented by a finite dataset ${x_1, x_2, \dots, x_N}$, then $p(x) = \frac{1}{N} \sum_{i=1}^N \delta (x-x_i)$, where $x_i$ is the $i$th observed data, and $\delta(.)$ is the Dirac’s delta function, then the cross-entropy becomes:</p>
+<p>Given an empirical observed dataset $\mathcal{D} = {x_1, x_2, \dots, x_N}$, we can approximate $p(x)$ with the empirical data distribution,  $p(x) = \frac{1}{N} \sum_{i=1}^N \delta (x-x_i)$,  where $x_i$ is the $i$th observed data, and $\delta(.)$ is the Dirac’s delta function. The cross-entropy then becomes:</p>
 
 \[H_{ce}(p, q) = -\frac{1}{N} \sum_{n=1}^{N} \log q(x_n)\]
 
@@ -374,7 +374,7 @@
 <p>Key Insights:</p>
 <ul>
   <li>
-    <p><strong>*NLL and Cross-Entropy</strong>: The NLL represents the average penalty for the model $q(x)$ assigning probabilities to observed data points in a dataset.</p>
+    <p><strong>NLL and Cross-Entropy</strong>: The NLL represents the average penalty for the model $q(x)$ assigning probabilities to observed data points in a dataset.</p>
   </li>
   <li>
     <p><strong>Test Set Evaluation</strong>: NLL is typically computed on a held-out test set to measure the model’s generalization ability.</p>
@@ -389,12 +389,12 @@
 <p>For models of discrete data, such as language models, <strong>Negative Log Likelihood (NLL)</strong> is a straightforward way to measure how well the model predicts the data. NLL evaluates the average “surprise” the model experiences when it encounters the actual outcomes in the dataset, based on the probabilities it assigns to them. The term “surprise” refers to how unexpected an event is, given the model’s prediction. If the model assigns a high probability to the correct outcome, the surprise (and NLL) is low. Conversely, if the model assigns a low probability, the surprise is high, reflecting the model’s uncertainty.</p>
 <ul>
   <li>
-    <p><strong>*Example:</strong>	
+    <p><strong>Example:</strong>	
  Suppose a language model predicts the next word in the sentence “The cat sat on the __” with the following probabilities:</p>
 
-    <p>• $q(\text{“mat”}) = 0.6$,
- • $q(\text{“floor”}) = 0.3$,
- • $q(\text{“table”}) = 0.1.$</p>
+    <div class="language-plaintext highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> $q(\text{“mat”}) = 0.6, \quad q(\text{“floor”}) = 0.3, \quad q(\text{“table”}) = 0.1$
+</code></pre></div>    </div>
 
     <p>If the correct word is “mat,” the NLL for this prediction is simply:</p>
 
@@ -407,7 +407,7 @@
 <p>Interpreting NLL directly can be unintuitive. To make it easier to understand, <strong>perplexity</strong> is used. Perplexity translates NLL into a measure that reflects how “confused” the model is—essentially, the average number of equally likely choices the model is effectively guessing from.</p>
 <ul>
   <li>
-    <p><strong>*Why Does Perplexity Represent Choices?</strong>: If a model has a perplexity of $P$, it behaves as if it is guessing from $P$ equally likely options. This comes from the relationship between NLL and uniform distributions: for $P$ equally likely outcomes, $q(x) = 1/P$, and the NLL is:</p>
+    <p><strong>Why Does Perplexity Represent Choices?</strong>: If a model has a perplexity of $P$, it behaves as if it is guessing from $P$ equally likely options. This comes from the relationship between NLL and uniform distributions: for $P$ equally likely outcomes, $q(x) = 1/P$, and the NLL is:</p>
 
 \[\text{NLL} = -\log_2(1/P) = \log_2(P)\]
 
@@ -445,6 +445,53 @@
 
 <p>Since a PDF can take values greater than 1, the average log-likelihood for discrete data can become arbitrarily large, making direct evaluation difficult. To address this, <strong>uniform dequantization</strong> is used.</p>
 
+<h4 id="dequantization">Dequantization</h4>
+
+<p>Dequantization is a method used in probabilistic modeling to handle discrete data (e.g., pixel intensities $0–255$) with continuous probability density functions (PDFs), such as in image and audio models. Directly modeling discrete data with continuous PDFs can lead to degenerate solutions where arbitrarily high likelihoods are assigned to discrete points. To mitigate this, uniform random noise is added to discrete values, transforming them into continuous values. This process avoids undefined densities and provides a lower bound for the discrete log-likelihood. Following are steps to take</p>
+
+<ul>
+  <li>
+<strong>Input</strong>: Pixel values in ${0, 1, …, 255}$.</li>
+  <li>
+<strong>Dequantization</strong>:
+    <ul>
+      <li>Add uniform noise: $z = x + \mathcal{U}(0, 1)$.</li>
+      <li>Normalize: $z = z / 256$, resulting in $z \in [0, 1]$.</li>
+    </ul>
+  </li>
+  <li>
+<strong>Flow Transformations</strong>:
+    <ul>
+      <li>Apply transformations like sigmoid scaling: $z = \sigma^{-1}\left(\frac{z - 0.5\alpha}{1 - \alpha}\right)$, mapping data from $[0, 1]$ to $(-\infty, \infty)$.</li>
+      <li>Use flow layers (e.g., affine coupling layers) to map $z$ to a latent Gaussian space.</li>
+    </ul>
+  </li>
+  <li>
+<strong>Training Objective</strong>:
+    <ul>
+      <li>
+        <p>Maximize likelihood: 
+  $\log p(x) \geq \mathbb{E}_{q(z\vert x)} \left[\log p(z) - \log q(z\vert x)\right]$</p>
+
+        <p>Proof: 
+  $p(x) = \int p(x\vert z)p(z)dz = \int q(z\vert x) \frac{p(x\vert z)p(z)}{q(z\vert x)}dz$
+  $\log p(x) = \log \int q(z|x) \frac{p(x|z)p(z)}{q(z|x)} \, dz$
+  Jensen’s inequality states that for a convex function $f$  is<br>
+  $f\left(\mathbb{E}[X]\right) \leq \mathbb{E}[f(X)]$.
+  Since the logarithm is a concave function, we can apply Jensen’s inequality:
+  $\log p(x) \geq \int q(z\vert x) \log \frac{p(x\vert z)p(z)}{q(z\vert x)} \, dz$
+  Expand the term inside the logarithm:
+  $\int q(z\vert x) \log \frac{p(x\vert z)p(z)}{q(z\vert x)} \, dz = \int q(z\vert x) \left[\log p(x\vert z) + \log p(z) - \log q(z\vert x)\right] \, dz$
+  The first term, $\log p(x\vert z)$, integrates to zero because $p(x\vert z) = \delta(x - \text{round}(z))$, and $q(z|x)$ is only defined over valid $z$. As a result 
+  $\log p(x) \geq \mathbb{E}_{q(z\vert x)} \left[\log p(z) - \log q(z\vert x)\right]$
+  <strong>The prior likelihood term</strong>: $\log p(z)$ encourages the latent variable $z$ (the output of the flow transformations applied to the input $x$) to follow a predefined distribution, such as a Gaussian.
+  <strong>The dequantization likelihood term</strong>: $-\log q(z\vert x)$ models the distribution $q(z\vert x)$, which is the distribution of the dequantized variable $z$ given the discrete input $x$.</p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+
   </article>
 
   
@@ -461,7 +508,7 @@
     © Copyright 2025 Ahmad  Zareei.
     <!--  -->     
     
-    Last updated: January 13, 2025.
+    Last updated: January 14, 2025.
     
   </div>
 </footer>
