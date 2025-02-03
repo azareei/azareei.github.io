@@ -171,7 +171,194 @@
   </header>
 
   <article class="post-content">
-    <p>A generative model is a <em>joint</em> probability distribution $p(x)$, for $x\in\mathcal{X}$ . It’s a joint distribution because $x$ can be multidimensional where it consists of multiple variables  $(x_1, x_2, \ldots, x_n)$.</p>
+    <ul>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>[[#1 Types of generative Models</td>
+          <td>1 Types of generative Models]]</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>[[#2 Goals of Generative AI</td>
+          <td>2 Goals of Generative AI]]</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>[[#3 Evaluating generative models</td>
+          <td>3 Evaluating generative models]]</td>
+        </tr>
+      </tbody>
+    </table>
+    <ul>
+      <li>
+        <table>
+          <tbody>
+            <tr>
+              <td>[[#3 Evaluating generative models#3.1 Likelihood-based evaluation</td>
+              <td>3.1 Likelihood-based evaluation]]</td>
+            </tr>
+          </tbody>
+        </table>
+        <ul>
+          <li>
+            <table>
+              <tbody>
+                <tr>
+                  <td>[[#3.1 Likelihood-based evaluation#3.1.1 NLL and perplexity</td>
+                  <td>3.1.1 NLL and perplexity]]</td>
+                </tr>
+              </tbody>
+            </table>
+            <ul>
+              <li>
+                <table>
+                  <tbody>
+                    <tr>
+                      <td>[[#3.1.1 NLL and perplexity#3.1.1.1 More about KL divergence</td>
+                      <td>3.1.1.1 More about KL divergence]]</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <table>
+              <tbody>
+                <tr>
+                  <td>[[#3.1 Likelihood-based evaluation#3.1.2 Handling Continuous Data:</td>
+                  <td>3.1.2 Handling Continuous Data:]]</td>
+                </tr>
+              </tbody>
+            </table>
+            <ul>
+              <li>
+                <table>
+                  <tbody>
+                    <tr>
+                      <td>[[#3.1.2 Handling Continuous Data:#3.1.2.1 Dequantization when handling Continuous Data</td>
+                      <td>3.1.2.1 Dequantization when handling Continuous Data]]</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <table>
+              <tbody>
+                <tr>
+                  <td>[[#3.1 Likelihood-based evaluation#3.1.3 Likelihood can be hard to compute</td>
+                  <td>3.1.3 Likelihood can be hard to compute]]</td>
+                </tr>
+              </tbody>
+            </table>
+            <ul>
+              <li>
+                <table>
+                  <tbody>
+                    <tr>
+                      <td>[[#3.1.3 Likelihood can be hard to compute#3.1.3.1 Example</td>
+                      <td>3.1.3.1 Example]]</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </li>
+              <li>
+                <table>
+                  <tbody>
+                    <tr>
+                      <td>[[#3.1.3 Likelihood can be hard to compute#3.1.3.2 Solution 1: <strong>Variational Inference</strong>
+</td>
+                      <td>3.1.3.2 Solution 1: <strong>Variational Inference</strong>]]</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </li>
+              <li>
+                <table>
+                  <tbody>
+                    <tr>
+                      <td>[[#3.1.3 Likelihood can be hard to compute#3.1.3.3 Solution 2: <strong>Annealed Importance Sampling (AIS)</strong>
+</td>
+                      <td>3.1.3.3 Solution 2: <strong>Annealed Importance Sampling (AIS)</strong>]]</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <table>
+              <tbody>
+                <tr>
+                  <td>[[#3.1 Likelihood-based evaluation#3.1.4 Likelihood and sample quality</td>
+                  <td>3.1.4 Likelihood and sample quality]]</td>
+                </tr>
+              </tbody>
+            </table>
+            <ul>
+              <li>
+                <table>
+                  <tbody>
+                    <tr>
+                      <td>[[#3.1.4 Likelihood and sample quality#3.1.4.1 Example of High Likelihood but Poor Samples</td>
+                      <td>3.1.4.1 Example of High Likelihood but Poor Samples]]</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </li>
+              <li>
+                <table>
+                  <tbody>
+                    <tr>
+                      <td>[[#3.1.4 Likelihood and sample quality#3.1.4.2 Example of Low Likelihood but Great Sample quality</td>
+                      <td>3.1.4.2 Example of Low Likelihood but Great Sample quality]]</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <table>
+          <tbody>
+            <tr>
+              <td>[[#3 Evaluating generative models#Perceptual Metrics</td>
+              <td>Perceptual Metrics]]</td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
+      <li>
+        <table>
+          <tbody>
+            <tr>
+              <td>[[#3 Evaluating generative models#Precision and recall metrics</td>
+              <td>Precision and recall metrics]]</td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p>A generative model is a <em>joint</em> probability distribution $p(x)$, for $x\in\mathcal{X}$ . It’s a joint distribution because $x$ can be multidimensional where it consists of multiple variables  $(x_1, x_2, \ldots, x_n)$.</p>
 
 <p>We also have <em>conditional</em> generative model $p(x\vert c)$ in which the generative model would be conditioned on inputs or covariates $c\in C$.</p>
 
@@ -393,7 +580,7 @@
  Suppose a language model predicts the next word in the sentence “The cat sat on the __” with the following probabilities:</p>
 
     <div class="language-plaintext highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code> $q(\text{“mat”}) = 0.6, \quad q(\text{“floor”}) = 0.3, \quad q(\text{“table”}) = 0.1$
+<div class="highlight"><pre class="highlight"><code> $$q(\text{“mat”}) = 0.6, \quad q(\text{“floor”}) = 0.3, \quad q(\text{“table”}) = 0.1$$
 </code></pre></div>    </div>
 
     <p>If the correct word is “mat,” the NLL for this prediction is simply:</p>
@@ -411,7 +598,7 @@
 
 \[\text{NLL} = -\log_2(1/P) = \log_2(P)\]
 
-    <p>Inverting this gives $P = 2^{\text{NLL}}$.</p>
+    <p>Inverting this gives \(P = 2^{\text{NLL}}\)</p>
   </li>
 </ul>
 
@@ -429,7 +616,7 @@
 <p>This measures the average difference in log probabilities between the true distribution $p(x)$ and the model distribution $q(x)$, weighted by $p(x)$. Two interpretations:</p>
 <ol>
   <li>
-<strong>Information Loss</strong>: $D_{KL}$ quantifies how much information is lost when $q(x)$(the model) is used to approximate $p(x)$ (the ground truth): In information theory, the information content (or “surprise”) of an event$ x$ occurring under a probability distribution $p(x)$ is given by $-\log p(x)$. So $D_{KL}$ is the information difference when we use the model $q(x)$ instead of true model $p(x)$, i.e.,  $-\log q(x) - (-\log p(x))$, weighted and averaged by the by $p(x)$.</li>
+<strong>Information Loss</strong>: $D_{KL}$ quantifies how much information is lost when $q(x)$(the model) is used to approximate $p(x)$ (the ground truth): In information theory, the information content (or “surprise”) of an event $x$ occurring under a probability distribution $p(x)$ is given by $-\log p(x)$. So $D_{KL}$ is the information difference when we use the model $q(x)$ instead of true model $p(x)$, i.e.,  $-\log q(x) - (-\log p(x))$, weighted and averaged by the by $p(x)$.</li>
   <li>
 <strong>Encoding</strong>: How inefficient is it to encode samples from $p(x)$ using a code optimized for $q(x)$: In information theory, the length of a code for an event $x$ is proportional to $-\log p(x)$, minimizing the average code length (Shannon’s Source Coding Theorem). If you use a code based on $q(x)$ instead of $p(x)$, the expected length of the code will increase. The extra cost per event is: $\log \frac{p(x)}{q(x)} = \log p(x) - \log q(x)$. Then, the expected extra cost is the KL divergence: $D_{KL}(p \parallel q) = \int p(x) \big[\log p(x) - \log q(x)\big] dx$.</li>
 </ol>
@@ -473,18 +660,45 @@
         <p>Maximize likelihood: 
   $\log p(x) \geq \mathbb{E}_{q(z\vert x)} \left[\log p(z) - \log q(z\vert x)\right]$</p>
 
-        <p>Proof: 
-  $p(x) = \int p(x\vert z)p(z)dz = \int q(z\vert x) \frac{p(x\vert z)p(z)}{q(z\vert x)}dz$
-  $\log p(x) = \log \int q(z|x) \frac{p(x|z)p(z)}{q(z|x)} \, dz$
-  Jensen’s inequality states that for a convex function $f$  is<br>
-  $f\left(\mathbb{E}[X]\right) \leq \mathbb{E}[f(X)]$.
-  Since the logarithm is a concave function, we can apply Jensen’s inequality:
-  $\log p(x) \geq \int q(z\vert x) \log \frac{p(x\vert z)p(z)}{q(z\vert x)} \, dz$
-  Expand the term inside the logarithm:
-  $\int q(z\vert x) \log \frac{p(x\vert z)p(z)}{q(z\vert x)} \, dz = \int q(z\vert x) \left[\log p(x\vert z) + \log p(z) - \log q(z\vert x)\right] \, dz$
-  The first term, $\log p(x\vert z)$, integrates to zero because $p(x\vert z) = \delta(x - \text{round}(z))$, and $q(z|x)$ is only defined over valid $z$. As a result 
-  $\log p(x) \geq \mathbb{E}_{q(z\vert x)} \left[\log p(z) - \log q(z\vert x)\right]$
-  <strong>The prior likelihood term</strong>: $\log p(z)$ encourages the latent variable $z$ (the output of the flow transformations applied to the input $x$) to follow a predefined distribution, such as a Gaussian.
+        <p>Proof:</p>
+
+        <p>$p(x) = \int p(x\vert z)p(z)dz = \int q(z\vert x) \frac{p(x\vert z)p(z)}{q(z\vert x)}dz$</p>
+
+        <table>
+          <tbody>
+            <tr>
+              <td>$\log p(x) = \log \int q(z</td>
+              <td>x) \frac{p(x</td>
+              <td>z)p(z)}{q(z</td>
+              <td>x)} \, dz$</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>Jensen’s inequality states that for a convex function $f$  is</p>
+
+        <p>$f\left(\mathbb{E}[X]\right) \leq \mathbb{E}[f(X)]$</p>
+
+        <p>Since the logarithm is a concave function, we can apply Jensen’s inequality:</p>
+
+        <p>$\log p(x) \geq \int q(z\vert x) \log \frac{p(x\vert z)p(z)}{q(z\vert x)} \, dz$</p>
+
+        <p>Expand the term inside the logarithm:</p>
+
+        <p>$\int q(z\vert x) \log \frac{p(x\vert z)p(z)}{q(z\vert x)} \, dz = \int q(z\vert x) \left[\log p(x\vert z) + \log p(z) - \log q(z\vert x)\right] \, dz$</p>
+
+        <table>
+          <tbody>
+            <tr>
+              <td>The first term, $\log p(x\vert z)$, integrates to zero because $p(x\vert z) = \delta(x - \text{round}(z))$, and $q(z</td>
+              <td>x)$ is only defined over valid $z$. As a result</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>$\log p(x) \geq \mathbb{E}_{q(z\vert x)} \left[\log p(z) - \log q(z\vert x)\right]$</p>
+
+        <p><strong>The prior likelihood term</strong>: $\log p(z)$ encourages the latent variable $z$ (the output of the flow transformations applied to the input $x$) to follow a predefined distribution, such as a Gaussian.
   <strong>The dequantization likelihood term</strong>: $-\log q(z\vert x)$ models the distribution $q(z\vert x)$, which is the distribution of the dequantized variable $z$ given the discrete input $x$.</p>
       </li>
     </ul>
@@ -493,7 +707,7 @@
 
 <h4 id="313-likelihood-can-be-hard-to-compute">3.1.3 Likelihood can be hard to compute</h4>
 
-<p>• In many generative models, we want to compute the <strong>likelihood</strong>  $p(x)$ , which tells us how well the model explains the data  $x$. Computing  $p(x)$  often requires evaluating a <strong>normalization constant</strong></p>
+<p>In many generative models, we want to compute the <strong>likelihood</strong>  $p(x)$ , which tells us how well the model explains the data  $x$. Computing  $p(x)$  often requires evaluating a <strong>normalization constant</strong></p>
 
 <p>$p(x) = \frac{\tilde{p}(x)}{Z}, \quad Z = \int \tilde{p}(x) dx$</p>
 
@@ -503,14 +717,7 @@
 
 <p>In a model with latent variables  $z$ , $ p(x)$  is computed as:</p>
 
-<table>
-  <tbody>
-    <tr>
-      <td>$p(x) = \int p(x</td>
-      <td>z)p(z) dz$</td>
-    </tr>
-  </tbody>
-</table>
+<p>$p(x) = \int p(x\vert z)p(z) dz$</p>
 
 <p>This requires integrating over all possible  $z$ , which can be computationally infeasible for complex models. We basically need to find all $z$ that result in that generated data $x$.</p>
 
@@ -556,6 +763,206 @@ $p(x) = \int p(x, z) \, dz =  \int q(z|x) \frac{p(x, z)}{q(z\vert x)} \, dz$</p>
 
 <h5 id="3133-solution-2-annealed-importance-sampling-ais">3.1.3.3 Solution 2: <strong>Annealed Importance Sampling (AIS)</strong>
 </h5>
+<p>In this method, we estimate the log likelihood using Monte Carlo sampling.</p>
+
+<h4 id="314-likelihood-and-sample-quality">3.1.4 Likelihood and sample quality</h4>
+<p>A model can achieve high likelihood but produce perceptually poor samples and vice versa. Likelihood alone is not a reliable indicator of the perceptual quality of generated samples.</p>
+
+<h5 id="3141-example-of-high-likelihood-but-poor-samples">3.1.4.1 Example of High Likelihood but Poor Samples</h5>
+<p>Consider the following</p>
+<ul>
+  <li>Model $q_0$: A good density model that performs well in terms of average log-likelihood.</li>
+  <li>Model $q_1$: A bad model that generates white noise.
+Now imagine a mixture model $q_2$
+• Mixture Model $q_2$: Combines these models:
+\(q_2(x) = 0.01q_0(x) + 0.99q_1(x)\)
+This means 99% of the samples will be poor (from $q_1$). Since $q_1$ is coming from uniform distribution (white noise), and for high-dimensional data (like images with many pixels) it would be a very small number, so negligible in comparison with $q_0$, so we will have</li>
+</ul>
+
+<p>\(\log q_2(x) = \log[0.01q_0(x) + 0.99q_1(x)] \geq \log[0.01q_0(x)] = \log q_0(x) - 2\)
+which would be a large log likelihood for $q_2$, however, the sample quality is pretty bad.</p>
+
+<h5 id="3142-example-of-low-likelihood-but-great-sample-quality">3.1.4.2 Example of Low Likelihood but Great Sample quality</h5>
+<p>Imagine a Gaussian Mixture Model defined as</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>$$  q(x) = \frac{1}{N} \sum_{n=1}^{N} N(x</td>
+      <td>x_n, \epsilon^2 I)$$</td>
+    </tr>
+    <tr>
+      <td>The model consists of a mixture of <strong>N Gaussians</strong>. Each <strong>Gaussian</strong>  $N(x</td>
+      <td>x_n, \epsilon^2 I)$  is centered on a training image  $x_n$ . Note that $\epsilon^2 I$  represents small Gaussian noise added around each training image. If  $\epsilon$  <strong>is very small</strong>, each Gaussian is tightly concentrated around the training images. This means that when we <strong>sample from this model</strong>, we get images that are <strong>almost identical to training images</strong>. <strong>Perceptually</strong>, the generated samples look great because they resemble real training images. Likelihood measures <strong>how well the model generalizes to new data</strong>. In this case, since the model is just a bunch of Gaussians centered on training images, its density function will <strong>assign high probability to training images.</strong> and <strong>assign very low probability to test images,</strong> which means <strong>poor likelihood on the test set</strong>.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="perceptual-metrics">Perceptual Metrics</h3>
+<p>Evaluating generative models (like GANs and VAEs) is challenging because traditional metrics like likelihood do not always reflect the perceptual quality of generated images. Instead of directly comparing raw pixel values, researchers use <strong>perceptual distance metrics</strong>, which compare feature representations of real and generated images. These features are extracted using neural networks, often from <strong>pretrained classifiers</strong> like the Inception model.</p>
+
+<ol>
+  <li>
+<strong>Inception Score (IS)</strong>: This score measures how well a generative model produces diverse and recognizable images. It uses a classifier (like the Inception network) to predict class labels for generated images.</li>
+</ol>
+
+<p>\(IS = \exp (E_{p_\theta(x)} D_{KL} (p_{\text{disc}}(Y \vert x) \parallel p_\theta(Y)))\)
+	where:
+	* $p_\theta(x)$  is the probability distribution of images generated by the model.
+	* $p_{\text{disc}}(Y | x)$  is the probability distribution over class labels <strong>given an image</strong>  x . This is obtained from a <strong>pretrained classifier</strong> (like Inception).
+	* $p_\theta(Y)$  is the <strong>marginal class distribution</strong> of generated images:
+  \(p_\theta(y) = \int p_{\text{disc}}(y \vert x) p_\theta(x) dx\)</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>**What is the Inception Score (IS) trying to do?** The Inception Score is trying to answer two questions about the images generated by a model:
+1. **Are the generated images clear and recognizable?** (Do they belong to a specific class with high confidence?)
+2. **Are the generated images diverse?** (Do they cover a wide range of different classes?)
+To measure this, it **compares two distributions**:
+* $p_{\text{disc}}(Y | x)$  → This is the **classifier’s prediction** for a generated image  $x$ . It tells us how confident the classifier is that the image belongs to a certain class (e.g., “cat” or “dog”).
+* $p_\theta(Y)$  → This is the **overall distribution of generated class labels** across many images. It tells us whether the model is generating a balanced mix of different classes.
+The score is calculated using **KL divergence**, which measures how different these two distributions are. This happens in two steps
+	1. **Check if each image belongs to a clear class.** -&gt; If an image is confidently recognized as a **specific** class (e.g., “cat” with 99% probability), it is a **high-quality sample**. If an image is blurry or unrecognizable, the classifier will be **uncertain** which is **bad**.
+	2. **Check if the model generates a variety of different classes.**: If the model generates **only cats**, it is **not diverse**, which is **bad**. If the model generates a **mix of different animals**, it is **diverse**, which is **good**.
+	3. Combining the above two: **KL divergence compares how different the per-image class prediction**  $p_{\text{disc}}(Y | x)$  **is from the overall class distribution**  $p_\theta(Y)$ **.** If the two distributions are very different, it means the images are **recognizable and diverse**, which gives a **high score**. If the distributions are similar, it means the images are **blurry or all from the same class**, which gives a **low score**.
+This can also be seen with a bit of derivation. The KL divergence in the inception score can be written as 
+$$   D_{KL} (p_{\text{disc}}(Y \vert x) \parallel p_\theta(Y)) = \sum_y p_{\text{disc}}(y \vert x) \log \frac{p_{\text{disc}}(y \vert x)}{p_\theta(y)}$$
+So the expected value is 
+	$$  E_{p_\theta(x)} D_{KL} (p_{\text{disc}}(Y \vert x) \parallel p_\theta(Y)) = \int p_\theta(x) \sum_y p_{\text{disc}}(y \vert x) \log \frac{p_{\text{disc}}(y \vert x)}{p_\theta(y)} dx$$
+Rearranging, we obtain 
+$$   E_{p_\theta(x)} D_{KL} (p_{\text{disc}}(Y \vert x) \parallel p_\theta(Y)) = \sum_y \int p_\theta(x) p_{\text{disc}}(y \vert x) \log \frac{p_{\text{disc}}(y \vert x)}{p_\theta(y)} dx$$
+Note that $p_\theta(y) = \int p_{\text{disc}}(y \vert x) p_\theta(x) dx$. So the above would mean
+	$$   E_{p_\theta(x)} D_{KL} (p_{\text{disc}}(Y \vert x) \parallel p_\theta(Y)) = H(p_\theta(Y)) - E_{p_\theta(x)} [H(p_{\text{disc}}(Y \vert x))]$$
+So in here 
+* $H(p_\theta(Y))$ is the **entropy of the marginal class distribution**: **High**  $H(p_\theta(Y))$ **(high marginal entropy) → Ensures diversity**
+*  $H(p_{\text{disc}}(Y \vert x))$  is the **conditional entropy** of class predictions per image: **Low**  $H(p_{\text{disc}}(Y \vert x))$  **(low per-image entropy) → Ensures realism**
+
+This represents the overall class distribution of the generated images.
+A high score means the model generates **varied** images across different classes (**high entropy** of predicted labels). Each individual image should be **easily classifiable** (low entropy per image). One big **limitation** is that it does not measure overfitting—if a model memorizes one perfect image per class, it can still score well.
+</code></pre></div></div>
+
+<ol>
+  <li>
+<strong>Fréchet Inception Distance (FID)</strong>: Instead of class labels, it compares statistical properties of deep features (mean and covariance) between real and generated images.</li>
+</ol>
+
+\[FID = \|\mu_m - \mu_d\|^2_2 + \text{tr} (\Sigma_d + \Sigma_m - 2(\Sigma_d \Sigma_m)^{1/2})\]
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>where 
+* $\mu_m, \Sigma_m$  = Mean and covariance of generated images
+* $\mu_d, \Sigma_d$  = Mean and covariance of real images
+Lower FID is better because it means generated images closely resemble real images in feature space. One **limitation** of this score is that it is sensitive to the number of samples used—results can vary due to statistical bias.
+</code></pre></div></div>
+
+<ol>
+  <li>
+<strong>Kernel Inception Distance (KID)</strong>: This score improves on FID by using <strong>Maximum Mean Discrepancy (MMD)</strong> to measure the similarity between distributions. This reduces bias issues in FID by comparing feature distributions more robustly. MMD measures the distance between two distributions <strong>without assuming they are Gaussian</strong>. Instead of just comparing the <strong>mean and covariance</strong> (like FID), MMD measures how well two sets of samples <strong>match</strong> using a <strong>kernel function</strong>.</li>
+</ol>
+
+\[\text{MMD}^2(X, Y) = E[k(x, x{\prime})] + E[k(y, y{\prime})] - 2E[k(x, y)]\]
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>where:
+* $X$  = set of features from real images.
+* $Y$  = set of features from generated images.
+* $k(x, y)$  = a kernel function that measures similarity (usually a **polynomial or Gaussian kernel**).
+* $E[k(x, x{\prime})]$  = similarity within real images.
+* $E[k(y, y{\prime})]$ = similarity within generated images.
+* $E[k(x, y)]$  = similarity between real and generated image
+</code></pre></div></div>
+
+<h3 id="precision-and-recall-metrics">Precision and recall metrics</h3>
+<p>The <strong>Fréchet Inception Distance (FID)</strong> measures the <strong>distance between the real and generated data distributions</strong> but does <strong>not tell us why a model is failing</strong>. A <strong>bad (high) FID</strong> could mean:</p>
+<ol>
+  <li>The model <strong>produces low-quality samples</strong> (they don’t look realistic).</li>
+  <li>The model <strong>places too much probability mass around the data distribution</strong>, meaning it only captures a limited part of the real data.</li>
+  <li>The model <strong>only generates a subset of the real data</strong> (a problem called <strong>mode collapse</strong> in GANs).
+Precision (sample quality), and recall (sample diversity) are introduced to resolve this differentiation issue</li>
+</ol>
+
+<ul>
+  <li>
+<strong>*Precision</strong> → Are generated samples <strong>high quality</strong> (similar to real data)?</li>
+  <li>
+    <ul>
+      <li>
+<strong>Recall</strong> → Is the <strong>diversity</strong> of generated samples good (does it cover the full real data distribution)?</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>Precision and recall</strong> work by using a <strong>pretrained classifier</strong> (like Inception) to extract <strong>features</strong> of both real and generated images. Then, <strong>nearest neighbor distances</strong> are used to compare them. Let’s define the notation:</p>
+<ul>
+  <li>$\Phi_{\text{model}}$  = Set of feature vectors from generated images.</li>
+  <li>$Phi_{\text{data}}$  = Set of feature vectors from real images.</li>
+  <li> $\text{NN}_k(\phi{\prime}, \Phi)$  = The  $k$-th nearest neighbor of  $\phi{\prime}$  in  $\Phi$  (used to measure how close a sample is to its nearest neighbors).
+To determine whether a generated image is <strong>close enough</strong> to real data, we define the function:</li>
+</ul>
+
+<p>$$f_k(\phi, \Phi) =</p>
+
+<p>\begin{cases}</p>
+
+<p>1, &amp; \text{if } \exists \phi{\prime} \in \Phi \text{ such that } |\phi - \phi{\prime}|_2^2 \leq |\phi{\prime} - \text{NN}_k(\phi{\prime}, \Phi)|_2^2 \</p>
+
+<p>0, &amp; \text{otherwise}</p>
+
+<p>\end{cases}
+$$
+ This function</p>
+<ul>
+  <li>checks whether a generated sample $ \phi$  is as <strong>close to real data as real data is to itself</strong>
+</li>
+  <li>if $\phi$  is <strong>close enough</strong> to any real data point  $\phi{\prime}$ , it is counted as <strong>a valid sample</strong>.</li>
+</ul>
+
+<p><strong>Precision (Sample Quality)</strong>: Precision tells us <strong>how many generated samples</strong> are close to real data.</p>
+
+<p>\(\text{precision}(\Phi_{\text{model}}, \Phi_{\text{data}}) = \frac{1}{|\Phi_{\text{model}}|} \sum_{\phi \in \Phi_{\text{model}}} f_k(\phi, \Phi_{\text{data}})\)</p>
+<ul>
+  <li>
+<strong>*High precision</strong> means most generated images are <strong>high-quality</strong> and resemble real data.</li>
+  <li>
+<strong>Low precision</strong> means many generated images are <strong>not realistic</strong>.</li>
+</ul>
+
+<p><strong>Recall (Sample Diversity)</strong>: Recall tells us <strong>whether real data points are well represented</strong> by the model.</p>
+
+<p>\(\text{recall}(\Phi_{\text{model}}, \Phi_{\text{data}}) = \frac{1}{|\Phi_{\text{data}}|} \sum_{\phi \in \Phi_{\text{data}}} f_k(\phi, \Phi_{\text{model}})\)</p>
+<ul>
+  <li>
+<strong>*High recall</strong> means the model generates <strong>a diverse set of samples that cover all real data</strong>.</li>
+  <li>
+<strong>Low recall</strong> means the model <strong>misses</strong> important variations in the real dataset (<strong>mode collapse</strong>).
+Now with precision and recall we can separate between the issues that the generative model has. For example, in <strong>GANs</strong>, <strong>mode collapse</strong> happens when the model only generates a <strong>few types of images</strong>.</li>
+  <li>
+<strong>*High precision but low recall</strong> = The GAN generates <strong>very realistic but repetitive</strong> images (e.g., only faces of young white males).</li>
+  <li>
+<strong>Low precision but high recall</strong> = The GAN generates <strong>a wide variety of images, but many are blurry</strong>.
+    <h3 id="statistical-tests">Statistical Tests</h3>
+    <p>A <strong>two-sample test</strong> is a <strong>statistical method</strong> used to determine whether two datasets (sets of samples) come from the <strong>same underlying distribution</strong>.</p>
+  </li>
+  <li>
+<strong>*Null Hypothesis (</strong> $H_0$ <strong>)</strong>: The two sets of samples come from the <strong>same</strong> distribution.</li>
+  <li>
+<strong>Alternative Hypothesis (</strong> $H_A$ <strong>)</strong>: The two sets of samples come from <strong>different</strong> distributions.
+For example, in <strong>Generative Adversarial Networks (GANs)</strong> and other generative models, we want to check:
+    <ol>
+      <li><strong>Are the generated samples statistically similar to real data?</strong></li>
+      <li><strong>How different is the model’s output from real data?</strong></li>
+    </ol>
+  </li>
+</ul>
+
+<p>To do this, we apply two-sample tests using:</p>
+<ol>
+  <li>
+<strong>Classifier-based statistics</strong> → Train a classifier to distinguish real vs. generated images.</li>
+  <li>
+<strong>Maximum Mean Discrepancy (MMD)</strong> → A kernel-based test to compare distributions.</li>
+</ol>
+
+<p>Since <strong>deep learning works with high-dimensional data</strong> (e.g., images with millions of pixels), two-sample tests often use <strong>learned feature representations</strong> (from pretrained networks like Inception) instead of comparing raw pixel values.</p>
+
+<p>Statistical tests let users control <strong>Type 1 error</strong> ( $\alpha$ ), which is <strong>the probability of wrongly rejecting the null hypothesis</strong> (i.e., concluding that the samples are different when they are actually from the same distribution).</p>
+
 
   </article>
 
@@ -573,7 +980,7 @@ $p(x) = \int p(x, z) \, dz =  \int q(z|x) \frac{p(x, z)}{q(z\vert x)} \, dz$</p>
     © Copyright 2025 Ahmad  Zareei.
     <!--  -->     
     
-    Last updated: January 16, 2025.
+    Last updated: February 03, 2025.
     
   </div>
 </footer>
