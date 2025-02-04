@@ -1,190 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://azareei.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://azareei.github.io/" rel="alternate" type="text/html" /><updated>2025-02-03T08:35:33+00:00</updated><id>https://azareei.github.io/feed.xml</id><title type="html">Ahmad Zareei</title><subtitle>Personal homepage of Ahmad Zareei, Senion AI research Scientist @META
-</subtitle><entry><title type="html">Generative AI</title><link href="https://azareei.github.io/blog/2025/Generative-AI/" rel="alternate" type="text/html" title="Generative AI" /><published>2025-01-07T18:00:00+00:00</published><updated>2025-01-07T18:00:00+00:00</updated><id>https://azareei.github.io/blog/2025/Generative-AI</id><content type="html" xml:base="https://azareei.github.io/blog/2025/Generative-AI/"><![CDATA[<ul>
-  <li>
-    <table>
-      <tbody>
-        <tr>
-          <td>[[#1 Types of generative Models</td>
-          <td>1 Types of generative Models]]</td>
-        </tr>
-      </tbody>
-    </table>
-  </li>
-  <li>
-    <table>
-      <tbody>
-        <tr>
-          <td>[[#2 Goals of Generative AI</td>
-          <td>2 Goals of Generative AI]]</td>
-        </tr>
-      </tbody>
-    </table>
-  </li>
-  <li>
-    <table>
-      <tbody>
-        <tr>
-          <td>[[#3 Evaluating generative models</td>
-          <td>3 Evaluating generative models]]</td>
-        </tr>
-      </tbody>
-    </table>
-    <ul>
-      <li>
-        <table>
-          <tbody>
-            <tr>
-              <td>[[#3 Evaluating generative models#3.1 Likelihood-based evaluation</td>
-              <td>3.1 Likelihood-based evaluation]]</td>
-            </tr>
-          </tbody>
-        </table>
-        <ul>
-          <li>
-            <table>
-              <tbody>
-                <tr>
-                  <td>[[#3.1 Likelihood-based evaluation#3.1.1 NLL and perplexity</td>
-                  <td>3.1.1 NLL and perplexity]]</td>
-                </tr>
-              </tbody>
-            </table>
-            <ul>
-              <li>
-                <table>
-                  <tbody>
-                    <tr>
-                      <td>[[#3.1.1 NLL and perplexity#3.1.1.1 More about KL divergence</td>
-                      <td>3.1.1.1 More about KL divergence]]</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <table>
-              <tbody>
-                <tr>
-                  <td>[[#3.1 Likelihood-based evaluation#3.1.2 Handling Continuous Data:</td>
-                  <td>3.1.2 Handling Continuous Data:]]</td>
-                </tr>
-              </tbody>
-            </table>
-            <ul>
-              <li>
-                <table>
-                  <tbody>
-                    <tr>
-                      <td>[[#3.1.2 Handling Continuous Data:#3.1.2.1 Dequantization when handling Continuous Data</td>
-                      <td>3.1.2.1 Dequantization when handling Continuous Data]]</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <table>
-              <tbody>
-                <tr>
-                  <td>[[#3.1 Likelihood-based evaluation#3.1.3 Likelihood can be hard to compute</td>
-                  <td>3.1.3 Likelihood can be hard to compute]]</td>
-                </tr>
-              </tbody>
-            </table>
-            <ul>
-              <li>
-                <table>
-                  <tbody>
-                    <tr>
-                      <td>[[#3.1.3 Likelihood can be hard to compute#3.1.3.1 Example</td>
-                      <td>3.1.3.1 Example]]</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </li>
-              <li>
-                <table>
-                  <tbody>
-                    <tr>
-                      <td>[[#3.1.3 Likelihood can be hard to compute#3.1.3.2 Solution 1: <strong>Variational Inference</strong></td>
-                      <td>3.1.3.2 Solution 1: <strong>Variational Inference</strong>]]</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </li>
-              <li>
-                <table>
-                  <tbody>
-                    <tr>
-                      <td>[[#3.1.3 Likelihood can be hard to compute#3.1.3.3 Solution 2: <strong>Annealed Importance Sampling (AIS)</strong></td>
-                      <td>3.1.3.3 Solution 2: <strong>Annealed Importance Sampling (AIS)</strong>]]</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <table>
-              <tbody>
-                <tr>
-                  <td>[[#3.1 Likelihood-based evaluation#3.1.4 Likelihood and sample quality</td>
-                  <td>3.1.4 Likelihood and sample quality]]</td>
-                </tr>
-              </tbody>
-            </table>
-            <ul>
-              <li>
-                <table>
-                  <tbody>
-                    <tr>
-                      <td>[[#3.1.4 Likelihood and sample quality#3.1.4.1 Example of High Likelihood but Poor Samples</td>
-                      <td>3.1.4.1 Example of High Likelihood but Poor Samples]]</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </li>
-              <li>
-                <table>
-                  <tbody>
-                    <tr>
-                      <td>[[#3.1.4 Likelihood and sample quality#3.1.4.2 Example of Low Likelihood but Great Sample quality</td>
-                      <td>3.1.4.2 Example of Low Likelihood but Great Sample quality]]</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-      <li>
-        <table>
-          <tbody>
-            <tr>
-              <td>[[#3 Evaluating generative models#Perceptual Metrics</td>
-              <td>Perceptual Metrics]]</td>
-            </tr>
-          </tbody>
-        </table>
-      </li>
-      <li>
-        <table>
-          <tbody>
-            <tr>
-              <td>[[#3 Evaluating generative models#Precision and recall metrics</td>
-              <td>Precision and recall metrics]]</td>
-            </tr>
-          </tbody>
-        </table>
-      </li>
-    </ul>
-  </li>
-</ul>
-
-<p>A generative model is a <em>joint</em> probability distribution $p(x)$, for $x\in\mathcal{X}$ . It’s a joint distribution because $x$ can be multidimensional where it consists of multiple variables  $(x_1, x_2, \ldots, x_n)$.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://azareei.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://azareei.github.io/" rel="alternate" type="text/html" /><updated>2025-02-04T00:54:52+00:00</updated><id>https://azareei.github.io/feed.xml</id><title type="html">Ahmad Zareei</title><subtitle>Personal homepage of Ahmad Zareei, Senion AI research Scientist @META
+</subtitle><entry><title type="html">Generative AI</title><link href="https://azareei.github.io/blog/2025/Generative-AI/" rel="alternate" type="text/html" title="Generative AI" /><published>2025-01-07T18:00:00+00:00</published><updated>2025-01-07T18:00:00+00:00</updated><id>https://azareei.github.io/blog/2025/Generative-AI</id><content type="html" xml:base="https://azareei.github.io/blog/2025/Generative-AI/"><![CDATA[<p>A generative model is a <em>joint</em> probability distribution $p(x)$, for $x\in\mathcal{X}$ . It’s a joint distribution because $x$ can be multidimensional where it consists of multiple variables  $(x_1, x_2, \ldots, x_n)$.</p>
 
 <p>We also have <em>conditional</em> generative model $p(x\vert c)$ in which the generative model would be conditioned on inputs or covariates $c\in C$.</p>
 
@@ -596,7 +411,7 @@ which would be a large log likelihood for $q_2$, however, the sample quality is 
   </tbody>
 </table>
 
-<h3 id="perceptual-metrics">Perceptual Metrics</h3>
+<h3 id="32-perceptual-metrics">3.2 Perceptual Metrics</h3>
 <p>Evaluating generative models (like GANs and VAEs) is challenging because traditional metrics like likelihood do not always reflect the perceptual quality of generated images. Instead of directly comparing raw pixel values, researchers use <strong>perceptual distance metrics</strong>, which compare feature representations of real and generated images. These features are extracted using neural networks, often from <strong>pretrained classifiers</strong> like the Inception model.</p>
 
 <ol>
@@ -663,7 +478,7 @@ Lower FID is better because it means generated images closely resemble real imag
 * $E[k(x, y)]$  = similarity between real and generated image
 </code></pre></div></div>
 
-<h3 id="precision-and-recall-metrics">Precision and recall metrics</h3>
+<h3 id="33-precision-and-recall-metrics">3.3 Precision and recall metrics</h3>
 <p>The <strong>Fréchet Inception Distance (FID)</strong> measures the <strong>distance between the real and generated data distributions</strong> but does <strong>not tell us why a model is failing</strong>. A <strong>bad (high) FID</strong> could mean:</p>
 <ol>
   <li>The model <strong>produces low-quality samples</strong> (they don’t look realistic).</li>
@@ -722,7 +537,7 @@ $$
 Now with precision and recall we can separate between the issues that the generative model has. For example, in <strong>GANs</strong>, <strong>mode collapse</strong> happens when the model only generates a <strong>few types of images</strong>.</li>
   <li><strong>*High precision but low recall</strong> = The GAN generates <strong>very realistic but repetitive</strong> images (e.g., only faces of young white males).</li>
   <li><strong>Low precision but high recall</strong> = The GAN generates <strong>a wide variety of images, but many are blurry</strong>.
-    <h3 id="statistical-tests">Statistical Tests</h3>
+    <h3 id="34-statistical-tests">3.4 Statistical Tests</h3>
     <p>A <strong>two-sample test</strong> is a <strong>statistical method</strong> used to determine whether two datasets (sets of samples) come from the <strong>same underlying distribution</strong>.</p>
   </li>
   <li><strong>*Null Hypothesis (</strong> $H_0$ <strong>)</strong>: The two sets of samples come from the <strong>same</strong> distribution.</li>
@@ -743,7 +558,7 @@ For example, in <strong>Generative Adversarial Networks (GANs)</strong> and othe
 
 <p>Since <strong>deep learning works with high-dimensional data</strong> (e.g., images with millions of pixels), two-sample tests often use <strong>learned feature representations</strong> (from pretrained networks like Inception) instead of comparing raw pixel values.</p>
 
-<p>Statistical tests let users control <strong>Type 1 error</strong> ( $\alpha$ ), which is <strong>the probability of wrongly rejecting the null hypothesis</strong> (i.e., concluding that the samples are different when they are actually from the same distribution).</p>]]></content><author><name></name></author><summary type="html"><![CDATA[[[#1 Types of generative Models 1 Types of generative Models]] [[#2 Goals of Generative AI 2 Goals of Generative AI]] [[#3 Evaluating generative models 3 Evaluating generative models]] [[#3 Evaluating generative models#3.1 Likelihood-based evaluation 3.1 Likelihood-based evaluation]] [[#3.1 Likelihood-based evaluation#3.1.1 NLL and perplexity 3.1.1 NLL and perplexity]] [[#3.1.1 NLL and perplexity#3.1.1.1 More about KL divergence 3.1.1.1 More about KL divergence]] [[#3.1 Likelihood-based evaluation#3.1.2 Handling Continuous Data: 3.1.2 Handling Continuous Data:]] [[#3.1.2 Handling Continuous Data:#3.1.2.1 Dequantization when handling Continuous Data 3.1.2.1 Dequantization when handling Continuous Data]] [[#3.1 Likelihood-based evaluation#3.1.3 Likelihood can be hard to compute 3.1.3 Likelihood can be hard to compute]] [[#3.1.3 Likelihood can be hard to compute#3.1.3.1 Example 3.1.3.1 Example]] [[#3.1.3 Likelihood can be hard to compute#3.1.3.2 Solution 1: Variational Inference 3.1.3.2 Solution 1: Variational Inference]] [[#3.1.3 Likelihood can be hard to compute#3.1.3.3 Solution 2: Annealed Importance Sampling (AIS) 3.1.3.3 Solution 2: Annealed Importance Sampling (AIS)]] [[#3.1 Likelihood-based evaluation#3.1.4 Likelihood and sample quality 3.1.4 Likelihood and sample quality]] [[#3.1.4 Likelihood and sample quality#3.1.4.1 Example of High Likelihood but Poor Samples 3.1.4.1 Example of High Likelihood but Poor Samples]] [[#3.1.4 Likelihood and sample quality#3.1.4.2 Example of Low Likelihood but Great Sample quality 3.1.4.2 Example of Low Likelihood but Great Sample quality]] [[#3 Evaluating generative models#Perceptual Metrics Perceptual Metrics]] [[#3 Evaluating generative models#Precision and recall metrics Precision and recall metrics]]]]></summary></entry><entry><title type="html">Adversarial thinking with AI</title><link href="https://azareei.github.io/blog/2024/Adversarial-thinking-ai/" rel="alternate" type="text/html" title="Adversarial thinking with AI" /><published>2024-03-03T18:00:00+00:00</published><updated>2024-03-03T18:00:00+00:00</updated><id>https://azareei.github.io/blog/2024/Adversarial-thinking-ai</id><content type="html" xml:base="https://azareei.github.io/blog/2024/Adversarial-thinking-ai/"><![CDATA[<p>Today, I tuned into a podcast episode from <a href="https://tbf.fm/episodes/299-adversarial-thinking-in-entrepreneurship">Boostrapped Founder</a>, featuring Arvid discussing the power of AI in fostering adversarial thinking for entrepreneurs. He highlighted using AI, like ChatGPT, to critically assess our ideas and messages. This means having ChatGPT spot potential misunderstandings in our emails, critique our writing, or evaluate our tweets for possible criticisms. This method not only uncovers flaws in our logic but also helps us fix these issues, with AI offering suggestions for improvements. These strategies are part of what’s called prompt engineering, and mastering several can be quite beneficial.</p>
+<p>Statistical tests let users control <strong>Type 1 error</strong> ( $\alpha$ ), which is <strong>the probability of wrongly rejecting the null hypothesis</strong> (i.e., concluding that the samples are different when they are actually from the same distribution).</p>]]></content><author><name></name></author><summary type="html"><![CDATA[A generative model is a joint probability distribution $p(x)$, for $x\in\mathcal{X}$ . It’s a joint distribution because $x$ can be multidimensional where it consists of multiple variables  $(x_1, x_2, \ldots, x_n)$.]]></summary></entry><entry><title type="html">Adversarial thinking with AI</title><link href="https://azareei.github.io/blog/2024/Adversarial-thinking-ai/" rel="alternate" type="text/html" title="Adversarial thinking with AI" /><published>2024-03-03T18:00:00+00:00</published><updated>2024-03-03T18:00:00+00:00</updated><id>https://azareei.github.io/blog/2024/Adversarial-thinking-ai</id><content type="html" xml:base="https://azareei.github.io/blog/2024/Adversarial-thinking-ai/"><![CDATA[<p>Today, I tuned into a podcast episode from <a href="https://tbf.fm/episodes/299-adversarial-thinking-in-entrepreneurship">Boostrapped Founder</a>, featuring Arvid discussing the power of AI in fostering adversarial thinking for entrepreneurs. He highlighted using AI, like ChatGPT, to critically assess our ideas and messages. This means having ChatGPT spot potential misunderstandings in our emails, critique our writing, or evaluate our tweets for possible criticisms. This method not only uncovers flaws in our logic but also helps us fix these issues, with AI offering suggestions for improvements. These strategies are part of what’s called prompt engineering, and mastering several can be quite beneficial.</p>
 
 <p>Another prompt engineering technique I find really helpful is this: I ask ChatGPT a question and at the end I ask it to come up with ten clarifying yes/no questions  and only after I answered those questions, provide me an answer. This ensures the AI completely understands my question, resulting in responses that are more precise and tailored to my needs. Using this method has consistently improved the feedback I receive. This shows the power of AI in refining our thought processes and decision-making!</p>]]></content><author><name></name></author><summary type="html"><![CDATA[Today, I tuned into a podcast episode from Boostrapped Founder, featuring Arvid discussing the power of AI in fostering adversarial thinking for entrepreneurs. He highlighted using AI, like ChatGPT, to critically assess our ideas and messages. This means having ChatGPT spot potential misunderstandings in our emails, critique our writing, or evaluate our tweets for possible criticisms. This method not only uncovers flaws in our logic but also helps us fix these issues, with AI offering suggestions for improvements. These strategies are part of what’s called prompt engineering, and mastering several can be quite beneficial.]]></summary></entry><entry><title type="html">From Bias Variance Trade Off to Double Descent</title><link href="https://azareei.github.io/blog/2024/Bias-Variance-Trade-off/" rel="alternate" type="text/html" title="From Bias Variance Trade Off to Double Descent" /><published>2024-02-20T18:00:00+00:00</published><updated>2024-02-20T18:00:00+00:00</updated><id>https://azareei.github.io/blog/2024/Bias-Variance-Trade-off</id><content type="html" xml:base="https://azareei.github.io/blog/2024/Bias-Variance-Trade-off/"><![CDATA[<p>This whole section is adapted from <a href="https://udlbook.github.io/udlbook/">Understanding Deep Learning</a>.</p>
 
