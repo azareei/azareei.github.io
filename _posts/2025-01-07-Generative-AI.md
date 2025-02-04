@@ -6,23 +6,6 @@ number headings: first-level 1, max 6, start-at 1, _.1.1
 toc: 
 beginning: true
 ---
-- [[#1 Types of generative Models|1 Types of generative Models]]
-- [[#2 Goals of Generative AI|2 Goals of Generative AI]]
-- [[#3 Evaluating generative models|3 Evaluating generative models]]
-	- [[#3 Evaluating generative models#3.1 Likelihood-based evaluation|3.1 Likelihood-based evaluation]]
-		- [[#3.1 Likelihood-based evaluation#3.1.1 NLL and perplexity|3.1.1 NLL and perplexity]]
-			- [[#3.1.1 NLL and perplexity#3.1.1.1 More about KL divergence|3.1.1.1 More about KL divergence]]
-		- [[#3.1 Likelihood-based evaluation#3.1.2 Handling Continuous Data:|3.1.2 Handling Continuous Data:]]
-			- [[#3.1.2 Handling Continuous Data:#3.1.2.1 Dequantization when handling Continuous Data|3.1.2.1 Dequantization when handling Continuous Data]]
-		- [[#3.1 Likelihood-based evaluation#3.1.3 Likelihood can be hard to compute|3.1.3 Likelihood can be hard to compute]]
-			- [[#3.1.3 Likelihood can be hard to compute#3.1.3.1 Example|3.1.3.1 Example]]
-			- [[#3.1.3 Likelihood can be hard to compute#3.1.3.2 Solution 1: **Variational Inference**|3.1.3.2 Solution 1: **Variational Inference**]]
-			- [[#3.1.3 Likelihood can be hard to compute#3.1.3.3 Solution 2: **Annealed Importance Sampling (AIS)**|3.1.3.3 Solution 2: **Annealed Importance Sampling (AIS)**]]
-		- [[#3.1 Likelihood-based evaluation#3.1.4 Likelihood and sample quality|3.1.4 Likelihood and sample quality]]
-			- [[#3.1.4 Likelihood and sample quality#3.1.4.1 Example of High Likelihood but Poor Samples|3.1.4.1 Example of High Likelihood but Poor Samples]]
-			- [[#3.1.4 Likelihood and sample quality#3.1.4.2 Example of Low Likelihood but Great Sample quality|3.1.4.2 Example of Low Likelihood but Great Sample quality]]
-	- [[#3 Evaluating generative models#Perceptual Metrics|Perceptual Metrics]]
-	- [[#3 Evaluating generative models#Precision and recall metrics|Precision and recall metrics]]
 
 A generative model is a *joint* probability distribution $p(x)$, for $x\in\mathcal{X}$ . It's a joint distribution because $x$ can be multidimensional where it consists of multiple variables  $(x_1, x_2, \ldots, x_n)$. 
 
@@ -295,7 +278,7 @@ Imagine a Gaussian Mixture Model defined as
 $$  q(x) = \frac{1}{N} \sum_{n=1}^{N} N(x | x_n, \epsilon^2 I)$$
 The model consists of a mixture of **N Gaussians**. Each **Gaussian**  $N(x | x_n, \epsilon^2 I)$  is centered on a training image  $x_n$ . Note that $\epsilon^2 I$  represents small Gaussian noise added around each training image. If  $\epsilon$  **is very small**, each Gaussian is tightly concentrated around the training images. This means that when we **sample from this model**, we get images that are **almost identical to training images**. **Perceptually**, the generated samples look great because they resemble real training images. Likelihood measures **how well the model generalizes to new data**. In this case, since the model is just a bunch of Gaussians centered on training images, its density function will **assign high probability to training images.** and **assign very low probability to test images,** which means **poor likelihood on the test set**.
 
-### Perceptual Metrics
+### 3.2 Perceptual Metrics
 Evaluating generative models (like GANs and VAEs) is challenging because traditional metrics like likelihood do not always reflect the perceptual quality of generated images. Instead of directly comparing raw pixel values, researchers use **perceptual distance metrics**, which compare feature representations of real and generated images. These features are extracted using neural networks, often from **pretrained classifiers** like the Inception model. 
 
 1. **Inception Score (IS)**: This score measures how well a generative model produces diverse and recognizable images. It uses a classifier (like the Inception network) to predict class labels for generated images.  
@@ -358,7 +341,7 @@ $$\text{MMD}^2(X, Y) = E[k(x, x{\prime})] + E[k(y, y{\prime})] - 2E[k(x, y)]$$
 	* $E[k(y, y{\prime})]$ = similarity within generated images.
 	* $E[k(x, y)]$  = similarity between real and generated image
 
-### Precision and recall metrics
+### 3.3 Precision and recall metrics
 The **Fréchet Inception Distance (FID)** measures the **distance between the real and generated data distributions** but does **not tell us why a model is failing**. A **bad (high) FID** could mean:
 1. The model **produces low-quality samples** (they don’t look realistic).
 2. The model **places too much probability mass around the data distribution**, meaning it only captures a limited part of the real data.
@@ -404,7 +387,7 @@ $$
 Now with precision and recall we can separate between the issues that the generative model has. For example, in **GANs**, **mode collapse** happens when the model only generates a **few types of images**.
 * ***High precision but low recall** = The GAN generates **very realistic but repetitive** images (e.g., only faces of young white males).
 * **Low precision but high recall** = The GAN generates **a wide variety of images, but many are blurry**.
-### Statistical Tests
+### 3.4 Statistical Tests
 A **two-sample test** is a **statistical method** used to determine whether two datasets (sets of samples) come from the **same underlying distribution**.
 * ***Null Hypothesis (** $H_0$ **)**: The two sets of samples come from the **same** distribution.
 * **Alternative Hypothesis (** $H_A$ **)**: The two sets of samples come from **different** distributions.
