@@ -1,5 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://azareei.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://azareei.github.io/" rel="alternate" type="text/html" /><updated>2025-02-06T09:14:01+00:00</updated><id>https://azareei.github.io/feed.xml</id><title type="html">Ahmad Zareei</title><subtitle>Personal homepage of Ahmad Zareei, Senion AI research Scientist @META
-</subtitle><entry><title type="html">Generative AI</title><link href="https://azareei.github.io/blog/2025/Generative-AI/" rel="alternate" type="text/html" title="Generative AI" /><published>2025-01-07T18:00:00+00:00</published><updated>2025-01-07T18:00:00+00:00</updated><id>https://azareei.github.io/blog/2025/Generative-AI</id><content type="html" xml:base="https://azareei.github.io/blog/2025/Generative-AI/"><![CDATA[<p>A generative model is a <em>joint</em> probability distribution $p(x)$, for $x\in\mathcal{X}$ . It’s a joint distribution because $x$ can be multidimensional where it consists of multiple variables  $(x_1, x_2, \ldots, x_n)$.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://azareei.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://azareei.github.io/" rel="alternate" type="text/html" /><updated>2025-02-06T09:32:14+00:00</updated><id>https://azareei.github.io/feed.xml</id><title type="html">Ahmad Zareei</title><subtitle>Personal homepage of Ahmad Zareei, Senion AI research Scientist @META
+</subtitle><entry><title type="html">Generative AI</title><link href="https://azareei.github.io/blog/2025/Generative-AI/" rel="alternate" type="text/html" title="Generative AI" /><published>2025-01-07T18:00:00+00:00</published><updated>2025-01-07T18:00:00+00:00</updated><id>https://azareei.github.io/blog/2025/Generative-AI</id><content type="html" xml:base="https://azareei.github.io/blog/2025/Generative-AI/"><![CDATA[<p>This is my note capturing my journey in getting deeper in Generative AI.</p>
+
+<h1 id="generative-ai">Generative AI</h1>
+
+<p>A generative model is a <em>joint</em> probability distribution $p(x)$, for $x\in\mathcal{X}$ . It’s a joint distribution because $x$ can be multidimensional where it consists of multiple variables  $(x_1, x_2, \ldots, x_n)$.</p>
 
 <p>We also have <em>conditional</em> generative model $p(x\vert c)$ in which the generative model would be conditioned on inputs or covariates $c\in C$.</p>
 
@@ -672,7 +676,7 @@ A high score means the model generates <strong>varied</strong> images across dif
 
 \[z = f_\phi(x), \quad x = g_\theta(z)\]
 
-<p>The encoder  $f_\phi$  learns a <strong>compressed representation</strong>  $z$  in a space  $\mathbb{R}^d$ , where  $d \ll D$ . Then, define a probability distribution over  z :</p>
+<p>The encoder  $f_\phi$  learns a <strong>compressed representation</strong>  $z$  in a space  $\mathbb{R}^d$ , where  $d \ll D$ . Then, define a probability distribution over  $z$ :</p>
 
 \[q_\theta(z) = p(f_\phi(x))\]
 
@@ -684,7 +688,58 @@ A high score means the model generates <strong>varied</strong> images across dif
 <ol>
   <li><strong>Variational Autoencoders (VAEs)</strong>: Learn a <strong>latent space representation</strong> while maximizing likelihood. Uses a <strong>Gaussian prior over latent space</strong> to regularize learning.</li>
   <li><strong>Latent Diffusion Models</strong>: Train an autoencoder first, then <strong>apply diffusion</strong> in latent space.</li>
-</ol>]]></content><author><name></name></author><summary type="html"><![CDATA[A generative model is a joint probability distribution $p(x)$, for $x\in\mathcal{X}$ . It’s a joint distribution because $x$ can be multidimensional where it consists of multiple variables  $(x_1, x_2, \ldots, x_n)$.]]></summary></entry><entry><title type="html">Adversarial thinking with AI</title><link href="https://azareei.github.io/blog/2024/Adversarial-thinking-ai/" rel="alternate" type="text/html" title="Adversarial thinking with AI" /><published>2024-03-03T18:00:00+00:00</published><updated>2024-03-03T18:00:00+00:00</updated><id>https://azareei.github.io/blog/2024/Adversarial-thinking-ai</id><content type="html" xml:base="https://azareei.github.io/blog/2024/Adversarial-thinking-ai/"><![CDATA[<p>Today, I tuned into a podcast episode from <a href="https://tbf.fm/episodes/299-adversarial-thinking-in-entrepreneurship">Boostrapped Founder</a>, featuring Arvid discussing the power of AI in fostering adversarial thinking for entrepreneurs. He highlighted using AI, like ChatGPT, to critically assess our ideas and messages. This means having ChatGPT spot potential misunderstandings in our emails, critique our writing, or evaluate our tweets for possible criticisms. This method not only uncovers flaws in our logic but also helps us fix these issues, with AI offering suggestions for improvements. These strategies are part of what’s called prompt engineering, and mastering several can be quite beneficial.</p>
+</ol>
+
+<h1 id="variational-autoencoders">Variational AutoEncoders</h1>
+
+<p><strong>What is a Deep Latent Variable Model (DLVM)?</strong> A <strong>Deep Latent Variable Model (DLVM)</strong> is a <strong>probabilistic generative model</strong> that assumes:</p>
+
+<ol>
+  <li>There is a <strong>latent variable</strong>  $z$  (an unobserved representation).</li>
+  <li>The observed data  $x$  is generated <strong>from</strong>  $z$  <strong>through a deep neural network (decoder)</strong>.</li>
+</ol>
+
+<p>Formally, the <strong>generative process</strong> is:</p>
+
+<p>(A) <strong>Sample a latent code</strong>  $z$  <strong>from a prior</strong>  $p_\theta(z)$ <strong>:</strong>
+\(z \sim p_\theta(z)\)
+This is usually a <strong>Gaussian prior</strong>:</p>
+
+\[p_\theta(z) = \mathcal{N}(z \vert 0, I)\]
+
+<p>(B) <strong>Generate data</strong>  x  <strong>from</strong>  z  <strong>using an exponential family distribution</strong>:</p>
+
+\[x | z \sim \text{ExpFam}(x | d_\theta(z))\]
+
+<p>Here,  $d_\theta(z)$  is a deep <strong>neural network</strong> (called the <strong>decoder</strong>) that maps  $z$  to the parameters of the likelihood distribution. <strong>ExpFam</strong> refers to the <strong>exponential family of distributions</strong>, which includes: <strong>Gaussian</strong> for continuous data;  <strong>Bernoulli</strong> for binary data; <strong>Categorical</strong> for discrete data</p>
+
+<p>For example, a <strong>VAE for image generation</strong> might work as follows:</p>
+
+<ol>
+  <li>Sample a <strong>latent code</strong>  $z$  <strong>(compressed representation of the image)</strong>.</li>
+  <li>Use a <strong>decoder (deep neural network)</strong> to transform  $z$  into an image.</li>
+  <li>The output image is drawn from a <strong>Gaussian likelihood</strong>, meaning:</li>
+</ol>
+
+\[x \vert z \sim \mathcal{N}(d_\theta(z), \sigma^2 I)\]
+
+<p><strong>Why Exact Inference is Intractable</strong>? In generative models, we are often interested in the <strong>posterior distribution</strong>:</p>
+
+\[p_\theta(z \vert x) = \frac{p_\theta(x \vert z) p_\theta(z)}{p_\theta(x)}\]
+
+<p>which represents the probability of a latent variable  $z$  given an observed data point  $x$ . This posterior is crucial because it allows us to understand the hidden structure behind the data and enables efficient sampling of new data points. However, computing this posterior directly requires knowledge of the <strong>marginal likelihood</strong> (or <strong>evidence</strong>):</p>
+
+\[p_\theta(x) = \int p_\theta(x \vert z) p_\theta(z) dz\]
+
+<p>which integrates over all possible latent variables  $z$  to determine the total probability of observing  $x$ . Unfortunately, computing  $p_\theta(x)$  is <strong>intractable</strong>, making exact posterior inference impossible. The intractability arises due to several reasons:</p>
+
+<ol>
+  <li><strong>The Decoder Network</strong>  $d_\theta(z)$  <strong>is Nonlinear and Complex</strong>: In modern deep generative models, $p_\theta(x \vert z)$  is parameterized by a <strong>deep neural network</strong>, called the <strong>decoder</strong>. This means that the function mapping  $z$  to  $x$  is highly <strong>nonlinear</strong> and complex, making it <strong>impossible to integrate analytically</strong>. Even if  $p_\theta(x \vert z)$  is a simple Gaussian, when  $z$  is transformed by a deep network, the resulting likelihood function becomes <strong>highly non-Gaussian</strong> and difficult to evaluate.</li>
+  <li><strong>The Integral is High-Dimensional</strong>: If  $z$  is a low-dimensional variable (e.g., a scalar), integrating over all values of  $z$  might be feasible. However, in practice,  $z$  often has <strong>hundreds or thousands of dimensions</strong>, depending on the complexity of the data. Computing an exact integral in such a high-dimensional space requires summing over <strong>exponentially many possible values</strong>, making direct evaluation computationally infeasible.</li>
+  <li><strong>The Curse of Dimensionality</strong>: In high-dimensional spaces, standard numerical integration techniques (such as grid-based integration) fail because the number of required computations grows <strong>exponentially</strong> with the number of dimensions. Monte Carlo sampling methods, while useful, become inefficient because the probability mass is often concentrated in small regions, making it difficult to obtain accurate estimates without a massive number of samples.</li>
+</ol>
+
+<p>Due to these challenges, we cannot compute the exact posterior  $p_\theta(z \vert x)$  directly. Instead, we resort to <strong>approximate inference methods</strong>, such as <strong>Variational Inference (VI)</strong> or <strong>Monte Carlo methods</strong>, which allow us to estimate the posterior efficiently while keeping computations feasible.</p>]]></content><author><name></name></author><summary type="html"><![CDATA[This is my note capturing my journey in getting deeper in Generative AI.]]></summary></entry><entry><title type="html">Adversarial thinking with AI</title><link href="https://azareei.github.io/blog/2024/Adversarial-thinking-ai/" rel="alternate" type="text/html" title="Adversarial thinking with AI" /><published>2024-03-03T18:00:00+00:00</published><updated>2024-03-03T18:00:00+00:00</updated><id>https://azareei.github.io/blog/2024/Adversarial-thinking-ai</id><content type="html" xml:base="https://azareei.github.io/blog/2024/Adversarial-thinking-ai/"><![CDATA[<p>Today, I tuned into a podcast episode from <a href="https://tbf.fm/episodes/299-adversarial-thinking-in-entrepreneurship">Boostrapped Founder</a>, featuring Arvid discussing the power of AI in fostering adversarial thinking for entrepreneurs. He highlighted using AI, like ChatGPT, to critically assess our ideas and messages. This means having ChatGPT spot potential misunderstandings in our emails, critique our writing, or evaluate our tweets for possible criticisms. This method not only uncovers flaws in our logic but also helps us fix these issues, with AI offering suggestions for improvements. These strategies are part of what’s called prompt engineering, and mastering several can be quite beneficial.</p>
 
 <p>Another prompt engineering technique I find really helpful is this: I ask ChatGPT a question and at the end I ask it to come up with ten clarifying yes/no questions  and only after I answered those questions, provide me an answer. This ensures the AI completely understands my question, resulting in responses that are more precise and tailored to my needs. Using this method has consistently improved the feedback I receive. This shows the power of AI in refining our thought processes and decision-making!</p>]]></content><author><name></name></author><summary type="html"><![CDATA[Today, I tuned into a podcast episode from Boostrapped Founder, featuring Arvid discussing the power of AI in fostering adversarial thinking for entrepreneurs. He highlighted using AI, like ChatGPT, to critically assess our ideas and messages. This means having ChatGPT spot potential misunderstandings in our emails, critique our writing, or evaluate our tweets for possible criticisms. This method not only uncovers flaws in our logic but also helps us fix these issues, with AI offering suggestions for improvements. These strategies are part of what’s called prompt engineering, and mastering several can be quite beneficial.]]></summary></entry><entry><title type="html">From Bias Variance Trade Off to Double Descent</title><link href="https://azareei.github.io/blog/2024/Bias-Variance-Trade-off/" rel="alternate" type="text/html" title="From Bias Variance Trade Off to Double Descent" /><published>2024-02-20T18:00:00+00:00</published><updated>2024-02-20T18:00:00+00:00</updated><id>https://azareei.github.io/blog/2024/Bias-Variance-Trade-off</id><content type="html" xml:base="https://azareei.github.io/blog/2024/Bias-Variance-Trade-off/"><![CDATA[<p>This whole section is adapted from <a href="https://udlbook.github.io/udlbook/">Understanding Deep Learning</a>.</p>
 
