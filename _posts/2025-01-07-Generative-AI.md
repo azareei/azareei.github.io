@@ -84,6 +84,7 @@ The generative AI models are evaluated on three aspects
 No single metric captures all above, we use different metrics for each or combine parts. 
 
 ### 3.1 Likelihood-based evaluation
+
 To evaluate how well a generative model $q$ matches the true data distribution $p$, **KL Divergence** is a commonly used metric:
 
 $$
@@ -255,12 +256,15 @@ For example, in Variational Autoencoders (VAEs), we:
 2. Optimize the ELBO to train the model without computing the exact  $p(x)$
 
 ##### 3.1.3.3 Solution 2: **Annealed Importance Sampling (AIS)**
+
 In this method, we estimate the log likelihood using Monte Carlo sampling. 
 
 #### 3.1.4 Likelihood and sample quality
+
 A model can achieve high likelihood but produce perceptually poor samples and vice versa. Likelihood alone is not a reliable indicator of the perceptual quality of generated samples.
 
 ##### 3.1.4.1 Example of High Likelihood but Poor Samples
+
 Consider the following
 * Model $q_0$: A good density model that performs well in terms of average log-likelihood.
 * Model $q_1$: A bad model that generates white noise.
@@ -273,12 +277,14 @@ $$  \log q_2(x) = \log[0.01q_0(x) + 0.99q_1(x)] \geq \log[0.01q_0(x)] = \log q_0
 which would be a large log likelihood for $q_2$, however, the sample quality is pretty bad. 
 
 ##### 3.1.4.2 Example of Low Likelihood but Great Sample quality 
+
 Imagine a Gaussian Mixture Model defined as 
 
 $$  q(x) = \frac{1}{N} \sum_{n=1}^{N} N(x \vert x_n, \epsilon^2 I)$$
 The model consists of a mixture of **N Gaussians**. Each **Gaussian**  $N(x \vert x_n, \epsilon^2 I)$  is centered on a training image  $x_n$ . Note that $\epsilon^2 I$  represents small Gaussian noise added around each training image. If  $\epsilon$  **is very small**, each Gaussian is tightly concentrated around the training images. This means that when we **sample from this model**, we get images that are **almost identical to training images**. **Perceptually**, the generated samples look great because they resemble real training images. Likelihood measures **how well the model generalizes to new data**. In this case, since the model is just a bunch of Gaussians centered on training images, its density function will **assign high probability to training images.** and **assign very low probability to test images,** which means **poor likelihood on the test set**.
 
 ### 3.2 Perceptual Metrics
+
 Evaluating generative models (like GANs and VAEs) is challenging because traditional metrics like likelihood do not always reflect the perceptual quality of generated images. Instead of directly comparing raw pixel values, researchers use **perceptual distance metrics**, which compare feature representations of real and generated images. These features are extracted using neural networks, often from **pretrained classifiers** like the Inception model. 
 
 (A) **Inception Score (IS)**: This score measures how well a generative model produces diverse and recognizable images. It uses a classifier (like the Inception network) to predict class labels for generated images.  
@@ -354,7 +360,9 @@ where:
 	* $E[k(y, y{\prime})]$ = similarity within generated images.
 	* $E[k(x, y)]$  = similarity between real and generated image
 
+
 ### 3.3 Precision and recall metrics
+
 The **Fréchet Inception Distance (FID)** measures the **distance between the real and generated data distributions** but does **not tell us why a model is failing**. A **bad (high) FID** could mean:
 1. The model **produces low-quality samples** (they don’t look realistic).
 2. The model **places too much probability mass around the data distribution**, meaning it only captures a limited part of the real data.
@@ -403,7 +411,9 @@ $$\text{recall}(\Phi_{\text{model}}, \Phi_{\text{data}}) = \frac{1}{|\Phi_{\text
 Now with precision and recall we can separate between the issues that the generative model has. For example, in **GANs**, **mode collapse** happens when the model only generates a **few types of images**.
 * ***High precision but low recall** = The GAN generates **very realistic but repetitive** images (e.g., only faces of young white males).
 * **Low precision but high recall** = The GAN generates **a wide variety of images, but many are blurry**.
+
 ### 3.4 Statistical Tests
+
 A **two-sample test** is a **statistical method** used to determine whether two datasets (sets of samples) come from the **same underlying distribution**.
 * ***Null Hypothesis (** $H_0$ **)**: The two sets of samples come from the **same** distribution.
 * **Alternative Hypothesis (** $H_A$ **)**: The two sets of samples come from **different** distributions.
@@ -420,7 +430,7 @@ Since **deep learning works with high-dimensional data** (e.g., images with mill
 
 Statistical tests let users control **Type 1 error** ( $\alpha$ ), which is **the probability of wrongly rejecting the null hypothesis** (i.e., concluding that the samples are different when they are actually from the same distribution).
 
-### Maximum Likelihood Estimation (MLE) for Generative Models
+### 3.5 Maximum Likelihood Estimation (MLE) for Generative Models
 
 MLE is a **statistical method** used to train probabilistic models by **maximizing the likelihood** of observed data under the model’s distribution. For a dataset with samples  $x \sim p(x)$ , where:
 * $p(x)$  is the **true data distribution** (which we want to approximate).
@@ -463,7 +473,8 @@ For this to be well-defined:
 * $q(x)$  must be **nonzero** everywhere that  $p(x)$  is nonzero. Note that, if $p(x)$ is non-zero, then $q(x)$ should be non-zero, otherwise, the above expectation becomes ill-defined or large. 
 * If  $q(x)$  is defined over the full  $\mathbb{R}^D$ , it **fails to properly learn the structure of**  $\mathcal{M}$ . If $q(x)$ is not defined everywhere (and is only defined over data), then the generative model does not generalizes. 
 
-#### Three Solutions to MLE Failure in High-Dimensional Data
+
+#### 3.5.1 Three Solutions to MLE Failure in High-Dimensional Data
 
 Three solutions address this problem:
 1. (A)  **Adding Noise (Diffusion Models, Spread KL Divergence)**
