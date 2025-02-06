@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://azareei.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://azareei.github.io/" rel="alternate" type="text/html" /><updated>2025-02-06T08:07:15+00:00</updated><id>https://azareei.github.io/feed.xml</id><title type="html">Ahmad Zareei</title><subtitle>Personal homepage of Ahmad Zareei, Senion AI research Scientist @META
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://azareei.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://azareei.github.io/" rel="alternate" type="text/html" /><updated>2025-02-06T09:10:57+00:00</updated><id>https://azareei.github.io/feed.xml</id><title type="html">Ahmad Zareei</title><subtitle>Personal homepage of Ahmad Zareei, Senion AI research Scientist @META
 </subtitle><entry><title type="html">Generative AI</title><link href="https://azareei.github.io/blog/2025/Generative-AI/" rel="alternate" type="text/html" title="Generative AI" /><published>2025-01-07T18:00:00+00:00</published><updated>2025-01-07T18:00:00+00:00</updated><id>https://azareei.github.io/blog/2025/Generative-AI</id><content type="html" xml:base="https://azareei.github.io/blog/2025/Generative-AI/"><![CDATA[<p>A generative model is a <em>joint</em> probability distribution $p(x)$, for $x\in\mathcal{X}$ . It’s a joint distribution because $x$ can be multidimensional where it consists of multiple variables  $(x_1, x_2, \ldots, x_n)$.</p>
 
 <p>We also have <em>conditional</em> generative model $p(x\vert c)$ in which the generative model would be conditioned on inputs or covariates $c\in C$.</p>
@@ -404,7 +404,7 @@ The model consists of a mixture of <strong>N Gaussians</strong>. Each <strong>Ga
 <h3 id="32-perceptual-metrics">3.2 Perceptual Metrics</h3>
 <p>Evaluating generative models (like GANs and VAEs) is challenging because traditional metrics like likelihood do not always reflect the perceptual quality of generated images. Instead of directly comparing raw pixel values, researchers use <strong>perceptual distance metrics</strong>, which compare feature representations of real and generated images. These features are extracted using neural networks, often from <strong>pretrained classifiers</strong> like the Inception model.</p>
 
-<p><strong>Inception Score (IS)</strong>: This score measures how well a generative model produces diverse and recognizable images. It uses a classifier (like the Inception network) to predict class labels for generated images.</p>
+<p>(A) <strong>Inception Score (IS)</strong>: This score measures how well a generative model produces diverse and recognizable images. It uses a classifier (like the Inception network) to predict class labels for generated images.</p>
 
 \[IS = \exp (E_{p_\theta(x)} D_{KL} (p_{\text{disc}}(Y \vert x) \parallel p_\theta(Y)))\]
 
@@ -458,7 +458,7 @@ The model consists of a mixture of <strong>N Gaussians</strong>. Each <strong>Ga
 <p>This represents the overall class distribution of the generated images.
 A high score means the model generates <strong>varied</strong> images across different classes (<strong>high entropy</strong> of predicted labels). Each individual image should be <strong>easily classifiable</strong> (low entropy per image). One big <strong>limitation</strong> is that it does not measure overfitting—if a model memorizes one perfect image per class, it can still score well.</p>
 
-<p><strong>Fréchet Inception Distance (FID)</strong>: Instead of class labels, it compares statistical properties of deep features (mean and covariance) between real and generated images.</p>
+<p>(B) <strong>Fréchet Inception Distance (FID)</strong>: Instead of class labels, it compares statistical properties of deep features (mean and covariance) between real and generated images.</p>
 
 \[FID = \|\mu_m - \mu_d\|^2_2 + \text{tr} (\Sigma_d + \Sigma_m - 2(\Sigma_d \Sigma_m)^{1/2})\]
 
@@ -471,7 +471,7 @@ A high score means the model generates <strong>varied</strong> images across dif
 
 <p>Lower FID is better because it means generated images closely resemble real images in feature space. One <strong>limitation</strong> of this score is that it is sensitive to the number of samples used—results can vary due to statistical bias.</p>
 
-<p><strong>Kernel Inception Distance (KID)</strong>: This score improves on FID by using <strong>Maximum Mean Discrepancy (MMD)</strong> to measure the similarity between distributions. This reduces bias issues in FID by comparing feature distributions more robustly. MMD measures the distance between two distributions <strong>without assuming they are Gaussian</strong>. Instead of just comparing the <strong>mean and covariance</strong> (like FID), MMD measures how well two sets of samples <strong>match</strong> using a <strong>kernel function</strong>.</p>
+<p>(C) <strong>Kernel Inception Distance (KID)</strong>: This score improves on FID by using <strong>Maximum Mean Discrepancy (MMD)</strong> to measure the similarity between distributions. This reduces bias issues in FID by comparing feature distributions more robustly. MMD measures the distance between two distributions <strong>without assuming they are Gaussian</strong>. Instead of just comparing the <strong>mean and covariance</strong> (like FID), MMD measures how well two sets of samples <strong>match</strong> using a <strong>kernel function</strong>.</p>
 
 \[\text{MMD}^2(X, Y) = E[k(x, x{\prime})] + E[k(y, y{\prime})] - 2E[k(x, y)]\]
 
@@ -488,10 +488,10 @@ A high score means the model generates <strong>varied</strong> images across dif
 <ol>
   <li>The model <strong>produces low-quality samples</strong> (they don’t look realistic).</li>
   <li>The model <strong>places too much probability mass around the data distribution</strong>, meaning it only captures a limited part of the real data.</li>
-  <li>The model <strong>only generates a subset of the real data</strong> (a problem called <strong>mode collapse</strong> in GANs).
-Precision (sample quality), and recall (sample diversity) are introduced to resolve this differentiation issue</li>
+  <li>The model <strong>only generates a subset of the real data</strong> (a problem called <strong>mode collapse</strong> in GANs).</li>
 </ol>
 
+<p>Precision (sample quality), and recall (sample diversity) are introduced to resolve this differentiation issue</p>
 <ul>
   <li><strong>*Precision</strong> -&gt; Are generated samples <strong>high quality</strong> (similar to real data)?</li>
   <li>
@@ -505,9 +505,10 @@ Precision (sample quality), and recall (sample diversity) are introduced to reso
 <ul>
   <li>$\Phi_{\text{model}}$  = Set of feature vectors from generated images.</li>
   <li>$\Phi_{\text{data}}$  = Set of feature vectors from real images.</li>
-  <li> $\text{NN}_k(\phi{\prime}, \Phi)$  = The  $k$-th nearest neighbor of  $\phi{\prime}$  in  $\Phi$  (used to measure how close a sample is to its nearest neighbors).
-To determine whether a generated image is <strong>close enough</strong> to real data, we define the function:</li>
+  <li> $\text{NN}_k(\phi{\prime}, \Phi)$  = The  $k$-th nearest neighbor of  $\phi{\prime}$  in  $\Phi$  (used to measure how close a sample is to its nearest neighbors).</li>
 </ul>
+
+<p>To determine whether a generated image is <strong>close enough</strong> to real data, we define the function:</p>
 
 \[f_k(\phi, \Phi) =
 
@@ -530,7 +531,7 @@ To determine whether a generated image is <strong>close enough</strong> to real 
 \[\text{precision}(\Phi_{\text{model}}, \Phi_{\text{data}}) = \frac{1}{|\Phi_{\text{model}}|} \sum_{\phi \in \Phi_{\text{model}}} f_k(\phi, \Phi_{\text{data}})\]
 
 <ul>
-  <li><strong>*High precision</strong> means most generated images are <strong>high-quality</strong> and resemble real data.</li>
+  <li><strong>High precision</strong> means most generated images are <strong>high-quality</strong> and resemble real data.</li>
   <li><strong>Low precision</strong> means many generated images are <strong>not realistic</strong>.</li>
 </ul>
 
@@ -540,22 +541,25 @@ To determine whether a generated image is <strong>close enough</strong> to real 
 
 <ul>
   <li><strong>*High recall</strong> means the model generates <strong>a diverse set of samples that cover all real data</strong>.</li>
-  <li><strong>Low recall</strong> means the model <strong>misses</strong> important variations in the real dataset (<strong>mode collapse</strong>).
-Now with precision and recall we can separate between the issues that the generative model has. For example, in <strong>GANs</strong>, <strong>mode collapse</strong> happens when the model only generates a <strong>few types of images</strong>.</li>
+  <li><strong>Low recall</strong> means the model <strong>misses</strong> important variations in the real dataset (<strong>mode collapse</strong>).</li>
+</ul>
+
+<p>Now with precision and recall we can separate between the issues that the generative model has. For example, in <strong>GANs</strong>, <strong>mode collapse</strong> happens when the model only generates a <strong>few types of images</strong>.</p>
+<ul>
   <li><strong>*High precision but low recall</strong> = The GAN generates <strong>very realistic but repetitive</strong> images (e.g., only faces of young white males).</li>
   <li><strong>Low precision but high recall</strong> = The GAN generates <strong>a wide variety of images, but many are blurry</strong>.
     <h3 id="34-statistical-tests">3.4 Statistical Tests</h3>
     <p>A <strong>two-sample test</strong> is a <strong>statistical method</strong> used to determine whether two datasets (sets of samples) come from the <strong>same underlying distribution</strong>.</p>
   </li>
   <li><strong>*Null Hypothesis (</strong> $H_0$ <strong>)</strong>: The two sets of samples come from the <strong>same</strong> distribution.</li>
-  <li><strong>Alternative Hypothesis (</strong> $H_A$ <strong>)</strong>: The two sets of samples come from <strong>different</strong> distributions.
-For example, in <strong>Generative Adversarial Networks (GANs)</strong> and other generative models, we want to check:
-    <ol>
-      <li><strong>Are the generated samples statistically similar to real data?</strong></li>
-      <li><strong>How different is the model’s output from real data?</strong></li>
-    </ol>
-  </li>
+  <li><strong>Alternative Hypothesis (</strong> $H_A$ <strong>)</strong>: The two sets of samples come from <strong>different</strong> distributions.</li>
 </ul>
+
+<p>For example, in <strong>Generative Adversarial Networks (GANs)</strong> and other generative models, we want to check:</p>
+<ol>
+  <li><strong>Are the generated samples statistically similar to real data?</strong></li>
+  <li><strong>How different is the model’s output from real data?</strong></li>
+</ol>
 
 <p>To do this, we apply two-sample tests using:</p>
 <ol>
@@ -565,7 +569,112 @@ For example, in <strong>Generative Adversarial Networks (GANs)</strong> and othe
 
 <p>Since <strong>deep learning works with high-dimensional data</strong> (e.g., images with millions of pixels), two-sample tests often use <strong>learned feature representations</strong> (from pretrained networks like Inception) instead of comparing raw pixel values.</p>
 
-<p>Statistical tests let users control <strong>Type 1 error</strong> ( $\alpha$ ), which is <strong>the probability of wrongly rejecting the null hypothesis</strong> (i.e., concluding that the samples are different when they are actually from the same distribution).</p>]]></content><author><name></name></author><summary type="html"><![CDATA[A generative model is a joint probability distribution $p(x)$, for $x\in\mathcal{X}$ . It’s a joint distribution because $x$ can be multidimensional where it consists of multiple variables  $(x_1, x_2, \ldots, x_n)$.]]></summary></entry><entry><title type="html">Adversarial thinking with AI</title><link href="https://azareei.github.io/blog/2024/Adversarial-thinking-ai/" rel="alternate" type="text/html" title="Adversarial thinking with AI" /><published>2024-03-03T18:00:00+00:00</published><updated>2024-03-03T18:00:00+00:00</updated><id>https://azareei.github.io/blog/2024/Adversarial-thinking-ai</id><content type="html" xml:base="https://azareei.github.io/blog/2024/Adversarial-thinking-ai/"><![CDATA[<p>Today, I tuned into a podcast episode from <a href="https://tbf.fm/episodes/299-adversarial-thinking-in-entrepreneurship">Boostrapped Founder</a>, featuring Arvid discussing the power of AI in fostering adversarial thinking for entrepreneurs. He highlighted using AI, like ChatGPT, to critically assess our ideas and messages. This means having ChatGPT spot potential misunderstandings in our emails, critique our writing, or evaluate our tweets for possible criticisms. This method not only uncovers flaws in our logic but also helps us fix these issues, with AI offering suggestions for improvements. These strategies are part of what’s called prompt engineering, and mastering several can be quite beneficial.</p>
+<p>Statistical tests let users control <strong>Type 1 error</strong> ( $\alpha$ ), which is <strong>the probability of wrongly rejecting the null hypothesis</strong> (i.e., concluding that the samples are different when they are actually from the same distribution).</p>
+
+<h3 id="maximum-likelihood-estimation-mle-for-generative-models">Maximum Likelihood Estimation (MLE) for Generative Models</h3>
+
+<p>MLE is a <strong>statistical method</strong> used to train probabilistic models by <strong>maximizing the likelihood</strong> of observed data under the model’s distribution. For a dataset with samples  $x \sim p(x)$ , where:</p>
+<ul>
+  <li>$p(x)$  is the <strong>true data distribution</strong> (which we want to approximate).</li>
+  <li>$q(x)$  is the <strong>model distribution</strong> (which we are learning).</li>
+</ul>
+
+<p>The objective in MLE is:</p>
+
+\[\max_q \mathbb{E}_{p(x)} [\log q(x)]\]
+
+<p>which means adjusting  $q(x)$  to <strong>maximize the log-likelihood</strong> of real data. <strong>Why MLE is Equivalent to Minimizing KL Divergence?</strong> We can rewrite the MLE objective using the <strong>Kullback-Leibler (KL) divergence</strong>:</p>
+
+\[\mathbb{E}{p(x)} [\log q(x)] = - D{\text{KL}}(p \parallel q) + \text{const}\]
+
+<p>where:</p>
+
+\[D_{\text{KL}}(p \parallel q) = \mathbb{E}_{p(x)} \left[ \log \frac{p(x)}{q(x)} \right]\]
+
+<p>Since the constant term does not depend on  $q$ , <strong>MLE is equivalent to minimizing</strong>  $D_{\text{KL}}(p \parallel q)$. <strong>KL divergence measures how different</strong>  $q(x)$  <strong>(the learned model) is from</strong>  $p(x)$  <strong>(the real data distribution).</strong> MLE <strong>pulls</strong>  $q(x)$  <strong>towards</strong> $ p(x)$  so that the model generates realistic samples.</p>
+
+<ul>
+  <li><strong>*Advantage of MLE</strong>: It ensures that  $q(x)$  does not ignore any part of  $p(x)$ , avoiding <strong>mode collapse</strong> (a common issue in GANs).</li>
+  <li><strong>Limitation</strong>: It can fail when  $p(x)$  <strong>lies on a low-dimensional manifold within a high-dimensional space</strong>.</li>
+</ul>
+
+<p><strong>What is the Manifold Hypothesis?</strong> The <strong>manifold hypothesis</strong> states that <strong>real-world high-dimensional data (e.g., images, text, speech) actually lies on a much lower-dimensional manifold embedded in the full space</strong>. Formally:</p>
+
+<ul>
+  <li>Real data  $x$  lives in a <strong>subspace</strong>  $\mathcal{M}$  of dimension  $d^*$  (<strong>low-dimensional</strong>).</li>
+  <li>The surrounding space  $\mathbb{R}^D$ (<strong>ambient space</strong>) has dimension  $D$ , where  $d^* &lt; D$</li>
+  <li>Probability mass is <strong>concentrated only on</strong>  $\mathcal{M}$ <strong>, not the entire</strong> $\mathbb{R}^D$ .</li>
+</ul>
+
+<p>For example, a 1,000 × 1,000 pixel grayscale image technically lives in a <strong>1,000,000-dimensional space</strong>. However, not all <strong>possible pixel combinations</strong> form valid images. Real images exist in a much lower-dimensional manifold within this huge space.</p>
+
+<p><strong>Why Does MLE Fail in This Case?</strong> MLE assumes  $p(x)$  is <strong>defined everywhere in</strong>  $\mathbb{R}^D$. But <strong>in reality,</strong>  $p(x) &gt; 0$  <strong>only on</strong>  $\mathcal{M}$ , making MLE problematic. As a result, the Likelihood Objective is Ill-Defined.  MLE maximizes:</p>
+
+\[\mathbb{E}_{p(x)} [\log q(x)]\]
+
+<p>For this to be well-defined:</p>
+<ul>
+  <li>$q(x)$  must be <strong>nonzero</strong> everywhere that  $p(x)$  is nonzero. Note that, if $p(x)$ is non-zero, then $q(x)$ should be non-zero, otherwise, the above expectation becomes ill-defined or large.</li>
+  <li>If  $q(x)$  is defined over the full  $\mathbb{R}^D$ , it <strong>fails to properly learn the structure of</strong>  $\mathcal{M}$ . If $q(x)$ is not defined everywhere (and is only defined over data), then the generative model does not generalizes.</li>
+</ul>
+
+<h4 id="three-solutions-to-mle-failure-in-high-dimensional-data">Three Solutions to MLE Failure in High-Dimensional Data</h4>
+
+<p>Three solutions address this problem:</p>
+<ol>
+  <li>(A)  <strong>Adding Noise (Diffusion Models, Spread KL Divergence)</strong></li>
+  <li>(B) <strong>Using Alternative Divergences (Wasserstein Distance, MMD, GANs)</strong></li>
+  <li>(C) <strong>Two-Step Methods (Autoencoders + Latent Space Learning)</strong></li>
+</ol>
+
+<p>Each method <strong>modifies the training objective or the model structure</strong> to handle the mismatch between  $p(x)$  and  $q(x)$.</p>
+
+<p>(A) <strong>Adding Noise to Fill the Space</strong>: Since real data  $p(x)$  only exists on a <strong>thin manifold</strong>, the likelihood objective is problematic because  $q(x)$  is defined over the full space. <strong>A simple fix</strong> is to <strong>add noise</strong> to the data, artificially expanding the distribution to fill  $\mathbb{R}^D$. Instead of working directly with  $p(x)$  and  $q(x)$, we define <strong>smoothed versions</strong> by convolving them with a Gaussian:</p>
+
+\[p_\sigma = p \ast \mathcal{N}(0, \sigma^2 I_D), \quad q_\sigma = q \ast \mathcal{N}(0, \sigma^2 I_D)\]
+
+<p>Then, we redefine <strong>KL divergence</strong> as:
+\(D_{\text{KL}, \sigma}(p || q) = D_{\text{KL}}(p_\sigma || q_\sigma)\)</p>
+
+<p>Since  $p_\sigma$  and  $q_\sigma$ now have <strong>support over the full space</strong>, KL divergence is always finite. Examples of such implementations are</p>
+<ol>
+  <li><strong>Diffusion Models</strong>: Add noise at various levels and learn to <strong>reverse the diffusion process</strong> (denoising).</li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td><strong>Delta-VAE (Latent Variable Model with Noise Injection)</strong>: $q(x) = \mathcal{N}(x</td>
+          <td>g_\theta(z), \sigma^2 I)$, where  $g_\theta(z)$  is a <strong>decoder</strong>, and  $z \sim \mathcal{N}(0, I_d)$ is a low-dimensional latent variable. During training, the model <strong>includes noise</strong> to ensure proper likelihood calculation. After training, noise is “turned off,” ensuring the model correctly learns the data manifold.</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ol>
+
+<p>(B) <strong>Using Alternative Divergences Instead of KL</strong>: The problem with KL divergence is that it <strong>penalizes missing support harshly</strong> (assigning infinite loss). Some divergences <strong>do not require overlapping supports</strong>, making them better suited for generative modeling. Two <strong>alternative divergences</strong> are</p>
+
+<ol>
+  <li><strong>Wasserstein Distance (Optimal Transport)</strong>: Measures the <strong>minimal cost of transporting mass from</strong>  $p(x)$  <strong>to</strong>  $q(x)$ . More stable than KL and does not require absolute density matching. Used in <strong>Wasserstein GANs (WGANs)</strong>.</li>
+  <li><strong>Maximum Mean Discrepancy (MMD)</strong>: Measures the <strong>distance between distributions in feature space</strong> using kernel methods. Useful for non-adversarial generative models.</li>
+</ol>
+
+<p>(C) <strong>Two-Step Methods (Learning the Manifold + Density Estimation)</strong>: Instead of <strong>modeling</strong>  $p(x)$  <strong>in</strong>  $\mathbb{R}^D$  <strong>directly</strong>, we first <strong>learn the lower-dimensional latent manifold</strong>  $\mathcal{M}$ , then estimate a probability distribution in this space. Train an <strong>autoencoder</strong> to map data to a lower-dimensional space:</p>
+
+\[z = f_\phi(x), \quad x = g_\theta(z)\]
+
+<p>The encoder  $f_\phi$  learns a <strong>compressed representation</strong>  $z$  in a space  $\mathbb{R}^d$ , where  $d \ll D$ . Then, define a probability distribution over  z :</p>
+
+\[q_\theta(z) = p(f_\phi(x))\]
+
+<p>Since this is now in <strong>low-dimensional space</strong>, MLE is <strong>safe to apply</strong>. The final generative model is:</p>
+
+\[q(x) = q_\theta(z) g_\theta(z)\]
+
+<p>Some examples are:</p>
+<ol>
+  <li><strong>Variational Autoencoders (VAEs)</strong>: Learn a <strong>latent space representation</strong> while maximizing likelihood. Uses a <strong>Gaussian prior over latent space</strong> to regularize learning.</li>
+  <li><strong>Latent Diffusion Models</strong>: Train an autoencoder first, then <strong>apply diffusion</strong> in latent space.</li>
+</ol>]]></content><author><name></name></author><summary type="html"><![CDATA[A generative model is a joint probability distribution $p(x)$, for $x\in\mathcal{X}$ . It’s a joint distribution because $x$ can be multidimensional where it consists of multiple variables  $(x_1, x_2, \ldots, x_n)$.]]></summary></entry><entry><title type="html">Adversarial thinking with AI</title><link href="https://azareei.github.io/blog/2024/Adversarial-thinking-ai/" rel="alternate" type="text/html" title="Adversarial thinking with AI" /><published>2024-03-03T18:00:00+00:00</published><updated>2024-03-03T18:00:00+00:00</updated><id>https://azareei.github.io/blog/2024/Adversarial-thinking-ai</id><content type="html" xml:base="https://azareei.github.io/blog/2024/Adversarial-thinking-ai/"><![CDATA[<p>Today, I tuned into a podcast episode from <a href="https://tbf.fm/episodes/299-adversarial-thinking-in-entrepreneurship">Boostrapped Founder</a>, featuring Arvid discussing the power of AI in fostering adversarial thinking for entrepreneurs. He highlighted using AI, like ChatGPT, to critically assess our ideas and messages. This means having ChatGPT spot potential misunderstandings in our emails, critique our writing, or evaluate our tweets for possible criticisms. This method not only uncovers flaws in our logic but also helps us fix these issues, with AI offering suggestions for improvements. These strategies are part of what’s called prompt engineering, and mastering several can be quite beneficial.</p>
 
 <p>Another prompt engineering technique I find really helpful is this: I ask ChatGPT a question and at the end I ask it to come up with ten clarifying yes/no questions  and only after I answered those questions, provide me an answer. This ensures the AI completely understands my question, resulting in responses that are more precise and tailored to my needs. Using this method has consistently improved the feedback I receive. This shows the power of AI in refining our thought processes and decision-making!</p>]]></content><author><name></name></author><summary type="html"><![CDATA[Today, I tuned into a podcast episode from Boostrapped Founder, featuring Arvid discussing the power of AI in fostering adversarial thinking for entrepreneurs. He highlighted using AI, like ChatGPT, to critically assess our ideas and messages. This means having ChatGPT spot potential misunderstandings in our emails, critique our writing, or evaluate our tweets for possible criticisms. This method not only uncovers flaws in our logic but also helps us fix these issues, with AI offering suggestions for improvements. These strategies are part of what’s called prompt engineering, and mastering several can be quite beneficial.]]></summary></entry><entry><title type="html">From Bias Variance Trade Off to Double Descent</title><link href="https://azareei.github.io/blog/2024/Bias-Variance-Trade-off/" rel="alternate" type="text/html" title="From Bias Variance Trade Off to Double Descent" /><published>2024-02-20T18:00:00+00:00</published><updated>2024-02-20T18:00:00+00:00</updated><id>https://azareei.github.io/blog/2024/Bias-Variance-Trade-off</id><content type="html" xml:base="https://azareei.github.io/blog/2024/Bias-Variance-Trade-off/"><![CDATA[<p>This whole section is adapted from <a href="https://udlbook.github.io/udlbook/">Understanding Deep Learning</a>.</p>
 
