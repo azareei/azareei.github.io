@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://azareei.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://azareei.github.io/" rel="alternate" type="text/html" /><updated>2025-02-04T00:54:52+00:00</updated><id>https://azareei.github.io/feed.xml</id><title type="html">Ahmad Zareei</title><subtitle>Personal homepage of Ahmad Zareei, Senion AI research Scientist @META
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://azareei.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://azareei.github.io/" rel="alternate" type="text/html" /><updated>2025-02-06T07:50:41+00:00</updated><id>https://azareei.github.io/feed.xml</id><title type="html">Ahmad Zareei</title><subtitle>Personal homepage of Ahmad Zareei, Senion AI research Scientist @META
 </subtitle><entry><title type="html">Generative AI</title><link href="https://azareei.github.io/blog/2025/Generative-AI/" rel="alternate" type="text/html" title="Generative AI" /><published>2025-01-07T18:00:00+00:00</published><updated>2025-01-07T18:00:00+00:00</updated><id>https://azareei.github.io/blog/2025/Generative-AI</id><content type="html" xml:base="https://azareei.github.io/blog/2025/Generative-AI/"><![CDATA[<p>A generative model is a <em>joint</em> probability distribution $p(x)$, for $x\in\mathcal{X}$ . It’s a joint distribution because $x$ can be multidimensional where it consists of multiple variables  $(x_1, x_2, \ldots, x_n)$.</p>
 
 <p>We also have <em>conditional</em> generative model $p(x\vert c)$ in which the generative model would be conditioned on inputs or covariates $c\in C$.</p>
@@ -398,18 +398,8 @@ which would be a large log likelihood for $q_2$, however, the sample quality is 
 <h5 id="3142-example-of-low-likelihood-but-great-sample-quality">3.1.4.2 Example of Low Likelihood but Great Sample quality</h5>
 <p>Imagine a Gaussian Mixture Model defined as</p>
 
-<table>
-  <tbody>
-    <tr>
-      <td>$$  q(x) = \frac{1}{N} \sum_{n=1}^{N} N(x</td>
-      <td>x_n, \epsilon^2 I)$$</td>
-    </tr>
-    <tr>
-      <td>The model consists of a mixture of <strong>N Gaussians</strong>. Each <strong>Gaussian</strong>  $N(x</td>
-      <td>x_n, \epsilon^2 I)$  is centered on a training image  $x_n$ . Note that $\epsilon^2 I$  represents small Gaussian noise added around each training image. If  $\epsilon$  <strong>is very small</strong>, each Gaussian is tightly concentrated around the training images. This means that when we <strong>sample from this model</strong>, we get images that are <strong>almost identical to training images</strong>. <strong>Perceptually</strong>, the generated samples look great because they resemble real training images. Likelihood measures <strong>how well the model generalizes to new data</strong>. In this case, since the model is just a bunch of Gaussians centered on training images, its density function will <strong>assign high probability to training images.</strong> and <strong>assign very low probability to test images,</strong> which means <strong>poor likelihood on the test set</strong>.</td>
-    </tr>
-  </tbody>
-</table>
+<p>\(q(x) = \frac{1}{N} \sum_{n=1}^{N} N(x \vert x_n, \epsilon^2 I)\)
+The model consists of a mixture of <strong>N Gaussians</strong>. Each <strong>Gaussian</strong>  $N(x \vert x_n, \epsilon^2 I)$  is centered on a training image  $x_n$ . Note that $\epsilon^2 I$  represents small Gaussian noise added around each training image. If  $\epsilon$  <strong>is very small</strong>, each Gaussian is tightly concentrated around the training images. This means that when we <strong>sample from this model</strong>, we get images that are <strong>almost identical to training images</strong>. <strong>Perceptually</strong>, the generated samples look great because they resemble real training images. Likelihood measures <strong>how well the model generalizes to new data</strong>. In this case, since the model is just a bunch of Gaussians centered on training images, its density function will <strong>assign high probability to training images.</strong> and <strong>assign very low probability to test images,</strong> which means <strong>poor likelihood on the test set</strong>.</p>
 
 <h3 id="32-perceptual-metrics">3.2 Perceptual Metrics</h3>
 <p>Evaluating generative models (like GANs and VAEs) is challenging because traditional metrics like likelihood do not always reflect the perceptual quality of generated images. Instead of directly comparing raw pixel values, researchers use <strong>perceptual distance metrics</strong>, which compare feature representations of real and generated images. These features are extracted using neural networks, often from <strong>pretrained classifiers</strong> like the Inception model.</p>
@@ -421,7 +411,7 @@ which would be a large log likelihood for $q_2$, however, the sample quality is 
 <p>\(IS = \exp (E_{p_\theta(x)} D_{KL} (p_{\text{disc}}(Y \vert x) \parallel p_\theta(Y)))\)
 	where:
 	* $p_\theta(x)$  is the probability distribution of images generated by the model.
-	* $p_{\text{disc}}(Y | x)$  is the probability distribution over class labels <strong>given an image</strong>  x . This is obtained from a <strong>pretrained classifier</strong> (like Inception).
+	* $p_{\text{disc}}(Y \vert x)$  is the probability distribution over class labels <strong>given an image</strong>  x . This is obtained from a <strong>pretrained classifier</strong> (like Inception).
 	* $p_\theta(Y)$  is the <strong>marginal class distribution</strong> of generated images:
   \(p_\theta(y) = \int p_{\text{disc}}(y \vert x) p_\theta(x) dx\)</p>
 
@@ -429,12 +419,12 @@ which would be a large log likelihood for $q_2$, however, the sample quality is 
 1. **Are the generated images clear and recognizable?** (Do they belong to a specific class with high confidence?)
 2. **Are the generated images diverse?** (Do they cover a wide range of different classes?)
 To measure this, it **compares two distributions**:
-* $p_{\text{disc}}(Y | x)$  → This is the **classifier’s prediction** for a generated image  $x$ . It tells us how confident the classifier is that the image belongs to a certain class (e.g., “cat” or “dog”).
+* $p_{\text{disc}}(Y \vert x)$  → This is the **classifier’s prediction** for a generated image  $x$ . It tells us how confident the classifier is that the image belongs to a certain class (e.g., “cat” or “dog”).
 * $p_\theta(Y)$  → This is the **overall distribution of generated class labels** across many images. It tells us whether the model is generating a balanced mix of different classes.
 The score is calculated using **KL divergence**, which measures how different these two distributions are. This happens in two steps
 	1. **Check if each image belongs to a clear class.** -&gt; If an image is confidently recognized as a **specific** class (e.g., “cat” with 99% probability), it is a **high-quality sample**. If an image is blurry or unrecognizable, the classifier will be **uncertain** which is **bad**.
 	2. **Check if the model generates a variety of different classes.**: If the model generates **only cats**, it is **not diverse**, which is **bad**. If the model generates a **mix of different animals**, it is **diverse**, which is **good**.
-	3. Combining the above two: **KL divergence compares how different the per-image class prediction**  $p_{\text{disc}}(Y | x)$  **is from the overall class distribution**  $p_\theta(Y)$ **.** If the two distributions are very different, it means the images are **recognizable and diverse**, which gives a **high score**. If the distributions are similar, it means the images are **blurry or all from the same class**, which gives a **low score**.
+	3. Combining the above two: **KL divergence compares how different the per-image class prediction**  $p_{\text{disc}}(Y \vert x)$  **is from the overall class distribution**  $p_\theta(Y)$ **.** If the two distributions are very different, it means the images are **recognizable and diverse**, which gives a **high score**. If the distributions are similar, it means the images are **blurry or all from the same class**, which gives a **low score**.
 This can also be seen with a bit of derivation. The KL divergence in the inception score can be written as 
 $$   D_{KL} (p_{\text{disc}}(Y \vert x) \parallel p_\theta(Y)) = \sum_y p_{\text{disc}}(y \vert x) \log \frac{p_{\text{disc}}(y \vert x)}{p_\theta(y)}$$
 So the expected value is 
