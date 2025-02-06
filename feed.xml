@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://azareei.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://azareei.github.io/" rel="alternate" type="text/html" /><updated>2025-02-06T09:10:57+00:00</updated><id>https://azareei.github.io/feed.xml</id><title type="html">Ahmad Zareei</title><subtitle>Personal homepage of Ahmad Zareei, Senion AI research Scientist @META
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://azareei.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://azareei.github.io/" rel="alternate" type="text/html" /><updated>2025-02-06T09:14:01+00:00</updated><id>https://azareei.github.io/feed.xml</id><title type="html">Ahmad Zareei</title><subtitle>Personal homepage of Ahmad Zareei, Senion AI research Scientist @META
 </subtitle><entry><title type="html">Generative AI</title><link href="https://azareei.github.io/blog/2025/Generative-AI/" rel="alternate" type="text/html" title="Generative AI" /><published>2025-01-07T18:00:00+00:00</published><updated>2025-01-07T18:00:00+00:00</updated><id>https://azareei.github.io/blog/2025/Generative-AI</id><content type="html" xml:base="https://azareei.github.io/blog/2025/Generative-AI/"><![CDATA[<p>A generative model is a <em>joint</em> probability distribution $p(x)$, for $x\in\mathcal{X}$ . It’s a joint distribution because $x$ can be multidimensional where it consists of multiple variables  $(x_1, x_2, \ldots, x_n)$.</p>
 
 <p>We also have <em>conditional</em> generative model $p(x\vert c)$ in which the generative model would be conditioned on inputs or covariates $c\in C$.</p>
@@ -164,6 +164,7 @@
 <p>No single metric captures all above, we use different metrics for each or combine parts.</p>
 
 <h3 id="31-likelihood-based-evaluation">3.1 Likelihood-based evaluation</h3>
+
 <p>To evaluate how well a generative model $q$ matches the true data distribution $p$, <strong>KL Divergence</strong> is a commonly used metric:</p>
 
 \[D_{KL}(p \parallel q) = \int p(x) \log \frac{p(x)}{q(x)} dx = \int p(x) \log p(x) \, dx - \int p(x) \log q(x) \, dx = - H(p) + H_{ce}(p, q)\]
@@ -376,12 +377,15 @@ $p(x) = \int p(x, z) \, dz =  \int q(z|x) \frac{p(x, z)}{q(z\vert x)} \, dz$</p>
 </ol>
 
 <h5 id="3133-solution-2-annealed-importance-sampling-ais">3.1.3.3 Solution 2: <strong>Annealed Importance Sampling (AIS)</strong></h5>
+
 <p>In this method, we estimate the log likelihood using Monte Carlo sampling.</p>
 
 <h4 id="314-likelihood-and-sample-quality">3.1.4 Likelihood and sample quality</h4>
+
 <p>A model can achieve high likelihood but produce perceptually poor samples and vice versa. Likelihood alone is not a reliable indicator of the perceptual quality of generated samples.</p>
 
 <h5 id="3141-example-of-high-likelihood-but-poor-samples">3.1.4.1 Example of High Likelihood but Poor Samples</h5>
+
 <p>Consider the following</p>
 <ul>
   <li>Model $q_0$: A good density model that performs well in terms of average log-likelihood.</li>
@@ -396,12 +400,14 @@ This means 99% of the samples will be poor (from $q_1$). Since $q_1$ is coming f
 which would be a large log likelihood for $q_2$, however, the sample quality is pretty bad.</p>
 
 <h5 id="3142-example-of-low-likelihood-but-great-sample-quality">3.1.4.2 Example of Low Likelihood but Great Sample quality</h5>
+
 <p>Imagine a Gaussian Mixture Model defined as</p>
 
 <p>\(q(x) = \frac{1}{N} \sum_{n=1}^{N} N(x \vert x_n, \epsilon^2 I)\)
 The model consists of a mixture of <strong>N Gaussians</strong>. Each <strong>Gaussian</strong>  $N(x \vert x_n, \epsilon^2 I)$  is centered on a training image  $x_n$ . Note that $\epsilon^2 I$  represents small Gaussian noise added around each training image. If  $\epsilon$  <strong>is very small</strong>, each Gaussian is tightly concentrated around the training images. This means that when we <strong>sample from this model</strong>, we get images that are <strong>almost identical to training images</strong>. <strong>Perceptually</strong>, the generated samples look great because they resemble real training images. Likelihood measures <strong>how well the model generalizes to new data</strong>. In this case, since the model is just a bunch of Gaussians centered on training images, its density function will <strong>assign high probability to training images.</strong> and <strong>assign very low probability to test images,</strong> which means <strong>poor likelihood on the test set</strong>.</p>
 
 <h3 id="32-perceptual-metrics">3.2 Perceptual Metrics</h3>
+
 <p>Evaluating generative models (like GANs and VAEs) is challenging because traditional metrics like likelihood do not always reflect the perceptual quality of generated images. Instead of directly comparing raw pixel values, researchers use <strong>perceptual distance metrics</strong>, which compare feature representations of real and generated images. These features are extracted using neural networks, often from <strong>pretrained classifiers</strong> like the Inception model.</p>
 
 <p>(A) <strong>Inception Score (IS)</strong>: This score measures how well a generative model produces diverse and recognizable images. It uses a classifier (like the Inception network) to predict class labels for generated images.</p>
@@ -484,6 +490,7 @@ A high score means the model generates <strong>varied</strong> images across dif
 	* $E[k(x, y)]$  = similarity between real and generated image</p>
 
 <h3 id="33-precision-and-recall-metrics">3.3 Precision and recall metrics</h3>
+
 <p>The <strong>Fréchet Inception Distance (FID)</strong> measures the <strong>distance between the real and generated data distributions</strong> but does <strong>not tell us why a model is failing</strong>. A <strong>bad (high) FID</strong> could mean:</p>
 <ol>
   <li>The model <strong>produces low-quality samples</strong> (they don’t look realistic).</li>
@@ -547,10 +554,13 @@ A high score means the model generates <strong>varied</strong> images across dif
 <p>Now with precision and recall we can separate between the issues that the generative model has. For example, in <strong>GANs</strong>, <strong>mode collapse</strong> happens when the model only generates a <strong>few types of images</strong>.</p>
 <ul>
   <li><strong>*High precision but low recall</strong> = The GAN generates <strong>very realistic but repetitive</strong> images (e.g., only faces of young white males).</li>
-  <li><strong>Low precision but high recall</strong> = The GAN generates <strong>a wide variety of images, but many are blurry</strong>.
-    <h3 id="34-statistical-tests">3.4 Statistical Tests</h3>
-    <p>A <strong>two-sample test</strong> is a <strong>statistical method</strong> used to determine whether two datasets (sets of samples) come from the <strong>same underlying distribution</strong>.</p>
-  </li>
+  <li><strong>Low precision but high recall</strong> = The GAN generates <strong>a wide variety of images, but many are blurry</strong>.</li>
+</ul>
+
+<h3 id="34-statistical-tests">3.4 Statistical Tests</h3>
+
+<p>A <strong>two-sample test</strong> is a <strong>statistical method</strong> used to determine whether two datasets (sets of samples) come from the <strong>same underlying distribution</strong>.</p>
+<ul>
   <li><strong>*Null Hypothesis (</strong> $H_0$ <strong>)</strong>: The two sets of samples come from the <strong>same</strong> distribution.</li>
   <li><strong>Alternative Hypothesis (</strong> $H_A$ <strong>)</strong>: The two sets of samples come from <strong>different</strong> distributions.</li>
 </ul>
@@ -571,7 +581,7 @@ A high score means the model generates <strong>varied</strong> images across dif
 
 <p>Statistical tests let users control <strong>Type 1 error</strong> ( $\alpha$ ), which is <strong>the probability of wrongly rejecting the null hypothesis</strong> (i.e., concluding that the samples are different when they are actually from the same distribution).</p>
 
-<h3 id="maximum-likelihood-estimation-mle-for-generative-models">Maximum Likelihood Estimation (MLE) for Generative Models</h3>
+<h3 id="35-maximum-likelihood-estimation-mle-for-generative-models">3.5 Maximum Likelihood Estimation (MLE) for Generative Models</h3>
 
 <p>MLE is a <strong>statistical method</strong> used to train probabilistic models by <strong>maximizing the likelihood</strong> of observed data under the model’s distribution. For a dataset with samples  $x \sim p(x)$ , where:</p>
 <ul>
@@ -618,7 +628,7 @@ A high score means the model generates <strong>varied</strong> images across dif
   <li>If  $q(x)$  is defined over the full  $\mathbb{R}^D$ , it <strong>fails to properly learn the structure of</strong>  $\mathcal{M}$ . If $q(x)$ is not defined everywhere (and is only defined over data), then the generative model does not generalizes.</li>
 </ul>
 
-<h4 id="three-solutions-to-mle-failure-in-high-dimensional-data">Three Solutions to MLE Failure in High-Dimensional Data</h4>
+<h4 id="351-three-solutions-to-mle-failure-in-high-dimensional-data">3.5.1 Three Solutions to MLE Failure in High-Dimensional Data</h4>
 
 <p>Three solutions address this problem:</p>
 <ol>
