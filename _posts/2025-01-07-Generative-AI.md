@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Generative AI
+title: Learning Gen-AI
 date: 2025-01-07 14:00:00-0400
 number headings: auto, first-level 1, max 6, start-at 1, _.1.1
 toc: 
@@ -8,7 +8,7 @@ beginning: true
 ---
 
 
-This is my note capturing my journey in getting deeper in Generative AI. 
+This is my note for my journey in getting deeper in Generative AI. 
 
 # Generative AI
 
@@ -569,4 +569,16 @@ which integrates over all possible latent variables  $z$  to determine the tot
 
   
 Due to these challenges, we cannot compute the exact posterior  $p_\theta(z \vert x)$  directly. Instead, we resort to **approximate inference methods**, such as **Variational Inference (VI)** or **Monte Carlo methods**, which allow us to estimate the posterior efficiently while keeping computations feasible.
+
+**Approximate Inference with Variational Autoencoders (VAEs)** or **Amortized Variational Inference**: Instead of computing the true posterior  $p_\theta(z \vert x) $, we introduce an **approximate posterior**:
+
+$$q_\phi(z \vert x)$$
+
+This is a **neural network (called the inference network or encoder)** that learns to approximate  $p_\theta(z \vert x)$ . Instead of computing an **exact** posterior for each  $x$ , we train  $q_\phi(z \vert x)$  to perform **fast inference for any input**—this is called **amortized inference**.
+
+  **Variational Autoencoder (VAE)**: A **Variational Autoencoder (VAE)** consists of:
+1. **Encoder (Inference Network**  $q_\phi(z \vert x)$ **)**: Learns a probabilistic mapping from data  x  to latent codes  z . Typically modeled as $q_\phi(z \vert x) = \mathcal{N}(z \vert \mu_\phi(x), \sigma_\phi^2(x) I)$,  where  $\mu_\phi(x)$  and  $\sigma_\phi^2(x)$  are computed by a **neural network**.
+2. **Decoder (Generative Model**  $p_\theta(x | z)$ **)**: Learns to reconstruct  x  from latent variable  $z$. Defines a **likelihood function** for generating data.
+3. **Latent Prior**  $p(z)$ : Typically a **standard normal distribution**  $\mathcal{N}(0, I)$.
+
 
