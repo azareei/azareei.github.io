@@ -281,7 +281,7 @@ The model consists of a mixture of **N Gaussians**. Each **Gaussian**  $N(x \ve
 ### 3.2 Perceptual Metrics
 Evaluating generative models (like GANs and VAEs) is challenging because traditional metrics like likelihood do not always reflect the perceptual quality of generated images. Instead of directly comparing raw pixel values, researchers use **perceptual distance metrics**, which compare feature representations of real and generated images. These features are extracted using neural networks, often from **pretrained classifiers** like the Inception model. 
 
-**Inception Score (IS)**: This score measures how well a generative model produces diverse and recognizable images. It uses a classifier (like the Inception network) to predict class labels for generated images.  
+(A) **Inception Score (IS)**: This score measures how well a generative model produces diverse and recognizable images. It uses a classifier (like the Inception network) to predict class labels for generated images.  
 
 $$IS = \exp (E_{p_\theta(x)} D_{KL} (p_{\text{disc}}(Y \vert x) \parallel p_\theta(Y)))
 $$
@@ -329,7 +329,7 @@ So in here
 This represents the overall class distribution of the generated images.
 A high score means the model generates **varied** images across different classes (**high entropy** of predicted labels). Each individual image should be **easily classifiable** (low entropy per image). One big **limitation** is that it does not measure overfitting—if a model memorizes one perfect image per class, it can still score well.
 
-**Fréchet Inception Distance (FID)**: Instead of class labels, it compares statistical properties of deep features (mean and covariance) between real and generated images.
+(B) **Fréchet Inception Distance (FID)**: Instead of class labels, it compares statistical properties of deep features (mean and covariance) between real and generated images.
 
 $$FID = \|\mu_m - \mu_d\|^2_2 + \text{tr} (\Sigma_d + \Sigma_m - 2(\Sigma_d \Sigma_m)^{1/2})$$
   
@@ -341,7 +341,7 @@ where
 Lower FID is better because it means generated images closely resemble real images in feature space. One **limitation** of this score is that it is sensitive to the number of samples used—results can vary due to statistical bias.
 
 
-**Kernel Inception Distance (KID)**: This score improves on FID by using **Maximum Mean Discrepancy (MMD)** to measure the similarity between distributions. This reduces bias issues in FID by comparing feature distributions more robustly. MMD measures the distance between two distributions **without assuming they are Gaussian**. Instead of just comparing the **mean and covariance** (like FID), MMD measures how well two sets of samples **match** using a **kernel function**.   
+(C) **Kernel Inception Distance (KID)**: This score improves on FID by using **Maximum Mean Discrepancy (MMD)** to measure the similarity between distributions. This reduces bias issues in FID by comparing feature distributions more robustly. MMD measures the distance between two distributions **without assuming they are Gaussian**. Instead of just comparing the **mean and covariance** (like FID), MMD measures how well two sets of samples **match** using a **kernel function**.   
 
 $$\text{MMD}^2(X, Y) = E[k(x, x{\prime})] + E[k(y, y{\prime})] - 2E[k(x, y)]$$
 
@@ -359,8 +359,8 @@ The **Fréchet Inception Distance (FID)** measures the **distance between the re
 1. The model **produces low-quality samples** (they don’t look realistic).
 2. The model **places too much probability mass around the data distribution**, meaning it only captures a limited part of the real data.
 3. The model **only generates a subset of the real data** (a problem called **mode collapse** in GANs).
-Precision (sample quality), and recall (sample diversity) are introduced to resolve this differentiation issue
 
+Precision (sample quality), and recall (sample diversity) are introduced to resolve this differentiation issue
 * ***Precision** -> Are generated samples **high quality** (similar to real data)?
 * * **Recall** -> Is the **diversity** of generated samples good (does it cover the full real data distribution)?
 
@@ -368,6 +368,7 @@ Precision (sample quality), and recall (sample diversity) are introduced to reso
 * $\Phi_{\text{model}}$  = Set of feature vectors from generated images.
 * $\Phi_{\text{data}}$  = Set of feature vectors from real images.
 *  $\text{NN}_k(\phi{\prime}, \Phi)$  = The  $k$-th nearest neighbor of  $\phi{\prime}$  in  $\Phi$  (used to measure how close a sample is to its nearest neighbors).
+
 To determine whether a generated image is **close enough** to real data, we define the function:
 
 $$f_k(\phi, \Phi) =
@@ -389,7 +390,7 @@ $$
 
 $$\text{precision}(\Phi_{\text{model}}, \Phi_{\text{data}}) = \frac{1}{|\Phi_{\text{model}}|} \sum_{\phi \in \Phi_{\text{model}}} f_k(\phi, \Phi_{\text{data}})$$
 
-  * ***High precision** means most generated images are **high-quality** and resemble real data.
+  * **High precision** means most generated images are **high-quality** and resemble real data.
   * **Low precision** means many generated images are **not realistic**.
 
 **Recall (Sample Diversity)**: Recall tells us **whether real data points are well represented** by the model. 
@@ -398,6 +399,7 @@ $$\text{recall}(\Phi_{\text{model}}, \Phi_{\text{data}}) = \frac{1}{|\Phi_{\text
 
   * ***High recall** means the model generates **a diverse set of samples that cover all real data**. 
   * **Low recall** means the model **misses** important variations in the real dataset (**mode collapse**).
+  
 Now with precision and recall we can separate between the issues that the generative model has. For example, in **GANs**, **mode collapse** happens when the model only generates a **few types of images**.
 * ***High precision but low recall** = The GAN generates **very realistic but repetitive** images (e.g., only faces of young white males).
 * **Low precision but high recall** = The GAN generates **a wide variety of images, but many are blurry**.
@@ -405,6 +407,7 @@ Now with precision and recall we can separate between the issues that the genera
 A **two-sample test** is a **statistical method** used to determine whether two datasets (sets of samples) come from the **same underlying distribution**.
 * ***Null Hypothesis (** $H_0$ **)**: The two sets of samples come from the **same** distribution.
 * **Alternative Hypothesis (** $H_A$ **)**: The two sets of samples come from **different** distributions.
+
 For example, in **Generative Adversarial Networks (GANs)** and other generative models, we want to check:
 1. **Are the generated samples statistically similar to real data?**
 2. **How different is the model’s output from real data?**
@@ -417,3 +420,86 @@ Since **deep learning works with high-dimensional data** (e.g., images with mill
 
 Statistical tests let users control **Type 1 error** ( $\alpha$ ), which is **the probability of wrongly rejecting the null hypothesis** (i.e., concluding that the samples are different when they are actually from the same distribution).
 
+### Maximum Likelihood Estimation (MLE) for Generative Models
+
+MLE is a **statistical method** used to train probabilistic models by **maximizing the likelihood** of observed data under the model’s distribution. For a dataset with samples  $x \sim p(x)$ , where:
+* $p(x)$  is the **true data distribution** (which we want to approximate).
+* $q(x)$  is the **model distribution** (which we are learning).
+
+The objective in MLE is:
+
+$$\max_q \mathbb{E}_{p(x)} [\log q(x)]$$
+
+which means adjusting  $q(x)$  to **maximize the log-likelihood** of real data. **Why MLE is Equivalent to Minimizing KL Divergence?** We can rewrite the MLE objective using the **Kullback-Leibler (KL) divergence**:
+
+$$\mathbb{E}{p(x)} [\log q(x)] = - D{\text{KL}}(p \parallel q) + \text{const}$$
+
+where:
+
+$$D_{\text{KL}}(p \parallel q) = \mathbb{E}_{p(x)} \left[ \log \frac{p(x)}{q(x)} \right]
+$$
+  
+
+Since the constant term does not depend on  $q$ , **MLE is equivalent to minimizing**  $D_{\text{KL}}(p \parallel q)$. **KL divergence measures how different**  $q(x)$  **(the learned model) is from**  $p(x)$  **(the real data distribution).** MLE **pulls**  $q(x)$  **towards** $ p(x)$  so that the model generates realistic samples.
+
+* ***Advantage of MLE**: It ensures that  $q(x)$  does not ignore any part of  $p(x)$ , avoiding **mode collapse** (a common issue in GANs).
+* **Limitation**: It can fail when  $p(x)$  **lies on a low-dimensional manifold within a high-dimensional space**.
+
+**What is the Manifold Hypothesis?** The **manifold hypothesis** states that **real-world high-dimensional data (e.g., images, text, speech) actually lies on a much lower-dimensional manifold embedded in the full space**. Formally:
+
+* Real data  $x$  lives in a **subspace**  $\mathcal{M}$  of dimension  $d^*$  (**low-dimensional**).
+* The surrounding space  $\mathbb{R}^D$ (**ambient space**) has dimension  $D$ , where  $d^* < D$
+* Probability mass is **concentrated only on**  $\mathcal{M}$ **, not the entire** $\mathbb{R}^D$ .
+
+For example, a 1,000 × 1,000 pixel grayscale image technically lives in a **1,000,000-dimensional space**. However, not all **possible pixel combinations** form valid images. Real images exist in a much lower-dimensional manifold within this huge space.
+
+  
+
+**Why Does MLE Fail in This Case?** MLE assumes  $p(x)$  is **defined everywhere in**  $\mathbb{R}^D$. But **in reality,**  $p(x) > 0$  **only on**  $\mathcal{M}$ , making MLE problematic. As a result, the Likelihood Objective is Ill-Defined.  MLE maximizes:
+
+$$\mathbb{E}_{p(x)} [\log q(x)]$$
+
+For this to be well-defined:
+* $q(x)$  must be **nonzero** everywhere that  $p(x)$  is nonzero. Note that, if $p(x)$ is non-zero, then $q(x)$ should be non-zero, otherwise, the above expectation becomes ill-defined or large. 
+* If  $q(x)$  is defined over the full  $\mathbb{R}^D$ , it **fails to properly learn the structure of**  $\mathcal{M}$ . If $q(x)$ is not defined everywhere (and is only defined over data), then the generative model does not generalizes. 
+
+#### Three Solutions to MLE Failure in High-Dimensional Data
+
+Three solutions address this problem:
+1. (A)  **Adding Noise (Diffusion Models, Spread KL Divergence)**
+2. (B) **Using Alternative Divergences (Wasserstein Distance, MMD, GANs)**
+3. (C) **Two-Step Methods (Autoencoders + Latent Space Learning)**
+
+Each method **modifies the training objective or the model structure** to handle the mismatch between  $p(x)$  and  $q(x)$.
+
+(A) **Adding Noise to Fill the Space**: Since real data  $p(x)$  only exists on a **thin manifold**, the likelihood objective is problematic because  $q(x)$  is defined over the full space. **A simple fix** is to **add noise** to the data, artificially expanding the distribution to fill  $\mathbb{R}^D$. Instead of working directly with  $p(x)$  and  $q(x)$, we define **smoothed versions** by convolving them with a Gaussian:
+
+$$p_\sigma = p \ast \mathcal{N}(0, \sigma^2 I_D), \quad q_\sigma = q \ast \mathcal{N}(0, \sigma^2 I_D)$$
+
+  Then, we redefine **KL divergence** as:
+$$D_{\text{KL}, \sigma}(p || q) = D_{\text{KL}}(p_\sigma || q_\sigma)$$
+
+Since  $p_\sigma$  and  $q_\sigma$ now have **support over the full space**, KL divergence is always finite. Examples of such implementations are 
+1. **Diffusion Models**: Add noise at various levels and learn to **reverse the diffusion process** (denoising).
+2. **Delta-VAE (Latent Variable Model with Noise Injection)**: $q(x) = \mathcal{N}(x | g_\theta(z), \sigma^2 I)$, where  $g_\theta(z)$  is a **decoder**, and  $z \sim \mathcal{N}(0, I_d)$ is a low-dimensional latent variable. During training, the model **includes noise** to ensure proper likelihood calculation. After training, noise is “turned off,” ensuring the model correctly learns the data manifold.
+
+(B) **Using Alternative Divergences Instead of KL**: The problem with KL divergence is that it **penalizes missing support harshly** (assigning infinite loss). Some divergences **do not require overlapping supports**, making them better suited for generative modeling. Two **alternative divergences** are
+
+1. **Wasserstein Distance (Optimal Transport)**: Measures the **minimal cost of transporting mass from**  $p(x)$  **to**  $q(x)$ . More stable than KL and does not require absolute density matching. Used in **Wasserstein GANs (WGANs)**.
+2. **Maximum Mean Discrepancy (MMD)**: Measures the **distance between distributions in feature space** using kernel methods. Useful for non-adversarial generative models.
+
+  (C) **Two-Step Methods (Learning the Manifold + Density Estimation)**: Instead of **modeling**  $p(x)$  **in**  $\mathbb{R}^D$  **directly**, we first **learn the lower-dimensional latent manifold**  $\mathcal{M}$ , then estimate a probability distribution in this space. Train an **autoencoder** to map data to a lower-dimensional space:
+
+$$z = f_\phi(x), \quad x = g_\theta(z)$$
+
+The encoder  $f_\phi$  learns a **compressed representation**  $z$  in a space  $\mathbb{R}^d$ , where  $d \ll D$ . Then, define a probability distribution over  z :
+
+$$q_\theta(z) = p(f_\phi(x))$$
+
+  Since this is now in **low-dimensional space**, MLE is **safe to apply**. The final generative model is:
+
+$$q(x) = q_\theta(z) g_\theta(z)$$
+
+  Some examples are: 
+1. **Variational Autoencoders (VAEs)**: Learn a **latent space representation** while maximizing likelihood. Uses a **Gaussian prior over latent space** to regularize learning.
+2. **Latent Diffusion Models**: Train an autoencoder first, then **apply diffusion** in latent space.
