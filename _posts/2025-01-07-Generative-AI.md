@@ -2,10 +2,15 @@
 layout: post
 title: Generative AI
 date: 2025-01-07 14:00:00-0400
-number headings: first-level 1, max 6, start-at 1, _.1.1
+number headings: auto, first-level 1, max 6, start-at 1, _.1.1
 toc: 
 beginning: true
 ---
+
+
+This is my note capturing my journey in getting deeper in Generative AI. 
+
+# Generative AI
 
 A generative model is a *joint* probability distribution $p(x)$, for $x\in\mathcal{X}$ . It's a joint distribution because $x$ can be multidimensional where it consists of multiple variables  $(x_1, x_2, \ldots, x_n)$. 
 
@@ -503,7 +508,7 @@ Since  $p_\sigma$  and  $q_\sigma$ now have **support over the full space**, 
 
 $$z = f_\phi(x), \quad x = g_\theta(z)$$
 
-The encoder  $f_\phi$  learns a **compressed representation**  $z$  in a space  $\mathbb{R}^d$ , where  $d \ll D$ . Then, define a probability distribution over  z :
+The encoder  $f_\phi$  learns a **compressed representation**  $z$  in a space  $\mathbb{R}^d$ , where  $d \ll D$ . Then, define a probability distribution over  $z$ :
 
 $$q_\theta(z) = p(f_\phi(x))$$
 
@@ -514,3 +519,54 @@ $$q(x) = q_\theta(z) g_\theta(z)$$
   Some examples are: 
 1. **Variational Autoencoders (VAEs)**: Learn a **latent space representation** while maximizing likelihood. Uses a **Gaussian prior over latent space** to regularize learning.
 2. **Latent Diffusion Models**: Train an autoencoder first, then **apply diffusion** in latent space.
+
+
+
+# Variational AutoEncoders 
+
+**What is a Deep Latent Variable Model (DLVM)?** A **Deep Latent Variable Model (DLVM)** is a **probabilistic generative model** that assumes:
+
+1. There is a **latent variable**  $z$  (an unobserved representation).
+2. The observed data  $x$  is generated **from**  $z$  **through a deep neural network (decoder)**.
+
+Formally, the **generative process** is:
+
+(A) **Sample a latent code**  $z$  **from a prior**  $p_\theta(z)$ **:**
+$$z \sim p_\theta(z)$$
+This is usually a **Gaussian prior**:
+
+$$p_\theta(z) = \mathcal{N}(z \vert 0, I)$$
+
+ (B) **Generate data**  x  **from**  z  **using an exponential family distribution**:
+
+  $$x | z \sim \text{ExpFam}(x | d_\theta(z))$$
+
+Here,  $d_\theta(z)$  is a deep **neural network** (called the **decoder**) that maps  $z$  to the parameters of the likelihood distribution. **ExpFam** refers to the **exponential family of distributions**, which includes: **Gaussian** for continuous data;  **Bernoulli** for binary data; **Categorical** for discrete data
+
+
+For example, a **VAE for image generation** might work as follows:
+
+1. Sample a **latent code**  $z$  **(compressed representation of the image)**.
+2. Use a **decoder (deep neural network)** to transform  $z$  into an image.
+3. The output image is drawn from a **Gaussian likelihood**, meaning:
+
+$$x \vert z \sim \mathcal{N}(d_\theta(z), \sigma^2 I)$$
+
+**Why Exact Inference is Intractable**? In generative models, we are often interested in the **posterior distribution**:  
+
+$$p_\theta(z \vert x) = \frac{p_\theta(x \vert z) p_\theta(z)}{p_\theta(x)}$$
+
+
+which represents the probability of a latent variable  $z$  given an observed data point  $x$ . This posterior is crucial because it allows us to understand the hidden structure behind the data and enables efficient sampling of new data points. However, computing this posterior directly requires knowledge of the **marginal likelihood** (or **evidence**):
+
+$$p_\theta(x) = \int p_\theta(x \vert z) p_\theta(z) dz$$
+
+which integrates over all possible latent variables  $z$  to determine the total probability of observing  $x$ . Unfortunately, computing  $p_\theta(x)$  is **intractable**, making exact posterior inference impossible. The intractability arises due to several reasons:
+
+1. **The Decoder Network**  $d_\theta(z)$  **is Nonlinear and Complex**: In modern deep generative models, $p_\theta(x \vert z)$  is parameterized by a **deep neural network**, called the **decoder**. This means that the function mapping  $z$  to  $x$  is highly **nonlinear** and complex, making it **impossible to integrate analytically**. Even if  $p_\theta(x \vert z)$  is a simple Gaussian, when  $z$  is transformed by a deep network, the resulting likelihood function becomes **highly non-Gaussian** and difficult to evaluate.
+2. **The Integral is High-Dimensional**: If  $z$  is a low-dimensional variable (e.g., a scalar), integrating over all values of  $z$  might be feasible. However, in practice,  $z$  often has **hundreds or thousands of dimensions**, depending on the complexity of the data. Computing an exact integral in such a high-dimensional space requires summing over **exponentially many possible values**, making direct evaluation computationally infeasible.
+3. **The Curse of Dimensionality**: In high-dimensional spaces, standard numerical integration techniques (such as grid-based integration) fail because the number of required computations grows **exponentially** with the number of dimensions. Monte Carlo sampling methods, while useful, become inefficient because the probability mass is often concentrated in small regions, making it difficult to obtain accurate estimates without a massive number of samples.
+
+  
+Due to these challenges, we cannot compute the exact posterior  $p_\theta(z \vert x)$  directly. Instead, we resort to **approximate inference methods**, such as **Variational Inference (VI)** or **Monte Carlo methods**, which allow us to estimate the posterior efficiently while keeping computations feasible.
+
