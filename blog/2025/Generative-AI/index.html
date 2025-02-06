@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<title>Ahmad  Zareei | Generative AI</title>
+<title>Ahmad  Zareei | Learning Gen-AI</title>
 <meta name="description" content="Personal homepage of Ahmad Zareei, Senion AI research Scientist @META
 ">
 
@@ -166,12 +166,12 @@
 <div class="post">
 
   <header class="post-header">
-    <h1 class="post-title">Generative AI</h1>
+    <h1 class="post-title">Learning Gen-AI</h1>
     <p class="post-meta">January 7, 2025</p>
   </header>
 
   <article class="post-content">
-    <p>This is my note capturing my journey in getting deeper in Generative AI.</p>
+    <p>This is my note for my journey in getting deeper in Generative AI.</p>
 
 <h1 id="generative-ai">Generative AI</h1>
 
@@ -973,6 +973,31 @@ This is usually a <strong>Gaussian prior</strong>:</p>
 </ol>
 
 <p>Due to these challenges, we cannot compute the exact posterior  $p_\theta(z \vert x)$  directly. Instead, we resort to <strong>approximate inference methods</strong>, such as <strong>Variational Inference (VI)</strong> or <strong>Monte Carlo methods</strong>, which allow us to estimate the posterior efficiently while keeping computations feasible.</p>
+
+<p><strong>Approximate Inference with Variational Autoencoders (VAEs)</strong> or <strong>Amortized Variational Inference</strong>: Instead of computing the true posterior  $p_\theta(z \vert x) $, we introduce an <strong>approximate posterior</strong>:</p>
+
+\[q_\phi(z \vert x)\]
+
+<p>This is a <strong>neural network (called the inference network or encoder)</strong> that learns to approximate  $p_\theta(z \vert x)$ . Instead of computing an <strong>exact</strong> posterior for each  $x$ , we train  $q_\phi(z \vert x)$  to perform <strong>fast inference for any input</strong>—this is called <strong>amortized inference</strong>.</p>
+
+<p><strong>Variational Autoencoder (VAE)</strong>: A <strong>Variational Autoencoder (VAE)</strong> consists of:</p>
+<ol>
+  <li>
+<strong>Encoder (Inference Network</strong>  $q_\phi(z \vert x)$ <strong>)</strong>: Learns a probabilistic mapping from data  x  to latent codes  z . Typically modeled as $q_\phi(z \vert x) = \mathcal{N}(z \vert \mu_\phi(x), \sigma_\phi^2(x) I)$,  where  $\mu_\phi(x)$  and  $\sigma_\phi^2(x)$  are computed by a <strong>neural network</strong>.</li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>
+<strong>Decoder (Generative Model</strong>  $p_\theta(x</td>
+          <td>z)$ <strong>)</strong>: Learns to reconstruct  x  from latent variable  $z$. Defines a <strong>likelihood function</strong> for generating data.</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+<strong>Latent Prior</strong>  $p(z)$ : Typically a <strong>standard normal distribution</strong>  $\mathcal{N}(0, I)$.</li>
+</ol>
 
 
   </article>
