@@ -1,4 +1,4 @@
 _site 
 gemfile.lock
 .DS_Store
-Vendor
+vendor
