@@ -10,6 +10,7 @@ The theme is based on the **[al-folio](https://alshedivat.github.io/al-folio/)**
 
 To compile the jekyll source, you need to run the following commands to run locally or build the webpage.
 
+`bundle install --path vendor/bundle`
 `bundle exec jekyll serve`
 or
 `bundle exec jekyll build`
