@@ -3,3 +3,4 @@ gemfile.lock
 .DS_Store
 vendor
 .bundle
+.jekyll-cache
