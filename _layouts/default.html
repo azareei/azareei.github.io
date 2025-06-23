@@ -3,7 +3,9 @@
 
 <head>
   {% include head.html %}
+  {% if page.math or layout.math or site.enable_math %}
   {% include scripts/mathjax.html %}
+  {% endif %}
   <meta name="google-site-verification" content="SwVgS1KjZmScXzgcGAsFKN5eksnUe79r12brKRMZLko" />
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-TWETJLDW9Z"></script>
@@ -37,7 +39,9 @@
 
 {% include scripts/jquery.html %}
 {% include scripts/bootstrap.html %}
+{% if site.enable_mansory and page.masonry != false %}
 {% include scripts/mansory.html %}
+{% endif %}
 {% include scripts/misc.html %}
 
 </html>
