@@ -28,6 +28,33 @@
   img {
     width: 100%;
   }
+  
+  .profile-image {
+    width: 100% !important; // Keep within column bounds
+    max-width: 350px; // Increased to take advantage of larger column
+    height: auto;
+    border: none;
+    box-shadow: none;
+    background: transparent;
+    
+    // Ensure it's properly circular
+    border-radius: 50%;
+    object-fit: cover;
+    
+    // Add some margin for better spacing
+    margin-bottom: 1rem;
+  }
+  
+  .address {
+    width: 100%;
+    text-align: center;
+    
+    p {
+      font-size: 0.9rem;
+      margin: 0;
+      padding: 0;
+    }
+  }
 }
 
 // TODO: redefine content layout.
