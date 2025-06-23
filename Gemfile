@@ -14,7 +14,7 @@ group :jekyll_plugins do
     gem 'jekyll-twitter-plugin'
     gem 'jemoji'
     gem 'jekyll-github-metadata'
-    gem 'mini_racer'
+    # gem 'mini_racer'  # Commented out due to compilation issues
     gem 'unicode_utils'
     gem 'webrick'
 end

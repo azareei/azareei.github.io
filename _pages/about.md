@@ -6,7 +6,7 @@ description: AI Research Scientist <a href="https://about.facebook.com/meta/">@M
 
 profile:
   align: right
-  image: ahmad_zareei7.jpg
+  image: ahmad_zareei8.png
   address: >
     <p style="font-size: .7em" >Email: last_name at berkeley dot edu </p>
   # <p>410 Pierce Hall, SEAS </p>

@@ -1,0 +1,199 @@
+---
+layout: default
+---
+
+<div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title" style=font-size:50px>
+      {{ page.title }}
+    </h1>
+    <p class="desc">{{ page.description }}</p>
+  </header>
+
+  <article>
+    <!-- 3D Model Section -->
+    <div class="row mt-3 mb-4" style="text-align:center;">
+      <div class="col-sm">
+        <div id="threejs-container" class="z-depth-1" style="border-radius: 20px; width: 400px; height: 500px; margin: 0 auto; background: #f8f9fa;">
+        </div>
+        <div class="caption mt-2">
+          <small>Interactive 3D Model - Drag to rotate, scroll to zoom</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="clearfix">
+      {{ content }}
+    </div>
+  </article>
+
+  <!-- Include Three.js and related scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.142.0/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.142.0/examples/js/loaders/OBJLoader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.142.0/examples/js/loaders/MTLLoader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.142.0/examples/js/controls/OrbitControls.js"></script>
+  
+  <!-- Three.js script to load the 3D model -->
+  <script>
+    const width = 400;
+    const height = 500;
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0xf0f0f0); // Light gray background
+    const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 2000); // Reduced FOV from 90 to 45
+    const scale = 0.77;
+    camera.position.set(150 * scale, 100 * scale, 300 * scale); // Adjusted position for better perspective
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(width, height);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Limit pixel ratio for performance
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    document.getElementById('threejs-container').appendChild(renderer.domElement);
+    renderer.domElement.style.borderRadius = '20px';
+    renderer.domElement.style.overflow = 'hidden';
+    
+    // Improved lighting - Much brighter setup
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1.5); // Much higher ambient light
+    scene.add(ambientLight);
+    
+    // Hemisphere light for better overall illumination
+    const hemisphereLight = new THREE.HemisphereLight(0xffffff, 0x888888, 1.2);
+    scene.add(hemisphereLight);
+    
+    // Multiple directional lights for better illumination - Much brighter
+    const directionalLight1 = new THREE.DirectionalLight(0xffffff, 2.0);
+    directionalLight1.position.set(100, 150, 50);
+    scene.add(directionalLight1);
+    
+    const directionalLight2 = new THREE.DirectionalLight(0xffffff, 1.8);
+    directionalLight2.position.set(-100, 100, -50);
+    scene.add(directionalLight2);
+    
+    const directionalLight3 = new THREE.DirectionalLight(0xffffff, 1.5);
+    directionalLight3.position.set(0, 200, 0);
+    scene.add(directionalLight3);
+    
+    // Additional directional lights for complete coverage
+    const directionalLight4 = new THREE.DirectionalLight(0xffffff, 1.2);
+    directionalLight4.position.set(0, 0, 200);
+    scene.add(directionalLight4);
+    
+    const directionalLight5 = new THREE.DirectionalLight(0xffffff, 1.2);
+    directionalLight5.position.set(0, 0, -200);
+    scene.add(directionalLight5);
+    
+    // Add multiple point lights for additional illumination
+    const pointLight1 = new THREE.PointLight(0xffffff, 2.0, 1000);
+    pointLight1.position.set(0, 100, 200);
+    scene.add(pointLight1);
+    
+    const pointLight2 = new THREE.PointLight(0xffffff, 1.5, 1000);
+    pointLight2.position.set(200, 100, 0);
+    scene.add(pointLight2);
+    
+    const pointLight3 = new THREE.PointLight(0xffffff, 1.5, 1000);
+    pointLight3.position.set(-200, 100, 0);
+    scene.add(pointLight3);
+
+    // OrbitControls for camera interaction
+    const controls = new THREE.OrbitControls(camera, renderer.domElement);
+    controls.minDistance = 50; // Closer minimum distance
+    controls.maxDistance = 800; // Reduced maximum distance
+    controls.enablePan = true;
+    controls.enableDamping = true; // Smooth camera movement
+    controls.dampingFactor = 0.05;
+    
+    // Set initial camera target
+    camera.lookAt(0, 0, 0);
+
+    // Load MTL and then OBJ
+    const mtlLoader = new THREE.MTLLoader();
+    mtlLoader.load('{{ site.baseurl }}/assets/objs/material.mtl', function (materials) {
+      materials.preload();
+      const objLoader = new THREE.OBJLoader();
+      objLoader.setMaterials(materials);
+      loadModel(objLoader);
+    }, function (xhr) {
+      console.log('MTL loading progress:', (xhr.loaded / xhr.total * 100) + '%');
+    }, function (error) {
+      console.error('MTL loading failed, using fallback material:', error);
+      // Fallback: load OBJ without MTL and apply bright material
+      const objLoader = new THREE.OBJLoader();
+      loadModel(objLoader);
+    });
+    
+    function loadModel(objLoader) {
+      objLoader.load('{{ site.baseurl }}/assets/objs/model.obj', function (object) {
+        object.position.y = -30; // Adjusted position
+        object.position.x = 0; // Center horizontally
+        
+        // Scale the model if needed for better fit
+        const box = new THREE.Box3().setFromObject(object);
+        const size = box.getSize(new THREE.Vector3());
+        const maxDim = Math.max(size.x, size.y, size.z);
+        if (maxDim > 200) {
+          const scale = 200 / maxDim;
+          object.scale.set(scale, scale, scale);
+        }
+        
+        // Ensure all materials are properly lit
+        object.traverse(function (child) {
+          if (child.isMesh) {
+            if (child.material) {
+              // Make sure materials are not too dark
+              if (child.material.color) {
+                child.material.color.setHex(0xffffff);
+              }
+              // Force material properties for better visibility
+              child.material.emissive = new THREE.Color(0x222222); // Add some self-illumination
+              child.material.emissiveIntensity = 0.2;
+              child.material.needsUpdate = true;
+              
+              // Log material info for debugging
+              console.log('Material found:', child.material);
+            } else {
+              // Create a bright fallback material if none exists
+              child.material = new THREE.MeshLambertMaterial({ 
+                color: 0xffffff,
+                emissive: 0x222222,
+                emissiveIntensity: 0.2
+              });
+              console.log('Created fallback material for:', child.name);
+            }
+            // Enable shadows
+            child.castShadow = true;
+            child.receiveShadow = true;
+          }
+        });
+        
+        scene.add(object);
+        
+        // Adjust camera to look at the model center
+        const modelCenter = new THREE.Vector3();
+        box.getCenter(modelCenter);
+        camera.lookAt(modelCenter);
+        controls.target.copy(modelCenter);
+        
+        console.log('Model loaded successfully');
+      }, function (xhr) {
+        console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+      }, function (error) {
+        console.error('An error happened', error);
+      });
+    }
+
+    function animate() {
+      requestAnimationFrame(animate);
+      controls.update();
+      render();
+    }
+
+    function render() {
+      renderer.render(scene, camera);
+    }
+
+    animate();
+  </script>
+
+</div> 

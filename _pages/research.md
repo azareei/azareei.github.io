@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: research
 title: research
 permalink: /projects/
 description: 
