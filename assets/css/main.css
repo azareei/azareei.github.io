@@ -68,6 +68,26 @@ body.sticky-bottom-footer {
 .profile img {
   width: 100%;
 }
+.profile .profile-image {
+  width: 100% !important;
+  max-width: 350px;
+  height: auto;
+  border: none;
+  box-shadow: none;
+  background: transparent;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1rem;
+}
+.profile .address {
+  width: 100%;
+  text-align: center;
+}
+.profile .address p {
+  font-size: 0.9rem;
+  margin: 0;
+  padding: 0;
+}
 
 /******************************************************************************
  * Publications
@@ -118,7 +138,7 @@ a:hover:after, table.table a:hover:after {
 
 @media (min-width: 576px) {
   .profile {
-    width: 30%;
+    width: 40%;
   }
   .profile .address p {
     display: block;
