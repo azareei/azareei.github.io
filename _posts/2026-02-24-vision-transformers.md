@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Vision Transformers — A Complete Guide for AI Researchers
+title: Vision Transformers
 date: 2026-02-24 10:00:00-0400
 description: A comprehensive deep dive into ViT, DeiT, BEiT, MAE, DINO, Swin, DETR, SAM, CLIP, DiT, and beyond — with PyTorch code, training tips, and practical intuitions.
 toc:
