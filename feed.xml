@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://azareei.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://azareei.github.io/" rel="alternate" type="text/html" /><updated>2026-03-20T18:54:26+00:00</updated><id>https://azareei.github.io/feed.xml</id><title type="html">Ahmad Zareei</title><subtitle>Personal homepage of Ahmad Zareei, Senion AI research Scientist @META
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://azareei.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://azareei.github.io/" rel="alternate" type="text/html" /><updated>2026-03-20T19:05:56+00:00</updated><id>https://azareei.github.io/feed.xml</id><title type="html">Ahmad Zareei</title><subtitle>Personal homepage of Ahmad Zareei, Senion AI research Scientist @META
 </subtitle><entry><title type="html">From Points to Pixels: A Deep Dive into 3D Gaussian Splatting</title><link href="https://azareei.github.io/blog/2026/gaussian-splatting-deep-dive/" rel="alternate" type="text/html" title="From Points to Pixels: A Deep Dive into 3D Gaussian Splatting" /><published>2026-03-20T18:00:00+00:00</published><updated>2026-03-20T18:00:00+00:00</updated><id>https://azareei.github.io/blog/2026/gaussian-splatting-deep-dive</id><content type="html" xml:base="https://azareei.github.io/blog/2026/gaussian-splatting-deep-dive/"><![CDATA[<h2 id="introduction">Introduction</h2>
 
 <p>Imagine capturing a real-world scene with just a smartphone camera and, within minutes, reconstructing it as a fully interactive 3D environment that renders at over 100 frames per second with photorealistic quality. This isn’t science fiction—it’s the reality enabled by <strong>3D Gaussian Splatting</strong> (3DGS), a technique that has revolutionized 3D scene reconstruction and rendering since its introduction at SIGGRAPH 2023.</p>
@@ -818,7 +818,1379 @@ Comprehensive survey of extensions and applications</p>
   </li>
 </ul>
 
-<p>And many other papers, implementations, and industry reports cited throughout the post.</p>]]></content><author><name></name></author><category term="computer-vision" /><category term="3d-reconstruction" /><category term="neural-rendering" /><category term="gaussian-splatting" /><summary type="html"><![CDATA[A comprehensive guide to understanding 3D Gaussian Splatting, from first principles to state-of-the-art applications in 2026]]></summary></entry><entry><title type="html">Vision Transformers</title><link href="https://azareei.github.io/blog/2026/vision-transformers/" rel="alternate" type="text/html" title="Vision Transformers" /><published>2026-02-24T14:00:00+00:00</published><updated>2026-02-24T14:00:00+00:00</updated><id>https://azareei.github.io/blog/2026/vision-transformers</id><content type="html" xml:base="https://azareei.github.io/blog/2026/vision-transformers/"><![CDATA[<p>The transformer took NLP from a fragmented landscape of task-specific architectures to a single unified paradigm. Vision followed the same path — later, and with more friction. This post covers everything an AI researcher needs to know about vision transformers: the core architecture, training paradigms, key variants, working PyTorch code, and the open questions that remain.</p>
+<p>And many other papers, implementations, and industry reports cited throughout the post.</p>]]></content><author><name></name></author><category term="computer-vision" /><category term="3d-reconstruction" /><category term="neural-rendering" /><category term="gaussian-splatting" /><summary type="html"><![CDATA[A comprehensive guide to understanding 3D Gaussian Splatting, from first principles to state-of-the-art applications in 2026]]></summary></entry><entry><title type="html">World Models - Learning to Simulate Reality</title><link href="https://azareei.github.io/blog/2026/world-models-comprehensive-guide/" rel="alternate" type="text/html" title="World Models - Learning to Simulate Reality" /><published>2026-03-20T14:00:00+00:00</published><updated>2026-03-20T14:00:00+00:00</updated><id>https://azareei.github.io/blog/2026/world-models-comprehensive-guide</id><content type="html" xml:base="https://azareei.github.io/blog/2026/world-models-comprehensive-guide/"><![CDATA[<h2 id="introduction">Introduction</h2>
+
+<p>Imagine an agent that can predict what happens next when it takes an action—not just in simple games, but in the complex, messy real world with all its physics, dynamics, and uncertainties. This is the promise of <strong>world models</strong>: systems that learn internal representations of how the world works, enabling them to simulate futures, plan actions, and ultimately behave intelligently without exhaustive trial-and-error in reality.</p>
+
+<p>While large language models (LLMs) have dominated AI headlines by predicting the next <em>word</em>, world models aim to predict the next <em>world state</em>. They’re learning to understand causality, physics, and temporal dynamics—capabilities crucial for embodied AI systems like robots and autonomous vehicles that must interact with the physical world.</p>
+
+<p>In 2026, world models are experiencing a renaissance. Major AI labs are releasing foundation world models that can generate interactive, physically consistent simulations. Companies like Waymo are using world models to train self-driving cars on scenarios that don’t exist yet. And researchers are discovering that scaled video generation models exhibit emergent properties as “general purpose simulators of the physical world.”</p>
+
+<p>This post provides a comprehensive journey through world models: from their roots in classical control theory to cutting-edge transformer-based architectures that can dream up entire virtual worlds. We’ll explore the mathematics, architectures, applications, and open challenges that define this exciting frontier of AI research.</p>
+
+<h2 id="what-are-world-models-and-why-do-they-matter">What Are World Models and Why Do They Matter?</h2>
+
+<h3 id="the-core-idea">The Core Idea</h3>
+
+<p>A <strong>world model</strong> is a learned representation of environment dynamics—a function that predicts how the state of the world evolves over time, potentially conditioned on actions taken by an agent. Formally, given a current state $s_t$ and action $a_t$, a world model predicts the next state $s_{t+1}$ and potentially the reward $r_t$:</p>
+
+\[s_{t+1}, r_t = f_{\text{world}}(s_t, a_t)\]
+
+<p>But world models are more than just predictors. They’re <strong>simulators</strong> that enable:</p>
+
+<ul>
+  <li><strong>Planning</strong>: Simulate multiple possible futures to find the best action sequence</li>
+  <li><strong>Sample efficiency</strong>: Learn from imagined experiences rather than costly real-world interactions</li>
+  <li><strong>Counterfactual reasoning</strong>: Explore “what if” scenarios without consequences</li>
+  <li><strong>Transfer learning</strong>: Build reusable knowledge about physics and dynamics</li>
+</ul>
+
+<h3 id="why-world-models-matter-now">Why World Models Matter Now</h3>
+
+<p>Several converging trends have made world models particularly relevant in 2026:</p>
+
+<ol>
+  <li>
+    <p><strong>Data efficiency imperative</strong>: In robotics and autonomous driving, real-world data collection is expensive and dangerous. World models enable training in simulation.</p>
+  </li>
+  <li>
+    <p><strong>Scaling successes</strong>: Just as scaling transformed language models, researchers are discovering that scaling world models on diverse video data produces emergent understanding of physics and causality.</p>
+  </li>
+  <li>
+    <p><strong>Embodied AI push</strong>: As AI moves from text to physical interaction (robots, AVs, drones), understanding dynamics becomes essential.</p>
+  </li>
+  <li>
+    <p><strong>Generative model advances</strong>: Breakthroughs in diffusion models and transformers have dramatically improved our ability to generate high-fidelity video predictions.</p>
+  </li>
+</ol>
+
+<p>According to multiple AI research outlooks for 2026, world models are positioned as “the next big leap beyond LLMs” with industry interest multiplying as companies realize their potential for everything from robotics to video games.</p>
+
+<h2 id="historical-context-from-control-theory-to-deep-learning">Historical Context: From Control Theory to Deep Learning</h2>
+
+<h3 id="classical-foundations-1960s-1990s">Classical Foundations (1960s-1990s)</h3>
+
+<p>The idea of modeling system dynamics has deep roots in control theory and optimal control. The foundation was laid by several key developments:</p>
+
+<p><strong>The Kalman Filter (1960)</strong>: Hungarian mathematician Rudolf Emil Kalman revolutionized state estimation by introducing the Kalman filter, which maintains a probabilistic belief about a system’s state by combining predictions from a dynamics model with noisy sensor measurements. The Kalman filter essentially maintains a “world model”—a set of states that evolve in time according to physical laws—while accounting for uncertainty and measurement noise.</p>
+
+<p>The algorithm operates in two phases:</p>
+<ol>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td><strong>Prediction</strong>: Use the dynamics model to predict the next state: $\hat{x}_{t</td>
+          <td>t-1} = F_t \hat{x}_{t-1</td>
+          <td>t-1} + B_t u_t$</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td><strong>Update</strong>: Correct the prediction using measurements: $\hat{x}_{t</td>
+          <td>t} = \hat{x}_{t</td>
+          <td>t-1} + K_t(z_t - H_t\hat{x}_{t</td>
+          <td>t-1})$</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ol>
+
+<p>where $K_t$ is the Kalman gain that optimally weights the prediction vs. measurement based on their respective uncertainties.</p>
+
+<p>The Kalman filter and its nonlinear extensions (Extended Kalman Filter, Unscented Kalman Filter) became fundamental tools in aerospace, navigation, and robotics. NASA used nonlinear Kalman filters in its space program as early as the 1960s, with Stanley Schmidt driving their adoption.</p>
+
+<p><strong>Model-Based Control</strong>: Together with the Linear-Quadratic Regulator (LQR), the Kalman filter solved the Linear-Quadratic-Gaussian (LQG) control problem—arguably one of the most fundamental problems in control theory. This established the paradigm of using models for optimal decision-making under uncertainty.</p>
+
+<h3 id="the-rise-of-machine-learning-1990s-2000s">The Rise of Machine Learning (1990s-2000s)</h3>
+
+<p>As machine learning matured, researchers began replacing hand-engineered dynamics models with learned ones:</p>
+
+<p><strong>System Identification</strong>: Neural networks were applied to learn dynamics models from data, particularly for nonlinear systems where analytic models were intractable.</p>
+
+<p><strong>Dyna Architecture (1990)</strong>: Richard Sutton introduced the Dyna architecture, which unified model-free and model-based reinforcement learning. Dyna alternates between:</p>
+<ol>
+  <li>Collecting real experience and updating the model</li>
+  <li>Generating synthetic “imagined” trajectories using the model</li>
+  <li>Updating the policy using both real and imagined data</li>
+</ol>
+
+<p>This established the key insight that models could amplify learning by generating synthetic experience for policy improvement.</p>
+
+<p><strong>Forward Models in Neuroscience</strong>: Research in computational neuroscience suggested that biological brains maintain internal models for motor control and prediction, inspiring similar approaches in AI.</p>
+
+<h3 id="the-deep-learning-revolution-2010s-present">The Deep Learning Revolution (2010s-Present)</h3>
+
+<p>The combination of deep learning, large-scale video datasets, and computational power enabled a new generation of world models:</p>
+
+<p><strong>Visual Prediction Models (2015-2018)</strong>: ConvLSTM and PredRNN architectures showed that recurrent networks could predict future video frames by learning spatiotemporal dynamics. These models combined convolutional networks for spatial feature extraction with LSTMs for temporal modeling.</p>
+
+<p><strong>World Models Paper (2018)</strong>: David Ha and Jürgen Schmidhuber’s influential “World Models” paper demonstrated that agents could learn to play games by training entirely inside learned world models—even on hallucinated “dream” data.</p>
+
+<p><strong>Transformer Era (2020s)</strong>: The success of transformers in language and vision inspired their application to world modeling, enabling long-range temporal dependencies and better scalability.</p>
+
+<p><strong>Foundation World Models (2024-2026)</strong>: Models like Google’s Genie, OpenAI’s Sora, and NVIDIA’s Cosmos represent a paradigm shift: large-scale world models trained on diverse internet video that can generate interactive, controllable simulations.</p>
+
+<h2 id="fundamentals-core-concepts-and-mathematics">Fundamentals: Core Concepts and Mathematics</h2>
+
+<h3 id="state-space-and-representations">State Space and Representations</h3>
+
+<p>At the heart of world modeling is the concept of <strong>state</strong>—a representation that captures all relevant information about the environment at a given time.</p>
+
+<p><strong>Observable vs. Latent States</strong>: In many real-world scenarios, we don’t have direct access to the true state. Instead, we receive high-dimensional observations (like images) from which we must infer the underlying state:</p>
+
+\[o_t = g(s_t) + \epsilon_t\]
+
+<p>where $o_t$ is the observation, $g$ is the observation function, and $\epsilon_t$ represents noise.</p>
+
+<p><strong>State Representation Learning</strong>: A key challenge in modern world modeling is learning compact state representations from raw sensory data. This typically involves:</p>
+<ul>
+  <li><strong>Encoding</strong>: Map high-dimensional observations to low-dimensional latent states: $z_t = \text{Encoder}(o_t)$</li>
+  <li><strong>Decoding</strong>: Reconstruct observations from latent states: $\hat{o}_t = \text{Decoder}(z_t)$</li>
+  <li><strong>Dynamics</strong>: Model transitions in latent space: $z_{t+1} = f(z_t, a_t)$</li>
+</ul>
+
+<p>Working in learned latent space is crucial for efficiency—predicting pixel-level futures directly is computationally expensive and focuses on irrelevant details.</p>
+
+<h3 id="deterministic-vs-stochastic-dynamics">Deterministic vs. Stochastic Dynamics</h3>
+
+<p>World models must capture the inherent stochasticity in real-world dynamics:</p>
+
+<p><strong>Deterministic Models</strong>: Predict a single next state:
+\(s_{t+1} = f(s_t, a_t)\)</p>
+
+<p>These are simple but can’t capture multi-modal outcomes (e.g., a ball rolling left or right after hitting a corner).</p>
+
+<p><strong>Stochastic Models</strong>: Predict a distribution over possible next states:
+\(p(s_{t+1} | s_t, a_t)\)</p>
+
+<p>Common approaches include:</p>
+<ul>
+  <li><strong>Gaussian distributions</strong>: $s_{t+1} \sim \mathcal{N}(\mu(s_t, a_t), \Sigma(s_t, a_t))$</li>
+  <li><strong>Mixture models</strong>: Model multi-modal distributions as weighted combinations</li>
+  <li><strong>Implicit models</strong>: Use generative models (VAEs, diffusion models) to sample from learned distributions</li>
+</ul>
+
+<p>The <strong>Recurrent State Space Model (RSSM)</strong> used in the Dreamer series cleverly decomposes state into deterministic and stochastic components:</p>
+<ul>
+  <li><strong>Deterministic state</strong> $h_t$: Summarizes history via a recurrent network</li>
+  <li><strong>Stochastic state</strong> $z_t$: Captures unpredictable variations</li>
+</ul>
+
+<p>This hybrid approach balances the ability to remember information across time steps (deterministic) with the flexibility to capture uncertainty (stochastic).</p>
+
+<h3 id="model-based-vs-model-free-learning">Model-Based vs. Model-Free Learning</h3>
+
+<p>The use of world models sits within the broader context of model-based reinforcement learning (MBRL):</p>
+
+<p><strong>Model-Free RL</strong>: Learn a policy or value function directly from experience, without an explicit world model. Examples: DQN, PPO, SAC.</p>
+<ul>
+  <li><strong>Pros</strong>: Simple, direct optimization; works well with sufficient data</li>
+  <li><strong>Cons</strong>: Sample inefficient; poor generalization</li>
+</ul>
+
+<p><strong>Model-Based RL</strong>: Learn a world model, then use it for planning or to generate synthetic data for policy learning. Examples: MuZero, DreamerV3, Dyna.</p>
+<ul>
+  <li><strong>Pros</strong>: Sample efficient; enables planning; better generalization</li>
+  <li><strong>Cons</strong>: Model errors can compound; more complex to implement</li>
+</ul>
+
+<p>The central challenge in MBRL is the <strong>model error problem</strong>: inaccuracies in the learned model can mislead policy learning, especially over long horizons. This has driven much recent research on robust world modeling.</p>
+
+<h3 id="partial-observability-and-belief-states">Partial Observability and Belief States</h3>
+
+<p>Real-world environments are often <strong>partially observable</strong>—the agent can’t see everything (e.g., objects behind walls, internal states of other agents). This is formalized as a Partially Observable Markov Decision Process (POMDP).</p>
+
+<p>In POMDPs, the agent must maintain a <strong>belief state</strong>—a distribution over possible true states given its observation history:
+\(b_t(s) = P(s_t = s | o_1, a_1, \ldots, o_t)\)</p>
+
+<p>Recurrent networks (LSTMs, GRUs) and attention mechanisms naturally maintain implicit belief states by aggregating information over time, making them well-suited for world modeling in partially observable settings.</p>
+
+<h2 id="the-original-world-models-ha--schmidhuber-2018">The Original World Models: Ha &amp; Schmidhuber (2018)</h2>
+
+<p>The 2018 “World Models” paper by David Ha and Jürgen Schmidhuber crystallized many ideas and demonstrated their power in a compelling way. Let’s examine this influential work in detail.</p>
+
+<h3 id="motivation-and-setup">Motivation and Setup</h3>
+
+<p>Ha and Schmidhuber tackled the CarRacing-v0 environment from OpenAI Gym—a task requiring visual perception and motor control. Their key insight: instead of learning a monolithic end-to-end policy, decompose the problem into perception, dynamics modeling, and control.</p>
+
+<h3 id="architecture-vision-memory-and-controller">Architecture: Vision, Memory, and Controller</h3>
+
+<p>The World Models architecture consists of three components:</p>
+
+<p><strong>1. Vision (V): Variational Autoencoder</strong></p>
+
+<p>The VAE compresses high-dimensional visual observations (96×96 RGB images) into a compact latent vector $z_t$ of dimension 32:</p>
+
+\[\begin{align}
+z_t &amp;\sim q_\phi(z | o_t) = \mathcal{N}(\mu_\phi(o_t), \Sigma_\phi(o_t)) \\
+\hat{o}_t &amp;= p_\theta(o | z_t)
+\end{align}\]
+
+<p>The VAE is trained with the standard ELBO objective:
+\(\mathcal{L}_{\text{VAE}} = \mathbb{E}_{q_\phi}[\log p_\theta(o | z)] - \beta \cdot D_{\text{KL}}(q_\phi(z|o) \| p(z))\)</p>
+
+<p>Using a VAE (rather than a standard autoencoder) provides:</p>
+<ul>
+  <li>A smooth latent space amenable to dynamics modeling</li>
+  <li>Uncertainty estimates through the learned distribution</li>
+  <li>Regularization against overfitting</li>
+</ul>
+
+<p><strong>2. Memory (M): MDN-RNN</strong></p>
+
+<p>The memory component predicts temporal dynamics in latent space using a Mixture Density Network combined with an LSTM:</p>
+
+\[p(z_{t+1} | z_t, a_t, h_t) = \sum_{k=1}^K \pi_k(z_t, a_t, h_t) \cdot \mathcal{N}(\mu_k(z_t, a_t, h_t), \Sigma_k(z_t, a_t, h_t))\]
+
+<p>where $h_t$ is the LSTM hidden state, and the mixture of Gaussians captures multi-modal dynamics.</p>
+
+<p>The MDN-RNN is trained to predict the next latent code and reward:
+\(\mathcal{L}_{\text{MDN-RNN}} = -\mathbb{E}[\log p(z_{t+1}, r_t | z_t, a_t, h_t)]\)</p>
+
+<p>The mixture density network is crucial because a single Gaussian would average over multiple possible futures, producing blurry predictions.</p>
+
+<p><strong>3. Controller (C): Linear Policy</strong></p>
+
+<p>Remarkably, the controller that selects actions is a simple linear function of the concatenated VAE latent code and RNN hidden state:</p>
+
+\[a_t = W_c [z_t, h_t] + b_c\]
+
+<p>This tiny controller (only 867 parameters!) is trained using evolutionary algorithms (CMA-ES) to maximize cumulative reward.</p>
+
+<h3 id="training-procedure">Training Procedure</h3>
+
+<p>Training proceeds in three independent stages:</p>
+
+<ol>
+  <li><strong>Train VAE</strong>: Collect random rollouts, train VAE to reconstruct observations</li>
+  <li><strong>Train MDN-RNN</strong>: Using VAE-encoded latent codes, train RNN to predict next latent and reward</li>
+  <li><strong>Train Controller</strong>: Use evolutionary algorithms to optimize controller parameters, evaluating fitness in the real environment</li>
+</ol>
+
+<h3 id="learning-inside-dreams">Learning Inside Dreams</h3>
+
+<p>The most striking result: agents can be trained entirely inside hallucinated “dreams” generated by the world model:</p>
+
+<ol>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>The MDN-RNN generates synthetic rollouts: $z_{t+1}, r_t \sim p(z_{t+1}, r_t</td>
+          <td>z_t, a_t, h_t)$</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>The controller is optimized using only these synthetic experiences</li>
+  <li>The resulting policy transfers to the real environment!</li>
+</ol>
+
+<p>This demonstrates that the world model has captured sufficient environment structure for meaningful policy learning, despite never exactly matching reality.</p>
+
+<h3 id="impact-and-limitations">Impact and Limitations</h3>
+
+<p>The World Models paper had enormous influence, demonstrating:</p>
+<ul>
+  <li>The power of learning in latent space</li>
+  <li>That simple controllers can solve complex tasks when given good representations</li>
+  <li>The feasibility of training in simulated environments</li>
+</ul>
+
+<p>However, limitations included:</p>
+<ul>
+  <li>Three-stage training is cumbersome and suboptimal</li>
+  <li>No joint training or gradient flow between components</li>
+  <li>Limited to relatively simple environments</li>
+  <li>Model errors accumulate over long horizons</li>
+</ul>
+
+<p>These limitations motivated subsequent work, particularly the Dreamer series.</p>
+
+<h2 id="modern-architectures-from-transformers-to-diffusion-models">Modern Architectures: From Transformers to Diffusion Models</h2>
+
+<p>The field has evolved rapidly since 2018, with several architectural paradigms emerging for world modeling.</p>
+
+<h3 id="transformer-based-world-models">Transformer-Based World Models</h3>
+
+<p>Transformers’ ability to model long-range dependencies and scale effectively has made them a natural choice for world modeling.</p>
+
+<p><strong>Autoregressive Transformers</strong>: Models like GPT predict the next token in a sequence. Applied to world modeling, this becomes predicting the next frame or latent state token:</p>
+
+\[p(s_{1:T} | a_{1:T}) = \prod_{t=1}^T p(s_t | s_{&lt;t}, a_{\leq t})\]
+
+<p><strong>Key advantages</strong>:</p>
+<ul>
+  <li>Flexible context length via attention</li>
+  <li>Can incorporate multimodal inputs (images, actions, text)</li>
+  <li>Leverage pre-trained vision-language models</li>
+</ul>
+
+<p><strong>Examples</strong>:</p>
+<ul>
+  <li><strong>DrivingGPT</strong>: Uses autoregressive transformers for multimodal driving world models, learning joint world modeling and planning through standard next-token prediction</li>
+  <li><strong>Genie</strong>: Google’s foundation world model uses transformers to generate interactive environments from prompts</li>
+</ul>
+
+<p><strong>Tokenization Challenge</strong>: To apply transformers effectively, continuous states/images must be tokenized. Common approaches:</p>
+<ul>
+  <li><strong>VQ-VAE</strong>: Discretize latent space into learned codebook</li>
+  <li><strong>Patch embeddings</strong>: Treat image patches as tokens</li>
+  <li><strong>Action tokens</strong>: Interleave image and action tokens in the sequence</li>
+</ul>
+
+<h3 id="diffusion-models-for-world-modeling">Diffusion Models for World Modeling</h3>
+
+<p>Diffusion models have achieved state-of-the-art results in image and video generation, making them natural candidates for world modeling.</p>
+
+<p><strong>Diffusion Process</strong>: Instead of directly predicting the next state, diffusion models learn to iteratively denoise from pure noise to the target state:</p>
+
+\[\begin{align}
+\text{Forward (noising)}: &amp;&amp; q(x_t | x_{t-1}) &amp;= \mathcal{N}(x_t; \sqrt{1-\beta_t} x_{t-1}, \beta_t I) \\
+\text{Reverse (denoising)}: &amp;&amp; p_\theta(x_{t-1} | x_t) &amp;= \mathcal{N}(x_{t-1}; \mu_\theta(x_t, t), \Sigma_\theta(x_t, t))
+\end{align}\]
+
+<p><strong>Conditional Generation</strong>: For world modeling, we condition the denoising process on past states and actions:
+\(\epsilon_\theta(x_t, t, s_{&lt;t}, a_{\leq t})\)</p>
+
+<p><strong>Diffusion World Models</strong>: Research has shown that diffusion models can effectively model environment dynamics, particularly for:</p>
+<ul>
+  <li>High-fidelity visual prediction</li>
+  <li>Capturing multi-modal futures</li>
+  <li>Handling complex, contact-rich dynamics</li>
+</ul>
+
+<p><strong>Classifier-Free Guidance</strong>: To incorporate action conditioning, diffusion world models use classifier-free guidance:
+\(\tilde{\epsilon}_\theta = \epsilon_\theta(x_t, \emptyset) + w \cdot (\epsilon_\theta(x_t, a) - \epsilon_\theta(x_t, \emptyset))\)</p>
+
+<p>where $w$ controls the strength of action conditioning.</p>
+
+<p><strong>Diffusion Transformers (DiT)</strong>: Recent work combines the strengths of both architectures:</p>
+<ul>
+  <li>Use transformer backbone for the denoising network</li>
+  <li>Apply to video tokens for scalable world modeling</li>
+  <li><strong>UrbanDiT</strong>: A foundation model for urban spatiotemporal prediction that successfully scales up diffusion transformers for open-world learning</li>
+</ul>
+
+<p><strong>Trade-offs</strong>: Diffusion models offer high sample quality but are slower at inference due to iterative denoising. This has driven research into faster sampling methods for real-time applications.</p>
+
+<h3 id="video-prediction-models">Video Prediction Models</h3>
+
+<p>A parallel line of research has focused specifically on predicting future video frames—essentially world models in pixel space.</p>
+
+<p><strong>ConvLSTM (2015)</strong>: Pioneered spatiotemporal modeling by extending LSTMs with convolutional operations:
+\(\begin{align}
+i_t &amp;= \sigma(W_{xi} * X_t + W_{hi} * H_{t-1} + b_i) \\
+f_t &amp;= \sigma(W_{xf} * X_t + W_{hf} * H_{t-1} + b_f) \\
+C_t &amp;= f_t \odot C_{t-1} + i_t \odot \tanh(W_{xc} * X_t + W_{hc} * H_{t-1} + b_c) \\
+o_t &amp;= \sigma(W_{xo} * X_t + W_{ho} * H_{t-1} + b_o) \\
+H_t &amp;= o_t \odot \tanh(C_t)
+\end{align}\)</p>
+
+<p>where $*$ denotes convolution and $\odot$ element-wise multiplication.</p>
+
+<p><strong>PredRNN Series (2017-2019)</strong>: Introduced spatiotemporal memory cells that propagate information both horizontally (across time) and vertically (across layers), addressing the “deep-in-time” dilemma:</p>
+
+<ul>
+  <li><strong>Spatiotemporal LSTM</strong>: Dual memory structure for better spatiotemporal modeling</li>
+  <li><strong>PredRNN++</strong>: Added gradient highway units and Causal LSTM to address vanishing gradients</li>
+  <li><strong>Memory Decoupling</strong>: Separate short-term and long-term dependencies</li>
+</ul>
+
+<p>These models capture temporal dynamics through recurrent connections but suffer from vanishing gradients and difficulty modeling long-range dependencies—limitations addressed by transformers.</p>
+
+<h3 id="spatial-world-models-3d-and-4d-representations">Spatial World Models: 3D and 4D Representations</h3>
+
+<p>For embodied AI applications like autonomous driving and robotics, modeling in 3D space is crucial. This has led to <strong>occupancy-centric world models</strong>.</p>
+
+<p><strong>3D Occupancy Representation</strong>: Instead of predicting 2D images, predict 3D voxel grids where each voxel indicates:</p>
+<ul>
+  <li>Whether it’s occupied</li>
+  <li>Semantic class (car, pedestrian, road, etc.)</li>
+  <li>Potentially velocity and other attributes</li>
+</ul>
+
+<p><strong>4D Occupancy Forecasting</strong>: Predict how 3D occupancy evolves over time, enabling:</p>
+<ul>
+  <li>Geometry-aware perception</li>
+  <li>Long-term scene forecasting</li>
+  <li>Collision avoidance planning</li>
+</ul>
+
+<p><strong>Recent Developments</strong>:</p>
+
+<p><strong>OccWorld (2024)</strong>: Formulated 4D occupancy forecasting as learning to predict future 3D occupancy from past frames, using occupancy as a richer scene representation than bounding boxes.</p>
+
+<p><strong>GaussianWorld (2026)</strong>: Uses explicit 3D Gaussians (from 3D Gaussian Splatting) for scene representation instead of implicit voxels, enabling:</p>
+<ul>
+  <li>Continuous, differentiable scene representation</li>
+  <li>Explicit object movement modeling</li>
+  <li>Streaming prediction for autonomous driving</li>
+</ul>
+
+<p><strong>SparseWorld (2025)</strong>: Employs sparse and dynamic queries for flexible, adaptive, and efficient 4D occupancy modeling, addressing computational costs of dense voxel representations.</p>
+
+<p><strong>Key Advantages of Spatial World Models</strong>:</p>
+<ol>
+  <li><strong>Geometry consistency</strong>: Maintain 3D structure across viewpoints</li>
+  <li><strong>Multi-view support</strong>: Predict multiple camera views consistently</li>
+  <li><strong>Action-conditioned prediction</strong>: Simulate effects of ego-vehicle maneuvers</li>
+  <li><strong>Occlusion handling</strong>: Model hidden spaces and object permanence</li>
+</ol>
+
+<h2 id="large-scale-foundation-world-models-2024-2026">Large-Scale Foundation World Models (2024-2026)</h2>
+
+<p>Perhaps the most exciting recent development is the emergence of <strong>foundation world models</strong>—large-scale models trained on diverse internet video that exhibit emergent world understanding.</p>
+
+<h3 id="google-genie-series">Google Genie Series</h3>
+
+<p><strong>Genie 1 (February 2024)</strong>: A groundbreaking “foundation world model” that can generate playable, action-controllable virtual worlds from single images, photographs, or sketches—without requiring action labels during training.</p>
+
+<p><strong>Architecture</strong>:</p>
+<ul>
+  <li>Spatiotemporal transformer for video generation</li>
+  <li>Latent action model that discovers action space from video</li>
+  <li>VQ-VAE for video tokenization</li>
+</ul>
+
+<p><strong>Training</strong>: 200K hours of internet gameplay videos, learning to infer latent actions from frame transitions.</p>
+
+<p><strong>Genie 2 (December 2024)</strong>: Scaled up significantly with improved consistency and interactivity.</p>
+
+<p><strong>Genie 3 (August 2025)</strong>: The first <strong>real-time interactive world model</strong>, generating navigable 3D environments at 24 FPS in 720p resolution. Unlike previous systems requiring explicit 3D representations, Genie 3 learns physics purely from observation—a major milestone showing emergent understanding of 3D space and dynamics from 2D video.</p>
+
+<h3 id="openai-sora">OpenAI Sora</h3>
+
+<p><strong>Sora (February 2024)</strong>: Demonstrated that scaling video generation models with diffusion transformers produces remarkable physical understanding. Sora can generate up to one minute of high-fidelity video with complex camera motion, multiple characters, and physics-based interactions.</p>
+
+<p><strong>Key Insight</strong>: OpenAI’s research suggests that “video generation models are emerging as a promising path toward building general purpose simulators of the physical world.”</p>
+
+<p><strong>Architecture</strong>:</p>
+<ul>
+  <li>Diffusion transformer trained on video patches</li>
+  <li>Variable duration, resolution, and aspect ratio support</li>
+  <li>Text and image conditioning</li>
+</ul>
+
+<p><strong>Emergent Capabilities</strong>: Sora exhibits surprising understanding of:</p>
+<ul>
+  <li>Object permanence (objects exist when occluded)</li>
+  <li>3D consistency across viewpoint changes</li>
+  <li>Physical interactions and collisions</li>
+  <li>Cause and effect relationships</li>
+</ul>
+
+<p><strong>Limitations</strong>: Sora sometimes makes physics errors (e.g., glass not shattering when hit), highlighting that current world models still imperfectly capture physical laws.</p>
+
+<p><strong>Sora 2 (2025)</strong>: Improved physics modeling, added audio generation, and multi-scene control with consumer access.</p>
+
+<h3 id="meta-v-jepa">Meta V-JEPA</h3>
+
+<p><strong>Joint-Embedding Predictive Architecture (JEPA)</strong>: Yann LeCun’s proposed architecture for learning world models by predicting representations rather than raw pixels.</p>
+
+<p><strong>Key Idea</strong>: Instead of reconstructing detailed pixel values (which wastes capacity on irrelevant details), predict abstract representations of future states:</p>
+
+\[\text{Encoder}(x_{t+1}) \approx \text{Predictor}(\text{Encoder}(x_t), a_t)\]
+
+<p><strong>V-JEPA (2024)</strong>: Learns by predicting masked regions of video in representation space, excelling at understanding detailed object interactions without generating pixels.</p>
+
+<p><strong>V-JEPA 2 (January 2026)</strong>: Achieved state-of-the-art results after training on 1M+ hours of internet video, with 65-80% success on robotics pick-and-place tasks using only 62 hours of robot training data—demonstrating powerful transfer from video to physical interaction.</p>
+
+<p><strong>Advantages of JEPA</strong>:</p>
+<ul>
+  <li>Energy efficient (no pixel generation)</li>
+  <li>Focuses on semantic understanding</li>
+  <li>Natural uncertainty representation in latent space</li>
+  <li>Avoids common failure modes of generative models (e.g., hallucination)</li>
+</ul>
+
+<h3 id="nvidia-cosmos">NVIDIA Cosmos</h3>
+
+<p><strong>Cosmos 1.0 (2025)</strong>: NVIDIA’s open-weight world foundation model platform focused on physical AI, offering models and benchmarks for:</p>
+<ul>
+  <li>Autonomous driving</li>
+  <li>Robot manipulation</li>
+  <li>3D consistency</li>
+  <li>Physical alignment</li>
+</ul>
+
+<p><strong>Key Features</strong>:</p>
+<ul>
+  <li>Generates realistic physics-based training data</li>
+  <li>Supports multiple sensor modalities (camera, lidar, radar)</li>
+  <li>Efficient video tokenization and generation</li>
+  <li>Integration with simulation environments</li>
+</ul>
+
+<p><strong>Purpose</strong>: Enable cost-effective training and testing of autonomous systems by generating vast amounts of realistic synthetic data.</p>
+
+<h3 id="world-labs">World Labs</h3>
+
+<p>Fei-Fei Li’s World Labs (2024-2025) recently launched <strong>Marble</strong>, a system to create 3D worlds from text, images, video, or coarse 3D layouts—focusing on spatial intelligence and scene understanding.</p>
+
+<h3 id="the-scaling-hypothesis">The Scaling Hypothesis</h3>
+
+<p>These foundation models support a key hypothesis: <strong>world models exhibit favorable scaling properties</strong>. Just as LLMs improved dramatically with scale, world models show emergent capabilities when trained on diverse video data with sufficient compute:</p>
+
+<ul>
+  <li>Better physics understanding</li>
+  <li>Improved long-term consistency</li>
+  <li>Generalization to novel scenarios</li>
+  <li>Action-conditioned generation</li>
+</ul>
+
+<p>However, scaling world models faces unique challenges compared to language:</p>
+<ul>
+  <li>Video data is higher bandwidth than text</li>
+  <li>Physics understanding requires 3D reasoning</li>
+  <li>Evaluation is more complex than language metrics</li>
+</ul>
+
+<h2 id="the-dreamer-series-state-of-the-art-mbrl">The Dreamer Series: State-of-the-Art MBRL</h2>
+
+<p>While foundation world models focus on large-scale video generation, the Dreamer series represents the cutting edge of world models for reinforcement learning.</p>
+
+<h3 id="dreamerv1-2020">DreamerV1 (2020)</h3>
+
+<p>Introduced the <strong>Recurrent State Space Model (RSSM)</strong> that learns both deterministic and stochastic latent dynamics:</p>
+
+<p><strong>Representation model</strong> (encode observations):
+\(h_t = f(h_{t-1}, z_{t-1}, a_{t-1})\)
+\(z_t \sim q(z_t | h_t, o_t)\)</p>
+
+<p><strong>Transition model</strong> (predict dynamics):
+\(\hat{z}_t \sim p(z_t | h_t)\)</p>
+
+<p><strong>Observation model</strong> (decode to observations):
+\(\hat{o}_t \sim p(o_t | h_t, z_t)\)</p>
+
+<p><strong>Reward model</strong>:
+\(\hat{r}_t \sim p(r_t | h_t, z_t)\)</p>
+
+<p><strong>Key innovation</strong>: Train actor and critic networks purely on imagined rollouts in latent space, using gradients from the learned world model.</p>
+
+<h3 id="dreamerv2-2021">DreamerV2 (2021)</h3>
+
+<p>Improved upon V1 with:</p>
+<ul>
+  <li><strong>Categorical latent states</strong>: Replace Gaussian latents with discrete distributions</li>
+  <li><strong>KL balancing</strong>: Better trade-off between reconstruction and dynamics prediction</li>
+  <li><strong>Simplified architecture</strong>: Single world model for all tasks</li>
+</ul>
+
+<p>Achieved human-level performance on Atari from pixels using only 2 hours of gameplay—remarkable sample efficiency.</p>
+
+<h3 id="dreamerv3-2023">DreamerV3 (2023)</h3>
+
+<p>The current state-of-the-art, DreamerV3 is a <strong>general-purpose algorithm</strong> that masters diverse control tasks from a single configuration:</p>
+<ul>
+  <li>Atari games</li>
+  <li>DMC continuous control</li>
+  <li>Minecraft (first agent to collect diamonds from scratch without human data!)</li>
+  <li>Robotic manipulation</li>
+</ul>
+
+<p><strong>Key innovations</strong>:</p>
+<ol>
+  <li><strong>Symlog predictions</strong>: Robust value and reward prediction via symmetric logarithm transformations</li>
+  <li><strong>Improved normalization</strong>: EMA-based normalization for stability across scales</li>
+  <li><strong>Automatic entropy tuning</strong>: Adaptive exploration without manual tuning</li>
+</ol>
+
+<p><strong>Results</strong>: Outperforms specialized algorithms on their respective domains while using a single hyperparameter configuration—a major milestone toward general-purpose MBRL.</p>
+
+<h3 id="dreamer4-2025">Dreamer4 (2025)</h3>
+
+<p><strong>Scalable World Model Training</strong>: Dreamer4 extends the framework to much larger scales:</p>
+<ul>
+  <li>Fast, accurate world model with efficient transformer architecture</li>
+  <li><strong>Real-time interactive inference</strong> on a single GPU</li>
+  <li>Trained on offline data without environment interaction</li>
+</ul>
+
+<p><strong>Minecraft Achievement</strong>: First agent to obtain diamonds in Minecraft purely from offline data, outperforming OpenAI’s VPT by 100x in data efficiency.</p>
+
+<p>The Dreamer series demonstrates that world models can serve as powerful foundations for reinforcement learning across diverse domains.</p>
+
+<h2 id="applications-where-world-models-make-impact">Applications: Where World Models Make Impact</h2>
+
+<h3 id="autonomous-driving">Autonomous Driving</h3>
+
+<p>World models have become central to autonomous vehicle development in 2025-2026:</p>
+
+<p><strong>Waymo World Model (February 2026)</strong>: Built on Google DeepMind’s Genie 3, Waymo’s world model generates hyper-realistic driving simulations with camera and lidar data for training on rare, dangerous scenarios:</p>
+<ul>
+  <li>Wrong-way drivers</li>
+  <li>Objects falling from trucks</li>
+  <li>Flooded roads</li>
+  <li>Unusual pedestrian behavior</li>
+</ul>
+
+<p><strong>Key Benefits</strong>:</p>
+<ul>
+  <li><strong>Safety</strong>: Test dangerous scenarios without risk</li>
+  <li><strong>Coverage</strong>: Generate edge cases rarely seen in real data</li>
+  <li><strong>Efficiency</strong>: Cheaper than real-world data collection</li>
+  <li><strong>Iteration speed</strong>: Rapidly test system changes</li>
+</ul>
+
+<p><strong>Technical Approach</strong>: Action-conditioned video generation where the AV’s planned trajectory influences the predicted future scene, enabling counterfactual analysis (“What if I had braked harder?”).</p>
+
+<p><strong>Industry Adoption</strong>: As of 2026, world models are recognized as a key enabling technology for autonomous driving, with Gartner listing physical AI as a top strategic technology trend.</p>
+
+<h3 id="robotics-and-manipulation">Robotics and Manipulation</h3>
+
+<p>World models enable robots to learn complex manipulation skills with far fewer real-world interactions:</p>
+
+<p><strong>Simulation-to-Reality Transfer</strong>: Train policies in simulated worlds, then transfer to real robots:</p>
+<ul>
+  <li>Physics-informed world models learn from simulation</li>
+  <li>Domain randomization improves robustness</li>
+  <li>Fine-tuning with limited real data bridges the sim-to-real gap</li>
+</ul>
+
+<p><strong>V-JEPA for Robotics</strong>: Meta’s V-JEPA 2 achieved 65-80% success on pick-and-place tasks with unfamiliar objects after training on only 62 hours of robot data—the world model pre-trained on internet video provided rich priors about object interactions.</p>
+
+<p><strong>Contact-Rich Manipulation</strong>: World models must capture:</p>
+<ul>
+  <li>Contact dynamics and friction</li>
+  <li>Deformable object behavior</li>
+  <li>Multi-object interactions</li>
+  <li>Occlusions and partial observability</li>
+</ul>
+
+<p><strong>Open Challenges</strong>: Robots require extremely high precision; small model errors can cause failure. Current research focuses on:</p>
+<ul>
+  <li>Uncertainty quantification</li>
+  <li>Physics-informed architectures</li>
+  <li>Multi-modal world models (vision + force/torque sensing)</li>
+</ul>
+
+<h3 id="game-playing-and-interactive-environments">Game Playing and Interactive Environments</h3>
+
+<p>World models have long been applied to game playing, with recent dramatic advances:</p>
+
+<p><strong>MuZero (2020)</strong>: DeepMind’s MuZero learns to play games (Go, chess, shogi, Atari) at superhuman level without knowing the rules, learning a world model that predicts policy, value, and rewards without reconstructing observations.</p>
+
+<p><strong>Minecraft World Models</strong>:</p>
+<ul>
+  <li><strong>MineWorld (2025)</strong>: Real-time, open-source interactive world model driven by visual-action autoregressive transformers</li>
+  <li><strong>Solaris (2026)</strong>: Multiplayer world model with 12.64M frames, enabling consistent multi-view simulation and multiplayer interactions</li>
+  <li><strong>Oasis</strong>: Technical demo of real-time generative Minecraft gameplay</li>
+</ul>
+
+<p><strong>Procedural Content Generation</strong>: World models enable:</p>
+<ul>
+  <li>Generating novel game levels</li>
+  <li>Creating interactive NPCs with realistic behavior</li>
+  <li>Dynamic difficulty adjustment</li>
+</ul>
+
+<h3 id="scientific-simulation">Scientific Simulation</h3>
+
+<p>World models are increasingly applied to scientific domains:</p>
+
+<p><strong>Weather and Climate</strong>: World models for global weather prediction, learning atmospheric dynamics from historical data.</p>
+
+<p><strong>Molecular Dynamics</strong>: Predicting molecular conformations and interactions for drug discovery.</p>
+
+<p><strong>Urban Planning</strong>: UrbanDiT and similar models predict traffic flow, pedestrian movement, and urban dynamics for city planning.</p>
+
+<p><strong>Physics Simulation</strong>: Learning approximations to expensive physics simulations (fluid dynamics, structural mechanics) for faster engineering iteration.</p>
+
+<h2 id="technical-deep-dive-training-and-optimization">Technical Deep Dive: Training and Optimization</h2>
+
+<h3 id="training-objectives">Training Objectives</h3>
+
+<p>World models are typically trained to maximize likelihood of observed transitions:</p>
+
+\[\max_\theta \mathbb{E}_{(s_t, a_t, s_{t+1}) \sim \mathcal{D}} [\log p_\theta(s_{t+1} | s_t, a_t)]\]
+
+<p><strong>Reconstruction Loss</strong>: For image-based observations:
+\(\mathcal{L}_{\text{recon}} = \mathbb{E}[\|o_{t+1} - \hat{o}_{t+1}\|^2]\)</p>
+
+<p><strong>KL Regularization</strong>: For VAE-based models, regularize latent distributions:
+\(\mathcal{L}_{\text{KL}} = D_{\text{KL}}(q(z | o) \| p(z))\)</p>
+
+<p><strong>Reward Prediction</strong>: For RL applications:
+\(\mathcal{L}_{\text{reward}} = \mathbb{E}[\|r_t - \hat{r}_t\|^2]\)</p>
+
+<p><strong>Total Objective</strong>: Weighted combination:
+\(\mathcal{L}_{\text{world}} = \mathcal{L}_{\text{recon}} + \beta \mathcal{L}_{\text{KL}} + \gamma \mathcal{L}_{\text{reward}}\)</p>
+
+<h3 id="handling-multi-step-prediction">Handling Multi-Step Prediction</h3>
+
+<p>A key challenge: how to train models that can predict multiple steps into the future?</p>
+
+<p><strong>Teacher Forcing</strong>: Use ground-truth previous states during training:
+\(\hat{s}_{t+1} = f_\theta(s_t, a_t) \quad \text{(using true } s_t \text{)}\)</p>
+
+<p>This is efficient but creates train-test mismatch—at test time, the model uses its own predictions.</p>
+
+<p><strong>Scheduled Sampling</strong>: Gradually mix ground-truth and predicted states during training to reduce mismatch.</p>
+
+<p><strong>Free Running</strong>: Train on full rollouts using predicted states (no teacher forcing). This is more robust but harder to optimize due to compounding errors.</p>
+
+<p><strong>Latent Overshooting</strong> (used in Dreamer): Predict multiple steps ahead in latent space and supervise all predictions:
+\(\mathcal{L}_{\text{overshoot}} = \sum_{k=1}^K \|\text{Encode}(o_{t+k}) - \text{Predict}^k(z_t, a_{t:t+k})\|^2\)</p>
+
+<p>This regularizes the model to maintain accuracy over multiple steps.</p>
+
+<h3 id="dealing-with-compounding-errors">Dealing with Compounding Errors</h3>
+
+<p><strong>The Fundamental Challenge</strong>: Small one-step prediction errors compound exponentially over long horizons:</p>
+
+<p>If single-step error is $\epsilon$, then $H$-step error can grow as $\epsilon^H$ in worst case.</p>
+
+<p><strong>Mitigation Strategies</strong>:</p>
+
+<ol>
+  <li><strong>Latent Space Modeling</strong>: Learn smooth latent representations where errors compound more slowly</li>
+  <li><strong>Hierarchical Modeling</strong>: Predict at multiple temporal scales (high-level plans + low-level details)</li>
+  <li><strong>Error Correction</strong>: Use model ensembles or uncertainty-aware planning to correct trajectory</li>
+  <li><strong>Hybrid Approaches</strong>: Combine world model with model-free components</li>
+  <li><strong>Periodic Re-planning</strong>: Re-plan frequently using fresh observations (Model Predictive Control)</li>
+</ol>
+
+<p><strong>Recent Advances</strong>: Research on “learning to combat compounding error” focuses on:</p>
+<ul>
+  <li>Training objectives that explicitly penalize accumulated error</li>
+  <li>Architectures that maintain long-term consistency</li>
+  <li>Uncertainty estimation to detect when the model becomes unreliable</li>
+</ul>
+
+<h3 id="multi-modal-dynamics-and-mixture-models">Multi-Modal Dynamics and Mixture Models</h3>
+
+<p>Real-world dynamics are often multi-modal—multiple possible futures exist:</p>
+
+<p><strong>Problem</strong>: Single Gaussian predictions average over modes, producing blurry, unrealistic predictions.</p>
+
+<p><strong>Solution</strong>: Mixture Density Networks model the distribution as a mixture:
+\(p(s_{t+1} | s_t, a_t) = \sum_{k=1}^K \pi_k \mathcal{N}(\mu_k, \Sigma_k)\)</p>
+
+<p>where $\pi_k$, $\mu_k$, $\Sigma_k$ are predicted by the network.</p>
+
+<p><strong>Alternatives</strong>:</p>
+<ul>
+  <li><strong>Implicit generative models</strong>: VAEs, GANs, diffusion models naturally sample from multi-modal distributions</li>
+  <li><strong>Categorical latents</strong>: Dreamer uses categorical distributions in latent space to capture discrete variations</li>
+</ul>
+
+<h3 id="sample-efficiency-and-data-requirements">Sample Efficiency and Data Requirements</h3>
+
+<p><strong>MBRL’s Promise</strong>: World models should enable learning from less data by:</p>
+<ol>
+  <li>Generating synthetic experience for policy learning</li>
+  <li>Transferring knowledge from pre-trained models</li>
+  <li>Enabling offline learning from static datasets</li>
+</ol>
+
+<p><strong>Reality Check</strong>: Current world models require:</p>
+<ul>
+  <li><strong>Foundation models</strong>: Millions to billions of video frames for pre-training</li>
+  <li><strong>Task-specific models</strong>: Thousands to millions of environment steps</li>
+  <li><strong>Fine-tuning</strong>: Often hundreds to thousands of additional samples</li>
+</ul>
+
+<p><strong>Improving Sample Efficiency</strong>:</p>
+<ul>
+  <li>Pre-train on diverse data, fine-tune on task</li>
+  <li>Model-based data augmentation</li>
+  <li>Causal reasoning to focus on relevant variables</li>
+  <li>Hierarchical and compositional world models</li>
+</ul>
+
+<h2 id="implementation-guide">Implementation Guide</h2>
+
+<h3 id="popular-frameworks-and-libraries">Popular Frameworks and Libraries</h3>
+
+<p><strong>Dreamer Implementations</strong>:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># DreamerV3 (official implementation)
+# https://github.com/danijar/dreamerv3
+</span><span class="kn">import</span> <span class="n">dreamerv3</span>
+
+<span class="n">config</span> <span class="o">=</span> <span class="n">dreamerv3</span><span class="p">.</span><span class="n">Config</span><span class="p">.</span><span class="nf">from_yaml</span><span class="p">(</span><span class="sh">'</span><span class="s">configs/dreamerv3.yaml</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">agent</span> <span class="o">=</span> <span class="n">dreamerv3</span><span class="p">.</span><span class="nc">Agent</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+<span class="n">agent</span><span class="p">.</span><span class="nf">train</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><strong>World Models (PyTorch)</strong>:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Classical World Models implementation
+# https://github.com/ctallec/world-models
+</span><span class="kn">from</span> <span class="n">worldmodels</span> <span class="kn">import</span> <span class="n">VAE</span><span class="p">,</span> <span class="n">MDNRNN</span><span class="p">,</span> <span class="n">Controller</span>
+
+<span class="c1"># Train VAE
+</span><span class="n">vae</span> <span class="o">=</span> <span class="nc">VAE</span><span class="p">(</span><span class="n">latent_dim</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span>
+<span class="n">vae</span><span class="p">.</span><span class="nf">train</span><span class="p">(</span><span class="n">observations</span><span class="p">)</span>
+
+<span class="c1"># Train MDN-RNN
+</span><span class="n">mdrnn</span> <span class="o">=</span> <span class="nc">MDNRNN</span><span class="p">(</span><span class="n">latent_dim</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">action_dim</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="o">=</span><span class="mi">256</span><span class="p">)</span>
+<span class="n">mdrnn</span><span class="p">.</span><span class="nf">train</span><span class="p">(</span><span class="n">latents</span><span class="p">,</span> <span class="n">actions</span><span class="p">,</span> <span class="n">next_latents</span><span class="p">,</span> <span class="n">rewards</span><span class="p">)</span>
+
+<span class="c1"># Train controller with CMA-ES
+</span><span class="n">controller</span> <span class="o">=</span> <span class="nc">Controller</span><span class="p">(</span><span class="n">obs_dim</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span> <span class="n">action_dim</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">controller</span><span class="p">.</span><span class="nf">train</span><span class="p">(</span><span class="n">vae</span><span class="p">,</span> <span class="n">mdrnn</span><span class="p">,</span> <span class="n">env</span><span class="p">,</span> <span class="n">generations</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><strong>Diffusion Models for Dynamics</strong>:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Using diffusers library for video prediction
+</span><span class="kn">from</span> <span class="n">diffusers</span> <span class="kn">import</span> <span class="n">DDPMScheduler</span><span class="p">,</span> <span class="n">UNet3DConditionModel</span>
+
+<span class="c1"># Define 3D UNet for video
+</span><span class="n">model</span> <span class="o">=</span> <span class="nc">UNet3DConditionModel</span><span class="p">(</span>
+    <span class="n">sample_size</span><span class="o">=</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">),</span>
+    <span class="n">in_channels</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">out_channels</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">layers_per_block</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">block_out_channels</span><span class="o">=</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="mi">512</span><span class="p">),</span>
+    <span class="n">down_block_types</span><span class="o">=</span><span class="p">(</span><span class="sh">"</span><span class="s">DownBlock3D</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">DownBlock3D</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">DownBlock3D</span><span class="sh">"</span><span class="p">),</span>
+    <span class="n">up_block_types</span><span class="o">=</span><span class="p">(</span><span class="sh">"</span><span class="s">UpBlock3D</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">UpBlock3D</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">UpBlock3D</span><span class="sh">"</span><span class="p">),</span>
+<span class="p">)</span>
+
+<span class="c1"># Diffusion scheduler
+</span><span class="n">noise_scheduler</span> <span class="o">=</span> <span class="nc">DDPMScheduler</span><span class="p">(</span><span class="n">num_train_timesteps</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+
+<span class="c1"># Training loop
+</span><span class="k">for</span> <span class="n">batch</span> <span class="ow">in</span> <span class="n">dataloader</span><span class="p">:</span>
+    <span class="c1"># Sample timestep and noise
+</span>    <span class="n">timesteps</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nf">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">noise_scheduler</span><span class="p">.</span><span class="n">config</span><span class="p">.</span><span class="n">num_train_timesteps</span><span class="p">,</span> <span class="p">(</span><span class="n">batch</span><span class="p">.</span><span class="nf">size</span><span class="p">(</span><span class="mi">0</span><span class="p">),))</span>
+    <span class="n">noise</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nf">randn_like</span><span class="p">(</span><span class="n">batch</span><span class="p">)</span>
+    <span class="n">noisy_batch</span> <span class="o">=</span> <span class="n">noise_scheduler</span><span class="p">.</span><span class="nf">add_noise</span><span class="p">(</span><span class="n">batch</span><span class="p">,</span> <span class="n">noise</span><span class="p">,</span> <span class="n">timesteps</span><span class="p">)</span>
+
+    <span class="c1"># Predict noise
+</span>    <span class="n">pred_noise</span> <span class="o">=</span> <span class="nf">model</span><span class="p">(</span><span class="n">noisy_batch</span><span class="p">,</span> <span class="n">timesteps</span><span class="p">,</span> <span class="n">conditioning</span><span class="p">).</span><span class="n">sample</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="nf">mse_loss</span><span class="p">(</span><span class="n">pred_noise</span><span class="p">,</span> <span class="n">noise</span><span class="p">)</span>
+    <span class="n">loss</span><span class="p">.</span><span class="nf">backward</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h3 id="building-a-simple-world-model">Building a Simple World Model</h3>
+
+<p>Let’s implement a basic world model for a simple environment:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">torch</span>
+<span class="kn">import</span> <span class="n">torch.nn</span> <span class="k">as</span> <span class="n">nn</span>
+<span class="kn">import</span> <span class="n">torch.nn.functional</span> <span class="k">as</span> <span class="n">F</span>
+
+<span class="k">class</span> <span class="nc">SimpleWorldModel</span><span class="p">(</span><span class="n">nn</span><span class="p">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">obs_dim</span><span class="p">,</span> <span class="n">action_dim</span><span class="p">,</span> <span class="n">latent_dim</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="o">=</span><span class="mi">512</span><span class="p">):</span>
+        <span class="nf">super</span><span class="p">().</span><span class="nf">__init__</span><span class="p">()</span>
+
+        <span class="c1"># Encoder: observations -&gt; latent state
+</span>        <span class="n">self</span><span class="p">.</span><span class="n">encoder</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="nc">Sequential</span><span class="p">(</span>
+            <span class="n">nn</span><span class="p">.</span><span class="nc">Linear</span><span class="p">(</span><span class="n">obs_dim</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">),</span>
+            <span class="n">nn</span><span class="p">.</span><span class="nc">ReLU</span><span class="p">(),</span>
+            <span class="n">nn</span><span class="p">.</span><span class="nc">Linear</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">),</span>
+            <span class="n">nn</span><span class="p">.</span><span class="nc">ReLU</span><span class="p">(),</span>
+            <span class="n">nn</span><span class="p">.</span><span class="nc">Linear</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">latent_dim</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># mean and logvar
+</span>        <span class="p">)</span>
+
+        <span class="c1"># Dynamics: (latent_state, action) -&gt; next_latent_state
+</span>        <span class="n">self</span><span class="p">.</span><span class="n">dynamics_rnn</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="nc">GRUCell</span><span class="p">(</span><span class="n">latent_dim</span> <span class="o">+</span> <span class="n">action_dim</span><span class="p">,</span> <span class="n">latent_dim</span><span class="p">)</span>
+
+        <span class="c1"># Decoder: latent state -&gt; observations
+</span>        <span class="n">self</span><span class="p">.</span><span class="n">decoder</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="nc">Sequential</span><span class="p">(</span>
+            <span class="n">nn</span><span class="p">.</span><span class="nc">Linear</span><span class="p">(</span><span class="n">latent_dim</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">),</span>
+            <span class="n">nn</span><span class="p">.</span><span class="nc">ReLU</span><span class="p">(),</span>
+            <span class="n">nn</span><span class="p">.</span><span class="nc">Linear</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">),</span>
+            <span class="n">nn</span><span class="p">.</span><span class="nc">ReLU</span><span class="p">(),</span>
+            <span class="n">nn</span><span class="p">.</span><span class="nc">Linear</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">obs_dim</span><span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Reward predictor
+</span>        <span class="n">self</span><span class="p">.</span><span class="n">reward_head</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="nc">Sequential</span><span class="p">(</span>
+            <span class="n">nn</span><span class="p">.</span><span class="nc">Linear</span><span class="p">(</span><span class="n">latent_dim</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">),</span>
+            <span class="n">nn</span><span class="p">.</span><span class="nc">ReLU</span><span class="p">(),</span>
+            <span class="n">nn</span><span class="p">.</span><span class="nc">Linear</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">encode</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">obs</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">Encode observation to latent distribution.</span><span class="sh">"""</span>
+        <span class="n">h</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">encoder</span><span class="p">(</span><span class="n">obs</span><span class="p">)</span>
+        <span class="n">mean</span><span class="p">,</span> <span class="n">logvar</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nf">chunk</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">mean</span><span class="p">,</span> <span class="n">logvar</span>
+
+    <span class="k">def</span> <span class="nf">reparameterize</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">mean</span><span class="p">,</span> <span class="n">logvar</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">Sample from latent distribution using reparameterization trick.</span><span class="sh">"""</span>
+        <span class="n">std</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nf">exp</span><span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">logvar</span><span class="p">)</span>
+        <span class="n">eps</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nf">randn_like</span><span class="p">(</span><span class="n">std</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">mean</span> <span class="o">+</span> <span class="n">eps</span> <span class="o">*</span> <span class="n">std</span>
+
+    <span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">latent</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">Decode latent state to observation.</span><span class="sh">"""</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="nf">decoder</span><span class="p">(</span><span class="n">latent</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">predict_reward</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">latent</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">Predict reward from latent state.</span><span class="sh">"""</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="nf">reward_head</span><span class="p">(</span><span class="n">latent</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">obs</span><span class="p">,</span> <span class="n">actions</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">
+        Full forward pass: encode, predict dynamics, decode.
+
+        Args:
+            obs: [batch_size, seq_len, obs_dim]
+            actions: [batch_size, seq_len, action_dim]
+
+        Returns:
+            predictions: dict with reconstructed obs, predicted rewards, etc.
+        </span><span class="sh">"""</span>
+        <span class="n">batch_size</span><span class="p">,</span> <span class="n">seq_len</span> <span class="o">=</span> <span class="n">obs</span><span class="p">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+
+        <span class="c1"># Encode initial observation
+</span>        <span class="n">mean</span><span class="p">,</span> <span class="n">logvar</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">encode</span><span class="p">(</span><span class="n">obs</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span>
+        <span class="n">latent</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">reparameterize</span><span class="p">(</span><span class="n">mean</span><span class="p">,</span> <span class="n">logvar</span><span class="p">)</span>
+        <span class="n">hidden</span> <span class="o">=</span> <span class="n">latent</span>  <span class="c1"># Initial RNN hidden state
+</span>
+        <span class="n">predictions</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="sh">'</span><span class="s">obs</span><span class="sh">'</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="sh">'</span><span class="s">rewards</span><span class="sh">'</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="sh">'</span><span class="s">latents</span><span class="sh">'</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="sh">'</span><span class="s">kl_loss</span><span class="sh">'</span><span class="p">:</span> <span class="p">[]</span>
+        <span class="p">}</span>
+
+        <span class="c1"># Rollout through sequence
+</span>        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">seq_len</span><span class="p">):</span>
+            <span class="c1"># Predict reward
+</span>            <span class="n">reward</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">predict_reward</span><span class="p">(</span><span class="n">latent</span><span class="p">)</span>
+            <span class="n">predictions</span><span class="p">[</span><span class="sh">'</span><span class="s">rewards</span><span class="sh">'</span><span class="p">].</span><span class="nf">append</span><span class="p">(</span><span class="n">reward</span><span class="p">)</span>
+
+            <span class="c1"># Decode to observation
+</span>            <span class="n">obs_pred</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">decode</span><span class="p">(</span><span class="n">latent</span><span class="p">)</span>
+            <span class="n">predictions</span><span class="p">[</span><span class="sh">'</span><span class="s">obs</span><span class="sh">'</span><span class="p">].</span><span class="nf">append</span><span class="p">(</span><span class="n">obs_pred</span><span class="p">)</span>
+            <span class="n">predictions</span><span class="p">[</span><span class="sh">'</span><span class="s">latents</span><span class="sh">'</span><span class="p">].</span><span class="nf">append</span><span class="p">(</span><span class="n">latent</span><span class="p">)</span>
+
+            <span class="c1"># KL divergence (regularization)
+</span>            <span class="n">kl</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">torch</span><span class="p">.</span><span class="nf">sum</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">logvar</span> <span class="o">-</span> <span class="n">mean</span><span class="p">.</span><span class="nf">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="n">logvar</span><span class="p">.</span><span class="nf">exp</span><span class="p">(),</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">predictions</span><span class="p">[</span><span class="sh">'</span><span class="s">kl_loss</span><span class="sh">'</span><span class="p">].</span><span class="nf">append</span><span class="p">(</span><span class="n">kl</span><span class="p">)</span>
+
+            <span class="c1"># Update latent state with action via dynamics model
+</span>            <span class="k">if</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="n">seq_len</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">action</span> <span class="o">=</span> <span class="n">actions</span><span class="p">[:,</span> <span class="n">t</span><span class="p">]</span>
+                <span class="n">dynamics_input</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nf">cat</span><span class="p">([</span><span class="n">latent</span><span class="p">,</span> <span class="n">action</span><span class="p">],</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+                <span class="n">hidden</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">dynamics_rnn</span><span class="p">(</span><span class="n">dynamics_input</span><span class="p">,</span> <span class="n">hidden</span><span class="p">)</span>
+
+                <span class="c1"># Encode next observation for teacher forcing
+</span>                <span class="n">mean</span><span class="p">,</span> <span class="n">logvar</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">encode</span><span class="p">(</span><span class="n">obs</span><span class="p">[:,</span> <span class="n">t</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+                <span class="n">latent</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">reparameterize</span><span class="p">(</span><span class="n">mean</span><span class="p">,</span> <span class="n">logvar</span><span class="p">)</span>
+
+        <span class="c1"># Stack predictions
+</span>        <span class="n">predictions</span><span class="p">[</span><span class="sh">'</span><span class="s">obs</span><span class="sh">'</span><span class="p">]</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nf">stack</span><span class="p">(</span><span class="n">predictions</span><span class="p">[</span><span class="sh">'</span><span class="s">obs</span><span class="sh">'</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">predictions</span><span class="p">[</span><span class="sh">'</span><span class="s">rewards</span><span class="sh">'</span><span class="p">]</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nf">stack</span><span class="p">(</span><span class="n">predictions</span><span class="p">[</span><span class="sh">'</span><span class="s">rewards</span><span class="sh">'</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">predictions</span><span class="p">[</span><span class="sh">'</span><span class="s">latents</span><span class="sh">'</span><span class="p">]</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nf">stack</span><span class="p">(</span><span class="n">predictions</span><span class="p">[</span><span class="sh">'</span><span class="s">latents</span><span class="sh">'</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">predictions</span><span class="p">[</span><span class="sh">'</span><span class="s">kl_loss</span><span class="sh">'</span><span class="p">]</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nf">stack</span><span class="p">(</span><span class="n">predictions</span><span class="p">[</span><span class="sh">'</span><span class="s">kl_loss</span><span class="sh">'</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">predictions</span>
+
+    <span class="k">def</span> <span class="nf">imagine</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">initial_obs</span><span class="p">,</span> <span class="n">actions</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">
+        Generate imagined rollout without teacher forcing.
+
+        Args:
+            initial_obs: [batch_size, obs_dim]
+            actions: [batch_size, horizon, action_dim]
+
+        Returns:
+            imagined trajectory
+        </span><span class="sh">"""</span>
+        <span class="n">batch_size</span><span class="p">,</span> <span class="n">horizon</span> <span class="o">=</span> <span class="n">actions</span><span class="p">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+
+        <span class="c1"># Encode initial state
+</span>        <span class="n">mean</span><span class="p">,</span> <span class="n">logvar</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">encode</span><span class="p">(</span><span class="n">initial_obs</span><span class="p">)</span>
+        <span class="n">latent</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">reparameterize</span><span class="p">(</span><span class="n">mean</span><span class="p">,</span> <span class="n">logvar</span><span class="p">)</span>
+        <span class="n">hidden</span> <span class="o">=</span> <span class="n">latent</span>
+
+        <span class="n">imagined</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="sh">'</span><span class="s">obs</span><span class="sh">'</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="sh">'</span><span class="s">rewards</span><span class="sh">'</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="sh">'</span><span class="s">latents</span><span class="sh">'</span><span class="p">:</span> <span class="p">[]</span>
+        <span class="p">}</span>
+
+        <span class="c1"># Free running imagination
+</span>        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">horizon</span><span class="p">):</span>
+            <span class="c1"># Predict reward
+</span>            <span class="n">reward</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">predict_reward</span><span class="p">(</span><span class="n">latent</span><span class="p">)</span>
+            <span class="n">imagined</span><span class="p">[</span><span class="sh">'</span><span class="s">rewards</span><span class="sh">'</span><span class="p">].</span><span class="nf">append</span><span class="p">(</span><span class="n">reward</span><span class="p">)</span>
+
+            <span class="c1"># Decode observation
+</span>            <span class="n">obs_pred</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">decode</span><span class="p">(</span><span class="n">latent</span><span class="p">)</span>
+            <span class="n">imagined</span><span class="p">[</span><span class="sh">'</span><span class="s">obs</span><span class="sh">'</span><span class="p">].</span><span class="nf">append</span><span class="p">(</span><span class="n">obs_pred</span><span class="p">)</span>
+            <span class="n">imagined</span><span class="p">[</span><span class="sh">'</span><span class="s">latents</span><span class="sh">'</span><span class="p">].</span><span class="nf">append</span><span class="p">(</span><span class="n">latent</span><span class="p">)</span>
+
+            <span class="c1"># Dynamics step
+</span>            <span class="n">action</span> <span class="o">=</span> <span class="n">actions</span><span class="p">[:,</span> <span class="n">t</span><span class="p">]</span>
+            <span class="n">dynamics_input</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nf">cat</span><span class="p">([</span><span class="n">latent</span><span class="p">,</span> <span class="n">action</span><span class="p">],</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">hidden</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">dynamics_rnn</span><span class="p">(</span><span class="n">dynamics_input</span><span class="p">,</span> <span class="n">hidden</span><span class="p">)</span>
+            <span class="n">latent</span> <span class="o">=</span> <span class="n">hidden</span>  <span class="c1"># No encoding in imagination
+</span>
+        <span class="n">imagined</span><span class="p">[</span><span class="sh">'</span><span class="s">obs</span><span class="sh">'</span><span class="p">]</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nf">stack</span><span class="p">(</span><span class="n">imagined</span><span class="p">[</span><span class="sh">'</span><span class="s">obs</span><span class="sh">'</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">imagined</span><span class="p">[</span><span class="sh">'</span><span class="s">rewards</span><span class="sh">'</span><span class="p">]</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nf">stack</span><span class="p">(</span><span class="n">imagined</span><span class="p">[</span><span class="sh">'</span><span class="s">rewards</span><span class="sh">'</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">imagined</span><span class="p">[</span><span class="sh">'</span><span class="s">latents</span><span class="sh">'</span><span class="p">]</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nf">stack</span><span class="p">(</span><span class="n">imagined</span><span class="p">[</span><span class="sh">'</span><span class="s">latents</span><span class="sh">'</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">imagined</span>
+
+<span class="k">def</span> <span class="nf">train_world_model</span><span class="p">(</span><span class="n">world_model</span><span class="p">,</span> <span class="n">dataloader</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">beta_kl</span><span class="o">=</span><span class="mf">0.1</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">Train the world model on collected data.</span><span class="sh">"""</span>
+    <span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">optim</span><span class="p">.</span><span class="nc">Adam</span><span class="p">(</span><span class="n">world_model</span><span class="p">.</span><span class="nf">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">3e-4</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
+        <span class="n">total_loss</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">batch</span> <span class="ow">in</span> <span class="n">dataloader</span><span class="p">:</span>
+            <span class="n">obs</span><span class="p">,</span> <span class="n">actions</span><span class="p">,</span> <span class="n">rewards</span> <span class="o">=</span> <span class="n">batch</span>
+
+            <span class="c1"># Forward pass
+</span>            <span class="n">predictions</span> <span class="o">=</span> <span class="nf">world_model</span><span class="p">(</span><span class="n">obs</span><span class="p">,</span> <span class="n">actions</span><span class="p">)</span>
+
+            <span class="c1"># Losses
+</span>            <span class="n">obs_loss</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="nf">mse_loss</span><span class="p">(</span><span class="n">predictions</span><span class="p">[</span><span class="sh">'</span><span class="s">obs</span><span class="sh">'</span><span class="p">],</span> <span class="n">obs</span><span class="p">)</span>
+            <span class="n">reward_loss</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="nf">mse_loss</span><span class="p">(</span><span class="n">predictions</span><span class="p">[</span><span class="sh">'</span><span class="s">rewards</span><span class="sh">'</span><span class="p">],</span> <span class="n">rewards</span><span class="p">.</span><span class="nf">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+            <span class="n">kl_loss</span> <span class="o">=</span> <span class="n">predictions</span><span class="p">[</span><span class="sh">'</span><span class="s">kl_loss</span><span class="sh">'</span><span class="p">].</span><span class="nf">mean</span><span class="p">()</span>
+
+            <span class="n">loss</span> <span class="o">=</span> <span class="n">obs_loss</span> <span class="o">+</span> <span class="n">reward_loss</span> <span class="o">+</span> <span class="n">beta_kl</span> <span class="o">*</span> <span class="n">kl_loss</span>
+
+            <span class="c1"># Backward pass
+</span>            <span class="n">optimizer</span><span class="p">.</span><span class="nf">zero_grad</span><span class="p">()</span>
+            <span class="n">loss</span><span class="p">.</span><span class="nf">backward</span><span class="p">()</span>
+            <span class="n">torch</span><span class="p">.</span><span class="n">nn</span><span class="p">.</span><span class="n">utils</span><span class="p">.</span><span class="nf">clip_grad_norm_</span><span class="p">(</span><span class="n">world_model</span><span class="p">.</span><span class="nf">parameters</span><span class="p">(),</span> <span class="mf">1.0</span><span class="p">)</span>
+            <span class="n">optimizer</span><span class="p">.</span><span class="nf">step</span><span class="p">()</span>
+
+            <span class="n">total_loss</span> <span class="o">+=</span> <span class="n">loss</span><span class="p">.</span><span class="nf">item</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">epoch</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Epoch </span><span class="si">{</span><span class="n">epoch</span><span class="si">}</span><span class="s">: Loss = </span><span class="si">{</span><span class="n">total_loss</span> <span class="o">/</span> <span class="nf">len</span><span class="p">(</span><span class="n">dataloader</span><span class="p">)</span><span class="si">:</span><span class="p">.</span><span class="mi">4</span><span class="n">f</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># Example usage
+</span><span class="n">obs_dim</span> <span class="o">=</span> <span class="mi">20</span>  <span class="c1"># e.g., state vector for CartPole
+</span><span class="n">action_dim</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># discrete action encoded as continuous
+</span><span class="n">world_model</span> <span class="o">=</span> <span class="nc">SimpleWorldModel</span><span class="p">(</span><span class="n">obs_dim</span><span class="p">,</span> <span class="n">action_dim</span><span class="p">)</span>
+
+<span class="c1"># Training would proceed with collected environment data
+# train_world_model(world_model, dataloader)
+</span></code></pre></div></div>
+
+<h3 id="training-tips">Training Tips</h3>
+
+<p><strong>1. Start Simple</strong>: Begin with simple environments (CartPole, Pendulum) before tackling complex visual domains.</p>
+
+<p><strong>2. Balance Reconstruction and Dynamics</strong>: Too much emphasis on reconstruction can hurt dynamics prediction. The $\beta$ parameter in VAE loss is crucial.</p>
+
+<p><strong>3. Monitor Multi-Step Accuracy</strong>: Track prediction error at horizons 1, 5, 10+ steps to catch compounding error issues.</p>
+
+<p><strong>4. Use Latent Overshooting</strong>: Regularize long-term predictions even during training.</p>
+
+<p><strong>5. Curriculum Learning</strong>: Gradually increase prediction horizon during training.</p>
+
+<p><strong>6. Ensemble Models</strong>: Train multiple world models and use disagreement for uncertainty estimation.</p>
+
+<p><strong>7. Data Diversity</strong>: Ensure training data covers the full state-action space; world models struggle to extrapolate.</p>
+
+<h2 id="challenges-and-open-problems">Challenges and Open Problems</h2>
+
+<p>Despite recent progress, many fundamental challenges remain:</p>
+
+<h3 id="compounding-errors">Compounding Errors</h3>
+
+<p><strong>The Problem</strong>: Small prediction errors accumulate exponentially over long horizons. After $H$ steps, even a 1% per-step error can make predictions useless.</p>
+
+<p><strong>Current Approaches</strong>:</p>
+<ul>
+  <li>Periodic re-planning with fresh observations (MPC)</li>
+  <li>Hierarchical models that avoid fine-grained long-term prediction</li>
+  <li>Uncertainty-aware planning that detects unreliable regions</li>
+  <li>Hybrid model-free + model-based methods</li>
+</ul>
+
+<p><strong>Open Questions</strong>: Can we develop world models with provable bounds on error accumulation? How should we trade off model fidelity vs. planning horizon?</p>
+
+<h3 id="sample-efficiency">Sample Efficiency</h3>
+
+<p><strong>The Paradox</strong>: Model-based RL should be sample efficient, but current world models often require massive amounts of data to train:</p>
+<ul>
+  <li>Foundation models: billions of video frames</li>
+  <li>Task-specific models: millions of environment steps</li>
+</ul>
+
+<p><strong>Factors</strong>:</p>
+<ul>
+  <li>High-dimensional observations (images, video)</li>
+  <li>Stochastic, complex dynamics</li>
+  <li>Distribution shift between training and deployment</li>
+</ul>
+
+<p><strong>Promising Directions</strong>:</p>
+<ul>
+  <li>Transfer learning from pre-trained models</li>
+  <li>Physics-informed architectures that build in inductive biases</li>
+  <li>Active learning and curiosity-driven exploration</li>
+  <li>Compositional world models that generalize to novel combinations</li>
+</ul>
+
+<h3 id="physical-consistency">Physical Consistency</h3>
+
+<p><strong>Challenge</strong>: Current world models frequently violate physical laws:</p>
+<ul>
+  <li>Objects passing through each other</li>
+  <li>Energy not conserved</li>
+  <li>Impossible trajectories</li>
+  <li>Inconsistent shadows and reflections</li>
+</ul>
+
+<p><strong>Why It’s Hard</strong>: Learning physics from pixels without explicit supervision is extremely challenging. Models may achieve visual plausibility without true physical understanding.</p>
+
+<p><strong>Approaches</strong>:</p>
+<ul>
+  <li>Physics-informed loss functions (energy conservation, momentum, etc.)</li>
+  <li>Hybrid simulation + learning (use physics engines with learned parameters)</li>
+  <li>Geometric and 3D-aware architectures</li>
+  <li>Contrastive learning on physically possible vs. impossible scenarios</li>
+</ul>
+
+<p><strong>Recent Work</strong>: Physics-Informed BEV World Model (PIWM) and similar efforts show promise but are still far from perfect physical consistency.</p>
+
+<h3 id="long-horizon-prediction">Long-Horizon Prediction</h3>
+
+<p><strong>Fundamental Tension</strong>: The longer the prediction horizon, the more uncertainty and the harder the problem.</p>
+
+<p><strong>Strategies</strong>:</p>
+<ul>
+  <li><strong>Hierarchical modeling</strong>: Predict high-level “waypoints” and fill in details</li>
+  <li><strong>Stochastic prediction</strong>: Represent uncertainty rather than single trajectories</li>
+  <li><strong>Goal-conditioned models</strong>: Condition on desired end-state rather than predicting full trajectory</li>
+  <li><strong>Diffusion for long-horizon</strong>: Iteratively refine entire trajectories</li>
+</ul>
+
+<p><strong>Open Problem</strong>: How to maintain both accuracy and diversity in long-horizon predictions?</p>
+
+<h3 id="generalization">Generalization</h3>
+
+<p><strong>Out-of-Distribution Challenge</strong>: World models often fail on states, actions, or scenarios not well-represented in training data.</p>
+
+<p><strong>Types of Generalization Needed</strong>:</p>
+<ul>
+  <li>Novel objects and appearances</li>
+  <li>Different physical parameters (friction, mass, etc.)</li>
+  <li>New tasks and goals</li>
+  <li>Compositional generalization (new combinations of known elements)</li>
+</ul>
+
+<p><strong>Approaches</strong>:</p>
+<ul>
+  <li>Domain randomization during training</li>
+  <li>Causal models that separate stable from variable factors</li>
+  <li>Meta-learning across environments</li>
+  <li>Foundation models trained on diverse data</li>
+</ul>
+
+<h3 id="evaluation">Evaluation</h3>
+
+<p><strong>The Measurement Problem</strong>: How do we properly evaluate world models?</p>
+
+<p><strong>Metrics</strong>:</p>
+<ul>
+  <li>Pixel-level prediction error (MSE, SSIM, FVD)</li>
+  <li>Perceptual similarity (LPIPS, CLIP similarity)</li>
+  <li>Task performance (reward in RL)</li>
+  <li>Physical consistency scores</li>
+  <li>Human evaluation</li>
+</ul>
+
+<p><strong>Issues</strong>: Pixel metrics don’t capture physical understanding; task metrics don’t isolate model quality; human evaluation doesn’t scale.</p>
+
+<p><strong>Recent Benchmarks</strong>:</p>
+<ul>
+  <li><strong>WorldBench</strong>: Tests concept-specific physical reasoning</li>
+  <li><strong>WorldModelBench</strong>: Judges world modeling across domains</li>
+  <li><strong>WoW-World-Eval</strong>: Comprehensive embodied AI evaluation</li>
+</ul>
+
+<p><strong>Open Question</strong>: What are the right metrics for “understanding” vs. “generation quality”?</p>
+
+<h3 id="computational-cost">Computational Cost</h3>
+
+<p><strong>Reality Check</strong>: Training and inference with world models is expensive:</p>
+<ul>
+  <li>High-dimensional state spaces (video)</li>
+  <li>Long sequences</li>
+  <li>Iterative generation (diffusion models)</li>
+  <li>Multi-step planning</li>
+</ul>
+
+<p><strong>Efficiency Techniques</strong>:</p>
+<ul>
+  <li>Latent space modeling (lower dimensional than pixels)</li>
+  <li>Sparse representations (occupancy grids, object-centric)</li>
+  <li>Efficient architectures (linear attention, state-space models)</li>
+  <li>Distillation (train large model, deploy small model)</li>
+</ul>
+
+<p><strong>Trade-offs</strong>: Accuracy vs. speed is always present; the right choice depends on application.</p>
+
+<h2 id="future-directions">Future Directions</h2>
+
+<p>Where is the field headed? Several exciting directions are emerging:</p>
+
+<h3 id="unified-multimodal-world-models">Unified Multimodal World Models</h3>
+
+<p>Future world models will likely integrate multiple modalities:</p>
+<ul>
+  <li><strong>Vision + audio</strong>: Predict sound consistent with visual events</li>
+  <li><strong>Vision + language</strong>: Use language to guide and explain predictions</li>
+  <li><strong>Vision + force/torque</strong>: For robotic manipulation</li>
+  <li><strong>Multi-sensor fusion</strong>: Camera, lidar, radar, GPS, IMU</li>
+</ul>
+
+<p><strong>Unified-IO 2</strong> and similar models show the potential of joint training across modalities.</p>
+
+<h3 id="compositional-and-object-centric-models">Compositional and Object-Centric Models</h3>
+
+<p>Instead of monolithic pixel prediction, decompose scenes into objects and relationships:</p>
+<ul>
+  <li>Predict object-level dynamics and interactions</li>
+  <li>Enable combinatorial generalization</li>
+  <li>Provide interpretable, editable representations</li>
+</ul>
+
+<p><strong>Latent Particle World Model (LPWM)</strong> is a recent example of this direction.</p>
+
+<h3 id="causal-world-models">Causal World Models</h3>
+
+<p>Explicitly model causal relationships:</p>
+<ul>
+  <li>Identify stable causal structure vs. confounding factors</li>
+  <li>Enable interventional reasoning (“What if I had acted differently?”)</li>
+  <li>Improve robustness and generalization</li>
+</ul>
+
+<p><strong>Challenges</strong>: Causal discovery from observational data is fundamentally hard; need inductive biases and possibly interventional data.</p>
+
+<h3 id="real-time-interactive-models">Real-Time Interactive Models</h3>
+
+<p>Genie 3 demonstrated real-time world model inference, but most models are still too slow for interactive use:</p>
+
+<p><strong>Requirements</strong>:</p>
+<ul>
+  <li>Sub-100ms latency for responsive interaction</li>
+  <li>Continuous streaming (not batch processing)</li>
+  <li>Efficient state updates (no full recomputation)</li>
+</ul>
+
+<p><strong>Applications</strong>: Video games, VR/AR, teleoperation, interactive training.</p>
+
+<h3 id="world-models-for-reasoning">World Models for Reasoning</h3>
+
+<p>Can world models serve as “mental simulators” for abstract reasoning?</p>
+<ul>
+  <li>Simulate social interactions and theory of mind</li>
+  <li>Mathematical and logical reasoning via simulation</li>
+  <li>Creative problem-solving through mental search</li>
+</ul>
+
+<p>This connects to broader questions about system 2 reasoning and cognitive architectures.</p>
+
+<h3 id="open-source-and-democratization">Open-Source and Democratization</h3>
+
+<p>As with LLMs, open-source world models are crucial for research progress:</p>
+<ul>
+  <li>Open weights and architectures</li>
+  <li>Standard benchmarks and evaluation</li>
+  <li>Efficient implementations for smaller labs</li>
+  <li>Ethical guidelines and safety considerations</li>
+</ul>
+
+<p>NVIDIA’s Cosmos and various academic efforts are moving in this direction.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>World models represent a fundamental capability for intelligent systems: the ability to predict, simulate, and reason about how the world evolves over time. From their roots in Kalman filtering and control theory to modern foundation models trained on billions of video frames, world models have come remarkably far.</p>
+
+<p>The past few years have witnessed explosive progress:</p>
+<ul>
+  <li>Transformers and diffusion models bringing unprecedented generation quality</li>
+  <li>Foundation world models exhibiting emergent physical understanding</li>
+  <li>Real-world deployments in autonomous driving and robotics</li>
+  <li>Sample-efficient algorithms like DreamerV3 mastering diverse tasks</li>
+</ul>
+
+<p>Yet fundamental challenges remain: compounding errors, physical consistency, computational cost, and robust evaluation. Solving these will require interdisciplinary insights from machine learning, control theory, physics, cognitive science, and more.</p>
+
+<p>As we look toward the future, world models are poised to play a central role in the next generation of AI systems—ones that don’t just process information, but truly understand and interact with the physical world. Whether in self-driving cars navigating city streets, robots manipulating objects in warehouses, or game agents exploring virtual worlds, the ability to predict and plan using learned world models will be essential.</p>
+
+<p>The journey from Ha and Schmidhuber’s pioneering work to today’s real-time interactive foundation models has been remarkable. But in many ways, we’re still in the early stages. As compute grows, algorithms improve, and data becomes more abundant, world models will become increasingly powerful, general, and indispensable—learning not just to dream, but to truly understand reality.</p>
+
+<hr />
+
+<h2 id="further-reading-and-resources">Further Reading and Resources</h2>
+
+<h3 id="seminal-papers">Seminal Papers</h3>
+
+<ul>
+  <li>Ha, D., &amp; Schmidhuber, J. (2018). “World Models” (<a href="https://arxiv.org/abs/1803.10122">arXiv:1803.10122</a>)</li>
+  <li>Hafner, D., et al. (2023). “Mastering Diverse Domains through World Models” (<a href="https://arxiv.org/abs/2301.04104">arXiv:2301.04104</a>)</li>
+  <li>Kalman, R. E. (1960). “A New Approach to Linear Filtering and Prediction Problems”</li>
+</ul>
+
+<h3 id="recent-work-2024-2026">Recent Work (2024-2026)</h3>
+
+<ul>
+  <li>Genie 1 &amp; 2: Google DeepMind’s foundation world models</li>
+  <li>OpenAI Sora: Video generation models as world simulators (<a href="https://openai.com/index/video-generation-models-as-world-simulators/">OpenAI Blog</a>)</li>
+  <li>V-JEPA: Meta’s joint embedding predictive architecture (<a href="https://ai.meta.com/blog/v-jepa-yann-lecun-ai-model-video-joint-embedding-predictive-architecture/">Meta AI Blog</a>)</li>
+  <li>Waymo World Model: Real-world deployment for AV training (<a href="https://waymo.com/blog/2026/02/the-waymo-world-model-a-new-frontier-for-autonomous-driving-simulation/">Waymo Blog</a>)</li>
+  <li>DreamerV4: Scalable world model agents (<a href="https://arxiv.org/abs/2509.24527">arXiv:2509.24527</a>)</li>
+</ul>
+
+<h3 id="surveys-and-repositories">Surveys and Repositories</h3>
+
+<ul>
+  <li><a href="https://github.com/tsinghua-fib-lab/World-Model">World Models GitHub Survey</a>: Comprehensive survey published in ACM CSUR 2025</li>
+  <li><a href="https://github.com/LMD0311/Awesome-World-Model">Awesome World Models for Autonomous Driving</a></li>
+  <li><a href="https://github.com/ziqihuangg/Awesome-From-Video-Generation-to-World-Model">From Video Generation to World Models</a></li>
+  <li><a href="https://worldbench.github.io/survey">3D and 4D World Modeling Survey</a></li>
+</ul>
+
+<h3 id="implementations">Implementations</h3>
+
+<ul>
+  <li><a href="https://github.com/danijar/dreamerv3">DreamerV3 Official Implementation</a></li>
+  <li><a href="https://github.com/ctallec/world-models">World Models PyTorch</a></li>
+  <li><a href="https://github.com/facebookresearch/DiT">Diffusion Transformers (DiT)</a></li>
+</ul>
+
+<h3 id="benchmarks">Benchmarks</h3>
+
+<ul>
+  <li><a href="https://arxiv.org/abs/2601.21282">WorldBench</a>: Diagnostic evaluation of world models</li>
+  <li><a href="https://worldmodelbench.github.io/">WorldModelBench</a>: Judging video generation as world models</li>
+  <li><a href="https://evalcrafter.github.io/">EvalCrafter</a>: Benchmarking video generation models</li>
+</ul>
+
+<hr />
+
+<h2 id="sources">Sources</h2>
+
+<p>This post synthesized information from numerous sources. Key references include:</p>
+
+<ul>
+  <li><a href="https://www.scientificamerican.com/article/world-models-could-unlock-the-next-revolution-in-artificial-intelligence/">Scientific American: World models could unlock the next revolution in AI</a></li>
+  <li><a href="https://www.euronews.com/next/2026/01/01/from-ai-slop-to-world-models-bubbles-and-small-models-what-to-expect-from-ai-in-2026">Euronews: What to expect from AI in 2026 - World Models</a></li>
+  <li><a href="https://arxiv.org/abs/1803.10122">Original World Models Paper</a> by Ha &amp; Schmidhuber</li>
+  <li><a href="https://openai.com/index/video-generation-models-as-world-simulators/">OpenAI: Video generation models as world simulators</a></li>
+  <li><a href="https://ai.meta.com/blog/v-jepa-yann-lecun-ai-model-video-joint-embedding-predictive-architecture/">Meta AI: V-JEPA - The next step toward advanced machine intelligence</a></li>
+  <li><a href="https://waymo.com/blog/2026/02/the-waymo-world-model-a-new-frontier-for-autonomous-driving-simulation/">Waymo: The Waymo World Model</a></li>
+  <li><a href="https://arxiv.org/abs/2301.04104">DreamerV3 Paper</a></li>
+  <li><a href="https://medium.com/@graison/world-models-reading-list-the-papers-you-actually-need-in-2025-882f02d758a9">Medium: World Models Reading List 2025</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Kalman_filter">Kalman Filter Wikipedia</a></li>
+  <li><a href="https://www.geeksforgeeks.org/artificial-intelligence/model-based-reinforcement-learning-mbrl-in-ai/">Model-Based RL Resources</a></li>
+  <li><a href="https://worldbench.github.io/survey">3D and 4D World Modeling Survey</a></li>
+  <li><a href="https://physical-world-modeling.github.io/">Building Physically Plausible World Models</a></li>
+  <li><a href="https://arxiv.org/abs/2411.12164">Diffusion Transformers for Open-World Learning</a></li>
+  <li>Multiple arXiv preprints and conference papers from NeurIPS, ICLR, CVPR, ICML 2024-2026</li>
+</ul>]]></content><author><name></name></author><category term="machine-learning" /><category term="deep-learning" /><category term="reinforcement-learning" /><category term="computer-vision" /><category term="world-models" /><summary type="html"><![CDATA[A comprehensive exploration of world models from classical control theory to modern foundation models that learn to dream and predict the future]]></summary></entry><entry><title type="html">Vision Transformers</title><link href="https://azareei.github.io/blog/2026/vision-transformers/" rel="alternate" type="text/html" title="Vision Transformers" /><published>2026-02-24T14:00:00+00:00</published><updated>2026-02-24T14:00:00+00:00</updated><id>https://azareei.github.io/blog/2026/vision-transformers</id><content type="html" xml:base="https://azareei.github.io/blog/2026/vision-transformers/"><![CDATA[<p>The transformer took NLP from a fragmented landscape of task-specific architectures to a single unified paradigm. Vision followed the same path — later, and with more friction. This post covers everything an AI researcher needs to know about vision transformers: the core architecture, training paradigms, key variants, working PyTorch code, and the open questions that remain.</p>
 
 <hr />
 
@@ -5453,550 +6825,4 @@ and this empirical distribution,</p>
 
     <p>to be cont’d</p>
   </li>
-</ul>]]></content><author><name></name></author><summary type="html"><![CDATA[investment]]></summary></entry><entry><title type="html">Bayesian Machine Learning</title><link href="https://azareei.github.io/blog/2022/Baysian-ml/" rel="alternate" type="text/html" title="Bayesian Machine Learning" /><published>2022-01-26T02:30:00+00:00</published><updated>2022-01-26T02:30:00+00:00</updated><id>https://azareei.github.io/blog/2022/Baysian-ml</id><content type="html" xml:base="https://azareei.github.io/blog/2022/Baysian-ml/"><![CDATA[<p>These is a review of Bayesian Machine Learning. It’s based on HSE’s course on this topic.</p>
-
-<h3 id="maximum-likelihood-estimation-mle">Maximum Likelihood Estimation (MLE)</h3>
-
-<p>The ML estimate for \(\theta\) is the value under which the data are most likely, i.e.</p>
-
-\[\boxed{\hat{\theta}_{ML} \in \text{argmax}_\theta p(y|\theta)}\]
-
-<p>Example: We know that a fair coin has \(p(\text{head}) = p(\text{tail}) = 1/2\). Now imagine you have a coin and you don’t know if it is fair or not. You decide to throw the coin \(m\) times, where you observe \(m_H\) times head, and \(m_T\) times tail, where \(m_H + m_T = m\). Now you ask given this observation, what is the probability of \(p(\text{head}), p(\text{tail})\) for this coin? We know that if \(p(\text{head}) =\theta\), then the likelihood of such observation is</p>
-
-\[p(y|\theta) = \theta^{m_H} (1-\theta)^{m-m_H}\]
-
-<p>Now, we are interested to find a \(\hat \theta_{ML}\) such that the above probability is maximized. Instead of the probability, we maximize its logarithm which will be easier. We have</p>
-
-\[l(\theta) = m_H \log(\theta) + (m-m_H) \log(1-\theta)\]
-
-<p>finding the \(\text{argmax}_\theta\) for the above equation we have</p>
-
-\[\frac{d}{d\theta}d(\theta)|_{\hat\theta} = 0 = \frac{m_H}{\theta}|_{\hat\theta} - \frac{m-m_H}{1-\theta}|_{\hat\theta}\]
-
-\[\longrightarrow \hat{\theta} = \frac{m_H}{m}\]
-
-<h3 id="maximum-a-posteriori-map-estimation">Maximum a posteriori (MAP) estimation</h3>
-
-<p>We learned that in MLE estimation we find \(\theta\) to maximize the likelihood function \(p(y\mid \theta)\). Now, in MAP, we find \(\theta\) such that the posterior \(p(\theta\mid y)\) is maximized, i.e.,</p>
-
-\[\boxed{\hat{\theta}_{MAP} \in \text{argmax}_\theta p(\theta\mid y) = \text{argmax}_\theta  \frac{p(y\mid \theta) p(\theta)}{p(y)}}\]
-
-<p>Since the denominator does not depend on \(\theta\), we have</p>
-
-\[\hat{\theta}_{MAP} = \text{argmax}_\theta p(y\mid \theta)p(\theta) = \text{argmax}_\theta \log p(y\mid \theta) + \log p(\theta)\]
-
-<p>The last term, \(\log p(\theta)\) is known as our prior belief.</p>
-
-<p>Example: Again, imagine the same coin flip problem. Imagine we take the prior to be a beta distribution as</p>
-
-\[p(\theta) = \beta(\theta;\alpha,\beta) = A~ \theta^\alpha (1-\theta)^{\beta}\]
-
-<p>where \(A\) is a constant to make \(\int p(\theta)\text{d}\theta=1\). Now finding the solution to the MAP estimator, we find that</p>
-
-\[\hat{\theta}_{MAP} = \text{argmax}_\theta \log p(y\mid \theta) + \log p(\theta)\]
-
-\[\frac{m_H}{\theta}\mid _{\hat\theta} - \frac{m-m_H}{1-\theta}\mid _{\hat\theta}  + \frac{\alpha}{\theta}\mid _{\hat\theta} - \frac{\beta}{1-\theta}\mid _{\hat\theta} = 0\]
-
-\[\hat{\theta}_{MAP} = \frac{m_H + \alpha}{m+\alpha+\beta }\]
-
-<p>The point of \(\alpha, \beta\) coming from the prior in the above equation will be a regularizer. Imagine, we only throw the coin only once, then the ML gives \(\hat{\theta}_{ML}=1\), however, \(\hat{\theta}_{MAP} = \alpha/(\alpha+\beta)\).</p>
-
-<h3 id="point-estimation-and-probabilistic-linear-regression">Point estimation and probabilistic linear regression</h3>
-
-<p>Imagine we are given \(m\) datapoints, \((x_1,y_1), \cdots, (x_m,y_m)\), where \(x_i\)’s are independent variables and \(y_i\)’s are dependent. Assuming a linear relationship as</p>
-
-\[y_i \sim \theta^\top x_i + \epsilon\]
-
-<p>where \(\epsilon \sim \mathcal{N}(0,\sigma^2)\). Assuming the independence between the \(y_i\)’s, we can write</p>
-
-\[p(y\mid x,\theta)= \Pi_{i=1}^m p(y_i\mid x_i,\theta) = \Pi_{i=1}^m \mathcal{N}(y_i;\theta^\top x_i,\sigma^2)\]
-
-<p>Finding the maximum of log-likelihood, we obtain</p>
-
-\[\hat{\theta}_{ML} = \text{argmax}_\theta p(y\mid x,\theta) = \text{argmin}_\theta \sum_{i=1}^m (y_i - \theta^\top x_i)^2\]
-
-<p>which is the equivalent to ordinary least squares.</p>
-
-<p>Now, trying the MAP estimate, we first need to assume a prior for the \(\theta\) variables. As an initial estimate we assume \(\theta \sim \mathcal{N}(0, \nu^2\mathbf{I})\). Finding the MAP solution we find that</p>
-
-\[\hat{\theta}_{MAP} = \text{argmax}_\theta \log p(y\mid \theta) + \log p(\theta)\]
-
-\[\hat{\theta}_{MAP} = \text{argmin}_\theta \sum_{i=1}^m (y_i-\theta^\top x_i)^2 + \frac{\sigma^2}{\nu^2} \mid \mid \theta\mid \mid ^2\]
-
-<p>which is the same as ML solution with a regularization term.</p>
-
-<h3 id="conjugate-priors">Conjugate priors</h3>
-
-<p>We often would like to find the full posterior, \(p(\theta\mid y)\). If we know the full posterior distribution, then we can do posterior predictive distribution as</p>
-
-\[p(y_{m+1}\mid y) = \int p(y_{m+1}\mid y,\theta)~p(\theta\mid y) d\theta = \int p(y_{m+1}\mid \theta)~p(\theta\mid y) d\theta\]
-
-<p>The second part is because \(y_{m+1}\) and \(y\) are conditionally independent. If we would like to find the full posterior, then</p>
-
-\[p(\theta\mid y) = \frac{p(y\mid \theta)p(\theta)}{p(y)}\]
-
-<p>The bottom part is just a normalizer. So we need to choose the prior, \(p(\theta)\), such that with the likelihood distribution, \(p(y\mid \theta)\), we are able to track the distribution. Selecting prior in such a way that the \(p(y\mid \theta)p(\theta)\) becomes tractable is known as a selection of conjugate priors for \(p(y\mid \theta)\).</p>
-
-<h3 id="exponential-families-and-conjugate-priors">Exponential families and conjugate priors</h3>
-
-<p>The family of distribution \(\mathcal{F}\) is called exponential family if every member of \(\mathcal{F}\) has the form</p>
-
-\[\boxed{p(y_i\mid \theta) = f(y) g(\theta)\exp(\phi(\theta)^\top u(y_i))}\]
-
-<p>where \(f(\cdot), g(\cdot), \phi(\cdot),u(\cdot)\) are some functions. For example, an exponential distribution is an exponential family distribution:</p>
-
-\[p(y\mid \theta) = \theta e^{-\theta y}\]
-
-<p>or a beta distribution:</p>
-
-\[p(y\mid \theta) = \theta^{y} (1-\theta)^{1-y} = \exp(y\log\theta + (1-y)\log(1-\theta)) = (1-\theta)\exp(y \log\frac{\theta}{1-\theta})\]
-
-<p>Normal distribution is also an exponential family.</p>
-
-<p>If the \(p(y_i\mid \theta)\) is coming from an exponential family distribution, then if \(y_i\)’s are independent, the likelihood becomes</p>
-
-\[p(y\mid \theta) = \Pi_{i=1}^m p(y_i\mid \theta) = \left[\Pi_{i=1}^m f(y_i)\right] g(\theta)^m \exp\left( \phi(\theta)^\top \sum_{i=1}^m u(y_i)\right)\]
-
-<p>Now, we can select the prior as</p>
-
-\[p(\theta) \sim g(\theta)^\eta \exp(\phi(\theta)^\top \nu)\]
-
-<p>where \(\eta,\nu\) are hyper-parameters.</p>
-
-<p>Now you might ask, shouldn’t the choice of prior matter here? Can we really pick the prior distribution only based on making the problem tracktable? In the next part, we show that as long as you pick a prior that assigns non-zero probabilities to every possible value of \(\theta\), the solution of MAP converges to the true solution \(\theta^*\), or more precisely, \(theta^*\) corresponds to the likelihood model which is closest to the true generating distribution. The closeness of the distributions is defined using KL divergence.</p>
-
-<h3 id="kl-divergence">KL divergence</h3>
-
-<p>The KL divergence between two distributions \(p\) and \(q\) is defined as</p>
-
-\[\boxed{D_{KL}(p\mid \mid q) := \int_x p(x) \log \frac{p(x)}{q(x)}dx}\\ \to D_{KL}(p\mid \mid q)= \mathbf{E}_p[\log p(x) - \log q(x)]\]
-
-<p>Note that \(D_{KL}(p\mid \mid q)\) is always positive since</p>
-
-\[-D_{KL}(p\mid \mid q) = \int p(x)\left(-\log \frac{p(x)}{q(x)}\right) dx \leq  -\log \int p(x) \frac{q(x)}{p(x)} dx =0\]
-
-\[\rightarrow D_{KL}(p\mid \mid q)\geq 0\]
-
-<p>and the equality with zero only happens when \(p=q\). Now, we want to use the KL divergence to find the distribution from the likelihood family that is closest to the true generating function</p>
-
-\[\theta^* = \text{argmin}_\theta D(q(\cdot) \mid \mid p(\cdot\mid \theta))\]
-
-<p>Imagine we have \(y=(y_1,\cdots, y_m)\) as a set of independent samples from an arbitrary distribution \(q(y)\). We assume a family \(\mathcal{F}\) of likelihood distributions with \(\Theta = \{ \theta: p(\cdot \mid  \theta) \in \mathcal{F}\}\) the finite parameter space. Our goal is to show that if \(p(\theta=\theta^*)&gt;0\), then \(p(\theta=\theta^*\mid y)\to1\) as the number of observation increases or \(m\to\infty\). Consider \(\theta\neq \theta^*\), then</p>
-
-\[\log \frac{p(\theta\mid y)}{p(\theta^*\mid y)} = \log \frac{p(y\mid \theta) p (\theta)}{p(y\mid \theta^*) p (\theta^*)} = \log \frac{p (\theta)}{p (\theta^*)} + \sum_{i=1}^m \log \frac{p(y_i\mid \theta) }{p(y_i\mid \theta^*)}\]
-
-<p>where we used the fact that \(p(\theta^*) \neq 0\). We have</p>
-
-\[\frac{1}{m} \sum_{i=1}^m \log \frac{p(y_i\mid \theta) }{p(y_i\mid \theta^*)} \to \mathbf{E}_q\left[ \log \frac{p(y_i\mid \theta) }{p(y_i\mid \theta^*)}\right]\]
-
-<p>Expanding the Expected value we have</p>
-
-\[\mathbf{E}_q\left[ \log \frac{p(y_i\mid \theta) }{p(y_i\mid \theta^*)}\right] = \mathbf{E}_q\left[ \log \frac{p(y_i\mid \theta) }{p(y_i\mid \theta^*)}\frac{q(y)}{q(y)}\right] = \mathbf{E}_q\left[ \log \frac{q(y) }{p(y_i\mid \theta^*)}- \log \frac{q(y)}{p(y_i\mid \theta)} \right]\]
-
-\[\mathbf{E}_q\left[ \log \frac{p(y_i\mid \theta) }{p(y_i\mid \theta^*)}\right] = D_{KL}\left(q(\cdot) \mid \mid  p(\cdot\mid \theta^*)\right) - D_{KL}\left(q(\cdot) \mid \mid  p(\cdot\mid \theta)\right) &lt; 0\]
-
-<p>The above result is negative since we assume that \(\theta^*\) minimizes the KL divergence between \(q(\cdot)\) and \(p(\cdot\mid \theta)\). So far we have found that</p>
-
-\[\sum_{i=1}^m \log \frac{p(y_i\mid \theta) }{p(y_i\mid \theta^)} \to m\mathbf{E}_q\left[ \log \frac{p(y_i\mid \theta) }{p(y_i\mid \theta^)}\right] \to -\infty\]
-
-<p>since the expected value we found to be negative, and as \(m\to\infty\), the value goes to negative infinity. Plugging back into the initial equation we have</p>
-
-\[\log \frac{p(\theta\mid y)}{p(\theta^*\mid y)} = \log \frac{p (\theta)}{p (\theta^*)} + \sum_{i=1}^m \log \frac{p(y_i\mid \theta) }{p(y_i\mid \theta^*)} = \log \frac{p (\theta)}{p (\theta^*)} -\infty \to -\infty\]
-
-\[\log \frac{p(\theta\mid y)}{p(\theta^*\mid y)}  \to -\infty\]
-
-<p>This implies that \(p(\theta\mid y)/p(\theta^*\mid y) \to 0\), which means that \(p(\theta\mid y) \to 0\). We started with the fact that \(\theta\neq\theta^*\). So if \(p(\theta\mid y)\to 0\) for \(\theta\neq\theta^*\), then \(p(\theta^*\mid y)\to 1\).</p>
-
-<h1 id="expectation-maximization">Expectation Maximization</h1>
-
-<h3 id="guassian-mixture-models">Guassian Mixture Models:</h3>
-
-<p>In Gaussian Mixture model, you assume that your data is coming from a combination of Gaussian (Gaussian Mixture). There is a latent variable, \(z\), that determines which Gaussian to pick or how to combine the Gaussian models. In this latent model, we are interested to find \(\theta\) parameters of the Gaussian, such that \(p(x\mid \theta)\) is maximized. Let’s assume that the latent variable is discrete and \(z=1\) or \(2\). The probability of observing a datapoint is</p>
-
-\[p(x\mid \theta) = \sum_{c=1}^2 p(x,z=c\mid \theta) = \sum_{c=1}^2 p(z=c)~p(x\mid \theta,z)\]
-
-<p>Our goal as usual is to find \(\max_\theta p(X\mid \theta))\). We have</p>
-
-\[\max_\theta p(X\mid \theta) = \max_\theta \log p(X\mid \theta)= \max_\theta \log \Pi_{i=1}^N p(x_i\mid \theta)=  \max_\theta \sum_{i=1}^N \log p(x_i\mid \theta)\]
-
-\[\max*\theta p(X\mid \theta) = \max*\theta \sum*{i=1}^N \log \sum*{c=1}^2 p(x*i,z_i=c\mid \theta)\\ = \max*\theta \sum*{i=1}^N \log \sum*{c=1}^2 \frac{q(z*i=c)}{q(z_i=c)}p(x_i,z_i=c\mid \theta) \\ = \max*\theta \sum*{i=1}^N \log \sum*{c=1}^2q(z*i=c) \frac{p(x_i,z_i=c\mid \theta)}{q(z_i=c)}) \\ \geq \max*\theta \sum*{i=1}^N \sum*{c=1}^2 q(z_i=c) \log \frac{p(x_i,z_i=c\mid \theta)}{q(z_i=c)})\]
-
-<p>So, in summary we have found the following</p>
-
-\[\boxed{\log p(X\mid \theta) \geq \mathcal{L}(\theta,q) \text{ for any } q }\\ \boxed{\mathcal{L}(\theta,q) = \sum_{i=1}^N \sum_{c=1}^2 q(z_i=c) \log   \frac{p(x_i,z_i=c\mid \theta)}{q(z_i=c)}) }\]
-
-<p>So, we do the above part in two steps as follows (Expectation step)</p>
-
-\[\boxed{q^{k+1} = \text{argmax}_q \mathcal{L}(\theta^k,q)}\]
-
-<p>and next (Maximization step)</p>
-
-\[\boxed{\theta^{k+1} = \text{argmax}_\theta \mathcal{L}(\theta,q^{k+1})}\]
-
-<h3 id="e-step">E-Step:</h3>
-
-<p>Let’s look at the E-Step. In order to do so, let’s look at the difference between the log-likelihood and the lowerbound that we defined</p>
-
-\[\log p(X,\theta)-\mathcal{L}(\theta,q) = \sum_{i=1}^N \log p(x_i\mid \theta)  - \sum_{i=1}^N \sum_{c=1}^2 q(z_i=c) \log   \frac{p(x_i,z_i=c\mid \theta)}{q(z_i=c)}) \\ = \sum_{i=1}^N \log p(x_i\mid \theta) \sum_{c=1}^2 q(z_i=c)  - \sum_{i=1}^N \sum_{c=1}^2 q(z_i=c) \log   \frac{p(x_i,z_i=c\mid \theta)}{q(z_i=c)}) \\ = \sum_{i=1}^N \sum_{c=1}^2 q(z_i=c)  \left( \log p(x_i\mid \theta)  -\log   \frac{p(x_i,z_i=c\mid \theta)}{q(z_i=c)}) \right)\\ = \sum_{i=1}^N \sum_{c=1}^2 q(z_i=c)  \left( \log   \frac{q(z_i=c) p(x_i\mid \theta) }{p(x_i,z_i=c\mid \theta)}) \right) \\ = \sum_{i=1}^N \sum_{c=1}^2 q(z_i=c)  \left( \log   \frac{q(z_i=c) }{p(z_i=c\mid x_i,\theta)}) \right) \\ = D_{KL}\left({q(z_i=c) }\mid \mid {p(z_i=c\mid x_i,\theta)} \right)\]
-
-<p>So we found that</p>
-
-\[\boxed{\log p(X\mid \theta) - \mathcal{L}(\theta,q) = D_{KL}\left({q(z_i=c) }\mid \mid {p(z_i=c\mid x_i,\theta)} \right)}\]
-
-<p>which basically means that to maximize lowerbound \(\mathcal{L}(\theta,q)\) (which minimizes the distance between the log-likelihood and the lowerbound), we need to minimize the KL-divergence on the righthandside. The KL divergence is zero when the two PDFs are the same, so</p>
-
-\[q(z_i=c) = p(z_i=c\mid x_i,\theta)\]
-
-<h3 id="m-step">M-Step:</h3>
-
-<p>Now we are interested to maximize the following with respect to \(\theta\) as</p>
-
-\[\mathcal{L}(\theta,q) = \sum_{i=1}^N \sum_{c=1}^2 q(z_i=c) \log   \frac{p(x_i,z_i=c\mid \theta)}{q(z_i=c)})  \\= \sum_{i=1}^N \sum_{c=1}^2 q(z_i=c) \log   {p(x_i,z_i=c\mid \theta)}) - \sum_{i=1}^N \sum_{c=1}^2 q(z_i=c) \log   {q(z_i=c)})\\ = \mathbf{E}_q \log p(X,Z\mid \theta)\]
-
-<h3 id="summary-of-expectation-maximization">Summary of Expectation-Maximization:</h3>
-
-<p>E-step:</p>
-
-\[\boxed{q^{k+1}(z_i) = p(z_i\mid x_i,\theta^k) }\]
-
-<p>which results in the fact that \(\log p(X,\theta) = \mathcal{L}(\theta,q^{k+1})\). Next for the M-step, we have</p>
-
-\[\boxed{\theta^{k+1} = \text{argmax}_\theta \mathbf{E}_q \log p(X,Z\mid \theta)}\]
-
-<p>Note that this maximizes the lower bound, however it is guaranteed that \(\log p(X\mid \theta^{k+1}) \geq \mathcal{L}(\theta^{k+1},q^{k+1})\)</p>
-
-<h3 id="convergence">Convergence</h3>
-
-<p>We have</p>
-
-\[\log p(X\mid \theta^{k+1}) \geq \mathcal{L}(\theta^{k+1},q^{k+1}) \geq \mathcal{L}(\theta^k,q^{k+1}) = \log p(X\mid \theta^k)\]
-
-<h3 id="gaussian-mixture-models-gmm">Gaussian Mixture Models (GMM)</h3>
-
-<p>In these models, we assume that the data is coming from a mixture of Gaussian distributions \(\mathcal{N}(\mu,\Sigma)\) and the latent distribution is a categorical distribution \(\phi\). This basically means that</p>
-
-\[\boxed{p(X) = \sum_{k=1}^K \pi_k \mathcal{N}(X\mid \mu_k,\Sigma_k)}\]
-
-<p>where \(\sum_k \pi_k = 1\). Note that \(\theta = \{ \mu_1,\Sigma_1, \cdots, \mu_K,\Sigma_K\}.\) Now, let’s assume the latent variable is called \(z_i\). Using Expectation-Maximization that we discussed here, we find that</p>
-
-\[q(z_i = k) = p(z_i=k\mid x_i,\theta) = \frac{p(z_i=k) p(x_i \mid  z_i=k,\theta) }{p(x_i\mid \theta)} = \frac{p(z_i=k)p(x_i \mid  z_i=k,\theta) }{\sum_{k} p(z_i=k) p(x_i \mid  z_i=k,\theta) } \\ \boxed{q(z_i=k) = \frac{\pi_k \mathcal{N}(x_i\mid \mu_k,\Sigma_k)}{\sum_k\pi_k \mathcal{N}(x_i\mid \mu_k,\Sigma_k)}}\]
-
-<p>Next, in the Maximization step, we have</p>
-
-\[\theta^*= \max_\theta \mathbf{E}_q \log p(X,Z\mid \theta) = \max_\theta \log p(X\mid \theta) \\ \theta^* = \max_\theta \sum_i \log \left( \sum_k \pi_k \mathcal{N}(x_i\mid \mu_k,\sigma_k) \right)\]
-
-<p>Taking the derivative with respect to the \(\mu_k\), we find that</p>
-
-\[\frac{\partial \cdots}{\partial \mu_k} = 0 = \sum_i \frac{\pi_k \mathcal{N}(x_i\mid \mu_k,\sigma_k)}{\sum_k \pi_k \mathcal{N}(x_i\mid \mu_k,\sigma_k) } \\  \sum_i q(z_i=k)   \Sigma_k^{-1}(x_i - \mu_k) =0 =  \sum_i q(z_i=k)   (x_i - \mu_k) \\ \boxed{\mu_k =\frac{\sum_i q(z_i=k) x_i}{\sum_i q(z_i=k)}}\]
-
-<p>Similarly, we can find that</p>
-
-\[\boxed{\Sigma_k =   \frac{ \sum_i q(z_i=k)(x_i-\mu)^\top(x_i-\mu)}{  \sum_i q(z_i=k)}  }\]
-
-<h3 id="k-means-as-em">K-Means as EM</h3>
-
-<p>Imagine the K-means model, where we randomly initialize \(\theta = \{\mu_1, \cdots, \mu_C\}\) points, and then we repeat the following steps until convergence</p>
-
-<ul>
-  <li>For each point we calculate the closest centroid</li>
-</ul>
-
-\[z_i = \text{argmin}_k \\mid x_i-\mu_k\\mid ^2\]
-
-<ul>
-  <li>Update centroid</li>
-</ul>
-
-\[\mu_k = \frac{\sum_{i:z_i=k} x_i}{\sum_{i:z_i=k} 1}\]
-
-<p>The above K-means model can be think of as a GMM. Imagine we fix the covariance matrix to be identity, $\Sigma_k = I$, and also we fix the weights to be \(\pi_k = 1/\#\text{of Gaussians}\). We then will have</p>
-
-\[p(x_i\mid z_i=k,\theta) = \frac{1}{Z} \exp\left(-\frac{1}{2} \\mid x_i-\mu_k\\mid ^2\right)\]
-
-<p>Then, in the E-step, we pick \(q(z)\) such that they belong to the delta functions. Then are interested to find a function from the family of delta functions such that</p>
-
-\[q(z_i) = \begin{cases} 1 &amp; \text{ if } z_i = \text{argmax}_k p(z_i=k\mid x_i,\theta)\\ 0 &amp; \text{otherwise}\end{cases}\]
-
-<p>Note that</p>
-
-\[p(z_i=k\mid x_i,\theta) = \frac{1}{Z} p(x_i\mid z_i,\theta) p(z_i\mid \theta) = \frac{1}{Z} \exp(-\frac{1}{2}\\mid  x_i-\mu_k\\mid ^2) \pi_k\]
-
-<p>So the above maximization problem becomes</p>
-
-\[q(z_i) = \begin{cases} 1 &amp; \text{ if } z_i = \text{argmin}_k  \\mid x_i-\mu_k\\mid ^2 \\ 0&amp; \text{otherwise}\end{cases}\]
-
-<p>which is the same as the first step in the K-means. Now, lets look at the M-step, using the GMM derivation that we did above, we ha</p>
-
-\[\mu_k =\frac{\sum_i q(z_i=k) x_i}{\sum_i q(z_i=k)} = \frac{\sum_{i:z_i=k} x_i}{\sum_{i:z_i=k} 1}\]
-
-<h3 id="implementing-gmm-in-python">Implementing GMM in python</h3>
-
-<p>So in GMM we are implementing the following formulae</p>
-
-<p>E-step:</p>
-
-\[q(z_i=k) = \frac{\pi_k \mathcal{N}(x_i\mid \mu_k,\Sigma_k)}{\sum_k\pi_k \mathcal{N}(x_i\mid \mu_k,\Sigma_k)}\]
-
-<p>M-Step:</p>
-
-\[\mu_k =\frac{\sum_i q(z_i=k) x_i}{\sum_i q(z_i=k)}\]
-
-\[\Sigma_k =   \frac{ \sum_i q(z_i=k)(x_i-\mu)^\top(x_i-\mu)}{  \sum_i q(z_i=k)}\]
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
-<span class="c1"># here we denote q(z_i=k) with a NxC matrix called gamma
-# where N is the number of poitns i=1,...,N
-# and C is the number of clusters
-</span><span class="k">def</span> <span class="nf">E_step</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">pi</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">):</span>
-    <span class="sh">"""</span><span class="s">
-    Performs E-step on GMM model
-    Each input is numpy array:
-    X: (N x d), data points
-    pi: (C), mixture component weights
-    mu: (C x d), mixture component means
-    sigma: (C x d x d), mixture component covariance matrices
-
-    Returns:
-    gamma: (N x C), probabilities of clusters for objects
-
-    P(z\mid x) = (p(x\mid z) p(z))/(sum_z p(x\mid z) p(z) )
-    gamma  =
-    </span><span class="sh">"""</span>
-    <span class="n">N</span> <span class="o">=</span> <span class="n">X</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># number of objects
-</span>    <span class="n">C</span> <span class="o">=</span> <span class="n">pi</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># number of clusters
-</span>    <span class="n">d</span> <span class="o">=</span> <span class="n">mu</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># dimension of each object
-</span>    <span class="n">gamma</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,</span> <span class="n">C</span><span class="p">))</span> <span class="c1"># distribution q(T)
-</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">C</span><span class="p">):</span>
-      <span class="n">pi_i</span> <span class="o">=</span> <span class="n">pi</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-      <span class="n">gamma</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">pi_i</span><span class="o">*</span><span class="n">stats</span><span class="p">.</span><span class="nf">multivariate_normal</span><span class="p">(</span><span class="n">mu</span><span class="p">[</span><span class="n">i</span><span class="p">,:],</span><span class="n">sigma</span><span class="p">[</span><span class="n">i</span><span class="p">,:,:]).</span><span class="nf">pdf</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-
-    <span class="n">gamma</span> <span class="o">=</span> <span class="n">gamma</span><span class="o">/</span><span class="n">np</span><span class="p">.</span><span class="nf">sum</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">).</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">gamma</span>
-
-<span class="k">def</span> <span class="nf">M_step</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">gamma</span><span class="p">):</span>
-    <span class="sh">"""</span><span class="s">
-    Performs M-step on GMM model
-    Each input is numpy array:
-    X: (N x d), data points
-    gamma: (N x C), distribution q(T)
-
-    Returns:
-    pi: (C)
-    mu: (C x d)
-    sigma: (C x d x d)
-    </span><span class="sh">"""</span>
-    <span class="n">N</span> <span class="o">=</span> <span class="n">X</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># number of objects
-</span>    <span class="n">C</span> <span class="o">=</span> <span class="n">gamma</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># number of clusters
-</span>    <span class="n">d</span> <span class="o">=</span> <span class="n">X</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># dimension of each object
-</span>
-    <span class="n">resp_weights</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">sum</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-    <span class="n">pi</span> <span class="o">=</span> <span class="n">resp_weights</span><span class="o">/</span><span class="p">(</span><span class="mf">1.0</span><span class="o">*</span><span class="n">N</span><span class="p">)</span>
-
-    <span class="n">mu</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">dot</span><span class="p">(</span><span class="n">gamma</span><span class="p">.</span><span class="n">T</span><span class="p">,</span><span class="n">X</span><span class="p">)</span><span class="o">/</span><span class="n">resp_weights</span><span class="p">.</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-
-    <span class="n">sigma</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">zeros</span><span class="p">((</span><span class="n">C</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="n">d</span><span class="p">))</span>
-
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">C</span><span class="p">):</span>
-      <span class="n">diff</span> <span class="o">=</span> <span class="p">(</span><span class="n">X</span><span class="o">-</span><span class="n">mu</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-      <span class="n">weighted_sum</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">dot</span><span class="p">((</span><span class="n">gamma</span><span class="p">[:,</span><span class="n">i</span><span class="p">].</span><span class="nf">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">diff</span><span class="p">).</span><span class="n">T</span><span class="p">,</span><span class="n">diff</span><span class="p">)</span>
-      <span class="n">sigma</span><span class="p">[</span><span class="n">i</span><span class="p">,:,:]</span> <span class="o">=</span> <span class="n">weighted_sum</span><span class="o">/</span><span class="n">resp_weights</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-
-    <span class="k">return</span> <span class="n">pi</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span>
-
-<span class="k">def</span> <span class="nf">train_EM</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">restarts</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
-    <span class="sh">'''</span><span class="s">
-    Starts with random initialization *restarts* times
-    Runs optimization until saturation with *rtol* reached
-    or *max_iter* iterations were made.
-
-    X: (N, d), data points
-    C: int, number of clusters
-    </span><span class="sh">'''</span>
-    <span class="n">N</span> <span class="o">=</span> <span class="n">X</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># number of objects
-</span>    <span class="n">d</span> <span class="o">=</span> <span class="n">X</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># dimension of each object
-</span>    <span class="n">best_loss</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="p">.</span><span class="n">inf</span>
-    <span class="n">best_pi</span> <span class="o">=</span> <span class="bp">None</span>
-    <span class="n">best_mu</span> <span class="o">=</span> <span class="bp">None</span>
-    <span class="n">best_sigma</span> <span class="o">=</span> <span class="bp">None</span>
-
-    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">restarts</span><span class="p">):</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">pi</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">ones</span><span class="p">(</span><span class="n">C</span><span class="p">)</span><span class="o">/</span><span class="nf">float</span><span class="p">(</span><span class="n">C</span><span class="p">)</span>
-            <span class="n">mu</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">randn</span><span class="p">(</span><span class="n">C</span><span class="p">,</span><span class="n">d</span><span class="p">)</span>
-            <span class="n">sigma</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">zeros</span><span class="p">((</span><span class="n">C</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="n">d</span><span class="p">))</span>
-            <span class="n">sigma</span><span class="p">[...]</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">identity</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
-            <span class="n">prev_loss</span> <span class="o">=</span> <span class="bp">None</span>
-            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">max_iter</span><span class="p">):</span>
-              <span class="n">gamma</span> <span class="o">=</span> <span class="nc">E_step</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">pi</span><span class="p">,</span><span class="n">mu</span><span class="p">,</span><span class="n">sigma</span><span class="p">)</span>
-              <span class="n">pi</span><span class="p">,</span><span class="n">mu</span><span class="p">,</span><span class="n">sigma</span> <span class="o">=</span> <span class="nc">M_step</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">gamma</span><span class="p">)</span>
-              <span class="n">loss</span> <span class="o">=</span> <span class="nf">compute_vlb</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">pi</span><span class="p">,</span><span class="n">mu</span><span class="p">,</span><span class="n">sigma</span><span class="p">,</span><span class="n">gamma</span><span class="p">)</span>
-
-              <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="p">.</span><span class="nf">isnan</span><span class="p">(</span><span class="n">loss</span><span class="p">)</span> <span class="ow">and</span> <span class="n">loss</span><span class="o">&gt;</span><span class="n">best_loss</span><span class="p">:</span>
-                <span class="n">best_loss</span> <span class="o">=</span> <span class="n">loss</span>
-                <span class="n">best_mu</span> <span class="o">=</span> <span class="n">mu</span>
-                <span class="n">best_pi</span> <span class="o">=</span> <span class="n">pi</span>
-                <span class="n">best_sigma</span> <span class="o">=</span> <span class="n">sigma</span>
-
-              <span class="k">if</span> <span class="n">prev_loss</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-                <span class="n">diff</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">abs</span><span class="p">(</span><span class="n">prev_loss</span><span class="o">-</span><span class="n">loss</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="p">.</span><span class="nf">abs</span><span class="p">(</span><span class="n">prev_loss</span><span class="p">)</span>
-                <span class="k">if</span> <span class="n">diff</span> <span class="o">&lt;</span> <span class="n">rtol</span><span class="p">:</span>
-                  <span class="k">break</span>
-              <span class="n">prev_loss</span> <span class="o">=</span> <span class="n">loss</span>
-
-        <span class="k">except</span> <span class="n">np</span><span class="p">.</span><span class="n">linalg</span><span class="p">.</span><span class="n">LinAlgError</span><span class="p">:</span>
-            <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">Singular matrix: components collapsed</span><span class="sh">"</span><span class="p">)</span>
-            <span class="k">pass</span>
-
-    <span class="k">return</span> <span class="n">best_loss</span><span class="p">,</span> <span class="n">best_pi</span><span class="p">,</span> <span class="n">best_mu</span><span class="p">,</span> <span class="n">best_sigma</span>
-</code></pre></div></div>
-
-<p>Benefits of GMM models: in unsupervised clustering for example, KNN methods accuracy will increase as we increase the number of groups. So you never know how many groups are better for KNN methods. In GNN on the other hand, the accuracy increases and then decreases. So increasing the number of clusters does not necessary increase the accuracy.</p>
-
-<h3 id="dirichlet-distribution">Dirichlet Distribution</h3>
-
-<p>A Dirichlet distribution is defined as</p>
-
-\[f(\theta;\alpha) = \frac{1}{B(\alpha)} \Pi_{i=1}^K \theta_i^{\alpha_i-1}\]
-
-<p>Note that \(\sum_{i=1}^K \theta_i = 1\) and \(\theta_i&gt;0\). The expected value and variance can be found as</p>
-
-<p>Note that the Dirichlet distribution is conjugate to the multinomial distribution as</p>
-
-\[p(\theta) = \frac{n!}{x_1! \cdots x_K!} \Pi_{i=1}^K \theta_i^{x_i}\]
-
-<p>So if prior has a Dirichlet distribution, and likelihood is a multinomial, then the posetrior will also be a Dirichlet distribution.</p>
-
-<h3 id="latent-dirichelet-model">Latent Dirichelet Model</h3>
-
-<p>Imagine the following model for the distribution of words in a document</p>
-
-<p><br /></p>
-<div class="row mt-3" style="text-align:center;">
-    <div class="col-sm mt-3 mt-md-0">
-        <img class="img-fluid rounded z-depth-1" width="300" src="/assets/research/bayes1.jpg" />
-    </div>
-</div>
-<p><br /></p>
-
-<p>In latent Dirichelet model, we have</p>
-
-\[p(W,Z,\theta) = \Pi_{d=1}^D p(\theta_d) \Pi_{n=1}^{N_d} p(z_{dn}\mid \theta_d)~p(w_{dn}\mid z_{dn})\]
-
-<p>where \(p(\theta_d)\sim \text{Dir}(\alpha)\), and \(p(z_{dn}\mid \theta_d) = \theta_{dz_{dn}}\), and \(p(w_{dn}\mid z_{dn}) = \Phi_{z_{dn},w_{dn}}\), where \(\sum \Phi_{z_{dn},w_{dn}} =1\). In order to calculate the E-step, we first need to find the log-likelihood, where we have</p>
-
-\[\log p(W,Z,\theta) = \sum_{d=1}^D \left[ \sum_{t=1}^T (\alpha_t-1) \log \theta_{dt} +  \sum_{n=1}^{N_d} \sum_{t=1}^T \mathbf{1}(z_{dn}=t) \left(\log \theta_{dt} + \log \phi_{tw_{dn}} \right) \right] + \text{C.}\]
-
-<p>In the E-step, we want to</p>
-
-\[\min D_{KL}\left( q(\theta) q(Z) \\mid  p(\theta,Z\mid W) \right)\]
-
-\[\log q(\theta) = \mathbf{E}_{q(z)} \log p(\theta,Z,W)  =  \mathbf{E}_{q(z)} \log p(\theta,Z\mid  W) + C.\]
-
-\[\log q(\theta) = \mathbf{E}_{q(z)} \sum_{d=1}^D \left[ \sum_{t=1}^T (\alpha_t-1) \log \theta_{dt} +  \sum_{n=1}^{N_d} \sum_{t=1}^T\mathbf{1}(z_{dn}=t) \left(\log \theta_{dt} + \log \phi_{tw_{dn}} \right) \right]\\ = \mathbf{E}_{q(z)} \sum_{d=1}^D \left[ \sum_{t=1}^T (\alpha_t-1) \log \theta_{dt} +  \sum_{n=1}^{N_d}\sum_{t=1}^T \mathbf{1}(z_{dn}=t) \left(\log \theta_{dt} \right) \right] \\ =  \sum_{d=1}^D \left[ \sum_{t=1}^T (\alpha_t-1) \log \theta_{dt} +  \sum_{n=1}^{N_d} \sum_{t=1}^T \mathbf{E}_{q(z)}\left[\mathbf{1}(z_{dn}=t)\right] \left(\log \theta_{dt}  \right) \right] \\  =  \sum_{d=1}^D \sum_{t=1}^T \log \theta_{dt} \left[ (\alpha_t-1)  +  \sum_{n=1}^{N_d} \mathbf{E}_{q(z)}\left[\mathbf{1}(z_{dn}=t)\right] \right]\]
-
-<p>So in summary, we have</p>
-
-\[\boxed{\log q(\theta) =  \sum_{d=1}^D \sum_{t=1}^T \log \theta_{dt} \left[ (\alpha_t-1)  +  \sum_{n=1}^{N_d} \gamma_{dn}^t \right]} \\ \boxed{\gamma_{dn}^t = \mathbf{E}_{q(z)}\left[\mathbf{1}(z_{dn}=t)\right]}\]
-
-\[\to q(\theta) \propto \Pi_d \Pi_t \theta_{dt}^{\left[\alpha_t + \sum_n \gamma^t_{dn} - 1\right]}\]
-
-<p>Now, let’s take the E-step for \(q(Z)\), we have</p>
-
-\[\log q(Z) = \\  \mathbf{E}_{q(\theta)} \sum_{d=1}^D \left[ \sum_{t=1}^T (\alpha_t-1) \log \theta_{dt} +  \sum_{n=1}^{N_d} \sum_{t=1}^T\mathbf{1}(z_{dn}=t) \left(\log \theta_{dt} + \log \phi_{tw_{dn}} \right) \right] \\ = \mathbf{E}_{q(\theta)} \sum_{d=1}^D  \sum_{n=1}^{N_d} \mathbf{1}(z_{dn}=t) \left(\log \theta_{dt} + \log \phi_{tw_{dn}} \right)  \\ =  \sum_{d=1}^D  \sum_{n=1}^{N_d} \mathbf{1}(z_{dn}=t) \left(\mathbf{E}_{q(\theta)} \log \theta_{dt} + \log \phi_{tw_{dn}} \right)\]
-
-<p>so in summary</p>
-
-\[\boxed{\log q(Z) = \sum_{d=1}^D  \sum_{n=1}^{N_d} \mathbf{1}(z_{dn}=t) \left(\mathbf{E}_{q(\theta)} \log \theta_{dt} + \log \phi_{tw_{dn}} \right) } \\ \to q(Z) = \Pi_d \Pi_t q(z_{dn})\\ q\left( z_{dn}=t\right) =   \frac{\phi_{t w_{dn}} \exp \left( \mathbf{E}_{q(\theta)} \log \theta_{dt} \right)}{\sum_{t'} {\phi_{t' w_{dn}} \exp \left( \mathbf{E}_{q(\theta)} \log \theta_{dt'} \right)}}\]
-
-<p>and in the M-step we would like to maximize the following</p>
-
-\[\mathbf{E}_{q(\theta)q(Z)} \log p(\theta,Z,W)  = \mathbf{E}_{q(\theta)q(Z)}  \left[ \sum_{d=1}^D \left[ \sum_{t=1}^T (\alpha_t-1) \log \theta_{dt} +  \sum_{n=1}^{N_d} \sum_{t=1}^T \mathbf{1}(z_{dn}=t) \left(\log \theta_{dt} + \log \phi_{tw_{dn}} \right) \right] \right] \\ = \mathbf{E}_{q(\theta)q(Z)}  \left[ \sum_{d=1}^D \sum_{t=1}^T \sum_{n=1}^{N_d} \mathbf{1}(z_{dn}=t)  \log \phi_{tw_{dn}} \right] \\  =   \sum_{d=1}^D \sum_{t=1}^T \sum_{n=1}^{N_d} \mathbf{E}_{q(\theta)q(Z)} \left[\mathbf{1}(z_{dn}=t)\right]  \log \phi_{tw_{dn}} \\ =   \sum_{d=1}^D \sum_{t=1}^T \sum_{n=1}^{N_d} \gamma_{dn}^t  \log \phi_{tw_{dn}}\]
-
-<p>given that \(\sum_w \phi_{tw} = 1\) and also \(\phi_{tw}\geq 0\). We use lagrangian to maximize the above equation, we have</p>
-
-\[L =  \sum_{d=1}^D \sum_{t=1}^T \sum_{n=1}^{N_d} \gamma_{dn}^t \log \phi_{tw_{dn}} - \sum_{t=1}^T \lambda_t \left(\sum_w \phi_{tw}-1\right)\]
-
-<p>Now we take the derivative to maximize the above equation, we find</p>
-
-\[\frac{\partial L}{\partial \phi_{tw}} = \sum_{d=1}^D \sum_{n=1}^{N_d} \gamma_{dn}^t \frac{1}{\phi_{tw}}\mathbf{1}\left[w_{dn} = w\right] -  \lambda_t  = 0 \\ \phi_{tw} = \frac{\sum_{d=1}^D \sum_{n=1}^{N_d} \gamma_{dn}^t \mathbf{1}\left[w_{dn}= w\right]}{ \lambda_t}\]
-
-<p>Knowing that \(\sum_w \phi_{tw} = 1\), we can find that</p>
-
-\[\phi_{tw} = \frac{\sum_{d=1}^D \sum_{n=1}^{N_d} \gamma_{dn}^t \mathbf{1}\left[w_{dn}= w\right]}{ \sum_w \sum_{d=1}^D \sum_{n=1}^{N_d} \gamma_{dn}^t \mathbf{1}\left[w_{dn}= w\right]} \\ \to \boxed{\phi_{tw} = \frac{\sum_{d,n} \gamma_{dn}^t \mathbf{1}\left[w_{dn}= w\right]}{ \sum_{d,n,w'} \gamma_{dn}^t \mathbf{1}\left[w_{dn}= w'\right]}}\]
-
-<h2 id="monte-carlo-method">Monte-Carlo Method</h2>
-
-<p>Estimating expected values using sampling</p>
-
-\[\mathbf{E}_{p(x)} f(x) = \frac{1}{M} \sum f(x_s), \quad \text{where } x_s\sim p(x)\]
-
-<p>Now the question is how to sample from a probability distribution \(p(x)\)? In the following we will discuss this. Note that we assume that generating a random number with uniform distribution from in \([0,1]\) is given, i.e., we can easily sample form \(\mathcal{U}(0,1)\).</p>
-
-<h3 id="sampling-from-1-d-distribution">Sampling from 1-D distribution</h3>
-
-<p>Consider a distribution over discrete set such as \(p(a_i) = p_i\) for \(i=1,\cdots,n\). Note that \(\sum_i p_i = 1\). We can separate the \([0,1]\) distance proportional to the \(p_i\). Next, we sample a point from $[0,1]$ using the uniform distribution, we can assign it to the discrete values of \(a_i\) based on the interval that it lands into. Here is an example:</p>
-
-<p><br /></p>
-<div class="row mt-3" style="text-align:center;">
-    <div class="col-sm mt-3 mt-md-0">
-        <img class="img-fluid rounded z-depth-1" width="300" src="/assets/research/bayes2.png" />
-    </div>
-</div>
-<p><br /></p>
-
-<p>Sampling Normal distribution:</p>
-
-<p>We can generate normal distribution using central limit theorem, i.e.</p>
-
-\[x = \frac{1}{\sqrt{N}} \left[ \sum_{i=1}^N \left( x_i - \frac{1}{2}\right) \right]\]
-
-<p>As the \(N\to \infty\), the \(p(x) \to \mathcal{N}(0,1)\). This has been done very efficiently, and we can use packages such as <code class="language-plaintext highlighter-rouge">np.random.randn()</code> to generate these numbers. Now imagine that we are interested in 1d sampling from a continuous distribution such as \(p(x)\) shown below</p>
-
-<p><br /></p>
-<div class="row mt-3" style="text-align:center;">
-    <div class="col-sm mt-3 mt-md-0">
-        <img class="img-fluid rounded z-depth-1" width="300" src="/assets/research/bayes3.png" />
-    </div>
-</div>
-<p><br /></p>
-
-<p>One way to sample from \(p(x)\) in the above is to first bound the pdf by some normal distribution $q(x)$. Next, we generate a random point, say \(x_0\). We then accept this point with probability \(\alpha= p(x)/q(x)\) and reject it with \(1-\alpha\). This way, we create samples from the \(p(x)\).</p>
-
-<h3 id="markov-chains">Markov-Chains</h3>
-
-<p>There are two methods that we will introduce here (Metropolis-Hasting and Gibbs sampling) that depend on Markov-Chain. A few introductory remarks on Markov-process is helpful before we talk about them.</p>
-
-<p>Let \(X_t\) denote the value of a random variable at time $t$. The <em>state space</em> is the space of all possible values for $X$ values. The random variable is called a <strong>Markov process</strong> if the transition probabilities betwen different values in the state space only depend on the current’s value of the random variable, i.e.,</p>
-
-\[p(X_{t+1}=s_{j}\mid X_0=s_k, \cdots, X_t=s_i) = p(X_{t+1}=s_{j}\mid  X_t=s_i)\]
-
-<p>A Markov-Chain referes to a sequence of random variables \((X_0, \cdots,X_n)\) generated by a markov process. Transition probability (or the transition kernel) gives us the probability of transitioning between the states ina single step, i.e.,</p>
-
-\[p(i\to j) = p(X_{t+1}=s_j\mid  X_{t}=s_i)\]
-
-<p>Using the transition kernel, if we are at state \(s_i\) we can define a row vector for the state space probabilities, i.e., \(\pi_i(t) = p(X_t = s_i)\). The evolution of this state space probabilities can be obtained using the kernel as</p>
-
-\[\pi_j(t+1) = p(X_{t+1}=s_j) \\= \sum_k p(X_{t+1}=s_j\mid   X_t = s_k) p(X_t = s_k) = \sum_k p(k,j) \pi_k(t) \\ \mathbf{\pi}(t+1) = \mathbf{\pi}(t) \mathbf{P}\]
-
-<p>As a result, we can find that \(\pi(t) = \pi(0) \mathbf{P}^k\). A distribution of states $\mathbf{\pi}^*$ is called stationary if \(\mathbf{\pi}^* = \mathbf{\pi}^*\mathbf{P}\). A sufficient condition for a unique stationary distribution is that the <strong>detailed balance</strong> condition holds</p>
-
-\[p(j\to k) \pi^*_j = p(k\to j) \pi^*_k\]
-
-<p>If the above condition holds then we have</p>
-
-\[(\mathbf{\pi}\mathbf{P})_j = \sum_i \pi_i P(i,j) = \sum_i \pi_i P(i\to j) \\= \sum_i \pi_j P(j\to i)  = \pi_j \sum_i P(j\to i) = \pi_j\]
-
-<h3 id="metropolis-hasting-algorithm">Metropolis-Hasting Algorithm</h3>
-
-<p>So our goal is to generate a sample with PDF \(p(x)\). In Metropolis-Hasting the basic idea is to create a Markov-Process to generate new data points where \(p(x)\) is its stationary distribution. If \(p(x)\) is stationary distribution, then using following the Markov process for a long time we will generate data-points that have the distribution of \(p(x)\). But how can we create a Markov-Process where \(p(x)\) is its stationary distribution? We can use the idea of rejecting points. We start with any Markov-process \(Q\) (as long as we have a non-zero probability of going over all the data points), we then start from a data-point \(x_0\) (or state) and find our new data-point \(x_1\) (the new state). Now we have an option of accepting this new state or rejecting it. We select this acceptance/rejection probability such that our \(p(x)\) becomes the stationary distribution of our Markov process.</p>
-
-\[p(x_0) Q(x_0\to x_1) A(x_0 \to x_1) = p(x_1) Q(x_1\to x_0) A(x_1 \to x_0) \\ \frac{A(x_0 \to x_1)}{A(x_1 \to x_0)} = \frac{p(x_1)}{p(x_0)} \frac{Q(x_1\to x_0)}{Q(x_0\to x_1)} = \rho\]
-
-<p>So as long as our acceptance probability follows the above equality, we are doing well. Assume that the above proportionality is \(\rho\). If \(\rho\leq 1\), we can have \(A(x_0\to x_1) = \rho, A(x_1\to x_0) = 1\). On the other hand, if \(\rho&gt;1\), we can assign \(A(x_0\to x_1) = 1, A(x_1\to x_0) = 1/\rho\). So basically, we can assign the following acceptance probability</p>
-
-\[A(x_0\to x_1) = \begin{cases} \rho &amp; \rho \leq 1 \\ 1 &amp; \rho &gt;1 \end{cases}\]
-
-<p>Or we can summarize it as</p>
-
-\[A(x_0\to x_1) = \min\left(1, \frac{p(x_1)}{p(x_0)} \frac{Q(x_1\to x_0)}{Q(x_0\to x_1)} \right)\]]]></content><author><name></name></author><summary type="html"><![CDATA[Machine learning]]></summary></entry></feed>
+</ul>]]></content><author><name></name></author><summary type="html"><![CDATA[investment]]></summary></entry></feed>

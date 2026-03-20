@@ -1,0 +1,1689 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<title>Ahmad  Zareei | World Models - Learning to Simulate Reality</title>
+<meta name="description" content="Personal homepage of Ahmad Zareei, Senion AI research Scientist @META
+">
+
+<!-- Open Graph -->
+
+
+<!-- Bootstrap & MDB -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" integrity="sha512-MoRNloxbStBcD8z3M/2BmnT+rg4IsMxPkXaGh2zD6LGNNFE80W3onsAhRcMAMrSoyWL9xD7Ert0men7vR8LUZg==" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" integrity="sha512-RO38pBRxYH3SoOprtPTD86JFOclM51/XTIdEPh5j8sj4tp8jmQIx26twG52UaLi//hQldfrh7e51WzP9wuP32Q==" crossorigin="anonymous">
+
+<!-- Fonts & Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.0/css/academicons.min.css" integrity="sha512-W4yqoT1+8NLkinBLBZko+dFB2ZbHsYLDdr50VElllRcNt2Q4/GSs6u71UHKxB7S6JEMCp5Ve4xjh3eGQl/HRvg==" crossorigin="anonymous">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap">
+
+<!-- Code Syntax Highlighting -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+
+<!-- Styles -->
+<link rel="shortcut icon" href="/assets/img/logo.ico">
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<link rel="canonical" href="/blog/2026/world-models-comprehensive-guide/">
+
+<!-- Theming-->
+
+<script src="/assets/js/theme.js"></script>
+
+
+
+  
+  
+<!-- MathJax -->
+<script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js"></script>
+<script>
+    window.MathJax = {
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            processEscapes: true,
+            processEnvironments: true
+        },
+        options: {
+            skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+            ignoreHtmlClass: 'tex2jax_ignore',
+            processHtmlClass: 'tex2jax_process'
+        }
+    };
+</script>
+
+  
+  <meta name="google-site-verification" content="SwVgS1KjZmScXzgcGAsFKN5eksnUe79r12brKRMZLko">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TWETJLDW9Z"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-TWETJLDW9Z');
+  </script>
+</head>
+
+<body class="fixed-top-nav ">
+
+  <!-- Header -->
+
+  <header>
+
+  <!-- Nav Bar -->
+  <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top">
+    <div class="container">
+      
+      <a class="navbar-brand title font-weight-lighter" href="https://azareei.github.io/">
+        </a><a href="https://azareei.github.io/" class="fab"> <img style="height: 27px; width: auto; vertical-align: middle;padding-right: 10px;" src="/assets/img/logo.png" class="ai" alt="AZ">
+        </a>
+        <span class="font-weight-bold">Ahmad </span>    Zareei
+      
+      
+      <!-- Navbar Toogle -->
+      <button class="navbar-toggler collapsed ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar top-bar"></span>
+        <span class="icon-bar middle-bar"></span>
+        <span class="icon-bar bottom-bar"></span>
+      </button>
+      <div class="collapse navbar-collapse text-right" id="navbarNav">
+        <ul class="navbar-nav ml-auto flex-nowrap">
+          <!-- About -->
+          <li class="nav-item ">
+            <a class="nav-link" href="/">
+              about
+              
+            </a>
+          </li>
+          <!-- Other pages  | sort: "title" -->
+          
+          
+          
+          
+          
+          
+          
+          <li class="nav-item ">
+            <a class="nav-link" href="/publications/">
+              publications
+              
+            </a>
+          </li>
+          
+          
+          
+          <li class="nav-item ">
+            <a class="nav-link" href="/projects/">
+              research
+              
+            </a>
+          </li>
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          <!-- Blog -->
+          <li class="nav-item active">
+            <a class="nav-link" href="/blog/">
+              blog
+              
+            </a>
+          </li>
+          
+          
+          <div class="toggle-container">
+            <a id="light-toggle">
+              <i class="fas fa-moon"></i>
+              <i class="fas fa-sun"></i>
+            </a>
+          </div>
+          
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+</header>
+
+  <!-- Content -->
+
+  <div class="container mt-5">
+    
+
+<div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">World Models - Learning to Simulate Reality</h1>
+    <p class="post-meta">March 20, 2026</p>
+  </header>
+
+  <article class="post-content">
+    <h2 id="introduction">Introduction</h2>
+
+<p>Imagine an agent that can predict what happens next when it takes an action—not just in simple games, but in the complex, messy real world with all its physics, dynamics, and uncertainties. This is the promise of <strong>world models</strong>: systems that learn internal representations of how the world works, enabling them to simulate futures, plan actions, and ultimately behave intelligently without exhaustive trial-and-error in reality.</p>
+
+<p>While large language models (LLMs) have dominated AI headlines by predicting the next <em>word</em>, world models aim to predict the next <em>world state</em>. They’re learning to understand causality, physics, and temporal dynamics—capabilities crucial for embodied AI systems like robots and autonomous vehicles that must interact with the physical world.</p>
+
+<p>In 2026, world models are experiencing a renaissance. Major AI labs are releasing foundation world models that can generate interactive, physically consistent simulations. Companies like Waymo are using world models to train self-driving cars on scenarios that don’t exist yet. And researchers are discovering that scaled video generation models exhibit emergent properties as “general purpose simulators of the physical world.”</p>
+
+<p>This post provides a comprehensive journey through world models: from their roots in classical control theory to cutting-edge transformer-based architectures that can dream up entire virtual worlds. We’ll explore the mathematics, architectures, applications, and open challenges that define this exciting frontier of AI research.</p>
+
+<h2 id="what-are-world-models-and-why-do-they-matter">What Are World Models and Why Do They Matter?</h2>
+
+<h3 id="the-core-idea">The Core Idea</h3>
+
+<p>A <strong>world model</strong> is a learned representation of environment dynamics—a function that predicts how the state of the world evolves over time, potentially conditioned on actions taken by an agent. Formally, given a current state $s_t$ and action $a_t$, a world model predicts the next state $s_{t+1}$ and potentially the reward $r_t$:</p>
+
+\[s_{t+1}, r_t = f_{\text{world}}(s_t, a_t)\]
+
+<p>But world models are more than just predictors. They’re <strong>simulators</strong> that enable:</p>
+
+<ul>
+  <li>
+<strong>Planning</strong>: Simulate multiple possible futures to find the best action sequence</li>
+  <li>
+<strong>Sample efficiency</strong>: Learn from imagined experiences rather than costly real-world interactions</li>
+  <li>
+<strong>Counterfactual reasoning</strong>: Explore “what if” scenarios without consequences</li>
+  <li>
+<strong>Transfer learning</strong>: Build reusable knowledge about physics and dynamics</li>
+</ul>
+
+<h3 id="why-world-models-matter-now">Why World Models Matter Now</h3>
+
+<p>Several converging trends have made world models particularly relevant in 2026:</p>
+
+<ol>
+  <li>
+    <p><strong>Data efficiency imperative</strong>: In robotics and autonomous driving, real-world data collection is expensive and dangerous. World models enable training in simulation.</p>
+  </li>
+  <li>
+    <p><strong>Scaling successes</strong>: Just as scaling transformed language models, researchers are discovering that scaling world models on diverse video data produces emergent understanding of physics and causality.</p>
+  </li>
+  <li>
+    <p><strong>Embodied AI push</strong>: As AI moves from text to physical interaction (robots, AVs, drones), understanding dynamics becomes essential.</p>
+  </li>
+  <li>
+    <p><strong>Generative model advances</strong>: Breakthroughs in diffusion models and transformers have dramatically improved our ability to generate high-fidelity video predictions.</p>
+  </li>
+</ol>
+
+<p>According to multiple AI research outlooks for 2026, world models are positioned as “the next big leap beyond LLMs” with industry interest multiplying as companies realize their potential for everything from robotics to video games.</p>
+
+<h2 id="historical-context-from-control-theory-to-deep-learning">Historical Context: From Control Theory to Deep Learning</h2>
+
+<h3 id="classical-foundations-1960s-1990s">Classical Foundations (1960s-1990s)</h3>
+
+<p>The idea of modeling system dynamics has deep roots in control theory and optimal control. The foundation was laid by several key developments:</p>
+
+<p><strong>The Kalman Filter (1960)</strong>: Hungarian mathematician Rudolf Emil Kalman revolutionized state estimation by introducing the Kalman filter, which maintains a probabilistic belief about a system’s state by combining predictions from a dynamics model with noisy sensor measurements. The Kalman filter essentially maintains a “world model”—a set of states that evolve in time according to physical laws—while accounting for uncertainty and measurement noise.</p>
+
+<p>The algorithm operates in two phases:</p>
+<ol>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>
+<strong>Prediction</strong>: Use the dynamics model to predict the next state: $\hat{x}_{t</td>
+          <td>t-1} = F_t \hat{x}_{t-1</td>
+          <td>t-1} + B_t u_t$</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>
+<strong>Update</strong>: Correct the prediction using measurements: $\hat{x}_{t</td>
+          <td>t} = \hat{x}_{t</td>
+          <td>t-1} + K_t(z_t - H_t\hat{x}_{t</td>
+          <td>t-1})$</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ol>
+
+<p>where $K_t$ is the Kalman gain that optimally weights the prediction vs. measurement based on their respective uncertainties.</p>
+
+<p>The Kalman filter and its nonlinear extensions (Extended Kalman Filter, Unscented Kalman Filter) became fundamental tools in aerospace, navigation, and robotics. NASA used nonlinear Kalman filters in its space program as early as the 1960s, with Stanley Schmidt driving their adoption.</p>
+
+<p><strong>Model-Based Control</strong>: Together with the Linear-Quadratic Regulator (LQR), the Kalman filter solved the Linear-Quadratic-Gaussian (LQG) control problem—arguably one of the most fundamental problems in control theory. This established the paradigm of using models for optimal decision-making under uncertainty.</p>
+
+<h3 id="the-rise-of-machine-learning-1990s-2000s">The Rise of Machine Learning (1990s-2000s)</h3>
+
+<p>As machine learning matured, researchers began replacing hand-engineered dynamics models with learned ones:</p>
+
+<p><strong>System Identification</strong>: Neural networks were applied to learn dynamics models from data, particularly for nonlinear systems where analytic models were intractable.</p>
+
+<p><strong>Dyna Architecture (1990)</strong>: Richard Sutton introduced the Dyna architecture, which unified model-free and model-based reinforcement learning. Dyna alternates between:</p>
+<ol>
+  <li>Collecting real experience and updating the model</li>
+  <li>Generating synthetic “imagined” trajectories using the model</li>
+  <li>Updating the policy using both real and imagined data</li>
+</ol>
+
+<p>This established the key insight that models could amplify learning by generating synthetic experience for policy improvement.</p>
+
+<p><strong>Forward Models in Neuroscience</strong>: Research in computational neuroscience suggested that biological brains maintain internal models for motor control and prediction, inspiring similar approaches in AI.</p>
+
+<h3 id="the-deep-learning-revolution-2010s-present">The Deep Learning Revolution (2010s-Present)</h3>
+
+<p>The combination of deep learning, large-scale video datasets, and computational power enabled a new generation of world models:</p>
+
+<p><strong>Visual Prediction Models (2015-2018)</strong>: ConvLSTM and PredRNN architectures showed that recurrent networks could predict future video frames by learning spatiotemporal dynamics. These models combined convolutional networks for spatial feature extraction with LSTMs for temporal modeling.</p>
+
+<p><strong>World Models Paper (2018)</strong>: David Ha and Jürgen Schmidhuber’s influential “World Models” paper demonstrated that agents could learn to play games by training entirely inside learned world models—even on hallucinated “dream” data.</p>
+
+<p><strong>Transformer Era (2020s)</strong>: The success of transformers in language and vision inspired their application to world modeling, enabling long-range temporal dependencies and better scalability.</p>
+
+<p><strong>Foundation World Models (2024-2026)</strong>: Models like Google’s Genie, OpenAI’s Sora, and NVIDIA’s Cosmos represent a paradigm shift: large-scale world models trained on diverse internet video that can generate interactive, controllable simulations.</p>
+
+<h2 id="fundamentals-core-concepts-and-mathematics">Fundamentals: Core Concepts and Mathematics</h2>
+
+<h3 id="state-space-and-representations">State Space and Representations</h3>
+
+<p>At the heart of world modeling is the concept of <strong>state</strong>—a representation that captures all relevant information about the environment at a given time.</p>
+
+<p><strong>Observable vs. Latent States</strong>: In many real-world scenarios, we don’t have direct access to the true state. Instead, we receive high-dimensional observations (like images) from which we must infer the underlying state:</p>
+
+\[o_t = g(s_t) + \epsilon_t\]
+
+<p>where $o_t$ is the observation, $g$ is the observation function, and $\epsilon_t$ represents noise.</p>
+
+<p><strong>State Representation Learning</strong>: A key challenge in modern world modeling is learning compact state representations from raw sensory data. This typically involves:</p>
+<ul>
+  <li>
+<strong>Encoding</strong>: Map high-dimensional observations to low-dimensional latent states: $z_t = \text{Encoder}(o_t)$</li>
+  <li>
+<strong>Decoding</strong>: Reconstruct observations from latent states: $\hat{o}_t = \text{Decoder}(z_t)$</li>
+  <li>
+<strong>Dynamics</strong>: Model transitions in latent space: $z_{t+1} = f(z_t, a_t)$</li>
+</ul>
+
+<p>Working in learned latent space is crucial for efficiency—predicting pixel-level futures directly is computationally expensive and focuses on irrelevant details.</p>
+
+<h3 id="deterministic-vs-stochastic-dynamics">Deterministic vs. Stochastic Dynamics</h3>
+
+<p>World models must capture the inherent stochasticity in real-world dynamics:</p>
+
+<p><strong>Deterministic Models</strong>: Predict a single next state:
+\(s_{t+1} = f(s_t, a_t)\)</p>
+
+<p>These are simple but can’t capture multi-modal outcomes (e.g., a ball rolling left or right after hitting a corner).</p>
+
+<p><strong>Stochastic Models</strong>: Predict a distribution over possible next states:
+\(p(s_{t+1} | s_t, a_t)\)</p>
+
+<p>Common approaches include:</p>
+<ul>
+  <li>
+<strong>Gaussian distributions</strong>: $s_{t+1} \sim \mathcal{N}(\mu(s_t, a_t), \Sigma(s_t, a_t))$</li>
+  <li>
+<strong>Mixture models</strong>: Model multi-modal distributions as weighted combinations</li>
+  <li>
+<strong>Implicit models</strong>: Use generative models (VAEs, diffusion models) to sample from learned distributions</li>
+</ul>
+
+<p>The <strong>Recurrent State Space Model (RSSM)</strong> used in the Dreamer series cleverly decomposes state into deterministic and stochastic components:</p>
+<ul>
+  <li>
+<strong>Deterministic state</strong> $h_t$: Summarizes history via a recurrent network</li>
+  <li>
+<strong>Stochastic state</strong> $z_t$: Captures unpredictable variations</li>
+</ul>
+
+<p>This hybrid approach balances the ability to remember information across time steps (deterministic) with the flexibility to capture uncertainty (stochastic).</p>
+
+<h3 id="model-based-vs-model-free-learning">Model-Based vs. Model-Free Learning</h3>
+
+<p>The use of world models sits within the broader context of model-based reinforcement learning (MBRL):</p>
+
+<p><strong>Model-Free RL</strong>: Learn a policy or value function directly from experience, without an explicit world model. Examples: DQN, PPO, SAC.</p>
+<ul>
+  <li>
+<strong>Pros</strong>: Simple, direct optimization; works well with sufficient data</li>
+  <li>
+<strong>Cons</strong>: Sample inefficient; poor generalization</li>
+</ul>
+
+<p><strong>Model-Based RL</strong>: Learn a world model, then use it for planning or to generate synthetic data for policy learning. Examples: MuZero, DreamerV3, Dyna.</p>
+<ul>
+  <li>
+<strong>Pros</strong>: Sample efficient; enables planning; better generalization</li>
+  <li>
+<strong>Cons</strong>: Model errors can compound; more complex to implement</li>
+</ul>
+
+<p>The central challenge in MBRL is the <strong>model error problem</strong>: inaccuracies in the learned model can mislead policy learning, especially over long horizons. This has driven much recent research on robust world modeling.</p>
+
+<h3 id="partial-observability-and-belief-states">Partial Observability and Belief States</h3>
+
+<p>Real-world environments are often <strong>partially observable</strong>—the agent can’t see everything (e.g., objects behind walls, internal states of other agents). This is formalized as a Partially Observable Markov Decision Process (POMDP).</p>
+
+<p>In POMDPs, the agent must maintain a <strong>belief state</strong>—a distribution over possible true states given its observation history:
+\(b_t(s) = P(s_t = s | o_1, a_1, \ldots, o_t)\)</p>
+
+<p>Recurrent networks (LSTMs, GRUs) and attention mechanisms naturally maintain implicit belief states by aggregating information over time, making them well-suited for world modeling in partially observable settings.</p>
+
+<h2 id="the-original-world-models-ha--schmidhuber-2018">The Original World Models: Ha &amp; Schmidhuber (2018)</h2>
+
+<p>The 2018 “World Models” paper by David Ha and Jürgen Schmidhuber crystallized many ideas and demonstrated their power in a compelling way. Let’s examine this influential work in detail.</p>
+
+<h3 id="motivation-and-setup">Motivation and Setup</h3>
+
+<p>Ha and Schmidhuber tackled the CarRacing-v0 environment from OpenAI Gym—a task requiring visual perception and motor control. Their key insight: instead of learning a monolithic end-to-end policy, decompose the problem into perception, dynamics modeling, and control.</p>
+
+<h3 id="architecture-vision-memory-and-controller">Architecture: Vision, Memory, and Controller</h3>
+
+<p>The World Models architecture consists of three components:</p>
+
+<p><strong>1. Vision (V): Variational Autoencoder</strong></p>
+
+<p>The VAE compresses high-dimensional visual observations (96×96 RGB images) into a compact latent vector $z_t$ of dimension 32:</p>
+
+\[\begin{align}
+z_t &amp;\sim q_\phi(z | o_t) = \mathcal{N}(\mu_\phi(o_t), \Sigma_\phi(o_t)) \\
+\hat{o}_t &amp;= p_\theta(o | z_t)
+\end{align}\]
+
+<p>The VAE is trained with the standard ELBO objective:
+\(\mathcal{L}_{\text{VAE}} = \mathbb{E}_{q_\phi}[\log p_\theta(o | z)] - \beta \cdot D_{\text{KL}}(q_\phi(z|o) \| p(z))\)</p>
+
+<p>Using a VAE (rather than a standard autoencoder) provides:</p>
+<ul>
+  <li>A smooth latent space amenable to dynamics modeling</li>
+  <li>Uncertainty estimates through the learned distribution</li>
+  <li>Regularization against overfitting</li>
+</ul>
+
+<p><strong>2. Memory (M): MDN-RNN</strong></p>
+
+<p>The memory component predicts temporal dynamics in latent space using a Mixture Density Network combined with an LSTM:</p>
+
+\[p(z_{t+1} | z_t, a_t, h_t) = \sum_{k=1}^K \pi_k(z_t, a_t, h_t) \cdot \mathcal{N}(\mu_k(z_t, a_t, h_t), \Sigma_k(z_t, a_t, h_t))\]
+
+<p>where $h_t$ is the LSTM hidden state, and the mixture of Gaussians captures multi-modal dynamics.</p>
+
+<p>The MDN-RNN is trained to predict the next latent code and reward:
+\(\mathcal{L}_{\text{MDN-RNN}} = -\mathbb{E}[\log p(z_{t+1}, r_t | z_t, a_t, h_t)]\)</p>
+
+<p>The mixture density network is crucial because a single Gaussian would average over multiple possible futures, producing blurry predictions.</p>
+
+<p><strong>3. Controller (C): Linear Policy</strong></p>
+
+<p>Remarkably, the controller that selects actions is a simple linear function of the concatenated VAE latent code and RNN hidden state:</p>
+
+\[a_t = W_c [z_t, h_t] + b_c\]
+
+<p>This tiny controller (only 867 parameters!) is trained using evolutionary algorithms (CMA-ES) to maximize cumulative reward.</p>
+
+<h3 id="training-procedure">Training Procedure</h3>
+
+<p>Training proceeds in three independent stages:</p>
+
+<ol>
+  <li>
+<strong>Train VAE</strong>: Collect random rollouts, train VAE to reconstruct observations</li>
+  <li>
+<strong>Train MDN-RNN</strong>: Using VAE-encoded latent codes, train RNN to predict next latent and reward</li>
+  <li>
+<strong>Train Controller</strong>: Use evolutionary algorithms to optimize controller parameters, evaluating fitness in the real environment</li>
+</ol>
+
+<h3 id="learning-inside-dreams">Learning Inside Dreams</h3>
+
+<p>The most striking result: agents can be trained entirely inside hallucinated “dreams” generated by the world model:</p>
+
+<ol>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>The MDN-RNN generates synthetic rollouts: $z_{t+1}, r_t \sim p(z_{t+1}, r_t</td>
+          <td>z_t, a_t, h_t)$</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>The controller is optimized using only these synthetic experiences</li>
+  <li>The resulting policy transfers to the real environment!</li>
+</ol>
+
+<p>This demonstrates that the world model has captured sufficient environment structure for meaningful policy learning, despite never exactly matching reality.</p>
+
+<h3 id="impact-and-limitations">Impact and Limitations</h3>
+
+<p>The World Models paper had enormous influence, demonstrating:</p>
+<ul>
+  <li>The power of learning in latent space</li>
+  <li>That simple controllers can solve complex tasks when given good representations</li>
+  <li>The feasibility of training in simulated environments</li>
+</ul>
+
+<p>However, limitations included:</p>
+<ul>
+  <li>Three-stage training is cumbersome and suboptimal</li>
+  <li>No joint training or gradient flow between components</li>
+  <li>Limited to relatively simple environments</li>
+  <li>Model errors accumulate over long horizons</li>
+</ul>
+
+<p>These limitations motivated subsequent work, particularly the Dreamer series.</p>
+
+<h2 id="modern-architectures-from-transformers-to-diffusion-models">Modern Architectures: From Transformers to Diffusion Models</h2>
+
+<p>The field has evolved rapidly since 2018, with several architectural paradigms emerging for world modeling.</p>
+
+<h3 id="transformer-based-world-models">Transformer-Based World Models</h3>
+
+<p>Transformers’ ability to model long-range dependencies and scale effectively has made them a natural choice for world modeling.</p>
+
+<p><strong>Autoregressive Transformers</strong>: Models like GPT predict the next token in a sequence. Applied to world modeling, this becomes predicting the next frame or latent state token:</p>
+
+\[p(s_{1:T} | a_{1:T}) = \prod_{t=1}^T p(s_t | s_{&lt;t}, a_{\leq t})\]
+
+<p><strong>Key advantages</strong>:</p>
+<ul>
+  <li>Flexible context length via attention</li>
+  <li>Can incorporate multimodal inputs (images, actions, text)</li>
+  <li>Leverage pre-trained vision-language models</li>
+</ul>
+
+<p><strong>Examples</strong>:</p>
+<ul>
+  <li>
+<strong>DrivingGPT</strong>: Uses autoregressive transformers for multimodal driving world models, learning joint world modeling and planning through standard next-token prediction</li>
+  <li>
+<strong>Genie</strong>: Google’s foundation world model uses transformers to generate interactive environments from prompts</li>
+</ul>
+
+<p><strong>Tokenization Challenge</strong>: To apply transformers effectively, continuous states/images must be tokenized. Common approaches:</p>
+<ul>
+  <li>
+<strong>VQ-VAE</strong>: Discretize latent space into learned codebook</li>
+  <li>
+<strong>Patch embeddings</strong>: Treat image patches as tokens</li>
+  <li>
+<strong>Action tokens</strong>: Interleave image and action tokens in the sequence</li>
+</ul>
+
+<h3 id="diffusion-models-for-world-modeling">Diffusion Models for World Modeling</h3>
+
+<p>Diffusion models have achieved state-of-the-art results in image and video generation, making them natural candidates for world modeling.</p>
+
+<p><strong>Diffusion Process</strong>: Instead of directly predicting the next state, diffusion models learn to iteratively denoise from pure noise to the target state:</p>
+
+\[\begin{align}
+\text{Forward (noising)}: &amp;&amp; q(x_t | x_{t-1}) &amp;= \mathcal{N}(x_t; \sqrt{1-\beta_t} x_{t-1}, \beta_t I) \\
+\text{Reverse (denoising)}: &amp;&amp; p_\theta(x_{t-1} | x_t) &amp;= \mathcal{N}(x_{t-1}; \mu_\theta(x_t, t), \Sigma_\theta(x_t, t))
+\end{align}\]
+
+<p><strong>Conditional Generation</strong>: For world modeling, we condition the denoising process on past states and actions:
+\(\epsilon_\theta(x_t, t, s_{&lt;t}, a_{\leq t})\)</p>
+
+<p><strong>Diffusion World Models</strong>: Research has shown that diffusion models can effectively model environment dynamics, particularly for:</p>
+<ul>
+  <li>High-fidelity visual prediction</li>
+  <li>Capturing multi-modal futures</li>
+  <li>Handling complex, contact-rich dynamics</li>
+</ul>
+
+<p><strong>Classifier-Free Guidance</strong>: To incorporate action conditioning, diffusion world models use classifier-free guidance:
+\(\tilde{\epsilon}_\theta = \epsilon_\theta(x_t, \emptyset) + w \cdot (\epsilon_\theta(x_t, a) - \epsilon_\theta(x_t, \emptyset))\)</p>
+
+<p>where $w$ controls the strength of action conditioning.</p>
+
+<p><strong>Diffusion Transformers (DiT)</strong>: Recent work combines the strengths of both architectures:</p>
+<ul>
+  <li>Use transformer backbone for the denoising network</li>
+  <li>Apply to video tokens for scalable world modeling</li>
+  <li>
+<strong>UrbanDiT</strong>: A foundation model for urban spatiotemporal prediction that successfully scales up diffusion transformers for open-world learning</li>
+</ul>
+
+<p><strong>Trade-offs</strong>: Diffusion models offer high sample quality but are slower at inference due to iterative denoising. This has driven research into faster sampling methods for real-time applications.</p>
+
+<h3 id="video-prediction-models">Video Prediction Models</h3>
+
+<p>A parallel line of research has focused specifically on predicting future video frames—essentially world models in pixel space.</p>
+
+<p><strong>ConvLSTM (2015)</strong>: Pioneered spatiotemporal modeling by extending LSTMs with convolutional operations:
+\(\begin{align}
+i_t &amp;= \sigma(W_{xi} * X_t + W_{hi} * H_{t-1} + b_i) \\
+f_t &amp;= \sigma(W_{xf} * X_t + W_{hf} * H_{t-1} + b_f) \\
+C_t &amp;= f_t \odot C_{t-1} + i_t \odot \tanh(W_{xc} * X_t + W_{hc} * H_{t-1} + b_c) \\
+o_t &amp;= \sigma(W_{xo} * X_t + W_{ho} * H_{t-1} + b_o) \\
+H_t &amp;= o_t \odot \tanh(C_t)
+\end{align}\)</p>
+
+<p>where $*$ denotes convolution and $\odot$ element-wise multiplication.</p>
+
+<p><strong>PredRNN Series (2017-2019)</strong>: Introduced spatiotemporal memory cells that propagate information both horizontally (across time) and vertically (across layers), addressing the “deep-in-time” dilemma:</p>
+
+<ul>
+  <li>
+<strong>Spatiotemporal LSTM</strong>: Dual memory structure for better spatiotemporal modeling</li>
+  <li>
+<strong>PredRNN++</strong>: Added gradient highway units and Causal LSTM to address vanishing gradients</li>
+  <li>
+<strong>Memory Decoupling</strong>: Separate short-term and long-term dependencies</li>
+</ul>
+
+<p>These models capture temporal dynamics through recurrent connections but suffer from vanishing gradients and difficulty modeling long-range dependencies—limitations addressed by transformers.</p>
+
+<h3 id="spatial-world-models-3d-and-4d-representations">Spatial World Models: 3D and 4D Representations</h3>
+
+<p>For embodied AI applications like autonomous driving and robotics, modeling in 3D space is crucial. This has led to <strong>occupancy-centric world models</strong>.</p>
+
+<p><strong>3D Occupancy Representation</strong>: Instead of predicting 2D images, predict 3D voxel grids where each voxel indicates:</p>
+<ul>
+  <li>Whether it’s occupied</li>
+  <li>Semantic class (car, pedestrian, road, etc.)</li>
+  <li>Potentially velocity and other attributes</li>
+</ul>
+
+<p><strong>4D Occupancy Forecasting</strong>: Predict how 3D occupancy evolves over time, enabling:</p>
+<ul>
+  <li>Geometry-aware perception</li>
+  <li>Long-term scene forecasting</li>
+  <li>Collision avoidance planning</li>
+</ul>
+
+<p><strong>Recent Developments</strong>:</p>
+
+<p><strong>OccWorld (2024)</strong>: Formulated 4D occupancy forecasting as learning to predict future 3D occupancy from past frames, using occupancy as a richer scene representation than bounding boxes.</p>
+
+<p><strong>GaussianWorld (2026)</strong>: Uses explicit 3D Gaussians (from 3D Gaussian Splatting) for scene representation instead of implicit voxels, enabling:</p>
+<ul>
+  <li>Continuous, differentiable scene representation</li>
+  <li>Explicit object movement modeling</li>
+  <li>Streaming prediction for autonomous driving</li>
+</ul>
+
+<p><strong>SparseWorld (2025)</strong>: Employs sparse and dynamic queries for flexible, adaptive, and efficient 4D occupancy modeling, addressing computational costs of dense voxel representations.</p>
+
+<p><strong>Key Advantages of Spatial World Models</strong>:</p>
+<ol>
+  <li>
+<strong>Geometry consistency</strong>: Maintain 3D structure across viewpoints</li>
+  <li>
+<strong>Multi-view support</strong>: Predict multiple camera views consistently</li>
+  <li>
+<strong>Action-conditioned prediction</strong>: Simulate effects of ego-vehicle maneuvers</li>
+  <li>
+<strong>Occlusion handling</strong>: Model hidden spaces and object permanence</li>
+</ol>
+
+<h2 id="large-scale-foundation-world-models-2024-2026">Large-Scale Foundation World Models (2024-2026)</h2>
+
+<p>Perhaps the most exciting recent development is the emergence of <strong>foundation world models</strong>—large-scale models trained on diverse internet video that exhibit emergent world understanding.</p>
+
+<h3 id="google-genie-series">Google Genie Series</h3>
+
+<p><strong>Genie 1 (February 2024)</strong>: A groundbreaking “foundation world model” that can generate playable, action-controllable virtual worlds from single images, photographs, or sketches—without requiring action labels during training.</p>
+
+<p><strong>Architecture</strong>:</p>
+<ul>
+  <li>Spatiotemporal transformer for video generation</li>
+  <li>Latent action model that discovers action space from video</li>
+  <li>VQ-VAE for video tokenization</li>
+</ul>
+
+<p><strong>Training</strong>: 200K hours of internet gameplay videos, learning to infer latent actions from frame transitions.</p>
+
+<p><strong>Genie 2 (December 2024)</strong>: Scaled up significantly with improved consistency and interactivity.</p>
+
+<p><strong>Genie 3 (August 2025)</strong>: The first <strong>real-time interactive world model</strong>, generating navigable 3D environments at 24 FPS in 720p resolution. Unlike previous systems requiring explicit 3D representations, Genie 3 learns physics purely from observation—a major milestone showing emergent understanding of 3D space and dynamics from 2D video.</p>
+
+<h3 id="openai-sora">OpenAI Sora</h3>
+
+<p><strong>Sora (February 2024)</strong>: Demonstrated that scaling video generation models with diffusion transformers produces remarkable physical understanding. Sora can generate up to one minute of high-fidelity video with complex camera motion, multiple characters, and physics-based interactions.</p>
+
+<p><strong>Key Insight</strong>: OpenAI’s research suggests that “video generation models are emerging as a promising path toward building general purpose simulators of the physical world.”</p>
+
+<p><strong>Architecture</strong>:</p>
+<ul>
+  <li>Diffusion transformer trained on video patches</li>
+  <li>Variable duration, resolution, and aspect ratio support</li>
+  <li>Text and image conditioning</li>
+</ul>
+
+<p><strong>Emergent Capabilities</strong>: Sora exhibits surprising understanding of:</p>
+<ul>
+  <li>Object permanence (objects exist when occluded)</li>
+  <li>3D consistency across viewpoint changes</li>
+  <li>Physical interactions and collisions</li>
+  <li>Cause and effect relationships</li>
+</ul>
+
+<p><strong>Limitations</strong>: Sora sometimes makes physics errors (e.g., glass not shattering when hit), highlighting that current world models still imperfectly capture physical laws.</p>
+
+<p><strong>Sora 2 (2025)</strong>: Improved physics modeling, added audio generation, and multi-scene control with consumer access.</p>
+
+<h3 id="meta-v-jepa">Meta V-JEPA</h3>
+
+<p><strong>Joint-Embedding Predictive Architecture (JEPA)</strong>: Yann LeCun’s proposed architecture for learning world models by predicting representations rather than raw pixels.</p>
+
+<p><strong>Key Idea</strong>: Instead of reconstructing detailed pixel values (which wastes capacity on irrelevant details), predict abstract representations of future states:</p>
+
+\[\text{Encoder}(x_{t+1}) \approx \text{Predictor}(\text{Encoder}(x_t), a_t)\]
+
+<p><strong>V-JEPA (2024)</strong>: Learns by predicting masked regions of video in representation space, excelling at understanding detailed object interactions without generating pixels.</p>
+
+<p><strong>V-JEPA 2 (January 2026)</strong>: Achieved state-of-the-art results after training on 1M+ hours of internet video, with 65-80% success on robotics pick-and-place tasks using only 62 hours of robot training data—demonstrating powerful transfer from video to physical interaction.</p>
+
+<p><strong>Advantages of JEPA</strong>:</p>
+<ul>
+  <li>Energy efficient (no pixel generation)</li>
+  <li>Focuses on semantic understanding</li>
+  <li>Natural uncertainty representation in latent space</li>
+  <li>Avoids common failure modes of generative models (e.g., hallucination)</li>
+</ul>
+
+<h3 id="nvidia-cosmos">NVIDIA Cosmos</h3>
+
+<p><strong>Cosmos 1.0 (2025)</strong>: NVIDIA’s open-weight world foundation model platform focused on physical AI, offering models and benchmarks for:</p>
+<ul>
+  <li>Autonomous driving</li>
+  <li>Robot manipulation</li>
+  <li>3D consistency</li>
+  <li>Physical alignment</li>
+</ul>
+
+<p><strong>Key Features</strong>:</p>
+<ul>
+  <li>Generates realistic physics-based training data</li>
+  <li>Supports multiple sensor modalities (camera, lidar, radar)</li>
+  <li>Efficient video tokenization and generation</li>
+  <li>Integration with simulation environments</li>
+</ul>
+
+<p><strong>Purpose</strong>: Enable cost-effective training and testing of autonomous systems by generating vast amounts of realistic synthetic data.</p>
+
+<h3 id="world-labs">World Labs</h3>
+
+<p>Fei-Fei Li’s World Labs (2024-2025) recently launched <strong>Marble</strong>, a system to create 3D worlds from text, images, video, or coarse 3D layouts—focusing on spatial intelligence and scene understanding.</p>
+
+<h3 id="the-scaling-hypothesis">The Scaling Hypothesis</h3>
+
+<p>These foundation models support a key hypothesis: <strong>world models exhibit favorable scaling properties</strong>. Just as LLMs improved dramatically with scale, world models show emergent capabilities when trained on diverse video data with sufficient compute:</p>
+
+<ul>
+  <li>Better physics understanding</li>
+  <li>Improved long-term consistency</li>
+  <li>Generalization to novel scenarios</li>
+  <li>Action-conditioned generation</li>
+</ul>
+
+<p>However, scaling world models faces unique challenges compared to language:</p>
+<ul>
+  <li>Video data is higher bandwidth than text</li>
+  <li>Physics understanding requires 3D reasoning</li>
+  <li>Evaluation is more complex than language metrics</li>
+</ul>
+
+<h2 id="the-dreamer-series-state-of-the-art-mbrl">The Dreamer Series: State-of-the-Art MBRL</h2>
+
+<p>While foundation world models focus on large-scale video generation, the Dreamer series represents the cutting edge of world models for reinforcement learning.</p>
+
+<h3 id="dreamerv1-2020">DreamerV1 (2020)</h3>
+
+<p>Introduced the <strong>Recurrent State Space Model (RSSM)</strong> that learns both deterministic and stochastic latent dynamics:</p>
+
+<p><strong>Representation model</strong> (encode observations):
+\(h_t = f(h_{t-1}, z_{t-1}, a_{t-1})\)
+\(z_t \sim q(z_t | h_t, o_t)\)</p>
+
+<p><strong>Transition model</strong> (predict dynamics):
+\(\hat{z}_t \sim p(z_t | h_t)\)</p>
+
+<p><strong>Observation model</strong> (decode to observations):
+\(\hat{o}_t \sim p(o_t | h_t, z_t)\)</p>
+
+<p><strong>Reward model</strong>:
+\(\hat{r}_t \sim p(r_t | h_t, z_t)\)</p>
+
+<p><strong>Key innovation</strong>: Train actor and critic networks purely on imagined rollouts in latent space, using gradients from the learned world model.</p>
+
+<h3 id="dreamerv2-2021">DreamerV2 (2021)</h3>
+
+<p>Improved upon V1 with:</p>
+<ul>
+  <li>
+<strong>Categorical latent states</strong>: Replace Gaussian latents with discrete distributions</li>
+  <li>
+<strong>KL balancing</strong>: Better trade-off between reconstruction and dynamics prediction</li>
+  <li>
+<strong>Simplified architecture</strong>: Single world model for all tasks</li>
+</ul>
+
+<p>Achieved human-level performance on Atari from pixels using only 2 hours of gameplay—remarkable sample efficiency.</p>
+
+<h3 id="dreamerv3-2023">DreamerV3 (2023)</h3>
+
+<p>The current state-of-the-art, DreamerV3 is a <strong>general-purpose algorithm</strong> that masters diverse control tasks from a single configuration:</p>
+<ul>
+  <li>Atari games</li>
+  <li>DMC continuous control</li>
+  <li>Minecraft (first agent to collect diamonds from scratch without human data!)</li>
+  <li>Robotic manipulation</li>
+</ul>
+
+<p><strong>Key innovations</strong>:</p>
+<ol>
+  <li>
+<strong>Symlog predictions</strong>: Robust value and reward prediction via symmetric logarithm transformations</li>
+  <li>
+<strong>Improved normalization</strong>: EMA-based normalization for stability across scales</li>
+  <li>
+<strong>Automatic entropy tuning</strong>: Adaptive exploration without manual tuning</li>
+</ol>
+
+<p><strong>Results</strong>: Outperforms specialized algorithms on their respective domains while using a single hyperparameter configuration—a major milestone toward general-purpose MBRL.</p>
+
+<h3 id="dreamer4-2025">Dreamer4 (2025)</h3>
+
+<p><strong>Scalable World Model Training</strong>: Dreamer4 extends the framework to much larger scales:</p>
+<ul>
+  <li>Fast, accurate world model with efficient transformer architecture</li>
+  <li>
+<strong>Real-time interactive inference</strong> on a single GPU</li>
+  <li>Trained on offline data without environment interaction</li>
+</ul>
+
+<p><strong>Minecraft Achievement</strong>: First agent to obtain diamonds in Minecraft purely from offline data, outperforming OpenAI’s VPT by 100x in data efficiency.</p>
+
+<p>The Dreamer series demonstrates that world models can serve as powerful foundations for reinforcement learning across diverse domains.</p>
+
+<h2 id="applications-where-world-models-make-impact">Applications: Where World Models Make Impact</h2>
+
+<h3 id="autonomous-driving">Autonomous Driving</h3>
+
+<p>World models have become central to autonomous vehicle development in 2025-2026:</p>
+
+<p><strong>Waymo World Model (February 2026)</strong>: Built on Google DeepMind’s Genie 3, Waymo’s world model generates hyper-realistic driving simulations with camera and lidar data for training on rare, dangerous scenarios:</p>
+<ul>
+  <li>Wrong-way drivers</li>
+  <li>Objects falling from trucks</li>
+  <li>Flooded roads</li>
+  <li>Unusual pedestrian behavior</li>
+</ul>
+
+<p><strong>Key Benefits</strong>:</p>
+<ul>
+  <li>
+<strong>Safety</strong>: Test dangerous scenarios without risk</li>
+  <li>
+<strong>Coverage</strong>: Generate edge cases rarely seen in real data</li>
+  <li>
+<strong>Efficiency</strong>: Cheaper than real-world data collection</li>
+  <li>
+<strong>Iteration speed</strong>: Rapidly test system changes</li>
+</ul>
+
+<p><strong>Technical Approach</strong>: Action-conditioned video generation where the AV’s planned trajectory influences the predicted future scene, enabling counterfactual analysis (“What if I had braked harder?”).</p>
+
+<p><strong>Industry Adoption</strong>: As of 2026, world models are recognized as a key enabling technology for autonomous driving, with Gartner listing physical AI as a top strategic technology trend.</p>
+
+<h3 id="robotics-and-manipulation">Robotics and Manipulation</h3>
+
+<p>World models enable robots to learn complex manipulation skills with far fewer real-world interactions:</p>
+
+<p><strong>Simulation-to-Reality Transfer</strong>: Train policies in simulated worlds, then transfer to real robots:</p>
+<ul>
+  <li>Physics-informed world models learn from simulation</li>
+  <li>Domain randomization improves robustness</li>
+  <li>Fine-tuning with limited real data bridges the sim-to-real gap</li>
+</ul>
+
+<p><strong>V-JEPA for Robotics</strong>: Meta’s V-JEPA 2 achieved 65-80% success on pick-and-place tasks with unfamiliar objects after training on only 62 hours of robot data—the world model pre-trained on internet video provided rich priors about object interactions.</p>
+
+<p><strong>Contact-Rich Manipulation</strong>: World models must capture:</p>
+<ul>
+  <li>Contact dynamics and friction</li>
+  <li>Deformable object behavior</li>
+  <li>Multi-object interactions</li>
+  <li>Occlusions and partial observability</li>
+</ul>
+
+<p><strong>Open Challenges</strong>: Robots require extremely high precision; small model errors can cause failure. Current research focuses on:</p>
+<ul>
+  <li>Uncertainty quantification</li>
+  <li>Physics-informed architectures</li>
+  <li>Multi-modal world models (vision + force/torque sensing)</li>
+</ul>
+
+<h3 id="game-playing-and-interactive-environments">Game Playing and Interactive Environments</h3>
+
+<p>World models have long been applied to game playing, with recent dramatic advances:</p>
+
+<p><strong>MuZero (2020)</strong>: DeepMind’s MuZero learns to play games (Go, chess, shogi, Atari) at superhuman level without knowing the rules, learning a world model that predicts policy, value, and rewards without reconstructing observations.</p>
+
+<p><strong>Minecraft World Models</strong>:</p>
+<ul>
+  <li>
+<strong>MineWorld (2025)</strong>: Real-time, open-source interactive world model driven by visual-action autoregressive transformers</li>
+  <li>
+<strong>Solaris (2026)</strong>: Multiplayer world model with 12.64M frames, enabling consistent multi-view simulation and multiplayer interactions</li>
+  <li>
+<strong>Oasis</strong>: Technical demo of real-time generative Minecraft gameplay</li>
+</ul>
+
+<p><strong>Procedural Content Generation</strong>: World models enable:</p>
+<ul>
+  <li>Generating novel game levels</li>
+  <li>Creating interactive NPCs with realistic behavior</li>
+  <li>Dynamic difficulty adjustment</li>
+</ul>
+
+<h3 id="scientific-simulation">Scientific Simulation</h3>
+
+<p>World models are increasingly applied to scientific domains:</p>
+
+<p><strong>Weather and Climate</strong>: World models for global weather prediction, learning atmospheric dynamics from historical data.</p>
+
+<p><strong>Molecular Dynamics</strong>: Predicting molecular conformations and interactions for drug discovery.</p>
+
+<p><strong>Urban Planning</strong>: UrbanDiT and similar models predict traffic flow, pedestrian movement, and urban dynamics for city planning.</p>
+
+<p><strong>Physics Simulation</strong>: Learning approximations to expensive physics simulations (fluid dynamics, structural mechanics) for faster engineering iteration.</p>
+
+<h2 id="technical-deep-dive-training-and-optimization">Technical Deep Dive: Training and Optimization</h2>
+
+<h3 id="training-objectives">Training Objectives</h3>
+
+<p>World models are typically trained to maximize likelihood of observed transitions:</p>
+
+\[\max_\theta \mathbb{E}_{(s_t, a_t, s_{t+1}) \sim \mathcal{D}} [\log p_\theta(s_{t+1} | s_t, a_t)]\]
+
+<p><strong>Reconstruction Loss</strong>: For image-based observations:
+\(\mathcal{L}_{\text{recon}} = \mathbb{E}[\|o_{t+1} - \hat{o}_{t+1}\|^2]\)</p>
+
+<p><strong>KL Regularization</strong>: For VAE-based models, regularize latent distributions:
+\(\mathcal{L}_{\text{KL}} = D_{\text{KL}}(q(z | o) \| p(z))\)</p>
+
+<p><strong>Reward Prediction</strong>: For RL applications:
+\(\mathcal{L}_{\text{reward}} = \mathbb{E}[\|r_t - \hat{r}_t\|^2]\)</p>
+
+<p><strong>Total Objective</strong>: Weighted combination:
+\(\mathcal{L}_{\text{world}} = \mathcal{L}_{\text{recon}} + \beta \mathcal{L}_{\text{KL}} + \gamma \mathcal{L}_{\text{reward}}\)</p>
+
+<h3 id="handling-multi-step-prediction">Handling Multi-Step Prediction</h3>
+
+<p>A key challenge: how to train models that can predict multiple steps into the future?</p>
+
+<p><strong>Teacher Forcing</strong>: Use ground-truth previous states during training:
+\(\hat{s}_{t+1} = f_\theta(s_t, a_t) \quad \text{(using true } s_t \text{)}\)</p>
+
+<p>This is efficient but creates train-test mismatch—at test time, the model uses its own predictions.</p>
+
+<p><strong>Scheduled Sampling</strong>: Gradually mix ground-truth and predicted states during training to reduce mismatch.</p>
+
+<p><strong>Free Running</strong>: Train on full rollouts using predicted states (no teacher forcing). This is more robust but harder to optimize due to compounding errors.</p>
+
+<p><strong>Latent Overshooting</strong> (used in Dreamer): Predict multiple steps ahead in latent space and supervise all predictions:
+\(\mathcal{L}_{\text{overshoot}} = \sum_{k=1}^K \|\text{Encode}(o_{t+k}) - \text{Predict}^k(z_t, a_{t:t+k})\|^2\)</p>
+
+<p>This regularizes the model to maintain accuracy over multiple steps.</p>
+
+<h3 id="dealing-with-compounding-errors">Dealing with Compounding Errors</h3>
+
+<p><strong>The Fundamental Challenge</strong>: Small one-step prediction errors compound exponentially over long horizons:</p>
+
+<p>If single-step error is $\epsilon$, then $H$-step error can grow as $\epsilon^H$ in worst case.</p>
+
+<p><strong>Mitigation Strategies</strong>:</p>
+
+<ol>
+  <li>
+<strong>Latent Space Modeling</strong>: Learn smooth latent representations where errors compound more slowly</li>
+  <li>
+<strong>Hierarchical Modeling</strong>: Predict at multiple temporal scales (high-level plans + low-level details)</li>
+  <li>
+<strong>Error Correction</strong>: Use model ensembles or uncertainty-aware planning to correct trajectory</li>
+  <li>
+<strong>Hybrid Approaches</strong>: Combine world model with model-free components</li>
+  <li>
+<strong>Periodic Re-planning</strong>: Re-plan frequently using fresh observations (Model Predictive Control)</li>
+</ol>
+
+<p><strong>Recent Advances</strong>: Research on “learning to combat compounding error” focuses on:</p>
+<ul>
+  <li>Training objectives that explicitly penalize accumulated error</li>
+  <li>Architectures that maintain long-term consistency</li>
+  <li>Uncertainty estimation to detect when the model becomes unreliable</li>
+</ul>
+
+<h3 id="multi-modal-dynamics-and-mixture-models">Multi-Modal Dynamics and Mixture Models</h3>
+
+<p>Real-world dynamics are often multi-modal—multiple possible futures exist:</p>
+
+<p><strong>Problem</strong>: Single Gaussian predictions average over modes, producing blurry, unrealistic predictions.</p>
+
+<p><strong>Solution</strong>: Mixture Density Networks model the distribution as a mixture:
+\(p(s_{t+1} | s_t, a_t) = \sum_{k=1}^K \pi_k \mathcal{N}(\mu_k, \Sigma_k)\)</p>
+
+<p>where $\pi_k$, $\mu_k$, $\Sigma_k$ are predicted by the network.</p>
+
+<p><strong>Alternatives</strong>:</p>
+<ul>
+  <li>
+<strong>Implicit generative models</strong>: VAEs, GANs, diffusion models naturally sample from multi-modal distributions</li>
+  <li>
+<strong>Categorical latents</strong>: Dreamer uses categorical distributions in latent space to capture discrete variations</li>
+</ul>
+
+<h3 id="sample-efficiency-and-data-requirements">Sample Efficiency and Data Requirements</h3>
+
+<p><strong>MBRL’s Promise</strong>: World models should enable learning from less data by:</p>
+<ol>
+  <li>Generating synthetic experience for policy learning</li>
+  <li>Transferring knowledge from pre-trained models</li>
+  <li>Enabling offline learning from static datasets</li>
+</ol>
+
+<p><strong>Reality Check</strong>: Current world models require:</p>
+<ul>
+  <li>
+<strong>Foundation models</strong>: Millions to billions of video frames for pre-training</li>
+  <li>
+<strong>Task-specific models</strong>: Thousands to millions of environment steps</li>
+  <li>
+<strong>Fine-tuning</strong>: Often hundreds to thousands of additional samples</li>
+</ul>
+
+<p><strong>Improving Sample Efficiency</strong>:</p>
+<ul>
+  <li>Pre-train on diverse data, fine-tune on task</li>
+  <li>Model-based data augmentation</li>
+  <li>Causal reasoning to focus on relevant variables</li>
+  <li>Hierarchical and compositional world models</li>
+</ul>
+
+<h2 id="implementation-guide">Implementation Guide</h2>
+
+<h3 id="popular-frameworks-and-libraries">Popular Frameworks and Libraries</h3>
+
+<p><strong>Dreamer Implementations</strong>:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># DreamerV3 (official implementation)
+# https://github.com/danijar/dreamerv3
+</span><span class="kn">import</span> <span class="n">dreamerv3</span>
+
+<span class="n">config</span> <span class="o">=</span> <span class="n">dreamerv3</span><span class="p">.</span><span class="n">Config</span><span class="p">.</span><span class="nf">from_yaml</span><span class="p">(</span><span class="sh">'</span><span class="s">configs/dreamerv3.yaml</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">agent</span> <span class="o">=</span> <span class="n">dreamerv3</span><span class="p">.</span><span class="nc">Agent</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+<span class="n">agent</span><span class="p">.</span><span class="nf">train</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><strong>World Models (PyTorch)</strong>:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Classical World Models implementation
+# https://github.com/ctallec/world-models
+</span><span class="kn">from</span> <span class="n">worldmodels</span> <span class="kn">import</span> <span class="n">VAE</span><span class="p">,</span> <span class="n">MDNRNN</span><span class="p">,</span> <span class="n">Controller</span>
+
+<span class="c1"># Train VAE
+</span><span class="n">vae</span> <span class="o">=</span> <span class="nc">VAE</span><span class="p">(</span><span class="n">latent_dim</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span>
+<span class="n">vae</span><span class="p">.</span><span class="nf">train</span><span class="p">(</span><span class="n">observations</span><span class="p">)</span>
+
+<span class="c1"># Train MDN-RNN
+</span><span class="n">mdrnn</span> <span class="o">=</span> <span class="nc">MDNRNN</span><span class="p">(</span><span class="n">latent_dim</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">action_dim</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="o">=</span><span class="mi">256</span><span class="p">)</span>
+<span class="n">mdrnn</span><span class="p">.</span><span class="nf">train</span><span class="p">(</span><span class="n">latents</span><span class="p">,</span> <span class="n">actions</span><span class="p">,</span> <span class="n">next_latents</span><span class="p">,</span> <span class="n">rewards</span><span class="p">)</span>
+
+<span class="c1"># Train controller with CMA-ES
+</span><span class="n">controller</span> <span class="o">=</span> <span class="nc">Controller</span><span class="p">(</span><span class="n">obs_dim</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span> <span class="n">action_dim</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">controller</span><span class="p">.</span><span class="nf">train</span><span class="p">(</span><span class="n">vae</span><span class="p">,</span> <span class="n">mdrnn</span><span class="p">,</span> <span class="n">env</span><span class="p">,</span> <span class="n">generations</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><strong>Diffusion Models for Dynamics</strong>:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Using diffusers library for video prediction
+</span><span class="kn">from</span> <span class="n">diffusers</span> <span class="kn">import</span> <span class="n">DDPMScheduler</span><span class="p">,</span> <span class="n">UNet3DConditionModel</span>
+
+<span class="c1"># Define 3D UNet for video
+</span><span class="n">model</span> <span class="o">=</span> <span class="nc">UNet3DConditionModel</span><span class="p">(</span>
+    <span class="n">sample_size</span><span class="o">=</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">),</span>
+    <span class="n">in_channels</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">out_channels</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">layers_per_block</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">block_out_channels</span><span class="o">=</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="mi">512</span><span class="p">),</span>
+    <span class="n">down_block_types</span><span class="o">=</span><span class="p">(</span><span class="sh">"</span><span class="s">DownBlock3D</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">DownBlock3D</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">DownBlock3D</span><span class="sh">"</span><span class="p">),</span>
+    <span class="n">up_block_types</span><span class="o">=</span><span class="p">(</span><span class="sh">"</span><span class="s">UpBlock3D</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">UpBlock3D</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">UpBlock3D</span><span class="sh">"</span><span class="p">),</span>
+<span class="p">)</span>
+
+<span class="c1"># Diffusion scheduler
+</span><span class="n">noise_scheduler</span> <span class="o">=</span> <span class="nc">DDPMScheduler</span><span class="p">(</span><span class="n">num_train_timesteps</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+
+<span class="c1"># Training loop
+</span><span class="k">for</span> <span class="n">batch</span> <span class="ow">in</span> <span class="n">dataloader</span><span class="p">:</span>
+    <span class="c1"># Sample timestep and noise
+</span>    <span class="n">timesteps</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nf">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">noise_scheduler</span><span class="p">.</span><span class="n">config</span><span class="p">.</span><span class="n">num_train_timesteps</span><span class="p">,</span> <span class="p">(</span><span class="n">batch</span><span class="p">.</span><span class="nf">size</span><span class="p">(</span><span class="mi">0</span><span class="p">),))</span>
+    <span class="n">noise</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nf">randn_like</span><span class="p">(</span><span class="n">batch</span><span class="p">)</span>
+    <span class="n">noisy_batch</span> <span class="o">=</span> <span class="n">noise_scheduler</span><span class="p">.</span><span class="nf">add_noise</span><span class="p">(</span><span class="n">batch</span><span class="p">,</span> <span class="n">noise</span><span class="p">,</span> <span class="n">timesteps</span><span class="p">)</span>
+
+    <span class="c1"># Predict noise
+</span>    <span class="n">pred_noise</span> <span class="o">=</span> <span class="nf">model</span><span class="p">(</span><span class="n">noisy_batch</span><span class="p">,</span> <span class="n">timesteps</span><span class="p">,</span> <span class="n">conditioning</span><span class="p">).</span><span class="n">sample</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="nf">mse_loss</span><span class="p">(</span><span class="n">pred_noise</span><span class="p">,</span> <span class="n">noise</span><span class="p">)</span>
+    <span class="n">loss</span><span class="p">.</span><span class="nf">backward</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h3 id="building-a-simple-world-model">Building a Simple World Model</h3>
+
+<p>Let’s implement a basic world model for a simple environment:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">torch</span>
+<span class="kn">import</span> <span class="n">torch.nn</span> <span class="k">as</span> <span class="n">nn</span>
+<span class="kn">import</span> <span class="n">torch.nn.functional</span> <span class="k">as</span> <span class="n">F</span>
+
+<span class="k">class</span> <span class="nc">SimpleWorldModel</span><span class="p">(</span><span class="n">nn</span><span class="p">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">obs_dim</span><span class="p">,</span> <span class="n">action_dim</span><span class="p">,</span> <span class="n">latent_dim</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="o">=</span><span class="mi">512</span><span class="p">):</span>
+        <span class="nf">super</span><span class="p">().</span><span class="nf">__init__</span><span class="p">()</span>
+
+        <span class="c1"># Encoder: observations -&gt; latent state
+</span>        <span class="n">self</span><span class="p">.</span><span class="n">encoder</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="nc">Sequential</span><span class="p">(</span>
+            <span class="n">nn</span><span class="p">.</span><span class="nc">Linear</span><span class="p">(</span><span class="n">obs_dim</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">),</span>
+            <span class="n">nn</span><span class="p">.</span><span class="nc">ReLU</span><span class="p">(),</span>
+            <span class="n">nn</span><span class="p">.</span><span class="nc">Linear</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">),</span>
+            <span class="n">nn</span><span class="p">.</span><span class="nc">ReLU</span><span class="p">(),</span>
+            <span class="n">nn</span><span class="p">.</span><span class="nc">Linear</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">latent_dim</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># mean and logvar
+</span>        <span class="p">)</span>
+
+        <span class="c1"># Dynamics: (latent_state, action) -&gt; next_latent_state
+</span>        <span class="n">self</span><span class="p">.</span><span class="n">dynamics_rnn</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="nc">GRUCell</span><span class="p">(</span><span class="n">latent_dim</span> <span class="o">+</span> <span class="n">action_dim</span><span class="p">,</span> <span class="n">latent_dim</span><span class="p">)</span>
+
+        <span class="c1"># Decoder: latent state -&gt; observations
+</span>        <span class="n">self</span><span class="p">.</span><span class="n">decoder</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="nc">Sequential</span><span class="p">(</span>
+            <span class="n">nn</span><span class="p">.</span><span class="nc">Linear</span><span class="p">(</span><span class="n">latent_dim</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">),</span>
+            <span class="n">nn</span><span class="p">.</span><span class="nc">ReLU</span><span class="p">(),</span>
+            <span class="n">nn</span><span class="p">.</span><span class="nc">Linear</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">),</span>
+            <span class="n">nn</span><span class="p">.</span><span class="nc">ReLU</span><span class="p">(),</span>
+            <span class="n">nn</span><span class="p">.</span><span class="nc">Linear</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">obs_dim</span><span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Reward predictor
+</span>        <span class="n">self</span><span class="p">.</span><span class="n">reward_head</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="nc">Sequential</span><span class="p">(</span>
+            <span class="n">nn</span><span class="p">.</span><span class="nc">Linear</span><span class="p">(</span><span class="n">latent_dim</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">),</span>
+            <span class="n">nn</span><span class="p">.</span><span class="nc">ReLU</span><span class="p">(),</span>
+            <span class="n">nn</span><span class="p">.</span><span class="nc">Linear</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">encode</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">obs</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">Encode observation to latent distribution.</span><span class="sh">"""</span>
+        <span class="n">h</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">encoder</span><span class="p">(</span><span class="n">obs</span><span class="p">)</span>
+        <span class="n">mean</span><span class="p">,</span> <span class="n">logvar</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nf">chunk</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">mean</span><span class="p">,</span> <span class="n">logvar</span>
+
+    <span class="k">def</span> <span class="nf">reparameterize</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">mean</span><span class="p">,</span> <span class="n">logvar</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">Sample from latent distribution using reparameterization trick.</span><span class="sh">"""</span>
+        <span class="n">std</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nf">exp</span><span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">logvar</span><span class="p">)</span>
+        <span class="n">eps</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nf">randn_like</span><span class="p">(</span><span class="n">std</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">mean</span> <span class="o">+</span> <span class="n">eps</span> <span class="o">*</span> <span class="n">std</span>
+
+    <span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">latent</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">Decode latent state to observation.</span><span class="sh">"""</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="nf">decoder</span><span class="p">(</span><span class="n">latent</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">predict_reward</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">latent</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">Predict reward from latent state.</span><span class="sh">"""</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="nf">reward_head</span><span class="p">(</span><span class="n">latent</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">obs</span><span class="p">,</span> <span class="n">actions</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">
+        Full forward pass: encode, predict dynamics, decode.
+
+        Args:
+            obs: [batch_size, seq_len, obs_dim]
+            actions: [batch_size, seq_len, action_dim]
+
+        Returns:
+            predictions: dict with reconstructed obs, predicted rewards, etc.
+        </span><span class="sh">"""</span>
+        <span class="n">batch_size</span><span class="p">,</span> <span class="n">seq_len</span> <span class="o">=</span> <span class="n">obs</span><span class="p">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+
+        <span class="c1"># Encode initial observation
+</span>        <span class="n">mean</span><span class="p">,</span> <span class="n">logvar</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">encode</span><span class="p">(</span><span class="n">obs</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span>
+        <span class="n">latent</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">reparameterize</span><span class="p">(</span><span class="n">mean</span><span class="p">,</span> <span class="n">logvar</span><span class="p">)</span>
+        <span class="n">hidden</span> <span class="o">=</span> <span class="n">latent</span>  <span class="c1"># Initial RNN hidden state
+</span>
+        <span class="n">predictions</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="sh">'</span><span class="s">obs</span><span class="sh">'</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="sh">'</span><span class="s">rewards</span><span class="sh">'</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="sh">'</span><span class="s">latents</span><span class="sh">'</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="sh">'</span><span class="s">kl_loss</span><span class="sh">'</span><span class="p">:</span> <span class="p">[]</span>
+        <span class="p">}</span>
+
+        <span class="c1"># Rollout through sequence
+</span>        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">seq_len</span><span class="p">):</span>
+            <span class="c1"># Predict reward
+</span>            <span class="n">reward</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">predict_reward</span><span class="p">(</span><span class="n">latent</span><span class="p">)</span>
+            <span class="n">predictions</span><span class="p">[</span><span class="sh">'</span><span class="s">rewards</span><span class="sh">'</span><span class="p">].</span><span class="nf">append</span><span class="p">(</span><span class="n">reward</span><span class="p">)</span>
+
+            <span class="c1"># Decode to observation
+</span>            <span class="n">obs_pred</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">decode</span><span class="p">(</span><span class="n">latent</span><span class="p">)</span>
+            <span class="n">predictions</span><span class="p">[</span><span class="sh">'</span><span class="s">obs</span><span class="sh">'</span><span class="p">].</span><span class="nf">append</span><span class="p">(</span><span class="n">obs_pred</span><span class="p">)</span>
+            <span class="n">predictions</span><span class="p">[</span><span class="sh">'</span><span class="s">latents</span><span class="sh">'</span><span class="p">].</span><span class="nf">append</span><span class="p">(</span><span class="n">latent</span><span class="p">)</span>
+
+            <span class="c1"># KL divergence (regularization)
+</span>            <span class="n">kl</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">torch</span><span class="p">.</span><span class="nf">sum</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">logvar</span> <span class="o">-</span> <span class="n">mean</span><span class="p">.</span><span class="nf">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="n">logvar</span><span class="p">.</span><span class="nf">exp</span><span class="p">(),</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">predictions</span><span class="p">[</span><span class="sh">'</span><span class="s">kl_loss</span><span class="sh">'</span><span class="p">].</span><span class="nf">append</span><span class="p">(</span><span class="n">kl</span><span class="p">)</span>
+
+            <span class="c1"># Update latent state with action via dynamics model
+</span>            <span class="k">if</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="n">seq_len</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">action</span> <span class="o">=</span> <span class="n">actions</span><span class="p">[:,</span> <span class="n">t</span><span class="p">]</span>
+                <span class="n">dynamics_input</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nf">cat</span><span class="p">([</span><span class="n">latent</span><span class="p">,</span> <span class="n">action</span><span class="p">],</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+                <span class="n">hidden</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">dynamics_rnn</span><span class="p">(</span><span class="n">dynamics_input</span><span class="p">,</span> <span class="n">hidden</span><span class="p">)</span>
+
+                <span class="c1"># Encode next observation for teacher forcing
+</span>                <span class="n">mean</span><span class="p">,</span> <span class="n">logvar</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">encode</span><span class="p">(</span><span class="n">obs</span><span class="p">[:,</span> <span class="n">t</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+                <span class="n">latent</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">reparameterize</span><span class="p">(</span><span class="n">mean</span><span class="p">,</span> <span class="n">logvar</span><span class="p">)</span>
+
+        <span class="c1"># Stack predictions
+</span>        <span class="n">predictions</span><span class="p">[</span><span class="sh">'</span><span class="s">obs</span><span class="sh">'</span><span class="p">]</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nf">stack</span><span class="p">(</span><span class="n">predictions</span><span class="p">[</span><span class="sh">'</span><span class="s">obs</span><span class="sh">'</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">predictions</span><span class="p">[</span><span class="sh">'</span><span class="s">rewards</span><span class="sh">'</span><span class="p">]</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nf">stack</span><span class="p">(</span><span class="n">predictions</span><span class="p">[</span><span class="sh">'</span><span class="s">rewards</span><span class="sh">'</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">predictions</span><span class="p">[</span><span class="sh">'</span><span class="s">latents</span><span class="sh">'</span><span class="p">]</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nf">stack</span><span class="p">(</span><span class="n">predictions</span><span class="p">[</span><span class="sh">'</span><span class="s">latents</span><span class="sh">'</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">predictions</span><span class="p">[</span><span class="sh">'</span><span class="s">kl_loss</span><span class="sh">'</span><span class="p">]</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nf">stack</span><span class="p">(</span><span class="n">predictions</span><span class="p">[</span><span class="sh">'</span><span class="s">kl_loss</span><span class="sh">'</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">predictions</span>
+
+    <span class="k">def</span> <span class="nf">imagine</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">initial_obs</span><span class="p">,</span> <span class="n">actions</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">
+        Generate imagined rollout without teacher forcing.
+
+        Args:
+            initial_obs: [batch_size, obs_dim]
+            actions: [batch_size, horizon, action_dim]
+
+        Returns:
+            imagined trajectory
+        </span><span class="sh">"""</span>
+        <span class="n">batch_size</span><span class="p">,</span> <span class="n">horizon</span> <span class="o">=</span> <span class="n">actions</span><span class="p">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+
+        <span class="c1"># Encode initial state
+</span>        <span class="n">mean</span><span class="p">,</span> <span class="n">logvar</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">encode</span><span class="p">(</span><span class="n">initial_obs</span><span class="p">)</span>
+        <span class="n">latent</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">reparameterize</span><span class="p">(</span><span class="n">mean</span><span class="p">,</span> <span class="n">logvar</span><span class="p">)</span>
+        <span class="n">hidden</span> <span class="o">=</span> <span class="n">latent</span>
+
+        <span class="n">imagined</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="sh">'</span><span class="s">obs</span><span class="sh">'</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="sh">'</span><span class="s">rewards</span><span class="sh">'</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="sh">'</span><span class="s">latents</span><span class="sh">'</span><span class="p">:</span> <span class="p">[]</span>
+        <span class="p">}</span>
+
+        <span class="c1"># Free running imagination
+</span>        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">horizon</span><span class="p">):</span>
+            <span class="c1"># Predict reward
+</span>            <span class="n">reward</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">predict_reward</span><span class="p">(</span><span class="n">latent</span><span class="p">)</span>
+            <span class="n">imagined</span><span class="p">[</span><span class="sh">'</span><span class="s">rewards</span><span class="sh">'</span><span class="p">].</span><span class="nf">append</span><span class="p">(</span><span class="n">reward</span><span class="p">)</span>
+
+            <span class="c1"># Decode observation
+</span>            <span class="n">obs_pred</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">decode</span><span class="p">(</span><span class="n">latent</span><span class="p">)</span>
+            <span class="n">imagined</span><span class="p">[</span><span class="sh">'</span><span class="s">obs</span><span class="sh">'</span><span class="p">].</span><span class="nf">append</span><span class="p">(</span><span class="n">obs_pred</span><span class="p">)</span>
+            <span class="n">imagined</span><span class="p">[</span><span class="sh">'</span><span class="s">latents</span><span class="sh">'</span><span class="p">].</span><span class="nf">append</span><span class="p">(</span><span class="n">latent</span><span class="p">)</span>
+
+            <span class="c1"># Dynamics step
+</span>            <span class="n">action</span> <span class="o">=</span> <span class="n">actions</span><span class="p">[:,</span> <span class="n">t</span><span class="p">]</span>
+            <span class="n">dynamics_input</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nf">cat</span><span class="p">([</span><span class="n">latent</span><span class="p">,</span> <span class="n">action</span><span class="p">],</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">hidden</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">dynamics_rnn</span><span class="p">(</span><span class="n">dynamics_input</span><span class="p">,</span> <span class="n">hidden</span><span class="p">)</span>
+            <span class="n">latent</span> <span class="o">=</span> <span class="n">hidden</span>  <span class="c1"># No encoding in imagination
+</span>
+        <span class="n">imagined</span><span class="p">[</span><span class="sh">'</span><span class="s">obs</span><span class="sh">'</span><span class="p">]</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nf">stack</span><span class="p">(</span><span class="n">imagined</span><span class="p">[</span><span class="sh">'</span><span class="s">obs</span><span class="sh">'</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">imagined</span><span class="p">[</span><span class="sh">'</span><span class="s">rewards</span><span class="sh">'</span><span class="p">]</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nf">stack</span><span class="p">(</span><span class="n">imagined</span><span class="p">[</span><span class="sh">'</span><span class="s">rewards</span><span class="sh">'</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">imagined</span><span class="p">[</span><span class="sh">'</span><span class="s">latents</span><span class="sh">'</span><span class="p">]</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nf">stack</span><span class="p">(</span><span class="n">imagined</span><span class="p">[</span><span class="sh">'</span><span class="s">latents</span><span class="sh">'</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">imagined</span>
+
+<span class="k">def</span> <span class="nf">train_world_model</span><span class="p">(</span><span class="n">world_model</span><span class="p">,</span> <span class="n">dataloader</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">beta_kl</span><span class="o">=</span><span class="mf">0.1</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">Train the world model on collected data.</span><span class="sh">"""</span>
+    <span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">optim</span><span class="p">.</span><span class="nc">Adam</span><span class="p">(</span><span class="n">world_model</span><span class="p">.</span><span class="nf">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">3e-4</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
+        <span class="n">total_loss</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">batch</span> <span class="ow">in</span> <span class="n">dataloader</span><span class="p">:</span>
+            <span class="n">obs</span><span class="p">,</span> <span class="n">actions</span><span class="p">,</span> <span class="n">rewards</span> <span class="o">=</span> <span class="n">batch</span>
+
+            <span class="c1"># Forward pass
+</span>            <span class="n">predictions</span> <span class="o">=</span> <span class="nf">world_model</span><span class="p">(</span><span class="n">obs</span><span class="p">,</span> <span class="n">actions</span><span class="p">)</span>
+
+            <span class="c1"># Losses
+</span>            <span class="n">obs_loss</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="nf">mse_loss</span><span class="p">(</span><span class="n">predictions</span><span class="p">[</span><span class="sh">'</span><span class="s">obs</span><span class="sh">'</span><span class="p">],</span> <span class="n">obs</span><span class="p">)</span>
+            <span class="n">reward_loss</span> <span class="o">=</span> <span class="n">F</span><span class="p">.</span><span class="nf">mse_loss</span><span class="p">(</span><span class="n">predictions</span><span class="p">[</span><span class="sh">'</span><span class="s">rewards</span><span class="sh">'</span><span class="p">],</span> <span class="n">rewards</span><span class="p">.</span><span class="nf">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+            <span class="n">kl_loss</span> <span class="o">=</span> <span class="n">predictions</span><span class="p">[</span><span class="sh">'</span><span class="s">kl_loss</span><span class="sh">'</span><span class="p">].</span><span class="nf">mean</span><span class="p">()</span>
+
+            <span class="n">loss</span> <span class="o">=</span> <span class="n">obs_loss</span> <span class="o">+</span> <span class="n">reward_loss</span> <span class="o">+</span> <span class="n">beta_kl</span> <span class="o">*</span> <span class="n">kl_loss</span>
+
+            <span class="c1"># Backward pass
+</span>            <span class="n">optimizer</span><span class="p">.</span><span class="nf">zero_grad</span><span class="p">()</span>
+            <span class="n">loss</span><span class="p">.</span><span class="nf">backward</span><span class="p">()</span>
+            <span class="n">torch</span><span class="p">.</span><span class="n">nn</span><span class="p">.</span><span class="n">utils</span><span class="p">.</span><span class="nf">clip_grad_norm_</span><span class="p">(</span><span class="n">world_model</span><span class="p">.</span><span class="nf">parameters</span><span class="p">(),</span> <span class="mf">1.0</span><span class="p">)</span>
+            <span class="n">optimizer</span><span class="p">.</span><span class="nf">step</span><span class="p">()</span>
+
+            <span class="n">total_loss</span> <span class="o">+=</span> <span class="n">loss</span><span class="p">.</span><span class="nf">item</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">epoch</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Epoch </span><span class="si">{</span><span class="n">epoch</span><span class="si">}</span><span class="s">: Loss = </span><span class="si">{</span><span class="n">total_loss</span> <span class="o">/</span> <span class="nf">len</span><span class="p">(</span><span class="n">dataloader</span><span class="p">)</span><span class="si">:</span><span class="p">.</span><span class="mi">4</span><span class="n">f</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># Example usage
+</span><span class="n">obs_dim</span> <span class="o">=</span> <span class="mi">20</span>  <span class="c1"># e.g., state vector for CartPole
+</span><span class="n">action_dim</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># discrete action encoded as continuous
+</span><span class="n">world_model</span> <span class="o">=</span> <span class="nc">SimpleWorldModel</span><span class="p">(</span><span class="n">obs_dim</span><span class="p">,</span> <span class="n">action_dim</span><span class="p">)</span>
+
+<span class="c1"># Training would proceed with collected environment data
+# train_world_model(world_model, dataloader)
+</span></code></pre></div></div>
+
+<h3 id="training-tips">Training Tips</h3>
+
+<p><strong>1. Start Simple</strong>: Begin with simple environments (CartPole, Pendulum) before tackling complex visual domains.</p>
+
+<p><strong>2. Balance Reconstruction and Dynamics</strong>: Too much emphasis on reconstruction can hurt dynamics prediction. The $\beta$ parameter in VAE loss is crucial.</p>
+
+<p><strong>3. Monitor Multi-Step Accuracy</strong>: Track prediction error at horizons 1, 5, 10+ steps to catch compounding error issues.</p>
+
+<p><strong>4. Use Latent Overshooting</strong>: Regularize long-term predictions even during training.</p>
+
+<p><strong>5. Curriculum Learning</strong>: Gradually increase prediction horizon during training.</p>
+
+<p><strong>6. Ensemble Models</strong>: Train multiple world models and use disagreement for uncertainty estimation.</p>
+
+<p><strong>7. Data Diversity</strong>: Ensure training data covers the full state-action space; world models struggle to extrapolate.</p>
+
+<h2 id="challenges-and-open-problems">Challenges and Open Problems</h2>
+
+<p>Despite recent progress, many fundamental challenges remain:</p>
+
+<h3 id="compounding-errors">Compounding Errors</h3>
+
+<p><strong>The Problem</strong>: Small prediction errors accumulate exponentially over long horizons. After $H$ steps, even a 1% per-step error can make predictions useless.</p>
+
+<p><strong>Current Approaches</strong>:</p>
+<ul>
+  <li>Periodic re-planning with fresh observations (MPC)</li>
+  <li>Hierarchical models that avoid fine-grained long-term prediction</li>
+  <li>Uncertainty-aware planning that detects unreliable regions</li>
+  <li>Hybrid model-free + model-based methods</li>
+</ul>
+
+<p><strong>Open Questions</strong>: Can we develop world models with provable bounds on error accumulation? How should we trade off model fidelity vs. planning horizon?</p>
+
+<h3 id="sample-efficiency">Sample Efficiency</h3>
+
+<p><strong>The Paradox</strong>: Model-based RL should be sample efficient, but current world models often require massive amounts of data to train:</p>
+<ul>
+  <li>Foundation models: billions of video frames</li>
+  <li>Task-specific models: millions of environment steps</li>
+</ul>
+
+<p><strong>Factors</strong>:</p>
+<ul>
+  <li>High-dimensional observations (images, video)</li>
+  <li>Stochastic, complex dynamics</li>
+  <li>Distribution shift between training and deployment</li>
+</ul>
+
+<p><strong>Promising Directions</strong>:</p>
+<ul>
+  <li>Transfer learning from pre-trained models</li>
+  <li>Physics-informed architectures that build in inductive biases</li>
+  <li>Active learning and curiosity-driven exploration</li>
+  <li>Compositional world models that generalize to novel combinations</li>
+</ul>
+
+<h3 id="physical-consistency">Physical Consistency</h3>
+
+<p><strong>Challenge</strong>: Current world models frequently violate physical laws:</p>
+<ul>
+  <li>Objects passing through each other</li>
+  <li>Energy not conserved</li>
+  <li>Impossible trajectories</li>
+  <li>Inconsistent shadows and reflections</li>
+</ul>
+
+<p><strong>Why It’s Hard</strong>: Learning physics from pixels without explicit supervision is extremely challenging. Models may achieve visual plausibility without true physical understanding.</p>
+
+<p><strong>Approaches</strong>:</p>
+<ul>
+  <li>Physics-informed loss functions (energy conservation, momentum, etc.)</li>
+  <li>Hybrid simulation + learning (use physics engines with learned parameters)</li>
+  <li>Geometric and 3D-aware architectures</li>
+  <li>Contrastive learning on physically possible vs. impossible scenarios</li>
+</ul>
+
+<p><strong>Recent Work</strong>: Physics-Informed BEV World Model (PIWM) and similar efforts show promise but are still far from perfect physical consistency.</p>
+
+<h3 id="long-horizon-prediction">Long-Horizon Prediction</h3>
+
+<p><strong>Fundamental Tension</strong>: The longer the prediction horizon, the more uncertainty and the harder the problem.</p>
+
+<p><strong>Strategies</strong>:</p>
+<ul>
+  <li>
+<strong>Hierarchical modeling</strong>: Predict high-level “waypoints” and fill in details</li>
+  <li>
+<strong>Stochastic prediction</strong>: Represent uncertainty rather than single trajectories</li>
+  <li>
+<strong>Goal-conditioned models</strong>: Condition on desired end-state rather than predicting full trajectory</li>
+  <li>
+<strong>Diffusion for long-horizon</strong>: Iteratively refine entire trajectories</li>
+</ul>
+
+<p><strong>Open Problem</strong>: How to maintain both accuracy and diversity in long-horizon predictions?</p>
+
+<h3 id="generalization">Generalization</h3>
+
+<p><strong>Out-of-Distribution Challenge</strong>: World models often fail on states, actions, or scenarios not well-represented in training data.</p>
+
+<p><strong>Types of Generalization Needed</strong>:</p>
+<ul>
+  <li>Novel objects and appearances</li>
+  <li>Different physical parameters (friction, mass, etc.)</li>
+  <li>New tasks and goals</li>
+  <li>Compositional generalization (new combinations of known elements)</li>
+</ul>
+
+<p><strong>Approaches</strong>:</p>
+<ul>
+  <li>Domain randomization during training</li>
+  <li>Causal models that separate stable from variable factors</li>
+  <li>Meta-learning across environments</li>
+  <li>Foundation models trained on diverse data</li>
+</ul>
+
+<h3 id="evaluation">Evaluation</h3>
+
+<p><strong>The Measurement Problem</strong>: How do we properly evaluate world models?</p>
+
+<p><strong>Metrics</strong>:</p>
+<ul>
+  <li>Pixel-level prediction error (MSE, SSIM, FVD)</li>
+  <li>Perceptual similarity (LPIPS, CLIP similarity)</li>
+  <li>Task performance (reward in RL)</li>
+  <li>Physical consistency scores</li>
+  <li>Human evaluation</li>
+</ul>
+
+<p><strong>Issues</strong>: Pixel metrics don’t capture physical understanding; task metrics don’t isolate model quality; human evaluation doesn’t scale.</p>
+
+<p><strong>Recent Benchmarks</strong>:</p>
+<ul>
+  <li>
+<strong>WorldBench</strong>: Tests concept-specific physical reasoning</li>
+  <li>
+<strong>WorldModelBench</strong>: Judges world modeling across domains</li>
+  <li>
+<strong>WoW-World-Eval</strong>: Comprehensive embodied AI evaluation</li>
+</ul>
+
+<p><strong>Open Question</strong>: What are the right metrics for “understanding” vs. “generation quality”?</p>
+
+<h3 id="computational-cost">Computational Cost</h3>
+
+<p><strong>Reality Check</strong>: Training and inference with world models is expensive:</p>
+<ul>
+  <li>High-dimensional state spaces (video)</li>
+  <li>Long sequences</li>
+  <li>Iterative generation (diffusion models)</li>
+  <li>Multi-step planning</li>
+</ul>
+
+<p><strong>Efficiency Techniques</strong>:</p>
+<ul>
+  <li>Latent space modeling (lower dimensional than pixels)</li>
+  <li>Sparse representations (occupancy grids, object-centric)</li>
+  <li>Efficient architectures (linear attention, state-space models)</li>
+  <li>Distillation (train large model, deploy small model)</li>
+</ul>
+
+<p><strong>Trade-offs</strong>: Accuracy vs. speed is always present; the right choice depends on application.</p>
+
+<h2 id="future-directions">Future Directions</h2>
+
+<p>Where is the field headed? Several exciting directions are emerging:</p>
+
+<h3 id="unified-multimodal-world-models">Unified Multimodal World Models</h3>
+
+<p>Future world models will likely integrate multiple modalities:</p>
+<ul>
+  <li>
+<strong>Vision + audio</strong>: Predict sound consistent with visual events</li>
+  <li>
+<strong>Vision + language</strong>: Use language to guide and explain predictions</li>
+  <li>
+<strong>Vision + force/torque</strong>: For robotic manipulation</li>
+  <li>
+<strong>Multi-sensor fusion</strong>: Camera, lidar, radar, GPS, IMU</li>
+</ul>
+
+<p><strong>Unified-IO 2</strong> and similar models show the potential of joint training across modalities.</p>
+
+<h3 id="compositional-and-object-centric-models">Compositional and Object-Centric Models</h3>
+
+<p>Instead of monolithic pixel prediction, decompose scenes into objects and relationships:</p>
+<ul>
+  <li>Predict object-level dynamics and interactions</li>
+  <li>Enable combinatorial generalization</li>
+  <li>Provide interpretable, editable representations</li>
+</ul>
+
+<p><strong>Latent Particle World Model (LPWM)</strong> is a recent example of this direction.</p>
+
+<h3 id="causal-world-models">Causal World Models</h3>
+
+<p>Explicitly model causal relationships:</p>
+<ul>
+  <li>Identify stable causal structure vs. confounding factors</li>
+  <li>Enable interventional reasoning (“What if I had acted differently?”)</li>
+  <li>Improve robustness and generalization</li>
+</ul>
+
+<p><strong>Challenges</strong>: Causal discovery from observational data is fundamentally hard; need inductive biases and possibly interventional data.</p>
+
+<h3 id="real-time-interactive-models">Real-Time Interactive Models</h3>
+
+<p>Genie 3 demonstrated real-time world model inference, but most models are still too slow for interactive use:</p>
+
+<p><strong>Requirements</strong>:</p>
+<ul>
+  <li>Sub-100ms latency for responsive interaction</li>
+  <li>Continuous streaming (not batch processing)</li>
+  <li>Efficient state updates (no full recomputation)</li>
+</ul>
+
+<p><strong>Applications</strong>: Video games, VR/AR, teleoperation, interactive training.</p>
+
+<h3 id="world-models-for-reasoning">World Models for Reasoning</h3>
+
+<p>Can world models serve as “mental simulators” for abstract reasoning?</p>
+<ul>
+  <li>Simulate social interactions and theory of mind</li>
+  <li>Mathematical and logical reasoning via simulation</li>
+  <li>Creative problem-solving through mental search</li>
+</ul>
+
+<p>This connects to broader questions about system 2 reasoning and cognitive architectures.</p>
+
+<h3 id="open-source-and-democratization">Open-Source and Democratization</h3>
+
+<p>As with LLMs, open-source world models are crucial for research progress:</p>
+<ul>
+  <li>Open weights and architectures</li>
+  <li>Standard benchmarks and evaluation</li>
+  <li>Efficient implementations for smaller labs</li>
+  <li>Ethical guidelines and safety considerations</li>
+</ul>
+
+<p>NVIDIA’s Cosmos and various academic efforts are moving in this direction.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>World models represent a fundamental capability for intelligent systems: the ability to predict, simulate, and reason about how the world evolves over time. From their roots in Kalman filtering and control theory to modern foundation models trained on billions of video frames, world models have come remarkably far.</p>
+
+<p>The past few years have witnessed explosive progress:</p>
+<ul>
+  <li>Transformers and diffusion models bringing unprecedented generation quality</li>
+  <li>Foundation world models exhibiting emergent physical understanding</li>
+  <li>Real-world deployments in autonomous driving and robotics</li>
+  <li>Sample-efficient algorithms like DreamerV3 mastering diverse tasks</li>
+</ul>
+
+<p>Yet fundamental challenges remain: compounding errors, physical consistency, computational cost, and robust evaluation. Solving these will require interdisciplinary insights from machine learning, control theory, physics, cognitive science, and more.</p>
+
+<p>As we look toward the future, world models are poised to play a central role in the next generation of AI systems—ones that don’t just process information, but truly understand and interact with the physical world. Whether in self-driving cars navigating city streets, robots manipulating objects in warehouses, or game agents exploring virtual worlds, the ability to predict and plan using learned world models will be essential.</p>
+
+<p>The journey from Ha and Schmidhuber’s pioneering work to today’s real-time interactive foundation models has been remarkable. But in many ways, we’re still in the early stages. As compute grows, algorithms improve, and data becomes more abundant, world models will become increasingly powerful, general, and indispensable—learning not just to dream, but to truly understand reality.</p>
+
+<hr>
+
+<h2 id="further-reading-and-resources">Further Reading and Resources</h2>
+
+<h3 id="seminal-papers">Seminal Papers</h3>
+
+<ul>
+  <li>Ha, D., &amp; Schmidhuber, J. (2018). “World Models” (<a href="https://arxiv.org/abs/1803.10122" rel="external nofollow noopener" target="_blank">arXiv:1803.10122</a>)</li>
+  <li>Hafner, D., et al. (2023). “Mastering Diverse Domains through World Models” (<a href="https://arxiv.org/abs/2301.04104" rel="external nofollow noopener" target="_blank">arXiv:2301.04104</a>)</li>
+  <li>Kalman, R. E. (1960). “A New Approach to Linear Filtering and Prediction Problems”</li>
+</ul>
+
+<h3 id="recent-work-2024-2026">Recent Work (2024-2026)</h3>
+
+<ul>
+  <li>Genie 1 &amp; 2: Google DeepMind’s foundation world models</li>
+  <li>OpenAI Sora: Video generation models as world simulators (<a href="https://openai.com/index/video-generation-models-as-world-simulators/" rel="external nofollow noopener" target="_blank">OpenAI Blog</a>)</li>
+  <li>V-JEPA: Meta’s joint embedding predictive architecture (<a href="https://ai.meta.com/blog/v-jepa-yann-lecun-ai-model-video-joint-embedding-predictive-architecture/" rel="external nofollow noopener" target="_blank">Meta AI Blog</a>)</li>
+  <li>Waymo World Model: Real-world deployment for AV training (<a href="https://waymo.com/blog/2026/02/the-waymo-world-model-a-new-frontier-for-autonomous-driving-simulation/" rel="external nofollow noopener" target="_blank">Waymo Blog</a>)</li>
+  <li>DreamerV4: Scalable world model agents (<a href="https://arxiv.org/abs/2509.24527" rel="external nofollow noopener" target="_blank">arXiv:2509.24527</a>)</li>
+</ul>
+
+<h3 id="surveys-and-repositories">Surveys and Repositories</h3>
+
+<ul>
+  <li>
+<a href="https://github.com/tsinghua-fib-lab/World-Model" rel="external nofollow noopener" target="_blank">World Models GitHub Survey</a>: Comprehensive survey published in ACM CSUR 2025</li>
+  <li><a href="https://github.com/LMD0311/Awesome-World-Model" rel="external nofollow noopener" target="_blank">Awesome World Models for Autonomous Driving</a></li>
+  <li><a href="https://github.com/ziqihuangg/Awesome-From-Video-Generation-to-World-Model" rel="external nofollow noopener" target="_blank">From Video Generation to World Models</a></li>
+  <li><a href="https://worldbench.github.io/survey" rel="external nofollow noopener" target="_blank">3D and 4D World Modeling Survey</a></li>
+</ul>
+
+<h3 id="implementations">Implementations</h3>
+
+<ul>
+  <li><a href="https://github.com/danijar/dreamerv3" rel="external nofollow noopener" target="_blank">DreamerV3 Official Implementation</a></li>
+  <li><a href="https://github.com/ctallec/world-models" rel="external nofollow noopener" target="_blank">World Models PyTorch</a></li>
+  <li><a href="https://github.com/facebookresearch/DiT" rel="external nofollow noopener" target="_blank">Diffusion Transformers (DiT)</a></li>
+</ul>
+
+<h3 id="benchmarks">Benchmarks</h3>
+
+<ul>
+  <li>
+<a href="https://arxiv.org/abs/2601.21282" rel="external nofollow noopener" target="_blank">WorldBench</a>: Diagnostic evaluation of world models</li>
+  <li>
+<a href="https://worldmodelbench.github.io/" rel="external nofollow noopener" target="_blank">WorldModelBench</a>: Judging video generation as world models</li>
+  <li>
+<a href="https://evalcrafter.github.io/" rel="external nofollow noopener" target="_blank">EvalCrafter</a>: Benchmarking video generation models</li>
+</ul>
+
+<hr>
+
+<h2 id="sources">Sources</h2>
+
+<p>This post synthesized information from numerous sources. Key references include:</p>
+
+<ul>
+  <li><a href="https://www.scientificamerican.com/article/world-models-could-unlock-the-next-revolution-in-artificial-intelligence/" rel="external nofollow noopener" target="_blank">Scientific American: World models could unlock the next revolution in AI</a></li>
+  <li><a href="https://www.euronews.com/next/2026/01/01/from-ai-slop-to-world-models-bubbles-and-small-models-what-to-expect-from-ai-in-2026" rel="external nofollow noopener" target="_blank">Euronews: What to expect from AI in 2026 - World Models</a></li>
+  <li>
+<a href="https://arxiv.org/abs/1803.10122" rel="external nofollow noopener" target="_blank">Original World Models Paper</a> by Ha &amp; Schmidhuber</li>
+  <li><a href="https://openai.com/index/video-generation-models-as-world-simulators/" rel="external nofollow noopener" target="_blank">OpenAI: Video generation models as world simulators</a></li>
+  <li><a href="https://ai.meta.com/blog/v-jepa-yann-lecun-ai-model-video-joint-embedding-predictive-architecture/" rel="external nofollow noopener" target="_blank">Meta AI: V-JEPA - The next step toward advanced machine intelligence</a></li>
+  <li><a href="https://waymo.com/blog/2026/02/the-waymo-world-model-a-new-frontier-for-autonomous-driving-simulation/" rel="external nofollow noopener" target="_blank">Waymo: The Waymo World Model</a></li>
+  <li><a href="https://arxiv.org/abs/2301.04104" rel="external nofollow noopener" target="_blank">DreamerV3 Paper</a></li>
+  <li><a href="https://medium.com/@graison/world-models-reading-list-the-papers-you-actually-need-in-2025-882f02d758a9" rel="external nofollow noopener" target="_blank">Medium: World Models Reading List 2025</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Kalman_filter" rel="external nofollow noopener" target="_blank">Kalman Filter Wikipedia</a></li>
+  <li><a href="https://www.geeksforgeeks.org/artificial-intelligence/model-based-reinforcement-learning-mbrl-in-ai/" rel="external nofollow noopener" target="_blank">Model-Based RL Resources</a></li>
+  <li><a href="https://worldbench.github.io/survey" rel="external nofollow noopener" target="_blank">3D and 4D World Modeling Survey</a></li>
+  <li><a href="https://physical-world-modeling.github.io/" rel="external nofollow noopener" target="_blank">Building Physically Plausible World Models</a></li>
+  <li><a href="https://arxiv.org/abs/2411.12164" rel="external nofollow noopener" target="_blank">Diffusion Transformers for Open-World Learning</a></li>
+  <li>Multiple arXiv preprints and conference papers from NeurIPS, ICLR, CVPR, ICML 2024-2026</li>
+</ul>
+
+
+  </article>
+
+  
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+
+  
+<footer class="fixed-bottom">
+  <div class="container mt-0" style="text-align:center;">
+    © Copyright 2026 Ahmad  Zareei.
+    <!--  -->     
+    
+    Last updated: March 20, 2026.
+    
+  </div>
+</footer>
+
+
+
+</body>
+
+<!-- jQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+
+<!-- Bootsrap & MDB scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.4.4/umd/popper.min.js" integrity="sha512-eUQ9hGdLjBjY3F41CScH3UX+4JDSI9zXeroz7hJ+RteoCaY+GP/LDoM8AO+Pt+DRFw3nXqsjh9Zsts8hnYv8/A==" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha512-M5KW3ztuIICmVIhjSqXe01oV2bpe248gOxqmlcYrEzAvws7Pw3z6BK0iGbrwvdrUQUhi3eXgtxp5I8PDo9YfjQ==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js" integrity="sha512-Mug9KHKmroQFMLm93zGrjhibM2z2Obg9l6qFG2qKjXEXkMp/VDkI4uju9m4QKPjWSwQ6O2qzZEnJDEeCw0Blcw==" crossorigin="anonymous"></script>
+
+
+
+<!-- Mansory & imagesLoaded -->
+<script defer src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+<script defer src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+<script defer src="/assets/js/mansory.js" type="text/javascript"></script>
+
+
+
+
+
+
+<!-- Load Common JS -->
+<script src="/assets/js/common.js"></script>
+
+<!-- Load DarkMode JS -->
+<script src="/assets/js/dark_mode.js"></script>
+
+
+</html><html>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-77789841-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</html>
