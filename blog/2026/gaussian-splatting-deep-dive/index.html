@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<title>Ahmad  Zareei | From Points to Pixels: A Deep Dive into 3D Gaussian Splatting</title>
+<meta name="description" content="Personal homepage of Ahmad Zareei, Senion AI research Scientist @META
+">
+
+<!-- Open Graph -->
+
+
+<!-- Bootstrap & MDB -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" integrity="sha512-MoRNloxbStBcD8z3M/2BmnT+rg4IsMxPkXaGh2zD6LGNNFE80W3onsAhRcMAMrSoyWL9xD7Ert0men7vR8LUZg==" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" integrity="sha512-RO38pBRxYH3SoOprtPTD86JFOclM51/XTIdEPh5j8sj4tp8jmQIx26twG52UaLi//hQldfrh7e51WzP9wuP32Q==" crossorigin="anonymous">
+
+<!-- Fonts & Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.0/css/academicons.min.css" integrity="sha512-W4yqoT1+8NLkinBLBZko+dFB2ZbHsYLDdr50VElllRcNt2Q4/GSs6u71UHKxB7S6JEMCp5Ve4xjh3eGQl/HRvg==" crossorigin="anonymous">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap">
+
+<!-- Code Syntax Highlighting -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+
+<!-- Styles -->
+<link rel="shortcut icon" href="/assets/img/logo.ico">
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<link rel="canonical" href="/blog/2026/gaussian-splatting-deep-dive/">
+
+<!-- Theming-->
+
+<script src="/assets/js/theme.js"></script>
+
+
+
+  
+  
+<!-- MathJax -->
+<script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js"></script>
+<script>
+    window.MathJax = {
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            processEscapes: true,
+            processEnvironments: true
+        },
+        options: {
+            skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+            ignoreHtmlClass: 'tex2jax_ignore',
+            processHtmlClass: 'tex2jax_process'
+        }
+    };
+</script>
+
+  
+  <meta name="google-site-verification" content="SwVgS1KjZmScXzgcGAsFKN5eksnUe79r12brKRMZLko">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TWETJLDW9Z"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-TWETJLDW9Z');
+  </script>
+</head>
+
+<body class="fixed-top-nav ">
+
+  <!-- Header -->
+
+  <header>
+
+  <!-- Nav Bar -->
+  <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top">
+    <div class="container">
+      
+      <a class="navbar-brand title font-weight-lighter" href="https://azareei.github.io/">
+        </a><a href="https://azareei.github.io/" class="fab"> <img style="height: 27px; width: auto; vertical-align: middle;padding-right: 10px;" src="/assets/img/logo.png" class="ai" alt="AZ">
+        </a>
+        <span class="font-weight-bold">Ahmad </span>    Zareei
+      
+      
+      <!-- Navbar Toogle -->
+      <button class="navbar-toggler collapsed ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar top-bar"></span>
+        <span class="icon-bar middle-bar"></span>
+        <span class="icon-bar bottom-bar"></span>
+      </button>
+      <div class="collapse navbar-collapse text-right" id="navbarNav">
+        <ul class="navbar-nav ml-auto flex-nowrap">
+          <!-- About -->
+          <li class="nav-item ">
+            <a class="nav-link" href="/">
+              about
+              
+            </a>
+          </li>
+          <!-- Other pages  | sort: "title" -->
+          
+          
+          
+          
+          
+          
+          
+          <li class="nav-item ">
+            <a class="nav-link" href="/publications/">
+              publications
+              
+            </a>
+          </li>
+          
+          
+          
+          <li class="nav-item ">
+            <a class="nav-link" href="/projects/">
+              research
+              
+            </a>
+          </li>
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          <!-- Blog -->
+          <li class="nav-item active">
+            <a class="nav-link" href="/blog/">
+              blog
+              
+            </a>
+          </li>
+          
+          
+          <div class="toggle-container">
+            <a id="light-toggle">
+              <i class="fas fa-moon"></i>
+              <i class="fas fa-sun"></i>
+            </a>
+          </div>
+          
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+</header>
+
+  <!-- Content -->
+
+  <div class="container mt-5">
+    
+
+<div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">From Points to Pixels: A Deep Dive into 3D Gaussian Splatting</h1>
+    <p class="post-meta">March 20, 2026</p>
+  </header>
+
+  <article class="post-content">
+    <h2 id="introduction">Introduction</h2>
+
+<p>Imagine capturing a real-world scene with just a smartphone camera and, within minutes, reconstructing it as a fully interactive 3D environment that renders at over 100 frames per second with photorealistic quality. This isn’t science fiction—it’s the reality enabled by <strong>3D Gaussian Splatting</strong> (3DGS), a technique that has revolutionized 3D scene reconstruction and rendering since its introduction at SIGGRAPH 2023.</p>
+
+<p>In this comprehensive guide, we’ll journey from the fundamental concepts underlying Gaussian Splatting to its cutting-edge applications in AR/VR, gaming, and digital twins. Whether you’re an AI researcher looking to understand the mathematical foundations or a practitioner seeking to apply these techniques, this post will build your intuition progressively while maintaining technical rigor.</p>
+
+<h2 id="the-evolution-from-nerf-to-gaussian-splatting">The Evolution: From NeRF to Gaussian Splatting</h2>
+
+<h3 id="neural-radiance-fields-the-foundation">Neural Radiance Fields: The Foundation</h3>
+
+<p>To understand Gaussian Splatting, we must first appreciate what came before it. Neural Radiance Fields (NeRF), introduced in 2020, represented a paradigm shift in 3D reconstruction. NeRF models a scene as a continuous 5D function that maps 3D spatial coordinates $(x, y, z)$ and viewing directions $(\theta, \phi)$ to color and density values:</p>
+
+\[F_\theta: (\mathbf{x}, \mathbf{d}) \rightarrow (\mathbf{c}, \sigma)\]
+
+<p>where $\mathbf{x} \in \mathbb{R}^3$ is the position, $\mathbf{d} \in \mathbb{S}^2$ is the viewing direction, $\mathbf{c} \in \mathbb{R}^3$ is the RGB color, and $\sigma \in \mathbb{R}^+$ is the volume density.</p>
+
+<p>NeRF’s volumetric rendering produces stunning photorealistic results by integrating along camera rays:</p>
+
+\[C(\mathbf{r}) = \int_{t_n}^{t_f} T(t) \sigma(\mathbf{r}(t)) \mathbf{c}(\mathbf{r}(t), \mathbf{d}) \, dt\]
+
+<p>where $T(t) = \exp\left(-\int_{t_n}^{t} \sigma(\mathbf{r}(s)) \, ds\right)$ is the accumulated transmittance.</p>
+
+<h3 id="the-nerf-bottleneck">The NeRF Bottleneck</h3>
+
+<p>Despite its revolutionary quality, NeRF had critical limitations:</p>
+
+<ol>
+  <li>
+<strong>Slow Training</strong>: Hours or even days to optimize for a single scene</li>
+  <li>
+<strong>Slow Rendering</strong>: Requires querying the neural network hundreds of times per ray (typically 64-128 samples)</li>
+  <li>
+<strong>Real-time Impossibility</strong>: Rendering at interactive frame rates (&gt;30 FPS) was practically impossible</li>
+  <li>
+<strong>Memory Intensive</strong>: Volumetric integration is computationally expensive</li>
+</ol>
+
+<p>This is where Gaussian Splatting enters the picture.</p>
+
+<h2 id="what-is-gaussian-splatting">What is Gaussian Splatting?</h2>
+
+<h3 id="the-core-idea">The Core Idea</h3>
+
+<p>3D Gaussian Splatting represents a scene not as a continuous implicit function, but as a <strong>collection of oriented 3D Gaussian distributions</strong> in space. Think of it as representing your scene with thousands or millions of fuzzy, colored ellipsoids floating in 3D space.</p>
+
+<p>Each Gaussian primitive is defined by:</p>
+
+<ul>
+  <li>
+<strong>Position</strong> $\boldsymbol{\mu} \in \mathbb{R}^3$: The center of the Gaussian in 3D space</li>
+  <li>
+<strong>Covariance</strong> $\boldsymbol{\Sigma} \in \mathbb{R}^{3 \times 3}$: Defining the shape and orientation (an ellipsoid)</li>
+  <li>
+<strong>Opacity</strong> $\alpha \in [0, 1]$: How transparent the Gaussian is</li>
+  <li>
+<strong>Color</strong> represented via spherical harmonics coefficients</li>
+</ul>
+
+<p>The key insight: instead of ray marching through a continuous field, we <strong>project and rasterize</strong> these Gaussians onto the image plane—a process GPUs are exceptionally fast at.</p>
+
+<h3 id="mathematical-foundation">Mathematical Foundation</h3>
+
+<p>A 3D Gaussian is defined by the probability density function:</p>
+
+\[G(\mathbf{x}) = \frac{1}{(2\pi)^{3/2} |\boldsymbol{\Sigma}|^{1/2}} \exp\left(-\frac{1}{2}(\mathbf{x} - \boldsymbol{\mu})^T \boldsymbol{\Sigma}^{-1} (\mathbf{x} - \boldsymbol{\mu})\right)\]
+
+<p>To ensure the covariance matrix $\boldsymbol{\Sigma}$ remains symmetric and positive semi-definite (PSD), it’s parameterized as:</p>
+
+\[\boldsymbol{\Sigma} = \mathbf{R} \mathbf{S} \mathbf{S}^T \mathbf{R}^T\]
+
+<p>where:</p>
+<ul>
+  <li>$\mathbf{S} \in \mathbb{R}^{3 \times 3}$ is a diagonal matrix of scale values</li>
+  <li>$\mathbf{R} \in SO(3)$ is a rotation matrix constructed from a unit quaternion $\mathbf{q}$</li>
+</ul>
+
+<p>This parameterization is crucial because:</p>
+<ol>
+  <li>It guarantees valid covariance matrices during optimization</li>
+  <li>Quaternions provide smooth, singularity-free rotation representation</li>
+  <li>It’s fully differentiable with respect to scale and rotation parameters</li>
+</ol>
+
+<h2 id="the-splatting-process-from-3d-to-2d">The Splatting Process: From 3D to 2D</h2>
+
+<h3 id="projection-to-image-space">Projection to Image Space</h3>
+
+<p>The magic of splatting happens when we project 3D Gaussians to 2D. Given a camera with viewing transformation $\mathbf{W}$ and projection matrix $\mathbf{J}$, we project the 3D Gaussian’s mean and covariance:</p>
+
+<p><strong>Mean Projection:</strong>
+\(\boldsymbol{\mu}' = \mathbf{J} \mathbf{W} \boldsymbol{\mu}\)</p>
+
+<p><strong>Covariance Projection (using the Jacobian):</strong>
+\(\boldsymbol{\Sigma}' = \mathbf{J} \mathbf{W} \boldsymbol{\Sigma} \mathbf{W}^T \mathbf{J}^T\)</p>
+
+<p>This derivation comes from EWA (Elliptical Weighted Average) splatting, a classical technique from texture filtering. The critical property: <strong>this projection is fully differentiable</strong>, enabling end-to-end optimization via backpropagation.</p>
+
+<p>The 2D Gaussian on the image plane is:</p>
+
+\[G_{2D}(\mathbf{x}) = \exp\left(-\frac{1}{2}(\mathbf{x} - \boldsymbol{\mu}')^T {\boldsymbol{\Sigma}'}^{-1} (\mathbf{x} - \boldsymbol{\mu}')\right)\]
+
+<h3 id="view-dependent-color-with-spherical-harmonics">View-Dependent Color with Spherical Harmonics</h3>
+
+<p>To capture view-dependent effects (like specular highlights), each Gaussian stores color using <strong>spherical harmonic (SH) coefficients</strong> rather than a single RGB value.</p>
+
+<p>Spherical harmonics form an orthonormal basis on the sphere, analogous to how Fourier series work for periodic functions. The color for viewing direction $\mathbf{d}$ is:</p>
+
+\[\mathbf{c}(\mathbf{d}) = \sum_{l=0}^{l_{\text{max}}} \sum_{m=-l}^{l} c_{lm} Y_l^m(\mathbf{d})\]
+
+<p>where $Y_l^m$ are the spherical harmonic basis functions and $c_{lm}$ are learned coefficients (stored per channel: R, G, B).</p>
+
+<p>In practice, 3DGS uses $l_{\text{max}} = 3$ (16 coefficients total), providing a good balance between expressiveness and parameter count. The view direction is computed from the camera center to the Gaussian center, and the SH basis functions are evaluated and combined with the learned coefficients to produce the final color.</p>
+
+<p><strong>Recent Innovation</strong>: Some methods now use <strong>dual spherical harmonics</strong> to separately model diffuse and specular components, or <strong>Spherical Gaussians</strong> to reduce parameters while maintaining quality.</p>
+
+<h3 id="tile-based-rasterization">Tile-Based Rasterization</h3>
+
+<p>Rendering is performed using a custom <strong>differentiable tile-based rasterizer</strong>:</p>
+
+<ol>
+  <li>
+<strong>Frustum Culling</strong>: Discard Gaussians outside the camera frustum</li>
+  <li>
+<strong>Tile Assignment</strong>: Divide the image into 16×16 pixel tiles; assign each Gaussian to tiles it overlaps</li>
+  <li>
+<strong>Sorting</strong>: Within each tile, sort Gaussians by depth (front-to-back)</li>
+  <li>
+<strong>Alpha Blending</strong>: For each pixel, blend Gaussians using standard alpha compositing:</li>
+</ol>
+
+\[C = \sum_{i=1}^{N} c_i \alpha_i \prod_{j=1}^{i-1} (1 - \alpha_j)\]
+
+<p>where $c_i$ is the color and $\alpha_i = \alpha \cdot G_{2D}(\mathbf{x}_{\text{pixel}})$ is the opacity modulated by the 2D Gaussian falloff.</p>
+
+<p>This process leverages GPU hardware optimizations, achieving <strong>real-time performance</strong> (100+ FPS at 1080p).</p>
+
+<h2 id="training-optimization-from-images">Training: Optimization from Images</h2>
+
+<h3 id="initialization-from-structure-from-motion">Initialization from Structure-from-Motion</h3>
+
+<p>The optimization process begins with <strong>Structure-from-Motion (SfM)</strong>, typically using COLMAP, which provides:</p>
+<ul>
+  <li>Sparse 3D point cloud</li>
+  <li>Camera poses and intrinsics for each input image</li>
+</ul>
+
+<p>Each SfM point initializes a 3D Gaussian:</p>
+<ul>
+  <li>Position $\boldsymbol{\mu}$ = point position</li>
+  <li>Covariance initialized as small isotropic (spherical)</li>
+  <li>Color from the point cloud color</li>
+  <li>Opacity initialized to a small value</li>
+</ul>
+
+<p><strong>Dependency Challenge</strong>: Standard 3DGS relies heavily on accurate SfM initialization—random initialization typically fails with 4-5 dB PSNR drops. Recent research explores alternatives like monocular depth estimation or feed-forward models to eliminate this dependency.</p>
+
+<h3 id="loss-function">Loss Function</h3>
+
+<p>The training objective is simple: photometric consistency with input views. The loss is:</p>
+
+\[\mathcal{L} = (1 - \lambda) \mathcal{L}_1 + \lambda \mathcal{L}_{\text{D-SSIM}}\]
+
+<p>where:</p>
+<ul>
+  <li>$\mathcal{L}_1$ is the pixel-wise L1 loss</li>
+  <li>$\mathcal{L}_{\text{D-SSIM}}$ is the structural dissimilarity (complement of SSIM)</li>
+  <li>$\lambda = 0.2$ balances the two terms</li>
+</ul>
+
+<p>This combination captures both pixel accuracy (L1) and perceptual quality (SSIM).</p>
+
+<h3 id="adaptive-density-control">Adaptive Density Control</h3>
+
+<p>A critical innovation in 3DGS is <strong>Adaptive Density Control (ADC)</strong>—dynamically adjusting the number and properties of Gaussians during training. Every 100 iterations (typically), the algorithm:</p>
+
+<p><strong>1. Densification</strong>: Add Gaussians in under-reconstructed regions</p>
+<ul>
+  <li>
+<strong>Clone</strong>: Replicate Gaussians with high positional gradients but small size</li>
+  <li>
+<strong>Split</strong>: Divide Gaussians with high gradients and large size into two smaller ones</li>
+</ul>
+
+<p><strong>2. Pruning</strong>: Remove unnecessary Gaussians</p>
+<ul>
+  <li>Remove Gaussians with opacity below a threshold (e.g., $\alpha &lt; 0.005$)</li>
+  <li>Remove extremely large Gaussians that may be artifacts</li>
+</ul>
+
+<p><strong>Gradient Threshold</strong>: If the accumulated positional gradient over the last $\tau$ iterations exceeds a threshold, the Gaussian is a candidate for densification.</p>
+
+<p><strong>Recent Improvements</strong>: The original clone/split operations have known limitations—they can produce many overlapping, low-opacity Gaussians. Recent work proposes:</p>
+<ul>
+  <li>
+<strong>Long-axis split</strong>: Split along the major axis to reduce overlap</li>
+  <li>
+<strong>Opacity-adaptive pruning</strong>: More sophisticated removal strategies</li>
+  <li>
+<strong>Gaussian importance weighting</strong>: Prioritize meaningful Gaussians</li>
+</ul>
+
+<p>The entire process is <strong>fully differentiable</strong>, allowing gradients to flow from the rendered image back to all Gaussian parameters through the projection and rasterization.</p>
+
+<h2 id="technical-deep-dive-why-is-it-so-fast">Technical Deep Dive: Why Is It So Fast?</h2>
+
+<p>The speed of Gaussian Splatting comes from multiple factors:</p>
+
+<h3 id="1-explicit-representation">1. Explicit Representation</h3>
+<p>Unlike NeRF’s implicit neural network, Gaussians are <strong>explicit primitives</strong>—no expensive neural network evaluation per sample.</p>
+
+<h3 id="2-gpu-optimized-rasterization">2. GPU-Optimized Rasterization</h3>
+<p>The tile-based rasterizer is designed for modern GPU architectures:</p>
+<ul>
+  <li>Coalesced memory access patterns</li>
+  <li>Minimal divergence within warps</li>
+  <li>Hardware-accelerated alpha blending</li>
+</ul>
+
+<h3 id="3-efficient-sorting">3. Efficient Sorting</h3>
+<p>Per-tile sorting is performed on a relatively small number of Gaussians (compared to global sorting), and modern GPUs excel at parallel sorting.</p>
+
+<h3 id="4-early-termination">4. Early Termination</h3>
+<p>Alpha compositing stops when accumulated opacity reaches $\sim 1$, avoiding processing far-away Gaussians.</p>
+
+<h3 id="quantitative-comparison">Quantitative Comparison</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Method</th>
+      <th>Training Time</th>
+      <th>Rendering Speed</th>
+      <th>Quality (PSNR)</th>
+      <th>Memory</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>NeRF (original)</td>
+      <td>24-48 hours</td>
+      <td>0.1 FPS</td>
+      <td>High</td>
+      <td>Low</td>
+    </tr>
+    <tr>
+      <td>Instant-NGP</td>
+      <td>5-10 minutes</td>
+      <td>1-10 FPS</td>
+      <td>High</td>
+      <td>Medium</td>
+    </tr>
+    <tr>
+      <td>3D Gaussian Splatting</td>
+      <td>10-30 minutes</td>
+      <td>100+ FPS</td>
+      <td>High</td>
+      <td>Medium-High</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="gaussian-splatting-vs-nerf-a-nuanced-comparison">Gaussian Splatting vs. NeRF: A Nuanced Comparison</h2>
+
+<p>While 3DGS has captured significant attention, it’s essential to understand the tradeoffs:</p>
+
+<h3 id="gaussian-splatting-advantages">Gaussian Splatting Advantages</h3>
+<ul>
+  <li>
+<strong>Real-time rendering</strong> (100+ FPS vs. &lt;1 FPS)</li>
+  <li>
+<strong>Faster training</strong> (minutes vs. hours)</li>
+  <li>
+<strong>Deterministic rendering</strong> (no stochastic ray sampling)</li>
+  <li>
+<strong>Better for dynamic scenes</strong> with explicit representations</li>
+</ul>
+
+<h3 id="nerf-advantages">NeRF Advantages</h3>
+<ul>
+  <li>
+<strong>Better generalization</strong> to novel views outside training distribution</li>
+  <li>
+<strong>More compact representation</strong> (neural weights vs. millions of Gaussians)</li>
+  <li>
+<strong>Smoother geometry</strong> in low-texture regions</li>
+  <li>
+<strong>More stable training</strong> with limited views</li>
+  <li>
+<strong>Better with exposure variation</strong> and motion blur</li>
+</ul>
+
+<h3 id="use-case-recommendations">Use Case Recommendations</h3>
+<ul>
+  <li>
+<strong>3DGS</strong>: Real-time applications (VR/AR, gaming, live simulations), interactive visualization, production rendering</li>
+  <li>
+<strong>NeRF</strong>: High-quality offline rendering, scenes with sparse input views, memory-constrained environments (robotics)</li>
+</ul>
+
+<h2 id="state-of-the-art-in-2026">State-of-the-Art in 2026</h2>
+
+<p>As of March 2026, Gaussian Splatting has evolved from a research curiosity to a production-ready technology. Here are the major developments:</p>
+
+<h3 id="industry-adoption">Industry Adoption</h3>
+
+<p><strong>Major Software Integration:</strong></p>
+<ul>
+  <li>Foundry’s <strong>Nuke 17.0</strong> officially added Gaussian Splatting support</li>
+  <li>
+<strong>OpenUSD 26.03</strong> includes native Gaussian Splatting representation</li>
+  <li>
+<strong>VRChat</strong> added Gaussian Splatting support for user-created worlds</li>
+  <li>Khronos Group released a <strong>glTF 2.0 release candidate</strong> with Gaussian Splatting extensions</li>
+</ul>
+
+<p><strong>Hollywood Production</strong>: The 2026 Superman film marked the first major motion picture using <strong>dynamic Gaussian Splatting</strong> (4DGS) in production, demonstrating the technology’s maturity for professional VFX workflows.</p>
+
+<p><strong>Live Events</strong>: Gaussian Splatting was deployed for Olympic coverage in Milan 2026, providing immersive views of ski jumping, hockey, and figure skating.</p>
+
+<h3 id="4d-gaussian-splatting-dynamic-scenes">4D Gaussian Splatting: Dynamic Scenes</h3>
+
+<p>A major research direction is extending 3DGS to <strong>dynamic scenes</strong>—scenes that change over time. This is often called <strong>4D Gaussian Splatting</strong> (4DGS), where time is the fourth dimension.</p>
+
+<p><strong>Key Approaches:</strong></p>
+
+<ol>
+  <li>
+    <p><strong>Explicit Time Encoding</strong>: Each Gaussian has time-varying properties encoded via neural voxels or deformation fields</p>
+  </li>
+  <li>
+    <p><strong>Native 4D Primitives</strong>: Instead of 3D Gaussians deformed over time, directly optimize 4D Gaussian primitives with explicit geometry and appearance in spacetime</p>
+  </li>
+</ol>
+
+<p><strong>Major Publications:</strong></p>
+<ul>
+  <li>
+<strong>CVPR 2024</strong>: “4D Gaussian Splatting for Real-Time Dynamic Scene Rendering” achieved 82 FPS at 800×800 on RTX 3090</li>
+  <li>
+<strong>SIGGRAPH 2024</strong>: “ST-4DGS” with spatial-temporal consistency and motion-aware shape regularization</li>
+  <li>
+<strong>ICCV 2025</strong>: “MEGA” reduced storage from 13M to 0.91M Gaussians for complex scenes</li>
+  <li>
+<strong>NeurIPS 2025</strong>: “4DGS-1K” running at 1000+ FPS with 41× storage reduction</li>
+</ul>
+
+<p><strong>Commercial Deployment</strong>: Gracia AI raised $1.7M for an end-to-end 4DGS platform with Unity/Unreal plugins and standalone playback on Meta Quest 3/3S and Pico 4 Ultra.</p>
+
+<h3 id="vrar-optimization">VR/AR Optimization</h3>
+
+<p><strong>VRSplat</strong>: The first systematically evaluated 3DGS for VR, achieving 72+ FPS while eliminating:</p>
+<ul>
+  <li>Temporal artifacts (popping during head movement)</li>
+  <li>Stereo-disrupting floaters</li>
+  <li>View-inconsistent projections</li>
+</ul>
+
+<p><strong>Foveated Rendering</strong>: Combining 3DGS with gaze tracking for dynamic resolution adjustment, achieving 90Hz at full VR resolution (2016×2240 per eye).</p>
+
+<p><strong>Photorealistic Avatars</strong>: End-to-end pipelines creating Gaussian Splatting avatars from monocular video, directly compatible with Unity, with rendering speeds up to 361 FPS.</p>
+
+<h3 id="compression-and-efficiency">Compression and Efficiency</h3>
+
+<p><strong>Challenge</strong>: A complex scene can require 10-13 million Gaussians (~7-8 GB storage), limiting deployment on mobile and web platforms.</p>
+
+<p><strong>Solutions:</strong></p>
+<ul>
+  <li>
+<strong>Feed-forward compression</strong> with long-context modeling achieving 20× compression ratios</li>
+  <li>
+<strong>Pruning and quantization</strong> reducing parameters while maintaining quality</li>
+  <li>
+<strong>Learned codecs</strong> specifically designed for Gaussian primitives</li>
+</ul>
+
+<h3 id="enhanced-quality">Enhanced Quality</h3>
+
+<p><strong>Depth Integration</strong>: Methods like <strong>DepthSplat</strong> incorporate monocular depth estimation (e.g., from MiDaS or Depth Anything) as geometric priors, improving:</p>
+<ul>
+  <li>Reconstruction in low-texture regions</li>
+  <li>Geometric accuracy</li>
+  <li>Performance with fewer input views</li>
+</ul>
+
+<p><strong>Planar Priors</strong>: For indoor scenes, detecting planes (walls, floors) and constraining Gaussians improves texture-complexity-aware initialization.</p>
+
+<p><strong>2D Gaussians</strong>: SIGGRAPH 2024 introduced <strong>2D Gaussian Splatting</strong>, representing surfaces as oriented 2D disks rather than 3D ellipsoids, improving geometric accuracy.</p>
+
+<h3 id="human-reconstruction">Human Reconstruction</h3>
+
+<p>Specialized methods for digitizing humans:</p>
+<ul>
+  <li>
+<strong>SiTH, PSHuman</strong>: Integrate diffusion models to infer occluded body parts</li>
+  <li>
+<strong>PARTE</strong>: Enhanced geometric detail for clothing and hair</li>
+  <li>
+<strong>GSAC</strong>: Unity integration for avatar creation from video</li>
+</ul>
+
+<p><strong>Open Challenges</strong>:</p>
+<ul>
+  <li>Realistic cloth dynamics and loose garments</li>
+  <li>Few-shot learning (reconstruction from 1-5 images)</li>
+  <li>Extracting editable rigged meshes for animation</li>
+</ul>
+
+<h2 id="applications-across-industries">Applications Across Industries</h2>
+
+<h3 id="gaming-and-virtual-production">Gaming and Virtual Production</h3>
+<ul>
+  <li>
+<strong>Real-time game environments</strong> from photogrammetry scans</li>
+  <li>
+<strong>Previs and techvis</strong> for film production (Superman 2026)</li>
+  <li>
+<strong>In-camera VFX (ICVFX)</strong> with volumetric backgrounds that can be re-lit in real-time</li>
+</ul>
+
+<h3 id="arvr-and-spatial-computing">AR/VR and Spatial Computing</h3>
+<ul>
+  <li>
+<strong>Digital twins</strong> of real spaces for training and simulation</li>
+  <li>
+<strong>Telepresence</strong> with photorealistic human avatars</li>
+  <li>
+<strong>Location-based VR</strong> experiences (theme parks, museums)</li>
+</ul>
+
+<h3 id="geospatial-and-uav-mapping">Geospatial and UAV Mapping</h3>
+<ul>
+  <li>
+<strong>Drone photogrammetry</strong> reconstructions combining 3DGS with LiDAR</li>
+  <li>
+<strong>Urban digital twins</strong> for city planning and infrastructure</li>
+  <li>
+<strong>Environmental monitoring</strong> with temporal 4DGS</li>
+</ul>
+
+<h3 id="medical-and-scientific-visualization">Medical and Scientific Visualization</h3>
+<ul>
+  <li>
+<strong>Anatomical reconstruction</strong> from CT/MRI scans</li>
+  <li>
+<strong>Microscopy data</strong> visualization in 3D</li>
+  <li>
+<strong>Surgical planning</strong> with patient-specific 3D models</li>
+</ul>
+
+<h3 id="e-commerce-and-retail">E-commerce and Retail</h3>
+<ul>
+  <li>
+<strong>Product visualization</strong> with 360° view-dependent rendering</li>
+  <li>
+<strong>Virtual try-on</strong> for furniture and fashion</li>
+  <li>
+<strong>Showroom digitization</strong> for online shopping experiences</li>
+</ul>
+
+<h2 id="implementation-getting-started">Implementation: Getting Started</h2>
+
+<h3 id="popular-repositories">Popular Repositories</h3>
+
+<p><strong>Official Implementation:</strong></p>
+<ul>
+  <li>
+<a href="https://github.com/graphdeco-inria/gaussian-splatting" rel="external nofollow noopener" target="_blank">graphdeco-inria/gaussian-splatting</a> - The reference SIGGRAPH 2023 implementation</li>
+</ul>
+
+<p><strong>Optimized Alternatives:</strong></p>
+<ul>
+  <li>
+<a href="https://github.com/nerfstudio-project/gsplat" rel="external nofollow noopener" target="_blank">nerfstudio-project/gsplat</a> - 4× less memory, 15% faster than official, with extensive new features</li>
+  <li>
+<a href="https://github.com/yzslab/gaussian-splatting-lightning" rel="external nofollow noopener" target="_blank">gaussian-splatting-lightning</a> - Unified framework with multiple algorithm implementations and web viewer</li>
+  <li>
+<a href="https://github.com/GAP-LAB-CUHK-SZ/gaustudio" rel="external nofollow noopener" target="_blank">GauStudio</a> - Modular framework with various paper implementations</li>
+</ul>
+
+<p><strong>Web and Viewer:</strong></p>
+<ul>
+  <li>
+<a href="https://github.com/mkkellogg/GaussianSplats3D" rel="external nofollow noopener" target="_blank">mkkellogg/GaussianSplats3D</a> - Three.js-based web viewer for interactive visualization</li>
+</ul>
+
+<p><strong>Curated Resources:</strong></p>
+<ul>
+  <li>
+<a href="https://github.com/MrNeRF/awesome-3D-gaussian-splatting" rel="external nofollow noopener" target="_blank">MrNeRF/awesome-3D-gaussian-splatting</a> - Comprehensive list of papers, implementations, and resources</li>
+</ul>
+
+<h3 id="basic-workflow">Basic Workflow</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Pseudocode for 3D Gaussian Splatting training loop
+</span>
+<span class="c1"># 1. Initialize from SfM point cloud
+</span><span class="n">gaussians</span> <span class="o">=</span> <span class="nf">initialize_from_sfm</span><span class="p">(</span><span class="n">colmap_output</span><span class="p">)</span>
+
+<span class="c1"># 2. Optimization loop
+</span><span class="k">for</span> <span class="n">iteration</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">num_iterations</span><span class="p">):</span>
+    <span class="c1"># Sample a training view
+</span>    <span class="n">camera</span><span class="p">,</span> <span class="n">gt_image</span> <span class="o">=</span> <span class="nf">sample_training_view</span><span class="p">()</span>
+
+    <span class="c1"># Render the scene
+</span>    <span class="n">rendered_image</span> <span class="o">=</span> <span class="nf">rasterize_gaussians</span><span class="p">(</span><span class="n">gaussians</span><span class="p">,</span> <span class="n">camera</span><span class="p">)</span>
+
+    <span class="c1"># Compute loss
+</span>    <span class="n">loss</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">λ</span><span class="p">)</span> <span class="o">*</span> <span class="nc">L1</span><span class="p">(</span><span class="n">rendered_image</span><span class="p">,</span> <span class="n">gt_image</span><span class="p">)</span> <span class="o">+</span> \
+           <span class="n">λ</span> <span class="o">*</span> <span class="nc">DSSIM</span><span class="p">(</span><span class="n">rendered_image</span><span class="p">,</span> <span class="n">gt_image</span><span class="p">)</span>
+
+    <span class="c1"># Backpropagate
+</span>    <span class="n">loss</span><span class="p">.</span><span class="nf">backward</span><span class="p">()</span>
+
+    <span class="c1"># Update Gaussian parameters
+</span>    <span class="n">optimizer</span><span class="p">.</span><span class="nf">step</span><span class="p">()</span>
+
+    <span class="c1"># Adaptive density control every 100 iterations
+</span>    <span class="k">if</span> <span class="n">iteration</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># Densification
+</span>        <span class="n">gaussians</span> <span class="o">=</span> <span class="nf">clone_and_split</span><span class="p">(</span><span class="n">gaussians</span><span class="p">,</span> <span class="n">gradient_threshold</span><span class="p">)</span>
+
+        <span class="c1"># Pruning
+</span>        <span class="n">gaussians</span> <span class="o">=</span> <span class="nf">prune_low_opacity</span><span class="p">(</span><span class="n">gaussians</span><span class="p">,</span> <span class="n">α_threshold</span><span class="p">)</span>
+        <span class="n">gaussians</span> <span class="o">=</span> <span class="nf">prune_large_gaussians</span><span class="p">(</span><span class="n">gaussians</span><span class="p">,</span> <span class="n">size_threshold</span><span class="p">)</span>
+
+<span class="c1"># 3. Save optimized Gaussians
+</span><span class="nf">save_ply</span><span class="p">(</span><span class="n">gaussians</span><span class="p">,</span> <span class="sh">"</span><span class="s">scene.ply</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="training-your-own-scene">Training Your Own Scene</h3>
+
+<p><strong>Using NeRFStudio’s gsplat:</strong></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Install NeRFStudio</span>
+pip <span class="nb">install </span>nerfstudio
+
+<span class="c"># Process your video/images with COLMAP</span>
+ns-process-data images <span class="nt">--data</span> data/my_scene <span class="nt">--output-dir</span> data/my_scene_processed
+
+<span class="c"># Train Gaussian Splatting</span>
+ns-train splatfacto <span class="nt">--data</span> data/my_scene_processed
+
+<span class="c"># Interactive viewer</span>
+ns-viewer <span class="nt">--load-config</span> outputs/.../config.yml
+</code></pre></div></div>
+
+<p><strong>Key Hyperparameters:</strong></p>
+<ul>
+  <li>
+<strong>Learning rates</strong>: Position (1.6e-4), color (2.5e-3), opacity (5e-2), scale (5e-3), rotation (1e-3)</li>
+  <li>
+<strong>Densification interval</strong>: 100 iterations (from iteration 500 to 15,000)</li>
+  <li>
+<strong>Opacity reset</strong>: Every 3,000 iterations to prevent over-saturation</li>
+  <li>
+<strong>Number of iterations</strong>: 30,000 for typical scenes</li>
+</ul>
+
+<h2 id="open-problems-and-future-directions">Open Problems and Future Directions</h2>
+
+<p>Despite remarkable progress, several challenges remain:</p>
+
+<h3 id="1-compression-and-memory-efficiency">1. Compression and Memory Efficiency</h3>
+<p><strong>Problem</strong>: Scenes require millions of Gaussians (5-10 GB), limiting mobile deployment.</p>
+
+<p><strong>Directions</strong>:</p>
+<ul>
+  <li>Learned compression codecs</li>
+  <li>Hierarchical representations</li>
+  <li>Neural implicit-explicit hybrids</li>
+</ul>
+
+<h3 id="2-reliance-on-accurate-initialization">2. Reliance on Accurate Initialization</h3>
+<p><strong>Problem</strong>: Poor SfM point clouds → poor reconstructions (4-5 dB PSNR drop).</p>
+
+<p><strong>Directions</strong>:</p>
+<ul>
+  <li>Feed-forward models eliminating SfM dependency</li>
+  <li>Self-supervised initialization from scratch</li>
+  <li>Integration with foundation models (SAM, Depth Anything)</li>
+</ul>
+
+<h3 id="3-geometric-accuracy">3. Geometric Accuracy</h3>
+<p><strong>Problem</strong>: 3DGS optimizes for visual appearance, not geometric correctness—surfaces may be poorly defined.</p>
+
+<p><strong>Directions</strong>:</p>
+<ul>
+  <li>2D Gaussian Splatting for surface-aligned primitives</li>
+  <li>Regularization encouraging surface consistency</li>
+  <li>Hybrid mesh-Gaussian representations</li>
+</ul>
+
+<h3 id="4-dynamic-scenes-and-deformation">4. Dynamic Scenes and Deformation</h3>
+<p><strong>Problem</strong>: 4DGS storage and temporal consistency challenges.</p>
+
+<p><strong>Directions</strong>:</p>
+<ul>
+  <li>More compact motion representations</li>
+  <li>Physics-aware deformation models (cloth, fluid)</li>
+  <li>Temporal super-resolution</li>
+</ul>
+
+<h3 id="5-sparse-view-reconstruction">5. Sparse View Reconstruction</h3>
+<p><strong>Problem</strong>: Artifacts, scale ambiguity, multi-view inconsistency with few images.</p>
+
+<p><strong>Directions</strong>:</p>
+<ul>
+  <li>Few-shot learning with diffusion priors</li>
+  <li>Semantic guidance for plausible reconstruction</li>
+  <li>Test-time optimization with pre-trained models</li>
+</ul>
+
+<h3 id="6-standardization-and-tooling">6. Standardization and Tooling</h3>
+<p><strong>Problem</strong>: Lack of universal format for Gaussian scenes.</p>
+
+<p><strong>Directions</strong>:</p>
+<ul>
+  <li>OpenUSD and glTF extensions (in progress for 2026)</li>
+  <li>Production-grade editing tools</li>
+  <li>Integration with existing 3D pipelines (Blender, Maya)</li>
+</ul>
+
+<h3 id="7-quality-assessment">7. Quality Assessment</h3>
+<p><strong>Problem</strong>: Existing metrics (PSNR, SSIM, LPIPS) don’t fully capture subjective quality.</p>
+
+<p><strong>Directions</strong>:</p>
+<ul>
+  <li>Perceptual metrics for Gaussian-based rendering</li>
+  <li>User studies for quality benchmarks</li>
+  <li>Task-specific evaluation protocols</li>
+</ul>
+
+<h2 id="conclusion-the-jpeg-moment-for-spatial-computing">Conclusion: The JPEG Moment for Spatial Computing</h2>
+
+<p>As we stand in March 2026, 3D Gaussian Splatting represents what some call a “JPEG moment for spatial computing”—a transformative technology making photorealistic 3D capture and rendering accessible at scale. What began as an academic paper at SIGGRAPH 2023 has evolved into a production-ready technique deployed in Hollywood films, Olympic broadcasts, professional virtual production, and consumer VR/AR devices.</p>
+
+<p>The technique’s elegance lies in its simplicity: represent scenes with oriented 3D Gaussians, project them to 2D, and rasterize efficiently on GPUs. This explicit representation sidesteps the computational bottlenecks of implicit neural methods while maintaining photorealistic quality.</p>
+
+<p>Yet, as we’ve explored, Gaussian Splatting isn’t a silver bullet—it complements rather than replaces techniques like NeRF. The choice between methods depends on your constraints: real-time requirements favor 3DGS, memory constraints favor NeRF, geometric accuracy may require hybrid approaches.</p>
+
+<p>Looking forward, the research community is addressing compression, sparse-view reconstruction, dynamic scenes, and geometric accuracy. The industry is converging on standards (OpenUSD, glTF), and tool ecosystems are maturing. By 2027, we can expect Gaussian Splatting to be as ubiquitous in 3D content creation as JPEG is for 2D images.</p>
+
+<p>For researchers and practitioners entering this space, the opportunity is immense. Whether you’re building the next generation of VR experiences, digitizing cultural heritage, creating digital twins for industry, or pushing the boundaries of real-time rendering—3D Gaussian Splatting provides a powerful foundation.</p>
+
+<p>The code is open, the papers are accessible, and the community is collaborative. Now is the perfect time to dive in.</p>
+
+<hr>
+
+<h2 id="further-reading-and-resources">Further Reading and Resources</h2>
+
+<h3 id="foundational-papers">Foundational Papers</h3>
+
+<ol>
+  <li>
+    <p><strong>3D Gaussian Splatting for Real-Time Radiance Field Rendering</strong> (SIGGRAPH 2023)
+Kerbl, Kopanas, Leimkühler, Drettakis
+<a href="https://arxiv.org/abs/2308.04079" rel="external nofollow noopener" target="_blank">https://arxiv.org/abs/2308.04079</a></p>
+  </li>
+  <li>
+    <p><strong>NeRF: Representing Scenes as Neural Radiance Fields for View Synthesis</strong> (ECCV 2020)
+Mildenhall et al.
+<a href="https://arxiv.org/abs/2003.08934" rel="external nofollow noopener" target="_blank">https://arxiv.org/abs/2003.08934</a></p>
+  </li>
+  <li>
+    <p><strong>4D Gaussian Splatting for Real-Time Dynamic Scene Rendering</strong> (CVPR 2024)
+Wu et al.
+<a href="https://arxiv.org/abs/2310.08528" rel="external nofollow noopener" target="_blank">https://arxiv.org/abs/2310.08528</a></p>
+  </li>
+</ol>
+
+<h3 id="key-implementations">Key Implementations</h3>
+
+<ul>
+  <li>
+<strong>Official Reference</strong>: <a href="https://github.com/graphdeco-inria/gaussian-splatting" rel="external nofollow noopener" target="_blank">https://github.com/graphdeco-inria/gaussian-splatting</a>
+</li>
+  <li>
+<strong>Optimized gsplat</strong>: <a href="https://github.com/nerfstudio-project/gsplat" rel="external nofollow noopener" target="_blank">https://github.com/nerfstudio-project/gsplat</a>
+</li>
+  <li>
+<strong>Awesome List</strong>: <a href="https://github.com/MrNeRF/awesome-3D-gaussian-splatting" rel="external nofollow noopener" target="_blank">https://github.com/MrNeRF/awesome-3D-gaussian-splatting</a>
+</li>
+</ul>
+
+<h3 id="tutorials-and-learning-resources">Tutorials and Learning Resources</h3>
+
+<ul>
+  <li>
+<strong>LearnOpenCV Tutorial</strong>: <a href="https://learnopencv.com/3d-gaussian-splatting/" rel="external nofollow noopener" target="_blank">3D Gaussian Splatting - Paper Explained</a>
+</li>
+  <li>
+<strong>HuggingFace Blog</strong>: <a href="https://huggingface.co/blog/gaussian-splatting" rel="external nofollow noopener" target="_blank">Introduction to 3D Gaussian Splatting</a>
+</li>
+  <li>
+<strong>Hands-On Tutorial</strong>: <a href="https://www.ieeesmc.org/cai-2026/tutorial-6-from-images-to-3d-environments/" rel="external nofollow noopener" target="_blank">Radiance Fields and Gaussian Splatting Workshop</a> (May 2026)</li>
+</ul>
+
+<h3 id="recent-surveys-and-reviews">Recent Surveys and Reviews</h3>
+
+<ul>
+  <li>
+    <p><strong>Recent Advances in 3D Gaussian Splatting</strong> (IEEE, 2026)
+<a href="https://ieeexplore.ieee.org/document/10897713/" rel="external nofollow noopener" target="_blank">https://ieeexplore.ieee.org/document/10897713/</a></p>
+  </li>
+  <li>
+    <p><strong>3D Gaussian Splatting Technologies and Extensions: A Review</strong> (2025)
+Comprehensive survey of extensions and applications</p>
+  </li>
+  <li>
+    <p><strong>Gaussian Splatting in February 2026</strong> (Radiance Fields Newsletter)
+<a href="https://radiancefields.substack.com/p/gaussian-splatting-in-february-2026" rel="external nofollow noopener" target="_blank">https://radiancefields.substack.com/p/gaussian-splatting-in-february-2026</a></p>
+  </li>
+</ul>
+
+<h3 id="community-and-updates">Community and Updates</h3>
+
+<ul>
+  <li>
+<strong>Radiance Fields Newsletter</strong>: Monthly updates on NeRF, Gaussian Splatting, and related techniques</li>
+  <li>
+<strong>2025 arXiv Papers</strong>: <a href="https://github.com/Lee-JaeWon/2025-Arxiv-Paper-List-Gaussian-Splatting" rel="external nofollow noopener" target="_blank">Daily updated list</a>
+</li>
+  <li>
+<strong>Twitter/X</strong>: Follow #GaussianSplatting and researchers from INRIA, ETH Zurich, MIT CSAIL</li>
+</ul>
+
+<hr>
+
+<p><em>This post represents my understanding as of March 2026. The field is evolving rapidly—by the time you read this, new breakthroughs may have emerged. Check the awesome-3D-gaussian-splatting repository for the latest developments.</em></p>
+
+<hr>
+
+<h2 id="sources">Sources</h2>
+
+<p>This comprehensive guide was compiled from extensive research including:</p>
+
+<ul>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>[Gaussian splatting: a complete student guide to 3D capture in 2026</td>
+          <td>Medium](https://medium.com/@Jamesroha/gaussian-splatting-a-complete-student-guide-to-3d-capture-in-2026-1195a6265870)</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>[3D Gaussian Splatting Tutorial</td>
+          <td>LearnOpenCV](https://learnopencv.com/3d-gaussian-splatting/)</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>[Introduction to 3D Gaussian Splatting</td>
+          <td>HuggingFace](https://huggingface.co/blog/gaussian-splatting)</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>[3D Gaussian Splatting vs NeRF</td>
+          <td>PyImageSearch](https://pyimagesearch.com/2024/12/09/3d-gaussian-splatting-vs-nerf-the-end-game-of-3d-reconstruction/)</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>[Photogrammetry vs. NeRFs vs. Gaussian Splatting</td>
+          <td>Varjo](https://get.teleport.varjo.com/blog/photogrammetry-vs-nerfs-gaussian-splatting-pros-and-cons)</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>[3D Gaussian Splatting for Real-Time Radiance Field Rendering</td>
+          <td>arXiv](https://arxiv.org/abs/2308.04079)</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>[Official Implementation</td>
+          <td>GitHub](https://github.com/graphdeco-inria/gaussian-splatting)</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>[Creating stunning real time 3D scenes</td>
+          <td>INRIA](https://www.inria.fr/en/creating-stunning-real-time-3d-scenes-breakthrough-3d-gaussian-splatting)</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>[4D Gaussian Splatting</td>
+          <td>CVPR 2024](https://github.com/hustvl/4DGaussians)</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>[Gaussian Splatting in February 2026</td>
+          <td>Radiance Fields](https://radiancefields.substack.com/p/gaussian-splatting-in-february-2026)</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>[Recent advances in 3D Gaussian splatting</td>
+          <td>IEEE](https://ieeexplore.ieee.org/document/10897713/)</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>[A Comprehensive Overview of Gaussian Splatting</td>
+          <td>Towards Data Science](https://towardsdatascience.com/a-comprehensive-overview-of-gaussian-splatting-e7d570081362/)</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>[VRSplat: Gaussian Splatting for VR</td>
+          <td>arXiv](https://arxiv.org/abs/2505.10144)</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>[gsplat Implementation</td>
+          <td>GitHub](https://github.com/nerfstudio-project/gsplat)</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>[Improving Adaptive Density Control</td>
+          <td>arXiv](https://arxiv.org/html/2503.14274v1)</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>[Spherical Harmonics in Neural Rendering</td>
+          <td>Medium](https://papers-100-lines.medium.com/explore-how-spherical-harmonics-enhance-neural-radiance-fields-and-3d-gaussian-splatting-by-b33fc755bfc5)</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+
+<p>And many other papers, implementations, and industry reports cited throughout the post.</p>
+
+  </article>
+
+  
+
+</div>
+
+  </div>
+
+  <!-- Footer -->
+
+  
+<footer class="fixed-bottom">
+  <div class="container mt-0" style="text-align:center;">
+    © Copyright 2026 Ahmad  Zareei.
+    <!--  -->     
+    
+    Last updated: March 20, 2026.
+    
+  </div>
+</footer>
+
+
+
+</body>
+
+<!-- jQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+
+<!-- Bootsrap & MDB scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.4.4/umd/popper.min.js" integrity="sha512-eUQ9hGdLjBjY3F41CScH3UX+4JDSI9zXeroz7hJ+RteoCaY+GP/LDoM8AO+Pt+DRFw3nXqsjh9Zsts8hnYv8/A==" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha512-M5KW3ztuIICmVIhjSqXe01oV2bpe248gOxqmlcYrEzAvws7Pw3z6BK0iGbrwvdrUQUhi3eXgtxp5I8PDo9YfjQ==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js" integrity="sha512-Mug9KHKmroQFMLm93zGrjhibM2z2Obg9l6qFG2qKjXEXkMp/VDkI4uju9m4QKPjWSwQ6O2qzZEnJDEeCw0Blcw==" crossorigin="anonymous"></script>
+
+
+
+<!-- Mansory & imagesLoaded -->
+<script defer src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+<script defer src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+<script defer src="/assets/js/mansory.js" type="text/javascript"></script>
+
+
+
+
+
+
+<!-- Load Common JS -->
+<script src="/assets/js/common.js"></script>
+
+<!-- Load DarkMode JS -->
+<script src="/assets/js/dark_mode.js"></script>
+
+
+</html><html>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-77789841-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</html>
