@@ -1,17 +1,19 @@
 ---
 layout: research
 title: research
+seo_title: "Research | Ahmad Zareei: Physical AI, World Models & 3D Vision"
 permalink: /projects/
 description: 
+meta_description: "Ahmad Zareei, Senior Research Scientist at Meta, works on physical AI, world models, 3D computer vision, graph neural network simulators, and LLM agents."
 nav: true
 ---
 
 
-I am a researcher with a wealth of experience in machine learning, deep learning, data assimilation, analytical skills, programming, and optimization. Throughout my career, I have demonstrated a proven track record of successful collaboration with research teams and providing technical and scientific support. As a Senior AI Research Scientist, I bring extensive experience to the table. From my time as a Postdoctoral Fellow at SEAS Harvard, where I worked on deep learning surrogate models for inverse modeling of metamaterials, to my time as a Research Assistant at the UC Berkeley, where I developed optimization strategies for designing innovative mechanical cloaks, I have consistently produced impactful results. 
+I came to AI through physics. I am a Senior Research Scientist at Meta, and my research centers on physical AI: building AI systems that perceive, model, and reason about the physical world. My work spans 3D computer vision, graph neural networks, world models and learned simulators, and LLM-powered agents, and I take ideas from research all the way to production: from real-time 3D face reconstruction from a single camera, to the virtual try-on system for Ray-Ban Meta smart glasses, to agentic AI pipelines that design research studies, simulate users with LLM synthetic personas, and synthesize findings.
 
+My background is in applied mathematics and mechanics. During my Ph.D. at UC Berkeley, I developed transformation-based methods to control waves, including cloaks for water and flexural waves. As a postdoctoral fellow at Harvard SEAS, I built deep learning surrogates for the inverse design of mechanical metamaterials and graph neural network simulators that learn to solve PDEs. That path shapes how I approach AI today: I look for the structure underneath a problem, such as the governing equations, the dynamics, and the symmetries, and build it into models so they generalize beyond the data they were trained on. This physics-informed machine learning perspective drives my interest in world models, embodied AI and robotics, and AI for science. My research has appeared in Physical Review Letters, PNAS, Advanced Materials, and Scientific Reports.
 
-My main focus is on the problems at the interface of Artificial Intelligence and Physical Simulations. I use the state of the art deep learning and machine learning algorithms and tools to learn, infer and predict the dynamical systems. I believe that with the exponential growth of sensory data and internet of things, data driven
-modeling of complex physical phenomena is critical. Some of the projects that I have been recently working on are
+*Research interests:* physical AI · world models · learned physical simulators · 3D computer vision · graph neural networks · LLM agents · physics-informed ML · AI for science
 
 <br>
 

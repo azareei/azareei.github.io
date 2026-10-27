@@ -158,6 +158,9 @@ a, table.table a {
 
 .news table th {
   color: var(--global-text-color);
+  white-space: nowrap; // Keep each date on a single line
+  width: 1%; // Shrink the column to fit the date exactly
+  padding-right: 1.5rem;
 }
 
 // Social (bottom)
