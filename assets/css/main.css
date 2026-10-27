@@ -25,12 +25,12 @@
 }
 
 html[data-theme=dark] {
-  --global-bg-color: rgb(66.25, 66.25, 66.25);
+  --global-bg-color: rgb(25.9803921569%, 25.9803921569%, 25.9803921569%);
   --global-text-color: #e8e8e8;
   --global-theme-color: #2698BA;
-  --global-hover-color: rgb(123.3883928571, 204.0535714286, 228.1116071429);
+  --global-hover-color: rgb(48.387605042%, 80.0210084034%, 89.4555322129%);
   --global-footer-bg-color: #e8e8e8;
-  --global-footer-text-color: rgb(66.25, 66.25, 66.25);
+  --global-footer-text-color: rgb(25.9803921569%, 25.9803921569%, 25.9803921569%);
   --global-footer-link-color: #000000;
   --global-icon-color: navajowhite;
 }
@@ -191,7 +191,7 @@ a:hover:after, table.table a:hover:after {
   display: block;
   width: 22px;
   height: 2px;
-  background-color: rgb(66.25, 66.25, 66.25);
+  background-color: rgb(25.9803921569%, 25.9803921569%, 25.9803921569%);
   border-radius: 1px;
   margin-bottom: 4px;
   transition: all 0.2s;
@@ -225,6 +225,9 @@ a:hover:after, table.table a:hover:after {
 
 .news table th {
   color: var(--global-text-color);
+  white-space: nowrap;
+  width: 1%;
+  padding-right: 1.5rem;
 }
 
 .social {
