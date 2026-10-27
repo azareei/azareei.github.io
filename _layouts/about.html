@@ -9,6 +9,9 @@ layout: default
       {% if site.title == blank %}{{ site.title }}{% else %}<span class="font-weight-bold">{{ site.first_name }}</span>
       {{ site.middle_name }} {{ site.last_name }}{% endif %}
     </h1>
+    {% if site.former_first_name %}
+    <p class="former-name"><em>I go by {{ site.first_name }}; my earlier publications appear under the name {{ site.former_first_name }} {{ site.last_name }}.</em></p>
+    {% endif %}
     <p class="desc">{{ page.description }}</p>
   </header>
 

@@ -2,13 +2,14 @@
 # Site settings
 # -----------------------------------------------------------------------------
 
-title: Ahmad Zareei
-first_name: Ahmad
+title: Amad Zareei
+first_name: Amad
 middle_name: 
+former_first_name: Ahmad # earlier publications use this name
 last_name: Zareei
 email: zareei@berkeley.edu
 description: > # the ">" symbol means to ignore newlines until "footer_text:"
-  Ahmad Zareei, Senior Research Scientist at Meta, working on physical AI, world models, 3D computer vision, graph neural networks, and LLM agents.
+  Amad Zareei (formerly Ahmad Zareei), Senior Research Scientist at Meta, working on physical AI, world models, 3D computer vision, graph neural networks, and LLM agents.
 footer_text: >
 
 

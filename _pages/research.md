@@ -1,10 +1,10 @@
 ---
 layout: research
 title: research
-seo_title: "Research | Ahmad Zareei: Physical AI, World Models & 3D Vision"
+seo_title: "Research | Amad Zareei: Physical AI, World Models & 3D Vision"
 permalink: /projects/
 description: 
-meta_description: "Ahmad Zareei, Senior Research Scientist at Meta, works on physical AI, world models, 3D computer vision, graph neural network simulators, and LLM agents."
+meta_description: "Amad Zareei (formerly Ahmad Zareei), Senior Research Scientist at Meta, works on physical AI, world models, 3D computer vision, graph neural network simulators, and LLM agents."
 nav: true
 ---
 

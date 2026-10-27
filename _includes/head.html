@@ -43,7 +43,8 @@
 {
   "@context": "https://schema.org",
   "@type": "Person",
-  "name": "{{ full_name }}",
+  "name": "{{ site.first_name }} {{ site.last_name }}",
+  "alternateName": "{{ site.former_first_name }} {{ site.last_name }}",
   "url": "{{ site.url }}",
   "image": "{{ og_image }}",
   "jobTitle": "Senior Research Scientist",
